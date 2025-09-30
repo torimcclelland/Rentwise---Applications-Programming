@@ -1,0 +1,9 @@
+{
+    "expo": {
+        "name": "Rentwise",
+        "slug": "rentwise-app",
+        "version": "1.0.0",
+        "platforms": ["android", "web"]
+
+    }
+}

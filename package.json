@@ -1,6 +1,22 @@
 {
   "dependencies": {
+    "expo": "^54.0.10",
     "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-native": "^0.81.4"
+  },
+  "name": "rentwise---applications-programming",
+  "version": "1.0.0",
+  "description": "CMPSC 475 - Fall 2025",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
   }
 }
