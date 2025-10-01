@@ -9,7 +9,7 @@ Rentwise features a dashboard overview, a rental listings and documents manager,
 
 Tech Stack:
  - React Native
- - MongoDB
+ - Firebase
  - Github Projects
  - VS Code
  - Expo Go
