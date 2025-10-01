@@ -15,6 +15,6 @@ Tech Stack:
  - Expo Go
 
 To Get Started:
-1. git clone https://github.com/torimcclelland/Rentwise---Applications-Programming/blob/main/README.md
+1. git clone (https://github.com/torimcclelland/Rentwise---Applications-Programming)
 2. npm install
 3. npm expo start
