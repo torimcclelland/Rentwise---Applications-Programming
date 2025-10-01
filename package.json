@@ -3,11 +3,13 @@
     "@react-native-firebase/app": "^23.4.0",
     "@react-native-firebase/auth": "^23.4.0",
     "@react-native-firebase/firestore": "^23.4.0",
-    "expo": "^54.0.11",
+    "expo": "~54.0.11",
+    "expo-dev-client": "~6.0.13",
     "firebase": "^12.3.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-native": "^0.81.4"
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "^0.81.4",
+    "react-native-web": "^0.21.0"
   },
   "name": "rentwise---applications-programming",
   "version": "1.0.0",
