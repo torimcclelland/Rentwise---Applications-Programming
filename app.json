@@ -3,7 +3,10 @@
         "name": "Rentwise",
         "slug": "rentwise-app",
         "version": "1.0.0",
-        "platforms": ["android", "web"]
-
+        "platforms": ["android", "web"],
+        "android": {
+            "googleServicesFile": "./google-services.json",
+            "package": "com.studentlandlords.rentwise"
+        }
     }
 }

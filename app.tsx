@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Button, TextInput, View, Text, StyleSheet } from "react-native";
 import { db } from "./firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
+import { createUser } from "./database_calls/user/CreateUser";
+import { User } from "./models/User";
+import { ReturnValue } from "./models/ReturnValue";
 
 export default function App() {
   const [name, setName] = useState("");
@@ -9,16 +12,25 @@ export default function App() {
 
   const addUser = async () => {
     console.log(name);
-    try {
-      await addDoc(collection(db, "landlordusers"), {
-        name: name,
-        createdAt: new Date()
-      });
+    // try {
+    //   await addDoc(collection(db, "landlordusers"), {
+    //     name: name,
+    //     createdAt: new Date()
+    //   });
+    //   setStatus("✅ User added!");
+    //   setName("");
+    // } catch (error) {
+    //   console.error("Error adding document: ", error);
+    //   setStatus("❌ Failed to add user.");
+    // }
+    let result:ReturnValue = createUser(new User(name, "tempPass", false, false))
+
+    if(result.success == false){
+      console.error("Error: " + result.errorMsg)
+      setStatus("❌ Failed to add user: " + result.errorMsg)
+    } else {
       setStatus("✅ User added!");
       setName("");
-    } catch (error) {
-      console.error("Error adding document: ", error);
-      setStatus("❌ Failed to add user.");
     }
   };
 
