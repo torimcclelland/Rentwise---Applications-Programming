@@ -9,12 +9,12 @@ Rentwise features a dashboard overview, a rental listings and documents manager,
 
 Tech Stack:
  - React Native
- - MongoDB
+ - Firebase
  - Github Projects
  - VS Code
  - Expo Go
 
 To Get Started:
-1. git clone https://github.com/torimcclelland/Rentwise---Applications-Programming/blob/main/README.md
+1. git clone (https://github.com/torimcclelland/Rentwise---Applications-Programming)
 2. npm install
 3. npm expo start
