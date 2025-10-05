@@ -4,6 +4,6 @@ export class ReturnValue{
     constructor(
         public success: boolean,
         public errorMsg: string,
-        public userData?: User
+        public userData: User = new User("", "", false, false)
     ){}
 }
