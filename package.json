@@ -3,7 +3,8 @@
     "expo": "^54.0.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-native": "^0.81.4"
+    "react-native": "^0.81.4",
+    "react-native-vector-icons": "^10.3.0"
   },
   "name": "rentwise---applications-programming",
   "version": "1.0.0",
@@ -17,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/react": "~19.1.10",
+    "@types/react-native-vector-icons": "^6.4.18",
     "typescript": "~5.9.2"
   }
 }
