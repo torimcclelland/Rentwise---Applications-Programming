@@ -11,7 +11,6 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleSignUp = () => {
-    // Placeholder logic
     alert.alert('Sign Up', `Welcome, ${fullName}!`);
   };
 
