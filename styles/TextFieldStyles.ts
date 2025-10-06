@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const TextFieldStyles = StyleSheet.create({
   wrapper: {
-    marginBottom: 20
   },
   input: {
     height: 40,
