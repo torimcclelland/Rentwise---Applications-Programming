@@ -2,13 +2,12 @@ import { addDoc, collection } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-import { getUserByID } from './GetUserByID';
 
 /** 
- * @param {User} newUser The details of the user to create
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the newly created user.
+ * @param {User} newProperty The details of the property to create
+ * @returns {ReturnValue} The results of the operation. If successful, the propertyData field contains the details of the newly created property.
  */
-export async function createUser(newUser) {
+export async function createProperty(newProperty) {
 
     var result = new ReturnValue(false, "");
 

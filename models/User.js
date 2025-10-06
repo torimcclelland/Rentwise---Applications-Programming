@@ -1,7 +1,17 @@
 
 export class User{
 
-    constructor(email, password, isLandLord, isPremiumUser, properties = [], id = "", firstName = "", lastName = "", displayName = "")
+    constructor(
+        id = "",
+        email = "",
+        password = "",
+        firstName = "",
+        lastName = "",
+        displayName = "",
+        isLandLord = false,
+        isPremiumUser = false,
+        properties = [],
+    )
     { 
         this.email = email;
         this.password = password;

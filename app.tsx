@@ -23,7 +23,7 @@ export default function App() {
     //   console.error("Error adding document: ", error);
     //   setStatus("❌ Failed to add user.");
     // }
-    let tempuser = new User(name, "tempPass", false, false)
+    let tempuser = new User("", name, "tempPass")
     let result: ReturnValue = await createUser(tempuser)
 
     if(result.success == false){
