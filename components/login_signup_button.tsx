@@ -1,28 +1,34 @@
 import React from "react";
-import {TouchableOpacity, StyleSheet, Text, ViewStyle} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle} from 'react-native';
 
 interface LoginButtonProps {
   onPress: () => void;
   title: string;
+  style: ViewStyle;
+  textStyle: TextStyle;
 }
 
-const loginButton: React.FC<LoginButtonProps> = ({onPress, title, ...props}) => {
+const loginButton: React.FC<LoginButtonProps> = ({onPress, title, style, textStyle}) => {
     return (
-        <TouchableOpacity style={styles.button} {...props} onPress={onPress}>
-            <Text style={styles.text}>{title}</Text>
+        <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+            <Text style={[styles.text, textStyle]}>{title}</Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     button:{
-        backgroundColor: '#034974',
         justifyContent: 'center',
         borderRadius: 8,
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 40
     },
     text:{
-        color: 'white'
+        fontFamily: 'inter',
+        fontSize: 14,
+        fontStyle: 'normal',
+        fontWeight: 500
+        
     }
 });
 
