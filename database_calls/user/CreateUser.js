@@ -5,7 +5,11 @@ import { db } from '../../firebaseConfig';
 import { getUserByEmail } from './GetUserByEmail';
 import { getUserByID } from './GetUserByID';
 
-export async function createUser(newUser:User): Promise<ReturnValue> {
+/** 
+ * @param {User} newUser The details of the user to create
+ * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the newly created user.
+ */
+export async function createUser(newUser) {
 
     var result = new ReturnValue(false, "");
 
@@ -22,7 +26,7 @@ export async function createUser(newUser:User): Promise<ReturnValue> {
         result = await getUserByID(newUser);
 
     } catch(e){
-        let error:string = ""; 
+        let error = ""; 
         if (e instanceof Error) {
             error = e.message // works, `e` narrowed to Error
         } else{
