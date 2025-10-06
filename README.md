@@ -18,3 +18,21 @@ To Get Started:
 1. git clone (https://github.com/torimcclelland/Rentwise---Applications-Programming)
 2. npm install
 3. npm expo start
+
+
+# Misc notes Sam put here
+
+### Research/documentation/useful resources
+
+For app.json file set up: https://docs.expo.dev/versions/latest/config/app/#android
+
+For fireSTORE set up with EXPO set up: https://rnfirebase.io/ 
+
+Seems relevant to the firestore initialization mystery: 
+
+- https://stackoverflow.com/questions/76762689/how-to-use-firestore-persistence-on-react-native-expo-app
+- https://firebase.google.com/docs/firestore/quickstart (VERY IMPORTANT AND USEFUL)
+- 
+
+Typescript cheatsheet: https://www.typescriptlang.org/cheatsheets/
+
