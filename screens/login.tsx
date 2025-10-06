@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
 import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
-import loginButton from "../components/login_signup_button";
+import CustomDivider from "../components/divider"
 
 
 export default function login() {
@@ -21,20 +21,23 @@ export default function login() {
                 <Text style={styles.typetext}>Sign In</Text>
                 <Text style={styles.typetext}>enter your email to sign into Rentwise</Text>
             </View>
-            <TextField
-                placeholder="Email"
-            />
-            <TextField
-                placeholder="Password"
-            />
-            <View>
-                <LoginButton
-                title="Continue"
-                onPress={() => console.log('Another button pressed!')}
-                style={styles.loginButton}
-                textStyle={{color: "white"}}
+            <View style={styles.spacing}>
+                <TextField
+                    placeholder="Email"
                 />
+                <TextField
+                    placeholder="Password"
+                />
+                <View>
+                    <LoginButton
+                    title="Continue"
+                    onPress={() => console.log('Another button pressed!')}
+                    style={styles.loginButton}
+                    textStyle={{color: "white"}}
+                    />
+                </View>
             </View>
+            <CustomDivider/>
             <Text>Or</Text>
             <View>
                 <LoginButton
@@ -60,8 +63,7 @@ const styles = StyleSheet.create ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: 2,
-        marginBottom: 23,
+        gap: 2
     },
     typetext: {
         fontFamily: 'inter',
@@ -70,6 +72,10 @@ const styles = StyleSheet.create ({
         color: '#034974',
         lineHeight: 24,
         fontStyle: 'normal'
+    },
+    spacing:{
+        flexDirection: 'column',
+        gap: 16
     },
     logo: {
         height: 84,
@@ -99,7 +105,9 @@ const styles = StyleSheet.create ({
     },
     input:{
         flex: 1,
-        paddingHorizontal: 24
+        paddingHorizontal: 24,
+        flexDirection: 'column',
+        gap: 23
     },
     loginButton:{
         backgroundColor: '#034974'
