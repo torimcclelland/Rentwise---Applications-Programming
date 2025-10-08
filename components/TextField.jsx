@@ -1,12 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, TextInputProps } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import styles from '../styles/TextFieldStyles';
 
-interface TextFieldProps extends TextInputProps {
-  placeholder: string;
-}
-
-const TextField: React.FC<TextFieldProps> = ({ placeholder, ...props }) => {
+const TextField = ({ label, ...props }) => {
   return (
     <View style={styles.wrapper}>
       <TextInput 
