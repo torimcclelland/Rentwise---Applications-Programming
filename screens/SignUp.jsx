@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import styles from '../styles/SignUpStyle';
 import TextField from '../components/TextField';
-import React, { useState } from 'react';
 
 
 const SignUpScreen = () => {
