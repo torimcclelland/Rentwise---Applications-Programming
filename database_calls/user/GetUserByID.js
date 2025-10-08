@@ -39,7 +39,7 @@ export async function getUserByID(userToFind) {
             snapshot.data().lastName,
             snapshot.data().displayName,
             snapshot.data().isLandLord,
-            snapshot.data().isPremiumUser,
+            snapshot.data().isPremUser,
             snapshot.data().properties,
         )
 

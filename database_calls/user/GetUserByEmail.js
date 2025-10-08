@@ -36,7 +36,7 @@ export async function getUserByEmail(userToFind){
             snapshot.docs[0].data().email,
             snapshot.docs[0].data().password,
             snapshot.docs[0].data().isLandLord,
-            snapshot.docs[0].data().isPremiumUser,
+            snapshot.docs[0].data().is,
             snapshot.docs[0].data().properties,
             userToFind.id,
             snapshot.docs[0].data().firstName,

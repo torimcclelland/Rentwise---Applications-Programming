@@ -34,8 +34,9 @@ export async function getPropertyByID(propertyToFind) {
         // TODO: make a conversion function
         const propertyRetrieved = new Property(
             propertyToFind.id,
+            snapshot.data().landlord,
             snapshot.data().address,
-            snapshot.data().pricePerMonth,
+            snapshot.data().monthlyPrice,
             snapshot.data().city,
             snapshot.data().state,
             snapshot.data().zipcode,
@@ -43,7 +44,6 @@ export async function getPropertyByID(propertyToFind) {
             snapshot.data().description,
             snapshot.data().reviews,
             snapshot.data().avgRating,
-            snapshot.data().landlord
         )
 
         // success

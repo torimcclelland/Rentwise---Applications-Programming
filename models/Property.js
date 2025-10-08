@@ -3,8 +3,9 @@ export class Property{
 
     constructor(
         id = "",
+        landlordID = "",
         address = "",
-        pricePerMonth = 0.0,
+        monthlyPrice = 0.0,
         city = "",
         state = "",
         zipcode = "",
@@ -12,19 +13,18 @@ export class Property{
         description = "",
         reviews = [],
         avgRating = 0.0,
-        landlord = ""
     )
     { 
         this.id = id;
+        this.landlordID = landlordID;
         this.address = address;
-        this.pricePerMonth = pricePerMonth;
-        this.state = city;
+        this.monthlyPrice = monthlyPrice;
+        this.city = city;
         this.state = state;
         this.zipccode = zipcode;
         this.images = images;
         this.description = description;
         this.reviews = reviews;
         this.avgRating = avgRating;
-        this.landlord = landlord;
     }
 }
