@@ -14,27 +14,24 @@ export async function createProperty(newProperty) {
     // try catch to handle any errors
     try{
         // try to store user in database
-        if (!newUser) throw new Error("newUser is undefined");
+        if (!newProperty) throw new Error("newUser is undefined");
         
-        const tempCol = collection(db, 'Users')
-        const docRef = await addDoc(tempCol, {...newUser});
-        newUser.id = docRef.id
+        const tempCol = collection(db, 'Properties')
+        const docRef = await addDoc(tempCol, {...newProperty});
+        newProperty.id = docRef.id
         
-        // retrieve newly made user by calling the GetUser function
-        result = await getUserByID(newUser);
+        // retrieve newly made property by calling the GetProperty function
+        result = await getPropertyByID(newProperty);
 
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
             error = e.message // works, `e` narrowed to Error
         } else{
-            error = "Had a problem with typescript error handling when adding user."
+            error = "Had a problem with typescript error handling when adding property."
         }
 
         result = new ReturnValue(false, error)
-        console.log("After error stuff:")
-        console.log(newUser)
-        console.log(result)
     }
     
     return result;

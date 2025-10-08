@@ -32,26 +32,27 @@ export async function getUserByID(userToFind) {
 
         // TODO: make a conversion function
         const userRetrieved = new User(
+            userToFind.id,
             snapshot.data().email,
             snapshot.data().password,
+            snapshot.data().firstName,
+            snapshot.data().lastName,
+            snapshot.data().displayName,
             snapshot.data().isLandLord,
             snapshot.data().isPremiumUser,
             snapshot.data().properties,
-            userToFind.id,
-            snapshot.data().firstName,
-            snapshot.data().lastName,
-            snapshot.data().displayName
         )
 
         // success
-        result = new ReturnValue(true, "", userRetrieved)
+        result = new ReturnValue(true, "")
+        result.userData = userRetrieved
 
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
             error = e.message + " (find user problem)" // works, `e` narrowed to Error
         } else{
-            error = "Had a problem with typescript error handling when adding user."
+            error = "Had a problem with typescript error handling when finding user."
         }
 
         result = new ReturnValue(false, error)
