@@ -12,48 +12,48 @@ export default function login() {
 
     return (
         <View style={styles.app}>
-        <View style={styles.welcome}>
-            <Image style={styles.logo} source={require('./rentwiseLogo.png')}/>
-            <Text style={styles.name}>Rentwise</Text>
-        </View>
-        <View style={styles.input}>
-            <View style={styles.text}>
-                <Text style={styles.typetext}>Sign In</Text>
-                <Text style={styles.typetext}>enter your email to sign into Rentwise</Text>
+            <View style={styles.welcome}>
+                <Image style={styles.logo} source={require('./rentwiseLogo.png')}/>
+                <Text style={styles.name}>Rentwise</Text>
             </View>
-            <View style={styles.spacing}>
-                <TextField
-                    placeholder="Email"
-                />
-                <TextField
-                    placeholder="Password"
-                />
+            <View style={styles.input}>
+                <View style={styles.text}>
+                    <Text style={styles.typetext}>Sign In</Text>
+                    <Text style={styles.typetext}>enter your email to sign into Rentwise</Text>
+                </View>
+                <View style={styles.spacing}>
+                    <TextField
+                        placeholder="Email"
+                    />
+                    <TextField
+                        placeholder="Password"
+                    />
+                    <View>
+                        <LoginButton
+                        title="Continue"
+                        onPress={() => console.log('Another button pressed!')}
+                        style={styles.loginButton}
+                        textStyle={{color: "white"}}
+                        />
+                    </View>
+                </View>
+                <CustomDivider/>
+                <Text>Or</Text>
                 <View>
                     <LoginButton
-                    title="Continue"
+                    title="Continue with Google"
                     onPress={() => console.log('Another button pressed!')}
-                    style={styles.loginButton}
-                    textStyle={{color: "white"}}
+                    style={styles.altLoginButton}
+                    textStyle={{color: '#034974'}}
+                    />
+                    <LoginButton
+                    title="Continue with Facebook"
+                    onPress={() => console.log('Another button pressed!')}
+                    style={styles.altLoginButton}
+                    textStyle={{color: '#034974'}}
                     />
                 </View>
             </View>
-            <CustomDivider/>
-            <Text>Or</Text>
-            <View>
-                <LoginButton
-                title="Continue with Google"
-                onPress={() => console.log('Another button pressed!')}
-                style={styles.altLoginButton}
-                textStyle={{color: '#034974'}}
-                />
-                <LoginButton
-                title="Continue with Facebook"
-                onPress={() => console.log('Another button pressed!')}
-                style={styles.altLoginButton}
-                textStyle={{color: '#034974'}}
-                />
-            </View>
-        </View>
         </View>
     );
 }
@@ -97,7 +97,7 @@ const styles = StyleSheet.create ({
 
     },
     app:{
-        flex: 4, // makes the container take up available space
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
