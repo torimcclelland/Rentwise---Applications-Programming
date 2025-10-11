@@ -41,6 +41,7 @@ export default function login() {
                     <TextField
                         placeholder="Password"
                         value={password}
+                        isPassword={true}
                         onChangeText={setPassword}
                     />
                     <View>
