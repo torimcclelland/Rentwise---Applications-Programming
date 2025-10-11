@@ -32,9 +32,10 @@ Seems relevant to the firestore initialization mystery:
 
 - https://stackoverflow.com/questions/76762689/how-to-use-firestore-persistence-on-react-native-expo-app
 - https://firebase.google.com/docs/firestore/quickstart (VERY IMPORTANT AND USEFUL)
-- 
 
 Typescript cheatsheet: https://www.typescriptlang.org/cheatsheets/
+
+React Navigation: https://reactnavigation.org/docs/hello-react-navigation?config=dynamic
 
 # Notes on checkpoints
 
