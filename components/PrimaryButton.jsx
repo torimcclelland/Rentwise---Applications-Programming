@@ -8,7 +8,7 @@ const PrimaryButton = ({
   onPress,
   iconName,
   iconColor = '#fff',
-  backgroundColor = '#007AFF',
+  backgroundColor = '#034974',
   textColor = '#fff',
   size = 'medium',
   disabled = false,
