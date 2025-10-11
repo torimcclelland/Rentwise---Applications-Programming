@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     address:{
         backgroundColor: 'white',
         paddingLeft: 8,
-        paddingTop: 2
+        paddingTop: 2,
+        font: 'inter',
+        fontWeight: 500
     },
     icon:{
     }
