@@ -7,17 +7,17 @@ const sampleProperties = [
   {
     id: '1',
     title: '10 Gore Road',
-    imageUri: '',
+    imageUri: 'image.png',
   },
   {
     id: '2',
     title: '13 Sassafras Street',
-    imageUri: '',
+    imageUri: 'image.png',
   },
   {
     id: '3',
     title: '900 West 9th Street',
-    imageUri: '',
+    imageUri: 'image.png',
   },
 ];
 
