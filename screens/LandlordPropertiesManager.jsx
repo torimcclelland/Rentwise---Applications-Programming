@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { View, FlatList, StyleSheet } from 'react-native';
 import PropertyCard from '../components/PropertyCard';
 import BottomNavBar from '../components/BottomNavBar';
@@ -33,10 +34,23 @@ const LandlordPropertiesManager = () => {
         contentContainerStyle={styles.list}
       />
       <BottomNavBar />
+=======
+import { StyleSheet } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
+import PropertyCard from '../components/propertyCard';
+
+export default function LandlordPropertiesScreen (){
+  return (
+    <View style={styles.main}>
+      <PropertyCard
+      address="4119 Nancy Ave"
+      />
+>>>>>>> origin/main
     </View>
   );
 };
 
+<<<<<<< HEAD
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -48,3 +62,12 @@ const styles = StyleSheet.create({
 });
 
 export default LandlordPropertiesManager;
+=======
+const styles = StyleSheet.create ({
+  main:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
+>>>>>>> origin/main

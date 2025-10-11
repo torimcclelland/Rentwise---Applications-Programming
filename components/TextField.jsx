@@ -2,11 +2,14 @@ import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import styles from '../styles/TextFieldStyles';
 
-const TextField = ({ label, ...props }) => {
+const TextField = ({ placeholder, ...props }) => {
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} {...props} />
+      <TextInput 
+        style={styles.input} {...props}
+        placeholder={placeholder}
+        placeholderTextColor="#696969"
+      />
     </View>
   );
 };

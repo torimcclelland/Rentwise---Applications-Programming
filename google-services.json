@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "120381536293",
+    "project_id": "rentwise-be408",
+    "storage_bucket": "rentwise-be408.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120381536293:android:178ce6ebeff11d2c6027cc",
+        "android_client_info": {
+          "package_name": "com.studentlandlords.rentwise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRM0O0zM5b0Gp8YFG7lb3aWqJEglBV_Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
