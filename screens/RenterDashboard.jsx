@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import styles from '../styles/DashboardStyle';
+import PrimaryButton from '../components/PrimaryButton';
 
 const DashboardScreen = () => {
   return (
@@ -10,25 +11,19 @@ const DashboardScreen = () => {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Your Rentals</Text>
         <Text style={styles.cardSubtitle}>View and manage your active listings</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Go to Rentals</Text>
-        </TouchableOpacity>
+        <PrimaryButton title="See my rentals"></PrimaryButton>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Payment Summary</Text>
         <Text style={styles.cardSubtitle}>Track incoming and outgoing payments</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>View Payments</Text>
-        </TouchableOpacity>
+        <PrimaryButton title="See my payments"></PrimaryButton>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Messages</Text>
         <Text style={styles.cardSubtitle}>Connect with renters and landlords</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Open Inbox</Text>
-        </TouchableOpacity>
+        <PrimaryButton title="See my messages"></PrimaryButton>
       </View>
     </ScrollView>
   );
