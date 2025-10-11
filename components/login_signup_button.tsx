@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
         height: 40
     },
     text:{
-        fontFamily: 'inter',
         fontSize: 14,
         fontStyle: 'normal',
-        fontWeight: 500
+        fontWeight: 500,
+        font: 'inter'
         
     }
 });
