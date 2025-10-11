@@ -3,11 +3,14 @@ import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
 import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
+import getUserByEmail from '../database_calls/user/GetUserByEmail'
 
 
 export default function login() {
     const [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
+
+
 
 
     return (
@@ -19,26 +22,32 @@ export default function login() {
             <View style={styles.input}>
                 <View style={styles.text}>
                     <Text style={styles.typetext}>Sign In</Text>
-                    <Text style={styles.typetext}>enter your email to sign into Rentwise</Text>
+                    <Text style={styles.typetext}>Enter your email to sign into Rentwise</Text>
                 </View>
                 <View style={styles.spacing}>
                     <TextField
                         placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
                         placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <View>
                         <LoginButton
                         title="Continue"
-                        onPress={() => console.log('Another button pressed!')}
+                        onPress={getUserByEmail(email)}
                         style={styles.loginButton}
                         textStyle={{color: "white"}}
                         />
                     </View>
                 </View>
-                <CustomDivider/>
-                <Text>Or</Text>
+                <View style={styles.divider}>
+                    <CustomDivider/>
+                    <Text>Or</Text>
+                </View>
                 <View>
                     <LoginButton
                     title="Continue with Google"
@@ -94,6 +103,9 @@ const styles = StyleSheet.create ({
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
         textShadowOffset: { width: 0, height: 4 },
         textShadowRadius: 4
+
+    },
+    divider:{
 
     },
     app:{
