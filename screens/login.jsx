@@ -3,12 +3,23 @@ import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
 import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
+import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
 
 
 export default function login() {
     const [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
 
+    const handleGetUser = async () => {
+        const userToFind = {email}
+        const result = await getUserByEmail(userToFind);
+
+        if (result.success) {
+        console.log("User found:", result.userData);
+    } else {
+        console.log("Error:", result.message);
+    }
+};
 
     return (
         <View style={styles.app}>
@@ -19,26 +30,33 @@ export default function login() {
             <View style={styles.input}>
                 <View style={styles.text}>
                     <Text style={styles.typetext}>Sign In</Text>
-                    <Text style={styles.typetext}>enter your email to sign into Rentwise</Text>
+                    <Text style={styles.typetext}>Enter your email to sign into Rentwise</Text>
                 </View>
                 <View style={styles.spacing}>
                     <TextField
                         placeholder="Email"
+                        value={email}
+                        onChangeText={setEmail}
                     />
                     <TextField
                         placeholder="Password"
+                        value={password}
+                        isPassword={true}
+                        onChangeText={setPassword}
                     />
                     <View>
                         <LoginButton
                         title="Continue"
-                        onPress={() => console.log('Another button pressed!')}
+                        onPress={handleGetUser}
                         style={styles.loginButton}
                         textStyle={{color: "white"}}
                         />
                     </View>
                 </View>
-                <CustomDivider/>
-                <Text>Or</Text>
+                <View style={styles.divider}>
+                    <CustomDivider/>
+                    <Text>Or</Text>
+                </View>
                 <View>
                     <LoginButton
                     title="Continue with Google"
@@ -66,7 +84,7 @@ const styles = StyleSheet.create ({
         gap: 2
     },
     typetext: {
-        fontFamily: 'inter',
+        font: 'inter',
         fontSize: 16,
         fontWeight: 600,
         color: '#034974',
@@ -87,13 +105,13 @@ const styles = StyleSheet.create ({
     },
     name:{
         color: '#034974',
-        fontFamily: "Inter",
+        font: "Inter",
         fontSize: 64,
         fontStyle: 'normal',
         fontWeight: 600,
-        textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: { width: 0, height: 4 },
-        textShadowRadius: 4
+        // textShadowColor: 'rgba(0, 0, 0, 0.25)',
+        // textShadowOffset: { width: 0, height: 4 },
+        // textShadowRadius: 4
 
     },
     app:{
@@ -113,7 +131,7 @@ const styles = StyleSheet.create ({
         backgroundColor: '#034974'
     },
     altLoginButton:{
-        backgroundColor: 'gray',
+        backgroundColor: '#EEEEEE',
         marginBottom: 10
     }
 });

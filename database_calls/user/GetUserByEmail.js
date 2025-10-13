@@ -7,8 +7,8 @@ import { db } from '../../firebaseConfig';
  * 
  * @param {User} userToFind The details of the user to find by email (email field must not be empty)
  * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
- */
-/*
+ **/
+
 export async function getUserByEmail(userToFind){
 
     var result = new ReturnValue(false, "");
@@ -27,6 +27,7 @@ export async function getUserByEmail(userToFind){
 
         // query
         const newQuery = query(userRef, where("email", "==", userToFind.email), limit(1))
+        //console.log(newQuery) // added print statements for debugging
 
         const snapshot = await getDocs(newQuery);
 
@@ -43,6 +44,8 @@ export async function getUserByEmail(userToFind){
             snapshot.docs[0].data().lastName,
             snapshot.docs[0].data().displayName
         )
+        // success
+        result = new ReturnValue(true, "", userRetrieved);
 
     } catch(e){
         let error = ""; 
@@ -54,8 +57,6 @@ export async function getUserByEmail(userToFind){
 
         result = new ReturnValue(false, error)
     }
-    
-    return result;
+    return result
     
 }
-*/
