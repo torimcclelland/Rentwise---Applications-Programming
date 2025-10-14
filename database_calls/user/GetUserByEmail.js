@@ -12,7 +12,6 @@ import { db } from '../../firebaseConfig';
 export async function getUserByEmail(userToFind){
 
     var result = new ReturnValue(false, "");
-    console.log("Hello")
 
     if(userToFind.email == ""){
         result = new ReturnValue(false, "Email must not be empty.")
@@ -28,10 +27,9 @@ export async function getUserByEmail(userToFind){
 
         // query
         const newQuery = query(userRef, where("email", "==", userToFind.email), limit(1))
-        console.log(newQuery) // added print statements for debugging
+        //console.log(newQuery) // added print statements for debugging
 
         const snapshot = await getDocs(newQuery);
-        console.log(snapshot)
 
        
         // TODO: make a conversion function
@@ -46,8 +44,6 @@ export async function getUserByEmail(userToFind){
             snapshot.docs[0].data().lastName,
             snapshot.docs[0].data().displayName
         )
-
-        console.log(userRetrieved)
         // success
         result = new ReturnValue(true, "", userRetrieved);
 
@@ -61,7 +57,6 @@ export async function getUserByEmail(userToFind){
 
         result = new ReturnValue(false, error)
     }
-    console.log(result.userData)
     return result
     
 }
