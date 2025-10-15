@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import styles from '../styles/DashboardStyle';
 import PrimaryButton from '../components/PrimaryButton';
 import InfoCard from '../components/InfoCard';
-import CustomDivider from '../components/CustomDivider';
+import CustomDivider from '../components/divider';
 import { Image } from 'react-native';
 
 const DashboardScreen = () => {
