@@ -4,11 +4,11 @@ import styles from '../styles/DashboardStyle';
 import PrimaryButton from '../components/PrimaryButton';
 import InfoCard from '../components/InfoCard';
 import CustomDivider from '../components/CustomDivider';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Image } from 'react-native';
 
 const DashboardScreen = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView style={{ padding: 20 }}>
       <Text style={styles.header}>Hello Eric!</Text>
       <Text style={styles.subheader}>Here’s your rent summary at a glance.</Text>
 
@@ -42,7 +42,6 @@ const DashboardScreen = () => {
         image={null}
       />
       <TouchableOpacity style={styles.addRequestButton}>
-        <Icon name="add-circle-outline" size={24} color="#007AFF" />
         <Text style={styles.addRequestText}>Add New Request</Text>
       </TouchableOpacity>
 
