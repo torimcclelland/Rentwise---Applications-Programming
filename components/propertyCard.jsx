@@ -11,7 +11,7 @@ const PropertyCard = ({address, ...props}) => {
                 <View style={styles.button}>
                     <Text style={styles.address}>{address}</Text>
                     <Pressable>
-                        <Image style={styles.icon} source={require('./arrow_forward.svg')}/>
+                        <Image style={styles.icon} source={require('./arrowForward.jpg')}/>
                     </Pressable>
                 </View>
             </View>
@@ -23,18 +23,20 @@ const styles = StyleSheet.create({
     box:{
         width: 342,
         height: 134,
-        borderColor: 'gray',
-        boxShadow: 'rgba(0, 0, 0, 0.25)',
-        // textShadowOffset: { width: 0, height: 4 }, these are apparently depricated 
-        // textShadowRadius: 4,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5, 
+        borderRadius: 12,
+        // borderColor: 'gray'
+    },
+    border:{
+        borderRadius: 12,
         borderWidth: 0.5,
-        height: 107,
-        width: 328,
-        borderWidth: 0.5,
-        borderBottomLeftRadius: 12,
-        borderBottomRightRadius: 12,
-        borderTopLeftRadius: 12,
-        borderTopRightRadius: 12
+        backgroundColor: 'white',
+        overflow: 'hidden',
+        // borderColor: 'gray'
     },
     button:{
         flexDirection: 'row',
@@ -42,7 +44,6 @@ const styles = StyleSheet.create({
     },
     image:{
         height: 80,
-        width: 328,
         width: '100%',
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12
@@ -55,6 +56,8 @@ const styles = StyleSheet.create({
         fontWeight: 500
     },
     icon:{
+        height: 24,
+        width: 24
     }
 })
 
