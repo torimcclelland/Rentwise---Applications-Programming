@@ -38,11 +38,9 @@ export async function getUserByEmail(userToFind){
        
         const snapshotSingle = snapshot.docs[0]
 
-        // TODO: make a conversion function
+        // KELSIER: make a conversion function
         // get user ID
-        console.log(snapshotSingle.id)
-        console.log(userToFind)
-        console.log("user retrieved mapping")
+        
         const userRetrieved = {
             userID: snapshotSingle.id,
             email: snapshotSingle.get("email"),
@@ -54,8 +52,6 @@ export async function getUserByEmail(userToFind){
             isPremUser: snapshotSingle.get("isPremUser"),
             properties: snapshotSingle.get("properties"),
         }
-
-        console.log(userRetrieved)
 
         // success
         result = new ReturnValue(true, "", userRetrieved);

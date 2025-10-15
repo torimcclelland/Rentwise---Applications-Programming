@@ -33,8 +33,13 @@ export default function login() {
             return
         }
 
-        // if we get here, successful login
-        navigation.navigate('Renter Dashboard')
+        console.log(currentUser)
+        // if we get here, successful login. Navigate to the relevant screen
+        if (currentUser.isLandLord) {
+            navigation.navigate('Landlord Dashboard')
+        } else {
+            navigation.navigate('Renter Dashboard')
+        }
     };
 
     return (

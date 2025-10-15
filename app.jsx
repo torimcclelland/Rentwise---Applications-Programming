@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import login from './screens/login';
 import DashboardScreen from './screens/RenterDashboard';
+import LandlordPropertiesScreen from './screens/LandlordPropertiesManager';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,7 @@ function RootStack() {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={login} />
       <Stack.Screen name="Renter Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="Landlord Dashboard" component={LandlordPropertiesScreen} />
     </Stack.Navigator>
   );
 }
