@@ -2,7 +2,7 @@
 export class User{
 
     constructor(
-        id = "",
+        userID = "",
         email = "",
         password = "",
         firstName = "",
@@ -13,12 +13,12 @@ export class User{
         properties = [],
     )
     { 
+        this.userID = userID;
         this.email = email;
         this.password = password;
         this.isLandLord = isLandLord;
         this.isPremUser = isPremUser;
         this.properties = properties;
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.displayName = displayName;

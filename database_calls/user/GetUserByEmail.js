@@ -21,29 +21,42 @@ export async function getUserByEmail(userToFind){
     // try catch to handle any errors
     try{
         
-        
         // try to find user by ID
         const userRef = collection(db, 'Users')
 
         // query
+        //console.log("User we're searching with: " + userToFind.email)
         const newQuery = query(userRef, where("email", "==", userToFind.email), limit(1))
         //console.log(newQuery) // added print statements for debugging
 
         const snapshot = await getDocs(newQuery);
 
+        if(snapshot.docs.length == 0){
+            result = new ReturnValue(false, "User not found.");
+            return result
+        }
        
+        const snapshotSingle = snapshot.docs[0]
+
         // TODO: make a conversion function
-        const userRetrieved = new User(
-            snapshot.docs[0].data().email,
-            snapshot.docs[0].data().password,
-            snapshot.docs[0].data().isLandLord,
-            snapshot.docs[0].data().is,
-            snapshot.docs[0].data().properties,
-            userToFind.id,
-            snapshot.docs[0].data().firstName,
-            snapshot.docs[0].data().lastName,
-            snapshot.docs[0].data().displayName
-        )
+        // get user ID
+        console.log(snapshotSingle.id)
+        console.log(userToFind)
+        console.log("user retrieved mapping")
+        const userRetrieved = {
+            userID: snapshotSingle.id,
+            email: snapshotSingle.get("email"),
+            password : snapshotSingle.get("password"),
+            firstName: snapshotSingle.get("firstName"),
+            lastName: snapshotSingle.get("lastName"),
+            displayName: snapshotSingle.get("displayName"),
+            isLandLord: snapshotSingle.get("isLandLord"),
+            isPremUser: snapshotSingle.get("isPremUser"),
+            properties: snapshotSingle.get("properties"),
+        }
+
+        console.log(userRetrieved)
+
         // success
         result = new ReturnValue(true, "", userRetrieved);
 

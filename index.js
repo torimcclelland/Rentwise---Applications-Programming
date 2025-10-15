@@ -7,4 +7,4 @@ import DashboardScreen from './screens/RenterDashboard';
 //registerRootComponent(DashboardScreen)
 //registerRootComponent(LandlordPropertiesScreen)
 
-registerRootComponent(login);
+registerRootComponent(App);

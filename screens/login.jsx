@@ -1,5 +1,9 @@
 import React, {useState} from "react";
 import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
+import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
 import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
@@ -9,17 +13,29 @@ import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
 export default function login() {
     const [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
+    const navigation = useNavigation();
 
-    const handleGetUser = async () => {
-        const userToFind = {email}
+    const validateUser = async () => {
+        const userToFind = {email: email}
         const result = await getUserByEmail(userToFind);
 
-        if (result.success) {
-        console.log("User found:", result.userData);
-    } else {
-        console.log("Error:", result.message);
-    }
-};
+        if (!result.success) {
+            console.log("Error:", result.errorMsg);// KELSIER: better error handling
+            return;
+        }
+
+        // success, get user from result
+        const currentUser = result.userData
+
+        // check if password is correct
+        if(currentUser.password!=password){
+            console.log("Error: incorrect password"); // KELSIER do error handling here too
+            return
+        }
+
+        // if we get here, successful login
+        navigation.navigate('Renter Dashboard')
+    };
 
     return (
         <View style={styles.app}>
@@ -47,7 +63,7 @@ export default function login() {
                     <View>
                         <LoginButton
                         title="Continue"
-                        onPress={handleGetUser}
+                        onPress={validateUser}
                         style={styles.loginButton}
                         textStyle={{color: "white"}}
                         />
