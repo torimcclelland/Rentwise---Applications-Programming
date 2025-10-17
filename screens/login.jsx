@@ -8,11 +8,12 @@ import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
 import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
+import { GlobalValues } from "../GlobalValues";
 
 
 export default function login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword]= useState("");
+    const [email, setEmail] = useState("ThaidakarRental@fakeEmail.com");// MARSH clean this up
+    const [password, setPassword]= useState("tempPass");
     const navigation = useNavigation();
 
     const validateUser = async () => {
@@ -32,6 +33,8 @@ export default function login() {
             console.log("Error: incorrect password"); // KELSIER do error handling here too
             return
         }
+
+        GlobalValues.currentUser = currentUser;
 
         console.log(currentUser)
         // if we get here, successful login. Navigate to the relevant screen

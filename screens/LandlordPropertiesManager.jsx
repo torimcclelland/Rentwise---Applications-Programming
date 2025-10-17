@@ -1,14 +1,18 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native'
 import { View, Text, FlatList, TouchableOpacity, Image, Modal, ScrollView, Pressable} from 'react-native';
 import PropertyCard from '../components/propertyCard';
+import { Property } from '../models/Property';
+import { getPropertyByLandlord } from '../database_calls/property/GetPropertyByLandlord';
+import { GlobalValues } from '../GlobalValues';
+import { ReturnValue } from '../models/ReturnValue';
 import PrimaryButton from '../components/PrimaryButton';
 import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
 
 
 
-const LandlordPropertiesScreen = () =>{
+export const LandlordPropertiesScreen = () =>{
 
   const [modalVisible, setModalVisible] = useState(false);
   const [streetAddress, setStreetAddress] = useState("");
@@ -24,6 +28,21 @@ const LandlordPropertiesScreen = () =>{
   // function to toggle modal visibility
   const toggleModal = () =>{
     setModalVisible(!modalVisible)
+  }
+
+
+  const [propertiesLs, setPropertiesLs]= useState([]);  
+
+  // called when this window opened, use to call property update
+  useEffect(()=>{
+    getProperties();
+  }, [])
+
+  const getProperties = async () => {
+    let result = new ReturnValue();
+    result = await getPropertyByLandlord(GlobalValues.currentUser)
+
+    console.log(result)
   }
 
   return (
