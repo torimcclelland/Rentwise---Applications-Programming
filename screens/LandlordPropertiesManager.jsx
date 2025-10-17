@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native'
 import { View, Text, FlatList, TouchableOpacity, Image, Modal, ScrollView, Pressable} from 'react-native';
 import PropertyCard from '../components/propertyCard';
-import { Property } from '../models/Property';
 import { getPropertyByLandlord } from '../database_calls/property/GetPropertyByLandlord';
 import { GlobalValues } from '../GlobalValues';
 import { ReturnValue } from '../models/ReturnValue';
