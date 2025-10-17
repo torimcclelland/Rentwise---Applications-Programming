@@ -2,20 +2,23 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
+//resuable profile circle
 const Profile = ({ src, size = 64, style = {} }) => {
   return (
     <View style={[styles.container(size), style]}>
-      <Image source={src} style={styles.image} />
+      <Image source={src} style={styles.image} /> 
+      {/* //takes image it is given, stored one locally for example/tests */}
     </View>
   );
 };
 
+
 const styles = StyleSheet.create({
   container: (size) => ({
-    width: size,
+    width: size, //we specify size each time we use one
     height: size,
     borderRadius: size / 2,
-    overflow: 'hidden',
+    overflow: 'hidden', //keeps from spilling over the circle
     backgroundColor: '#ccc',
   }),
   image: {
