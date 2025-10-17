@@ -3,14 +3,15 @@ import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/BottomNavBarStyle';
-import Profile from './profile'; 
+import Profile from './profile';
+import exampleImage from './profileexample.png'; 
 
 const tabs = [
   { name: 'search', icon: 'compass-outline', route: 'LandlordProperties' },
   { name: 'messages', icon: 'chat-outline', route: null },
   { name: 'home', icon: 'home-outline', route: 'RenterDashboard' },
   { name: 'notifications', icon: 'bell-outline', route: null },
-  { name: 'profile', icon: null, route: null },
+  { name: 'profile', icon: null, route: null }, // Profile uses custom component
 ];
 
 const BottomNavBar = ({ selectedTab }) => {
@@ -28,7 +29,7 @@ const BottomNavBar = ({ selectedTab }) => {
         <TouchableOpacity key={tab.name} onPress={() => handleTabPress(tab)}>
           {tab.name === 'profile' ? (
             <Profile
-              src={'/profileexample.png'} 
+              src={exampleImage}
               size={28}
               style={{
                 borderWidth: selectedTab === 'profile' ? 2 : 0,
@@ -49,4 +50,3 @@ const BottomNavBar = ({ selectedTab }) => {
 };
 
 export default BottomNavBar;
-

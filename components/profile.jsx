@@ -1,42 +1,35 @@
 import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-const ProfileCircle = ({ src, size = 64, alt = 'Profile Image', style = {} }) => {
-  const dimension = `${size}px`;
-
-  const containerStyle = {
-    width: dimension,
-    height: dimension,
-    borderRadius: '50%',
-    overflow: 'hidden',
-    display: 'inline-block',
-    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.15)',
-    transition: 'transform 0.2s ease',
-    ...style,
-  };
-
-  const imageStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  };
-
+const Profile = ({ src, size = 64, style = {} }) => {
   return (
-    <div
-      style={containerStyle}
-      onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-      onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-    >
-      <img src={src} alt={alt} style={imageStyle} />
-    </div>
+    <View style={[styles.container(size), style]}>
+      <Image source={src} style={styles.image} />
+    </View>
   );
 };
 
-ProfileCircle.propTypes = {
-  src: PropTypes.string.isRequired,
+const styles = StyleSheet.create({
+  container: (size) => ({
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+    overflow: 'hidden',
+    backgroundColor: '#ccc',
+  }),
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+});
+
+Profile.propTypes = {
+  src: PropTypes.number.isRequired,
   size: PropTypes.number,
-  alt: PropTypes.string,
   style: PropTypes.object,
 };
 
-export default ProfileCircle;
+export default Profile;
+
