@@ -3,6 +3,7 @@ import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { Property } from '../../models/Property';
+import { snapshotToProperty } from '../../models/ConversionFunctions';
 
 /**
  * 
@@ -34,32 +35,18 @@ export async function getPropertyByLandlord(landlord) {
             return result;
         }
 
-//        listOfDocs = snapshot.docs.map(doc => doc.data())
-
         const propList = [];
         snapshot.forEach((doc) => {
-            const data = doc.data();
-            const property = new Property(
-                doc.id,
-                data.landlordID,
-                data.address,
-                data.monthlyPrice,
-                data.city,
-                data.state,
-                data.zipcode,
-                data.images,
-                data.description,
-                data.reviews,
-                data.avgRating
-            );
-            propList.push(property);
+            const property = snapshotToProperty(doc);
+            if(!property.success){
+                console.log(property.errorMsg)
+                return;
+            }
+            propList.push(property.propertyData);
         });
 
-        console.log(propList)
-
         // success
-        result = new ReturnValue(true, "")
-        //result.propertyList = listOfDocs
+        result = new ReturnValue(true, "", {}, {}, propList)
 
     } catch(e){
         let error = ""; 
