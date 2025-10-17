@@ -2,6 +2,7 @@ import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
+import { snapshotToUser } from '../../models/ConversionFunctions';
 
 /**
  * 
@@ -21,31 +22,25 @@ export async function getUserByEmail(userToFind){
     // try catch to handle any errors
     try{
         
-        
         // try to find user by ID
         const userRef = collection(db, 'Users')
 
         // query
+        //console.log("User we're searching with: " + userToFind.email)
         const newQuery = query(userRef, where("email", "==", userToFind.email), limit(1))
         //console.log(newQuery) // added print statements for debugging
 
         const snapshot = await getDocs(newQuery);
 
-       
-        // TODO: make a conversion function
-        const userRetrieved = new User(
-            snapshot.docs[0].data().email,
-            snapshot.docs[0].data().password,
-            snapshot.docs[0].data().isLandLord,
-            snapshot.docs[0].data().is,
-            snapshot.docs[0].data().properties,
-            userToFind.id,
-            snapshot.docs[0].data().firstName,
-            snapshot.docs[0].data().lastName,
-            snapshot.docs[0].data().displayName
-        )
+        if(snapshot.docs.length == 0){
+            result = new ReturnValue(false, "User not found.");
+            return result
+        }
+       // i actually cared enough to come
+        const snapshotSingle = snapshot.docs[0]
+
         // success
-        result = new ReturnValue(true, "", userRetrieved);
+        result = snapshotToUser(snapshotSingle)
 
     } catch(e){
         let error = ""; 

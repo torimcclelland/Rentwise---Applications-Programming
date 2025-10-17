@@ -4,6 +4,7 @@ import login from './screens/login';
 import LandlordPropertiesScreen from './screens/LandlordPropertiesManager'
 import DashboardScreen from './screens/RenterDashboard';
 
+<<<<<<< HEAD
 registerRootComponent(DashboardScreen)
 //registerRootComponent(LandlordPropertiesScreen)
 

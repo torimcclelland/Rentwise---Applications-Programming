@@ -1,25 +1,49 @@
 import React, {useState} from "react";
 import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
+import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
 import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
 import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
+import { GlobalValues } from "../GlobalValues";
 
 
 export default function login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword]= useState("");
+    const [email, setEmail] = useState("ThaidakarRental@fakeEmail.com");// MARSH clean this up
+    const [password, setPassword]= useState("tempPass");
+    const navigation = useNavigation();
 
-    const handleGetUser = async () => {
-        const userToFind = {email}
+    const validateUser = async () => {
+        const userToFind = {email: email}
         const result = await getUserByEmail(userToFind);
 
-        if (result.success) {
-        console.log("User found:", result.userData);
-    } else {
-        console.log("Error:", result.message);
-    }
-};
+        if (!result.success) {
+            console.log("Error:", result.errorMsg);// KELSIER: better error handling
+            return;
+        }
+
+        // success, get user from result
+        const currentUser = result.userData
+
+        // check if password is correct
+        if(currentUser.password!=password){
+            console.log("Error: incorrect password"); // KELSIER do error handling here too
+            return
+        }
+
+        GlobalValues.currentUser = currentUser;
+
+        console.log(currentUser)
+        // if we get here, successful login. Navigate to the relevant screen
+        if (currentUser.isLandLord) {
+            navigation.navigate('Landlord Dashboard')
+        } else {
+            navigation.navigate('Renter Dashboard')
+        }
+    };
 
     return (
         <View style={styles.app}>
@@ -47,7 +71,7 @@ export default function login() {
                     <View>
                         <LoginButton
                         title="Continue"
-                        onPress={handleGetUser}
+                        onPress={validateUser}
                         style={styles.loginButton}
                         textStyle={{color: "white"}}
                         />

@@ -22,6 +22,12 @@ To Get Started:
 
 # Misc notes Sam put here
 
+Note from Sam: I have a bit of a specific notation that may or may not appear in my code by habit, so here's an explanation in case it does. These are words that may appear in comments mostly so I can find areas I was working on easily and quickly.
+
+- "KELSIER": immediately relevant or important, also "TODO"
+- "WAXILLIUM": Likely to be relevant to what I'm working on next, AKA 'jump here when you start on the next item'
+- "MARSH": clean this up later
+
 ### Research/documentation/useful resources
 
 For app.json file set up: https://docs.expo.dev/versions/latest/config/app/#android
@@ -32,23 +38,17 @@ Seems relevant to the firestore initialization mystery:
 
 - https://stackoverflow.com/questions/76762689/how-to-use-firestore-persistence-on-react-native-expo-app
 - https://firebase.google.com/docs/firestore/quickstart (VERY IMPORTANT AND USEFUL)
-- 
 
 Typescript cheatsheet: https://www.typescriptlang.org/cheatsheets/
 
-# Notes on checkpoints
+React Navigation: https://reactnavigation.org/docs/hello-react-navigation?config=dynamic
 
-- Use template on Canvas for project status checkpoint every week
-    - He will deduct points for not listing team members
-    - There's a good amount of flexibility in how you put it all in there
-    - "Code Changes": maybe highlight certain key changes, don't copy/paste every change
-    - Record video of weekly update
-        - Present, as though to team or business to tell what we worked on
-        - Quick highlights, quick and snappy and efficient, do NOT go line-by-line
-        - Show items we worked on working
-        - Examples given, do better than them!
-        - Video length depends on what you did. Should not be super long, though. 5-12 minutes is a good range.
-    - change log
-        - either changes made to code for that cycle
-        - OR running list of changes since the start (my preference)
-- New requirement: presentation must all be on the same branch!
+## Checkpoint notes:
+
+- Fluff stuff first
+- Do not lose audience, don't just jump right into an IDE
+- Set the stage
+    - what we did, what we accomplished, show what we accomplished
+- show data storage, at least show it exists
+    - and during demo, show "here's front, here's back, here's the data moving between the two"
+- for demoing different components, make a demo page, show them all. Don't do "here's the file structure, here's the code". Then demo the structure/code of one or two components
