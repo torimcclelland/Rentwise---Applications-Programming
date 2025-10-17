@@ -2,6 +2,7 @@ import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
+import { snapshotToUser } from '../../models/ConversionFunctions';
 
 /**
  * 
@@ -35,26 +36,11 @@ export async function getUserByEmail(userToFind){
             result = new ReturnValue(false, "User not found.");
             return result
         }
-       
+       // i actually cared enough to come
         const snapshotSingle = snapshot.docs[0]
 
-        // KELSIER: make a conversion function
-        // get user ID
-        
-        const userRetrieved = {
-            userID: snapshotSingle.id,
-            email: snapshotSingle.get("email"),
-            password : snapshotSingle.get("password"),
-            firstName: snapshotSingle.get("firstName"),
-            lastName: snapshotSingle.get("lastName"),
-            displayName: snapshotSingle.get("displayName"),
-            isLandLord: snapshotSingle.get("isLandLord"),
-            isPremUser: snapshotSingle.get("isPremUser"),
-            properties: snapshotSingle.get("properties"),
-        }
-
         // success
-        result = new ReturnValue(true, "", userRetrieved);
+        result = snapshotToUser(snapshotSingle)
 
     } catch(e){
         let error = ""; 

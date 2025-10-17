@@ -43,3 +43,12 @@ Typescript cheatsheet: https://www.typescriptlang.org/cheatsheets/
 
 React Navigation: https://reactnavigation.org/docs/hello-react-navigation?config=dynamic
 
+## Checkpoint notes:
+
+- Fluff stuff first
+- Do not lose audience, don't just jump right into an IDE
+- Set the stage
+    - what we did, what we accomplished, show what we accomplished
+- show data storage, at least show it exists
+    - and during demo, show "here's front, here's back, here's the data moving between the two"
+- for demoing different components, make a demo page, show them all. Don't do "here's the file structure, here's the code". Then demo the structure/code of one or two components
