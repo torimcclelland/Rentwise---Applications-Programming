@@ -11,8 +11,9 @@ const PrimaryButton = ({
   backgroundColor = '#034974',
   textColor = '#fff',
   size = 'medium',
+  fontWeight = 600,
   disabled = false,
-  style,
+  customStyle,
 }) => {
   const sizeStyles = styles[size];
 
@@ -23,7 +24,7 @@ const PrimaryButton = ({
         sizeStyles,
         { backgroundColor },
         disabled && styles.disabled,
-        style,
+        customStyle,
       ]}
       onPress={onPress}
       activeOpacity={0.8}
@@ -33,7 +34,7 @@ const PrimaryButton = ({
         {iconName && (
           <Icon name={iconName} size={20} color={iconColor} style={styles.icon} />
         )}
-        <Text style={[styles.text, { color: textColor }]}>{title}</Text>
+        <Text style={[styles.text, { color: textColor, fontWeight: fontWeight }]}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
