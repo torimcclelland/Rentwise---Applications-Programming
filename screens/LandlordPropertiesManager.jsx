@@ -9,26 +9,63 @@ import { ReturnValue } from '../models/ReturnValue';
 import PrimaryButton from '../components/PrimaryButton';
 import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
+import { Property } from '../models/Property';
+import { createProperty } from '../database_calls/property/CreateProperty';
 
-
+//         id = "",
+//         landlordID = "",
+//         address = "",
+//         monthlyPrice = 0.0,
+//         city = "",
+//         state = "",
+//         zipcode = "",
+//         images = [],
+//         description = "",
+//         reviews = [],
+//         avgRating = 0.0,
 
 export const LandlordPropertiesScreen = () =>{
 
   const [modalVisible, setModalVisible] = useState(false);
   const [streetAddress, setStreetAddress] = useState("");
   const [city, setCity] = useState("");
+  const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [rentPrice, setRentPrice] = useState("");
-  const [petsAllowed, setPetsAllowed] = useState(""); // need to create radio button
-  const [numBed, setNumBed] = useState(0);
-  const [numBath, setNumBath] = useState(0);
+  // const [numBed, setNumBed] = useState(0);
+  // const [numBath, setNumBath] = useState(0);
   const [description, setDescription] = useState("");
+  const [avgRating, setAvgRating] = useState(0.0)
   // possibly add more check with group
 
   // function to toggle modal visibility
   const toggleModal = () =>{
     setModalVisible(!modalVisible)
   }
+  
+  const addProperty = async () => {
+    const property = new Property(
+      "1", // landlordId
+      "1", // propertyId
+      streetAddress,  
+      rentPrice || 100,  
+      city,
+      state,
+      zip,
+      [],
+      description,
+      [],
+      avgRating
+    );
+
+    try {
+      const result = await createProperty(property);
+      console.log("Property created!");
+      toggleModal(); // close modal if success
+    } catch (e) {
+      console.log("Error creating property:", e);
+    }
+  };
 
 
   const [propertiesLs, setPropertiesLs]= useState([]);  
@@ -105,20 +142,21 @@ export const LandlordPropertiesScreen = () =>{
                       />
                     </View>
                     <TextField
+                    style={styles.textbox}
+                    placeholder="State"
+                    value={state}
+                    onChangeText={setState}
+                    />
+                    <TextField
                     placeholder="description"
                     value={description}
                     onChangeText={setDescription}
                     />
-                    <TextField
-                    textType="number-pad"
-                    placeholder="Number Bed"
-                    value={numBed}
-                    onChangeText={setNumBed}
-                    />
-                    <TextField
-                    placeholder="Number Bath"
-                    value={numBath}
-                    onChangeText={setNumBath}
+                    <PrimaryButton
+                    onPress={addProperty}
+                    title="Submit"
+                    size="small"
+                    fontSize={12}
                     />
                   </View>
                 </View>
