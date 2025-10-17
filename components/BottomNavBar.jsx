@@ -3,14 +3,14 @@ import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/BottomNavBarStyle';
-import Profile from './profile'; // Assuming your profile circle component is named Profile.jsx
+import Profile from './profile'; 
 
 const tabs = [
   { name: 'search', icon: 'compass-outline', route: 'LandlordProperties' },
   { name: 'messages', icon: 'chat-outline', route: null },
   { name: 'home', icon: 'home-outline', route: 'RenterDashboard' },
   { name: 'notifications', icon: 'bell-outline', route: null },
-  { name: 'profile', icon: null, route: null }, // icon is now handled by Profile
+  { name: 'profile', icon: null, route: null },
 ];
 
 const BottomNavBar = ({ selectedTab }) => {
@@ -28,7 +28,7 @@ const BottomNavBar = ({ selectedTab }) => {
         <TouchableOpacity key={tab.name} onPress={() => handleTabPress(tab)}>
           {tab.name === 'profile' ? (
             <Profile
-              src={'/images/user-avatar.jpg'} // Replace with your actual image path or URI
+              src={'/profileexample.png'} 
               size={28}
               style={{
                 borderWidth: selectedTab === 'profile' ? 2 : 0,
