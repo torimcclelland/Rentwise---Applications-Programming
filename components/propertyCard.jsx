@@ -22,9 +22,9 @@ const PropertyCard = ({address, ...props}) => {
 const styles = StyleSheet.create({
     box:{
         width: 342,
-        height: 134,
+        height: 108,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: { width: 0, height: 0.5 },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5, 
@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
         // borderColor: 'gray'
     },
     border:{
+        width: 342,
+        height: 108,
         borderRadius: 12,
         borderWidth: 0.5,
         backgroundColor: 'white',
