@@ -9,7 +9,6 @@ import { ReturnValue } from '../models/ReturnValue';
 import PrimaryButton from '../components/PrimaryButton';
 import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
-import { Property } from '../models/Property';
 import { createProperty } from '../database_calls/property/CreateProperty';
 
 //         id = "",
