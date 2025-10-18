@@ -97,6 +97,18 @@ export default function login() {
                     textStyle={{color: '#034974'}}
                     />
                 </View>
+                <View style={styles.divider}>
+                    <CustomDivider/>
+                </View>
+                <View>
+                    <Text style={styles.typetext}>Don't have an account?</Text>
+                    <LoginButton
+                    title="Sign up here!"
+                    onPress={() => navigation.navigate('Sign Up')}
+                    style={styles.loginButton}
+                    textStyle={{color: "white"}}
+                    />
+                </View>
             </View>
         </View>
     );
