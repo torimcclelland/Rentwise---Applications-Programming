@@ -2,7 +2,7 @@
 export class Property{
 
     constructor(
-        id = "",
+        propertyID = "",
         landlordID = "",
         address = "",
         monthlyPrice = 0.0,
@@ -15,7 +15,7 @@ export class Property{
         avgRating = 0.0,
     )
     { 
-        this.id = id;
+        this.propertyID = propertyID;
         this.landlordID = landlordID;
         this.address = address;
         this.monthlyPrice = monthlyPrice;

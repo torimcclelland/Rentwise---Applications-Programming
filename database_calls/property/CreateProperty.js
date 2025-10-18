@@ -14,7 +14,7 @@ export async function createProperty(newProperty) {
     // try catch to handle any errors
     try{
         // try to store user in database
-        if (!newProperty) throw new Error("newUser is undefined");
+        if (!newProperty) throw new Error("newProperty is undefined");
         
         const tempCol = collection(db, 'Properties')
         const docRef = await addDoc(tempCol, {...newProperty});

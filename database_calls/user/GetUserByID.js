@@ -2,6 +2,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
+import { snapshotToUser } from '../../models/ConversionFunctions';
 
 /**
  * 
@@ -31,17 +32,7 @@ export async function getUserByID(userToFind) {
         } 
 
         // TODO: make a conversion function
-        const userRetrieved = new User(
-            userToFind.id,
-            snapshot.data().email,
-            snapshot.data().password,
-            snapshot.data().firstName,
-            snapshot.data().lastName,
-            snapshot.data().displayName,
-            snapshot.data().isLandLord,
-            snapshot.data().isPremUser,
-            snapshot.data().properties,
-        )
+        const userRetrieved = snapshotToUser(snapshot);
 
         // success
         result = new ReturnValue(true, "")
