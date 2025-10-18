@@ -37,6 +37,7 @@ export async function getPropertyByID(propertyToFind) {
         // success
         result = new ReturnValue(true, "")
         result.propertyData = propertyRetrieved
+        console.log(result.propertyData)
 
     } catch(e){
         let error = ""; 

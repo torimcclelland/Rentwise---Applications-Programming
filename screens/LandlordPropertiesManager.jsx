@@ -76,10 +76,11 @@ export const LandlordPropertiesScreen = () =>{
 
   const getProperties = async () => {
     let result = new ReturnValue();
+    console.log(GlobalValues.currentUser)
     result = await getPropertyByLandlord(GlobalValues.currentUser)
-    setPropertiesLs(result) // set the landlords properties from result
+    setPropertiesLs(result.propertyData) // set the landlords properties from result
 
-    console.log(result)
+    console.log("properties found:", result.propertyData)
   }
 
   return (
