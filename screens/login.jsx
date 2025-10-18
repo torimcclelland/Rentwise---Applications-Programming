@@ -61,12 +61,14 @@ export default function login() {
                         placeholder="Email"
                         value={email}
                         onChangeText={setEmail}
+                        hint="Enter your email here"
                     />
                     <TextField
                         placeholder="Password"
                         value={password}
                         isPassword={true}
                         onChangeText={setPassword}
+                        hint="Enter your password here"
                     />
                     <View>
                         <LoginButton
