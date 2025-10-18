@@ -10,6 +10,7 @@ import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
 import { createProperty } from '../database_calls/property/CreateProperty';
 
+
 //         id = "",
 //         landlordID = "",
 //         address = "",
@@ -84,7 +85,7 @@ export const LandlordPropertiesScreen = () =>{
     <View style={styles.main}>
       <View>
       <View style={styles.topComponent}>
-        <Text style={styles.text}>My Listings</Text>
+        <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
         <PrimaryButton
         title= "+ Add"
         fontWeight= {500}
@@ -97,7 +98,13 @@ export const LandlordPropertiesScreen = () =>{
       <PropertyCard
       address="4119 Nancy Ave"
       />
+      {/* nav bar divider */}
+      <CustomDivider
+      customStyles={{marginBottom: 20, marginTop: 20}}
+      />
+      <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
       </View>
+
 
       <Modal
       visible={modalVisible}
@@ -173,19 +180,21 @@ const styles = StyleSheet.create ({
     backgroundColor: 'white'
   },
   topComponent:{
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 25
+    // paddingHorizontal: 25
   },
   addButton: {
     height: 32,
-    width: 71
+    width: 71,
+    alignSelf: 'flex-end'
   },
   text: {
     font: 'inter',
     fontWeight: 500,
     fontSize: 14,
-    alignSelf: 'center'
+    // alignSelf: 'center'
   },
   image:{
     height: 24,
