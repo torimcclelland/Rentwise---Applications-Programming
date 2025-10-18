@@ -77,6 +77,7 @@ export const LandlordPropertiesScreen = () =>{
   const getProperties = async () => {
     let result = new ReturnValue();
     result = await getPropertyByLandlord(GlobalValues.currentUser)
+    setPropertiesLs(result) // set the landlords properties from result
 
     console.log(result)
   }
@@ -95,9 +96,19 @@ export const LandlordPropertiesScreen = () =>{
         onPress={toggleModal}
         />
       </View>
-      <PropertyCard
-      address="4119 Nancy Ave"
-      />
+      {propertiesLs.length > 0  ? (
+        <FlatList
+          data={propertiesLs}
+          keyExtractor={(item) => item.propertyID?.toString()}
+          renderItem={({item}) => (
+            <PropertyCard
+            address={item.streetAddress}
+            />
+          )}
+        />
+      ) : (
+        <Text>No properties listed yet</Text>
+      )}
       {/* nav bar divider */}
       <CustomDivider
       customStyles={{marginBottom: 20, marginTop: 20}}
