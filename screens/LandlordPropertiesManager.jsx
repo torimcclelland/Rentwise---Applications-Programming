@@ -9,6 +9,11 @@ import PrimaryButton from '../components/PrimaryButton';
 import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
 import { createProperty } from '../database_calls/property/CreateProperty';
+import Icon from 'react-native-vector-icons/Feather';
+import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
 
 
 //         id = "",
@@ -31,11 +36,11 @@ export const LandlordPropertiesScreen = () =>{
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [rentPrice, setRentPrice] = useState("");
-  // const [numBed, setNumBed] = useState(0);
-  // const [numBath, setNumBath] = useState(0);
   const [description, setDescription] = useState("");
   const [avgRating, setAvgRating] = useState(0.0)
   // possibly add more check with group
+  // navigation
+  const navigation = useNavigation();
 
   // function to toggle modal visibility
   const toggleModal = () =>{
@@ -78,9 +83,14 @@ export const LandlordPropertiesScreen = () =>{
     let result = new ReturnValue();
     console.log(GlobalValues.currentUser)
     result = await getPropertyByLandlord(GlobalValues.currentUser)
-    setPropertiesLs(result.propertyData) // set the landlords properties from result
+    setPropertiesLs(result) // set the landlords properties from result
+    console.log(propertiesLs)
 
     console.log("properties found:", result.propertyData)
+  }
+
+  const editProperty = async(propertyID) => {
+    navigation.navigate('Property Edit', {'propertyID': propertyID}); // pass the property ID to the screen
   }
 
   return (
@@ -101,9 +111,11 @@ export const LandlordPropertiesScreen = () =>{
         <FlatList
           data={propertiesLs}
           keyExtractor={(item) => item.propertyID?.toString()}
+          contentContainerStyle={{ gap: 16 }}
           renderItem={({item}) => (
             <PropertyCard
-            address={item.streetAddress}
+            address={item.address}
+            onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
             />
           )}
         />
@@ -139,6 +151,13 @@ export const LandlordPropertiesScreen = () =>{
                   </View>
 
                   <View style={stylesModal.spacing}>
+                    {/* for the image box */}
+                    <Pressable style={stylesModal.imageBox}>
+                      <View style={stylesModal.addImage}>
+                        <Icon name="plus" size={30} color="#666" />
+                        <Text>Add images</Text>
+                      </View>
+                    </Pressable>
                     <TextField
                     placeholder="Street Address"
                     value={streetAddress}
@@ -251,6 +270,21 @@ const stylesModal = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10
   },
+  imageBox: {
+    width: '100%',                
+    height: 150,
+    borderWidth: 2,
+    borderColor: '#aaa',
+    borderStyle: 'dashed',     
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fafafa',
+  },
+  addImage:{
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 })
 
 export default LandlordPropertiesScreen
