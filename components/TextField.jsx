@@ -11,7 +11,7 @@ const TextField = ({ placeholder, isPassword=false, textType, hint='', ...props 
         placeholderTextColor="#696969"
         secureTextEntry={isPassword}
         keyboardType={textType}
-        accessibilityLabel='Input {placeholder} into text box'
+        accessibilityLabel={`Input ${placeholder} into text box`}
         accessibilityRole='Text Box'
         accessibilityHint={hint}
       />
