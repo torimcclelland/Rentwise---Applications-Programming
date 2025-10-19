@@ -4,7 +4,7 @@ import styles from '../styles/DashboardStyle';
 import PrimaryButton from '../components/PrimaryButton';
 import InfoCard from '../components/InfoCard';
 import CustomDivider from '../components/divider';
-import BottomNavBar from '../components/BottomNavBar';
+//import BottomNavBar from '../components/BottomNavBar';
 
 const DashboardScreen = () => {
   return (
@@ -70,7 +70,7 @@ const DashboardScreen = () => {
         </ScrollView>
 
         {/* Bottom Navigation Bar */}
-        <BottomNavBar selectedTab="home" />
+        {/* <BottomNavBar selectedTab="home" /> */}
       </View>
     </SafeAreaView>
   );

@@ -3,14 +3,14 @@ import {useState} from 'react'
 import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
 
 
-const PropertyCard = ({address, ...props}) => {
+const PropertyCard = ({address, onPress, ...props}) => {
     return (
         <View style={styles.box}>
             <View style={styles.border}>
                 <Image style={styles.image} source={require('./house_2.webp')}/>
                 <View style={styles.button}>
                     <Text style={styles.address}>{address}</Text>
-                    <Pressable>
+                    <Pressable onPress={onPress}>
                         <Image style={styles.icon} source={require('./arrowForward.jpg')}/>
                     </Pressable>
                 </View>

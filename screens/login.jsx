@@ -20,13 +20,13 @@ export default function login() {
         const userToFind = {email: email}
         const result = await getUserByEmail(userToFind);
 
-        if (!result.success) {
+        if (!result) {
             console.log("Error:", result.errorMsg);// KELSIER: better error handling
             return;
         }
 
         // success, get user from result
-        const currentUser = result.userData
+        const currentUser = result
 
         // check if password is correct
         if(currentUser.password!=password){
@@ -35,8 +35,6 @@ export default function login() {
         }
 
         GlobalValues.currentUser = currentUser;
-
-        console.log(currentUser)
         // if we get here, successful login. Navigate to the relevant screen
         if (currentUser.isLandLord) {
             navigation.navigate('Landlord Dashboard')

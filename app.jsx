@@ -10,6 +10,7 @@ import BrowseProperties from './screens/BrowseProperties';
 import MessagesOverview from './screens/MessagesOverview';
 import Notifications from './screens/Notifications';
 import SignUpScreen from './screens/SignUp';
+import PropertyEditScreen from './screens/propertyEditScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ function RootStack() {
       <Stack.Screen name="Browse Properties" component={BrowseProperties}/>
       <Stack.Screen name="Messages" component={MessagesOverview}/>
       <Stack.Screen name="Notifications" component={Notifications}/>
+      <Stack.Screen name="Property Edit" component={PropertyEditScreen} />
     </Stack.Navigator>
   );
 }

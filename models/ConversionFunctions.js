@@ -1,23 +1,26 @@
 import { DocumentSnapshot } from "firebase/firestore";
 import { ReturnValue } from "./ReturnValue";
+import { User } from "./User";
+import { Property } from "./Property";
 
 function snapshotToUser(snapshot){
 
     let result = new ReturnValue
+    let convertedUser; 
 
     try{
         
-        const convertedUser = {
+        convertedUser = new User({
             userID: snapshot.id,
-            email: snapshot.get("email"),
-            password : snapshot.get("password"),
-            firstName: snapshot.get("firstName"),
-            lastName: snapshot.get("lastName"),
-            displayName: snapshot.get("displayName"),
-            isLandLord: snapshot.get("isLandLord"),
-            isPremUser: snapshot.get("isPremUser"),
-            properties: snapshot.get("properties"),
-        }
+            email: snapshot.email,
+            password: snapshot.password,
+            firstName: snapshot.firstName,
+            lastName: snapshot.lastName,
+            displayName: snapshot.displayName,
+            isLandLord: snapshot.isLandLord,
+            isPremUser: snapshot.isPremUser,
+            properties: snapshot.properties,
+    })
         result = new ReturnValue(true, "", convertedUser)
 
     } catch (e){
@@ -30,7 +33,7 @@ function snapshotToUser(snapshot){
 
         result = new ReturnValue(false, error)
     }
-    return result
+    return convertedUser
 }
 
 /**
@@ -40,22 +43,23 @@ function snapshotToUser(snapshot){
  */
 function snapshotToProperty(snapshot){
 
-    let result = new ReturnValue
+    let result = new ReturnValue()
+    let convertedProp
 
     try{
         
-        const convertedProp = {
-            propertyID: snapshot.id,
-            landlordID: snapshot.get("landlordID"),
-            address : snapshot.get("address"),
-            monthlyPrice: snapshot.get("monthlyPrice"),
-            city: snapshot.get("city"),
-            state: snapshot.get("state"),
-            zipcode: snapshot.get("zipcode"),
-            images: snapshot.get("images"),
-            description: snapshot.get("description"),
-            reviews: snapshot.get("reviews"),
-            avgRating: snapshot.get("avgRating"),
+        convertedProp = {
+            propertyID: snapshot.propertyID,
+            landlordID: snapshot.landlordID,
+            address : snapshot.address,
+            monthlyPrice: snapshot.monthlyPrice,
+            city: snapshot.city,
+            state: snapshot.state,
+            zipcode: snapshot.zipcode,
+            images: snapshot.images,
+            description: snapshot.description,
+            reviews: snapshot.reviews,
+            avgRating: snapshot.avgRating,
         }
         result = new ReturnValue(true, "", {}, convertedProp)
 
@@ -69,7 +73,7 @@ function snapshotToProperty(snapshot){
 
         result = new ReturnValue(false, error)
     }
-    return result
+    return convertedProp
 }
 
 export {snapshotToUser, snapshotToProperty}

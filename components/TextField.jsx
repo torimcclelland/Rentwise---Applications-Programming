@@ -11,7 +11,8 @@ const TextField = ({ placeholder, isPassword=false, textType, hint='', ...props 
         placeholderTextColor="#696969"
         secureTextEntry={isPassword}
         keyboardType={textType}
-        accessibilityLabel={'Text input for ' + placeholder}
+        accessibilityLabel='Input {placeholder} into text box'
+        accessibilityRole='Text Box'
         accessibilityHint={hint}
       />
     </View>

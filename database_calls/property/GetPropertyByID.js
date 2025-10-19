@@ -1,4 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
@@ -13,30 +14,38 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 export async function getPropertyByID(propertyToFind) {
 
     var result = new ReturnValue(false, "");
+    let propertyRetrieved
     
-    if(propertyToFind.propertyID == ""){
+    if(propertyToFind == ""){
         result = new ReturnValue(false, "Property ID must not be empty.")
         return result
     }
 
     // try catch to handle any errors
     try{
-        
+         const propertyRef = collection(db, 'Properties')
         // try to find user by ID
-        const propertyRef = doc(db, 'Properties', propertyToFind.propertyID)
+        const newQuery = query(propertyRef, where("propertyID", "==", propertyToFind), limit(1))
+        //console.log(newQuery) // added print statements for debugging
 
-        const snapshot = await getDoc(propertyRef);
+        const snapshot = await getDocs(newQuery);
 
-        if (snapshot.data() == undefined) {
+
+        if (snapshot.docs.length == 0) {
             result = new ReturnValue(false, "No snapshots found for property with id " + propertyToFind.propertyID);
             return result;
         } 
 
         // TODO: make a conversion function
-        const propertyRetrieved = snapshotToProperty(snapshot);
+        const singleSnapshot = snapshot.docs[0]
+        const data = singleSnapshot.data()
+        propertyRetrieved = snapshotToProperty(data);
         // success
-        result = new ReturnValue(true, "")
-        result.propertyData = propertyRetrieved
+        // result = new ReturnValue(true, "")
+        // result.propertyData = propertyRetrieved
+        // console.log(result.propertyData)
+        // we can prob remove
+
 
     } catch(e){
         let error = ""; 
@@ -49,6 +58,6 @@ export async function getPropertyByID(propertyToFind) {
         result = new ReturnValue(false, error)
     }
     
-    return result;
+    return propertyRetrieved;
     
 }

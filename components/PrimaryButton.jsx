@@ -30,6 +30,9 @@ const PrimaryButton = ({
       onPress={onPress}
       activeOpacity={0.8}
       disabled={disabled}
+      accessibilityLabel='Press to submit your form' // what the screen reader will read
+      accessibilityRole='Button'
+
     >
       <View style={styles.content}>
         {iconName && (
