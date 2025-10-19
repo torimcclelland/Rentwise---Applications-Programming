@@ -1,7 +1,7 @@
 
 export class User{
 
-    constructor(
+    constructor({
         userID = "",
         email = "",
         password = "",
@@ -11,8 +11,7 @@ export class User{
         isLandLord = false,
         isPremUser = false,
         properties = [],
-    )
-    { 
+    } = {}){ 
         this.userID = userID;
         this.email = email;
         this.password = password;

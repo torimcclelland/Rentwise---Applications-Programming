@@ -38,9 +38,9 @@ export async function getUserByEmail(userToFind){
         }
        // i actually cared enough to come
         const snapshotSingle = snapshot.docs[0]
-
+        const data = snapshotSingle.data()
         // success
-        result = snapshotToUser(snapshotSingle)
+        result = snapshotToUser(data)
 
     } catch(e){
         let error = ""; 
@@ -50,7 +50,7 @@ export async function getUserByEmail(userToFind){
             error = "Had a problem with typescript error handling when adding user."
         }
 
-        result = new ReturnValue(false, error)
+        // result = new ReturnValue(false, error)
     }
     return result
     

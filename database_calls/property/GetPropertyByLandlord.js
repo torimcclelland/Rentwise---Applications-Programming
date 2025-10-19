@@ -13,8 +13,9 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 export async function getPropertyByLandlord(landlord) {
 
     var result = new ReturnValue(false, "");
+    let propList;
     
-    if(landlord.id == ""){
+    if(landlord.userID == ""){
         result = new ReturnValue(false, "Landlord ID must not be empty.")
         return result
     }
@@ -35,14 +36,14 @@ export async function getPropertyByLandlord(landlord) {
             return result;
         }
 
-        const propList = [];
+        propList = [];
         snapshot.forEach((doc) => {
-            const property = snapshotToProperty(doc);
-            if(!property.success){
+            const property = snapshotToProperty(doc.data());
+            if(!property){
                 console.log(property.errorMsg)
                 return;
             }
-            propList.push(property.propertyData);
+            propList.push(property);
         });
 
         // success
@@ -59,6 +60,6 @@ export async function getPropertyByLandlord(landlord) {
         result = new ReturnValue(false, error)
     }
     
-    return result;
+    return propList;
     
 }
