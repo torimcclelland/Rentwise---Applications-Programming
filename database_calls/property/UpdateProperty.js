@@ -5,6 +5,7 @@ import { db } from '../../firebaseConfig';
 import { getPropertyByID } from './GetPropertyByID';
 import { collection, query, where, getDocs, limit, doc, updateDoc } from 'firebase/firestore';
 
+
 /** 
  * @param {Property} thisProperty The details of the property to update
  * @returns {ReturnValue} The results of the operation. If successful, the propertyData field contains the details of the updated property.

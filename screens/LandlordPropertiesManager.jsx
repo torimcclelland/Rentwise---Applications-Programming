@@ -14,6 +14,7 @@ import {
     createStaticNavigation,
     useNavigation,
   } from '@react-navigation/native';
+import { Property } from '../models/Property';
 
 
 //         id = "",
@@ -49,17 +50,14 @@ export const LandlordPropertiesScreen = () =>{
   
   const addProperty = async () => {
     const property = new Property(
-      "1", // landlordId
+      "3", // landlordId
       "1", // propertyId
       streetAddress,  
       rentPrice || 100,  
       city,
       state,
       zip,
-      [],
-      description,
-      [],
-      avgRating
+      description
     );
 
     try {
@@ -133,7 +131,7 @@ export const LandlordPropertiesScreen = () =>{
       <Modal
       visible={modalVisible}
       onRequestClose={toggleModal} // for Android hardware back button
-      animationType='fade' // pop-up slides up on the screen
+      animationType= 'slide' // pop-up slides up on the screen
       >
         <View style={stylesModal.centeredView}>
               <View style={stylesModal.modalView}>
@@ -163,20 +161,18 @@ export const LandlordPropertiesScreen = () =>{
                     value={streetAddress}
                     onChangeText={setStreetAddress}
                     />
-                    <View style={stylesModal.textBoxes}>
-                      <TextField
-                      style={styles.textbox}
-                      placeholder="City"
-                      value={city}
-                      onChangeText={setCity}
-                      />
-                      <TextField
-                      style={styles.textbox}
-                      placeholder="Zipcode"
-                      value={zip}
-                      onChangeText={setZip}
-                      />
-                    </View>
+                    <TextField
+                    style={styles.textbox}
+                    placeholder="City"
+                    value={city}
+                    onChangeText={setCity}
+                    />
+                    <TextField
+                    style={styles.textbox}
+                    placeholder="Zipcode"
+                    value={zip}
+                    onChangeText={setZip}
+                    />
                     <TextField
                     style={styles.textbox}
                     placeholder="State"
@@ -187,6 +183,11 @@ export const LandlordPropertiesScreen = () =>{
                     placeholder="description"
                     value={description}
                     onChangeText={setDescription}
+                    />
+                    <TextField
+                    placeholder="Rent price"
+                    value={rentPrice}
+                    onChangeText={setRentPrice}
                     />
                     <PrimaryButton
                     onPress={addProperty}
