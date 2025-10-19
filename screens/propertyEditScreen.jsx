@@ -6,6 +6,7 @@ import { getPropertyByID } from '../database_calls/property/GetPropertyByID'
 import Icon from 'react-native-vector-icons/Feather'
 import PrimaryButton from '../components/PrimaryButton'
 import { Property } from '../models/Property'
+import { updateProperty } from '../database_calls/property/UpdateProperty'
 
 
 
@@ -14,13 +15,6 @@ export const PropertyEditScreen = () =>{
     const {propertyID} = route.params
 
     // variables
-    const [streetAddress, setStreetAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zip, setZip] = useState("");
-    const [rentPrice, setRentPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [avgRating, setAvgRating] = useState(0.0)
     const [property, setProperty] = useState({}) // initialize property to empty
 
     // this.propertyID = propertyID;
@@ -42,12 +36,17 @@ export const PropertyEditScreen = () =>{
     const getPropertyInfo = async() =>{
         const property = await getPropertyByID(propertyID)
         setProperty(property)
-        setStreetAddress(property.address)
-        setCity(property.city)
-        setState(property.state)
-        setZip(property.zipcode)
-        setRentPrice(property.monthlyPrice)
-        setDescription(property.description)
+        // setStreetAddress(property.address)
+        // setCity(property.city)
+        // setState(property.state)
+        // setZip(property.zipcode)
+        // setRentPrice(property.monthlyPrice)
+        // setDescription(property.description)
+    }
+
+    const updateThisProperty = async() => {
+        console.log(property)
+        const result = await updateProperty(property)
     }
 
     return (
@@ -62,54 +61,55 @@ export const PropertyEditScreen = () =>{
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>Street Address</Text>
                 <TextField
-                placeholder={streetAddress}
-                value={streetAddress}
-                onChangeText={setStreetAddress}
+                placeholder={property.address}
+                value={property.address}
+                onChangeText={(text) => setProperty({ ...property, address: text })}
                 />
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>City</Text>
                 <TextField
-                placeholder={city}
-                value={city}
-                onChangeText={setCity}
+                placeholder={property.city}
+                value={property.city}
+                onChangeText={(text) => setProperty({ ...property, city: text })}
                 />
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>State</Text>
                 <TextField
-                placeholder={state}
-                value={state}
-                onChangeText={setState}
+                placeholder={property.state}
+                value={property.state}
+                onChangeText={(text) => setProperty({ ...property, state: text })}
                 />
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>Zip Code</Text>
                 <TextField
-                placeholder={zip}
-                value={zip}
-                onChangeText={setZip}
+                placeholder={property.zipcode}
+                value={property.zipcode}
+                onChangeText={(text) => setProperty({ ...property, zipcode: text })}
                 />
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>Rent Price</Text>
                 <TextField
-                placeholder={rentPrice}
-                value={rentPrice}
-                onChangeText={setRentPrice}
+                placeholder={property.monthlyPrice}
+                value={property.monthlyPrice}
+                onChangeText={(text) => setProperty({ ...property, monthlyPrice: text })}
                 />
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>Description</Text>
                 <TextField
-                placeholder={description}
-                value={description}
-                onChangeText={setDescription}
+                placeholder={property.description}
+                value={property.description}
+                onChangeText={(text) => setProperty({ ...property, description: text })}
                 />
             </View>
             <PrimaryButton
             title="Save"
             size="small"
+            onPress={updateThisProperty}
             />
         </View>
         </ScrollView>
