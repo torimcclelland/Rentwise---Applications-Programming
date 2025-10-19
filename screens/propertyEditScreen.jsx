@@ -4,6 +4,8 @@ import TextField from '../components/TextField'
 import { useRoute } from '@react-navigation/native'
 import { getPropertyByID } from '../database_calls/property/GetPropertyByID'
 import Icon from 'react-native-vector-icons/Feather'
+import PrimaryButton from '../components/PrimaryButton'
+import { Property } from '../models/Property'
 
 
 
@@ -46,8 +48,8 @@ export const PropertyEditScreen = () =>{
         setZip(property.zipcode)
         setRentPrice(property.monthlyPrice)
         setDescription(property.description)
-
     }
+
     return (
         <ScrollView>
         <View style={styles.component}>
@@ -105,6 +107,10 @@ export const PropertyEditScreen = () =>{
                 onChangeText={setDescription}
                 />
             </View>
+            <PrimaryButton
+            title="Save"
+            size="small"
+            />
         </View>
         </ScrollView>
     );
