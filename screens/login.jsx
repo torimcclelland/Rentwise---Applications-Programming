@@ -9,6 +9,7 @@ import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
 import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
 import { GlobalValues } from "../GlobalValues";
+import {login_style} from "../styles/login";
 
 
 export default function login() {
@@ -44,17 +45,17 @@ export default function login() {
     };
 
     return (
-        <View style={styles.app}>
-            <View style={styles.welcome}>
-                <Image style={styles.logo} source={require('./rentwiseLogo.png')}/>
-                <Text style={styles.name}>Rentwise</Text>
+        <View style={login_style.app}>
+            <View style={login_style.welcome}>
+                <Image style={login_style.logo} source={require('./rentwiseLogo.png')}/>
+                <Text style={login_style.name}>Rentwise</Text>
             </View>
-            <View style={styles.input}>
-                <View style={styles.text}>
-                    <Text style={styles.typetext}>Sign In</Text>
-                    <Text style={styles.typetext}>Enter your email to sign into Rentwise</Text>
+            <View style={login_style.input}>
+                <View style={login_style.text}>
+                    <Text style={login_style.typetext}>Sign In</Text>
+                    <Text style={login_style.typetext}>Enter your email to sign into Rentwise</Text>
                 </View>
-                <View style={styles.spacing}>
+                <View style={login_style.spacing}>
                     <TextField
                         placeholder="Email"
                         value={email}
@@ -72,12 +73,12 @@ export default function login() {
                         <LoginButton
                         title="Continue"
                         onPress={validateUser}
-                        style={styles.loginButton}
+                        style={login_style.loginButton}
                         textStyle={{color: "white"}}
                         />
                     </View>
                 </View>
-                <View style={styles.divider}>
+                <View style={login_style.divider}>
                     <CustomDivider/>
                     <Text>Or</Text>
                 </View>
@@ -85,25 +86,25 @@ export default function login() {
                     <LoginButton
                     title="Continue with Google"
                     onPress={() => console.log('Another button pressed!')}
-                    style={styles.altLoginButton}
+                    style={login_style.altLoginButton}
                     textStyle={{color: '#034974'}}
                     />
                     <LoginButton
                     title="Continue with Facebook"
                     onPress={() => console.log('Another button pressed!')}
-                    style={styles.altLoginButton}
+                    style={login_style.altLoginButton}
                     textStyle={{color: '#034974'}}
                     />
                 </View>
-                <View style={styles.divider}>
+                <View style={login_style.divider}>
                     <CustomDivider/>
                 </View>
                 <View>
-                    <Text style={styles.typetext}>Don't have an account?</Text>
+                    <Text style={login_style.typetext}>Don't have an account?</Text>
                     <LoginButton
                     title="Sign up here!"
                     onPress={() => navigation.navigate('Sign Up')}
-                    style={styles.loginButton}
+                    style={login_style.loginButton}
                     textStyle={{color: "white"}}
                     />
                 </View>
@@ -111,63 +112,3 @@ export default function login() {
         </View>
     );
 }
-
-const styles = StyleSheet.create ({
-    text: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 2
-    },
-    typetext: {
-        font: 'inter',
-        fontSize: 16,
-        fontWeight: 600,
-        color: '#034974',
-        lineHeight: 24,
-        fontStyle: 'normal'
-    },
-    spacing:{
-        flexDirection: 'column',
-        gap: 16
-    },
-    logo: {
-        height: 84,
-        width: 74
-    },
-    welcome: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    name:{
-        color: '#034974',
-        font: "Inter",
-        fontSize: 64,
-        fontStyle: 'normal',
-        fontWeight: 600,
-        // textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        // textShadowOffset: { width: 0, height: 4 },
-        // textShadowRadius: 4
-
-    },
-    app:{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-
-    },
-    input:{
-        flex: 1,
-        paddingHorizontal: 24,
-        flexDirection: 'column',
-        gap: 23
-    },
-    loginButton:{
-        backgroundColor: '#034974'
-    },
-    altLoginButton:{
-        backgroundColor: '#EEEEEE',
-        marginBottom: 10
-    }
-});
