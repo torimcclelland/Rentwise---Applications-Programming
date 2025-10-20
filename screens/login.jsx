@@ -59,12 +59,14 @@ export default function login() {
                         placeholder="Email"
                         value={email}
                         onChangeText={setEmail}
+                        hint="Enter your email here"
                     />
                     <TextField
                         placeholder="Password"
                         value={password}
                         isPassword={true}
                         onChangeText={setPassword}
+                        hint="Enter your password here"
                     />
                     <View>
                         <LoginButton
@@ -91,6 +93,18 @@ export default function login() {
                     onPress={() => console.log('Another button pressed!')}
                     style={styles.altLoginButton}
                     textStyle={{color: '#034974'}}
+                    />
+                </View>
+                <View style={styles.divider}>
+                    <CustomDivider/>
+                </View>
+                <View>
+                    <Text style={styles.typetext}>Don't have an account?</Text>
+                    <LoginButton
+                    title="Sign up here!"
+                    onPress={() => navigation.navigate('Sign Up')}
+                    style={styles.loginButton}
+                    textStyle={{color: "white"}}
                     />
                 </View>
             </View>
