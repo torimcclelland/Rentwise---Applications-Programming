@@ -10,24 +10,13 @@ import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
 import { createProperty } from '../database_calls/property/CreateProperty';
 import Icon from 'react-native-vector-icons/Feather';
+import DropDown from '../components/DropDown';
 import {
     createStaticNavigation,
     useNavigation,
   } from '@react-navigation/native';
 import { Property } from '../models/Property';
 
-
-//         id = "",
-//         landlordID = "",
-//         address = "",
-//         monthlyPrice = 0.0,
-//         city = "",
-//         state = "",
-//         zipcode = "",
-//         images = [],
-//         description = "",
-//         reviews = [],
-//         avgRating = 0.0,
 
 export const LandlordPropertiesScreen = () =>{
 
@@ -39,7 +28,14 @@ export const LandlordPropertiesScreen = () =>{
   const [rentPrice, setRentPrice] = useState("");
   const [description, setDescription] = useState("");
   const [avgRating, setAvgRating] = useState(0.0)
-  // possibly add more check with group
+
+  // create an array to hold state values
+  const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+ 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+ 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+ 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+ 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+
   // navigation
   const navigation = useNavigation();
 
@@ -78,14 +74,14 @@ export const LandlordPropertiesScreen = () =>{
   }, [])
 
   const getProperties = async () => {
+
     let result = new ReturnValue();
-    console.log(GlobalValues.currentUser)
+    
     result = await getPropertyByLandlord(GlobalValues.currentUser)
     console.log(result)
-    setPropertiesLs(result.propertyList) // set the landlords properties from result
-    //console.log(propertiesLs)
 
-    //console.log("properties found:", propertiesLs)
+    setPropertiesLs(result.propertyList) // set the landlords properties from result
+    
   }
 
   const editProperty = async(propertyID) => {
@@ -94,43 +90,44 @@ export const LandlordPropertiesScreen = () =>{
 
   return (
     <View style={styles.main}>
-      <View>
-      <View style={styles.topComponent}>
-        <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
-        <PrimaryButton
-        title= "+ Add"
-        fontWeight= {500}
-        fontSize={12}
-        size='small'
-        customStyle={styles.addButton}
-        onPress={toggleModal}
-        />
-      </View>
-      {propertiesLs.length > 0  ? (
-        <FlatList
-          data={propertiesLs}
-          keyExtractor={(item) => item.propertyID?.toString()}
-          contentContainerStyle={{ gap: 16 }}
-          renderItem={({item}) => (
-            <PropertyCard
-            address={item.address}
-            onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
+        <View>
+          <View style={styles.topComponent}>
+            <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
+            <PrimaryButton
+            title= "+ Add"
+            fontWeight= {500}
+            fontSize={12}
+            size='small'
+            customStyle={styles.addButton}
+            onPress={toggleModal}
             />
+          </View>
+          {propertiesLs.length > 0  ? (
+            <FlatList
+              data={propertiesLs}
+              keyExtractor={(item) => item.propertyID?.toString()}
+              contentContainerStyle={{ gap: 16 }}
+              renderItem={({item}) => (
+                <PropertyCard
+                address={item.address}
+                onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
+                />
+              )}
+            />
+          ) : (
+            <Text>No properties listed yet</Text>
           )}
-        />
-      ) : (
-        <Text>No properties listed yet</Text>
-      )}
-      {/* nav bar divider */}
-      <CustomDivider
-      customStyles={{marginBottom: 20, marginTop: 20}}
-      />
-      <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
-      </View>
+          {/* nav bar divider */}
+          <CustomDivider
+          customStyles={{marginBottom: 20, marginTop: 20}}
+          />
+          <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
+        </View>
 
 
       <Modal
       visible={modalVisible}
+      transparent={true}
       onRequestClose={toggleModal} // for Android hardware back button
       animationType= 'slide' // pop-up slides up on the screen
       >
@@ -138,67 +135,67 @@ export const LandlordPropertiesScreen = () =>{
               <View style={stylesModal.modalView}>
                 <View style={stylesModal.contentView}>
 
-                  <View style={stylesModal.banner}>
-                    <View style={stylesModal.back}>
-                      <Pressable
-                      onPress={toggleModal}>
-                        <Image style={styles.image} source={require('./backArrow.png')}/>
-                      </Pressable>
-                      <Text style={styles.text}>Add Listing</Text>
-                    </View>
-                    <CustomDivider/>
-                  </View>
-
-                  <View style={stylesModal.spacing}>
-                    {/* for the image box */}
-                    <Pressable style={stylesModal.imageBox}>
-                      <View style={stylesModal.addImage}>
-                        <Icon name="plus" size={30} color="#666" />
-                        <Text>Add images</Text>
-                      </View>
-                    </Pressable>
-                    <TextField
-                    placeholder="Street Address"
-                    value={streetAddress}
-                    onChangeText={setStreetAddress}
-                    />
-                    <TextField
-                    style={styles.textbox}
-                    placeholder="City"
-                    value={city}
-                    onChangeText={setCity}
-                    />
-                    <TextField
-                    style={styles.textbox}
-                    placeholder="Zipcode"
-                    value={zip}
-                    onChangeText={setZip}
-                    />
-                    <TextField
-                    style={styles.textbox}
-                    placeholder="State"
-                    value={state}
-                    onChangeText={setState}
-                    />
-                    <TextField
-                    placeholder="description"
-                    value={description}
-                    onChangeText={setDescription}
-                    />
-                    <TextField
-                    placeholder="Rent price"
-                    value={rentPrice}
-                    onChangeText={setRentPrice}
-                    />
-                    <PrimaryButton
-                    onPress={addProperty}
-                    title="Submit"
-                    size="small"
-                    fontSize={12}
-                    />
-                  </View>
+              <View style={stylesModal.banner}>
+                <View style={stylesModal.back}>
+                  <Pressable
+                  onPress={toggleModal}>
+                    <Image style={styles.image} source={require('./backArrow.png')}/>
+                  </Pressable>
+                  <Text style={styles.text}>Add Listing</Text>
                 </View>
+                <CustomDivider/>
               </View>
+                <View style={stylesModal.spacing}>
+                  {/* for the image box */}
+                  <Pressable style={stylesModal.imageBox}>
+                    <View style={stylesModal.addImage}>
+                      <Icon name="plus" size={30} color="#666"/>
+                      <Text>Add images</Text>
+                    </View>
+                  </Pressable>
+                  <TextField
+                  placeholder="Street Address"
+                  value={streetAddress}
+                  onChangeText={setStreetAddress}
+                  />
+                  <TextField
+                  placeholder="City"
+                  value={city}
+                  onChangeText={setCity}
+                  />
+                  {/* comment */}
+                  <DropDown
+                  placeholder="Select State"
+                  options={states}
+                  value={state}
+                  onSelect={setState}
+                  />
+                  <TextField
+                  textType="numeric"
+                  placeholder="Zipcode"
+                  value={zip}
+                  onChangeText={setZip}
+                  />
+                  <TextField
+                  placeholder="description"
+                  value={description}
+                  onChangeText={setDescription}
+                  />
+                  <TextField
+                  textType="numeric"
+                  placeholder="Rent price"
+                  value={rentPrice}
+                  onChangeText={setRentPrice}
+                  />
+                  <PrimaryButton
+                  onPress={addProperty}
+                  title="Submit"
+                  size="small"
+                  fontSize={12}
+                  />
+                </View>
+            </View>
+          </View>
         </View>
       </Modal>
     </View>
@@ -265,9 +262,6 @@ const stylesModal = StyleSheet.create({
   textBoxes:{
     flexDirection: 'row'
   },
-  textbox:{
-    flex: 1
-  },
   back:{
     flexDirection: 'row',
     marginBottom: 10
@@ -286,7 +280,7 @@ const stylesModal = StyleSheet.create({
   addImage:{
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
 })
 
 export default LandlordPropertiesScreen
