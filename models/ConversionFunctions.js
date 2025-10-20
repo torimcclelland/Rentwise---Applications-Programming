@@ -49,17 +49,17 @@ function snapshotToProperty(snapshot){
     try{
         
         convertedProp = {
-            propertyID: snapshot.propertyID,
-            landlordID: snapshot.landlordID,
-            address : snapshot.address,
-            monthlyPrice: snapshot.monthlyPrice,
-            city: snapshot.city,
-            state: snapshot.state,
-            zipcode: snapshot.zipcode,
-            images: snapshot.images,
-            description: snapshot.description,
-            reviews: snapshot.reviews,
-            avgRating: snapshot.avgRating,
+            propertyID: snapshot.id,
+            landlordID: snapshot.data().landlordID,
+            address: snapshot.data().address,
+            monthlyPrice: snapshot.data().monthlyPrice,
+            city: snapshot.data().city,
+            state: snapshot.data().state,
+            zipcode: snapshot.data().zipcode,
+            images: snapshot.data().images,
+            description: snapshot.data().description,
+            reviews: snapshot.data().reviews,
+            avgRating: snapshot.data().avgRating,
         }
         result = new ReturnValue(true, "", {}, convertedProp)
 

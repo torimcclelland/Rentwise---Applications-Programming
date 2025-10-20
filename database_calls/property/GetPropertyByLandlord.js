@@ -38,7 +38,7 @@ export async function getPropertyByLandlord(landlord) {
 
         propList = [];
         snapshot.forEach((doc) => {
-            const property = snapshotToProperty(doc.data());
+            const property = snapshotToProperty(doc);
             if(!property.success){
                 console.log(property.errorMsg)
                 return;

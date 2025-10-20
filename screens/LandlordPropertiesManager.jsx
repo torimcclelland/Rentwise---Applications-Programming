@@ -213,7 +213,6 @@ const styles = StyleSheet.create ({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // paddingHorizontal: 25
   },
   addButton: {
     height: 32,
@@ -224,7 +223,6 @@ const styles = StyleSheet.create ({
     font: 'inter',
     fontWeight: 500,
     fontSize: 14,
-    // alignSelf: 'center'
   },
   image:{
     height: 24,
