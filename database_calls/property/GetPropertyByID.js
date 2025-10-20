@@ -23,12 +23,12 @@ export async function getPropertyByID(propertyToFind) {
 
     // try catch to handle any errors
     try{
-         const propertyRef = collection(db, 'Properties')
+         const propertyRef = collection(db, 'Properties', propertyToFind.propertyID)
         // try to find user by ID
-        const newQuery = query(propertyRef, where("propertyID", "==", propertyToFind), limit(1))
+        //const newQuery = query(propertyRef, where("propertyID", "==", propertyToFind), limit(1))
         //console.log(newQuery) // added print statements for debugging
 
-        const snapshot = await getDocs(newQuery);
+        const snapshot = await getDoc(propertyRef);
 
 
         if (snapshot.docs.length == 0) {

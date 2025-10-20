@@ -21,7 +21,7 @@ export class Property{
         this.monthlyPrice = monthlyPrice;
         this.city = city;
         this.state = state;
-        this.zipccode = zipcode;
+        this.zipcode = zipcode;
         this.images = images;
         this.description = description;
         this.reviews = reviews;

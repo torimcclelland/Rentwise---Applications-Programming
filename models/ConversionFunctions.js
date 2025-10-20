@@ -73,7 +73,7 @@ function snapshotToProperty(snapshot){
 
         result = new ReturnValue(false, error)
     }
-    return convertedProp
+    return result
 }
 
 export {snapshotToUser, snapshotToProperty}

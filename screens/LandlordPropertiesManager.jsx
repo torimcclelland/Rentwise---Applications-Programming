@@ -50,7 +50,7 @@ export const LandlordPropertiesScreen = () =>{
   
   const addProperty = async () => {
     const property = new Property(
-      "3", // landlordId
+      GlobalValues.currentUser.userID, // landlordId
       "1", // propertyId
       streetAddress,  
       rentPrice || 100,  
@@ -81,10 +81,11 @@ export const LandlordPropertiesScreen = () =>{
     let result = new ReturnValue();
     console.log(GlobalValues.currentUser)
     result = await getPropertyByLandlord(GlobalValues.currentUser)
-    setPropertiesLs(result) // set the landlords properties from result
-    console.log(propertiesLs)
+    console.log(result)
+    setPropertiesLs(result.propertyList) // set the landlords properties from result
+    //console.log(propertiesLs)
 
-    console.log("properties found:", result.propertyData)
+    //console.log("properties found:", propertiesLs)
   }
 
   const editProperty = async(propertyID) => {
