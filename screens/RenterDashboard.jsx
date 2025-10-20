@@ -4,14 +4,15 @@ import styles from '../styles/DashboardStyle';
 import PrimaryButton from '../components/PrimaryButton';
 import InfoCard from '../components/InfoCard';
 import CustomDivider from '../components/divider';
-//import BottomNavBar from '../components/BottomNavBar';
+import { GlobalValues } from '../GlobalValues';
+import BottomNavBar from '../components/BottomNavBar';
 
 const DashboardScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ padding: 20 }}>
-          <Text style={styles.header}>Hello Eric!</Text>
+          <Text style={styles.header}>Hello {GlobalValues.currentUser.firstName}!</Text>
           <Text style={styles.subheader}>Here’s your rent summary at a glance.</Text>
 
           {/* Lease Summary */}
@@ -70,7 +71,7 @@ const DashboardScreen = () => {
         </ScrollView>
 
         {/* Bottom Navigation Bar */}
-        {/* <BottomNavBar selectedTab="home" /> */}
+        <BottomNavBar selectedTab="home" />
       </View>
     </SafeAreaView>
   );

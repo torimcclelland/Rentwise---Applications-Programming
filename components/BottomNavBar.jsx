@@ -7,10 +7,10 @@ import Profile from './profile';
 import exampleImage from './profileexample.png'; 
 
 const tabs = [
-  { name: 'search', icon: 'compass-outline', route: 'LandlordProperties' },
-  { name: 'messages', icon: 'chat-outline', route: null },
-  { name: 'home', icon: 'home-outline', route: 'RenterDashboard' },
-  { name: 'notifications', icon: 'bell-outline', route: null },
+  { name: 'search', icon: 'compass-outline', route: 'Browse Properties' },
+  { name: 'messages', icon: 'chat-outline', route: 'Messages' },
+  { name: 'home', icon: 'home-outline', route: 'Renter Dashboard' },
+  { name: 'notifications', icon: 'bell-outline', route: 'Notifications' },
   { name: 'profile', icon: null, route: null }, // Profile uses custom component
 ];
 

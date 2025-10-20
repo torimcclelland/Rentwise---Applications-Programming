@@ -6,6 +6,11 @@ const SignUpStyles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
+  pagecontent:{
+    flex: 1,
+    padding: 24,
+    backgroundColor: '#fff',
+  },
   header: {
     fontSize: 28,
     fontWeight: '700',
