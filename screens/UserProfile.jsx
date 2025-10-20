@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-native';
-import Profile from './components/profile'; 
-import BottomNavBar from './components/BottomNavBar';
-import { userImage } from './components/profileexample.png'; 
-import styles from './UserProfile.styles';
+import Profile from '../components/profile'; 
+import BottomNavBar from '../components/BottomNavBar';
+import userImage from '../components/profileexample.png'; 
+import styles from '../styles/UserProfileStyle.js';
 
 
 const UserProfile = () => {
@@ -12,7 +12,7 @@ const UserProfile = () => {
       {/* Header with Profile */}
       <View style={styles.header}>
         <Text style={styles.title}>Your Profile</Text>
-        <Profile src={userImage} size={48} style={styles.profileIcon} />
+        {/* <Profile src={userImage} size={48} style={styles.profileIcon} /> */}
       </View>
 
       {/* Scrollable content */}
@@ -34,8 +34,10 @@ const UserProfile = () => {
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
-        <BottomNavBar />
+        {<BottomNavBar /> }
       </View>
     </View>
   );
 };
+
+export default UserProfile;
