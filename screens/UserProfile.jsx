@@ -19,11 +19,11 @@ const UserProfile = () => {
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Name</Text>
-          <Text style={styles.cardValue}>Tori McClelland</Text>
+          <Text style={styles.cardValue}>Mrs. Landlord</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Email</Text>
-          <Text style={styles.cardValue}>tori.mcclelland@example.com</Text>
+          <Text style={styles.cardValue}>landlord@example.com</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Membership</Text>
