@@ -11,6 +11,7 @@ import MessagesOverview from './screens/MessagesOverview';
 import Notifications from './screens/Notifications';
 import SignUpScreen from './screens/SignUp';
 import PropertyEditScreen from './screens/propertyEditScreen';
+import UserProfile from './screens/UserProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ function RootStack() {
       <Stack.Screen name="Messages" component={MessagesOverview}/>
       <Stack.Screen name="Notifications" component={Notifications}/>
       <Stack.Screen name="Property Edit" component={PropertyEditScreen} />
+      <Stack.Screen name="User Profile" component={UserProfile} />
     </Stack.Navigator>
   );
 }
