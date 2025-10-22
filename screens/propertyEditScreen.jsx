@@ -35,7 +35,7 @@ export const PropertyEditScreen = () =>{
 
     const getPropertyInfo = async() =>{
         const property = await getPropertyByID(propertyID)
-        setProperty(property)
+        setProperty(property.propertyData)
         // setStreetAddress(property.address)
         // setCity(property.city)
         // setState(property.state)

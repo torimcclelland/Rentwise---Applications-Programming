@@ -38,12 +38,13 @@ export async function getPropertyByLandlord(landlord) {
 
         propList = [];
         snapshot.forEach((doc) => {
-            const property = snapshotToProperty(doc.data());
-            if(!property){
+            const property = snapshotToProperty(doc);
+            if(!property.success){
                 console.log(property.errorMsg)
                 return;
             }
-            propList.push(property);
+            property.propertyData.propertyID = doc.id;
+            propList.push(property.propertyData);
         });
 
         // success
@@ -60,6 +61,6 @@ export async function getPropertyByLandlord(landlord) {
         result = new ReturnValue(false, error)
     }
     
-    return propList;
+    return result;
     
 }
