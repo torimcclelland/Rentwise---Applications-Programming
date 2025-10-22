@@ -6,14 +6,14 @@ import { snapshotToUser } from '../../models/ConversionFunctions';
 
 /**
  * 
- * @param {User} userToFind The details of the user to find by id (id field must not be empty)
+ * @param {string} userToFind The id of the user to find by id
  * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
  */
 export async function getUserByID(userToFind) {
 
     var result = new ReturnValue(false, "");
     
-    if(userToFind.userID == ""){
+    if(!userToFind){
         result = new ReturnValue(false, "User ID must not be empty.")
         return result
     }
@@ -22,12 +22,12 @@ export async function getUserByID(userToFind) {
     try{
         
         // try to find user by ID
-        const userRef = doc(db, 'Users', userToFind.userID)
+        const userRef = doc(db, 'Users', userToFind)
 
         const snapshot = await getDoc(userRef);
 
         if (snapshot.data() == undefined) {
-            result = new ReturnValue(false, "No snapshots found for user with id " + userToFind.userID);
+            result = new ReturnValue(false, "No snapshots found for user with id " + userToFind);
             return result;
         } 
 

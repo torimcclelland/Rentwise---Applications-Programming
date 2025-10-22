@@ -12,14 +12,14 @@ function snapshotToUser(snapshot){
         
         convertedUser = new User({
             userID: snapshot.id,
-            email: snapshot.email,
-            password: snapshot.password,
-            firstName: snapshot.firstName,
-            lastName: snapshot.lastName,
-            displayName: snapshot.displayName,
-            isLandLord: snapshot.isLandLord,
-            isPremUser: snapshot.isPremUser,
-            properties: snapshot.properties,
+            email: snapshot.data().email,
+            password: snapshot.data().password,
+            firstName: snapshot.data().firstName,
+            lastName: snapshot.data().lastName,
+            displayName: snapshot.data().displayName,
+            isLandLord: snapshot.data().isLandLord,
+            isPremUser: snapshot.data().isPremUser,
+            properties: snapshot.data().properties,
     })
         result = new ReturnValue(true, "", convertedUser)
 

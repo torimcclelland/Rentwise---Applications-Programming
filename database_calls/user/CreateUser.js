@@ -22,7 +22,7 @@ export async function createUser(newUser) {
         newUser.userID = docRef.id
         
         // retrieve newly made user by calling the GetUser function
-        result = await getUserByID(newUser);
+        result = await getUserByID(newUser.userID);
 
     } catch(e){
         let error = ""; 
