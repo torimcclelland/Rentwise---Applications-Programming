@@ -9,12 +9,11 @@ export default function SignUpScreen () {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [displayName, setDisplayName] = useState('');
   const [isLandLord, setLandlord] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
 
   const handleSignUp = () => {
-    alert.alert('Sign Up', `Welcome, ${fullName}!`);
+    alert.alert('Sign Up', `Welcome, ${firstname} ${lastName}!`);
   };
 
   return (
@@ -31,28 +30,28 @@ export default function SignUpScreen () {
         <View>
           <Text style={login_style.typetext}>Email:</Text>
           <TextField
-              placeholder="Email"
+              placeholder="Enter your email here"
               value={email}
               onChangeText={setEmail}
               hint="Enter your email here"
               />
           <Text style={login_style.typetext}>Password:</Text>
           <TextField
-              placeholder="Password"
+              placeholder="Enter your password here"
               value={password}
               onChangeText={setPassword}
               hint="Enter your password here"
               />
           <Text style={login_style.typetext}>First Name:</Text>
           <TextField
-              placeholder="First name"
+              placeholder="Enter your first name here"
               value={firstName}
               onChangeText={setFirstName}
               hint="Enter your first name here"
               />
           <Text style={login_style.typetext}>Last Name:</Text>
           <TextField
-              placeholder="Last Name"
+              placeholder="Enter your last name here"
               value={lastName}
               onChangeText={setLastName}
               hint="Enter your last name here"
