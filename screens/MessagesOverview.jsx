@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; // placeholder profile image
-import styles from './MessagesOverviewStyle';
+import styles from '../styles/MessagesOverviewStyle';
 
 const messages = [
   { username: 'renter23', message: 'How are you today?' },
