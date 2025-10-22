@@ -13,7 +13,7 @@ export async function getUserByID(userToFind) {
 
     var result = new ReturnValue(false, "");
     
-    if(userToFind.id == ""){
+    if(userToFind.userID == ""){
         result = new ReturnValue(false, "User ID must not be empty.")
         return result
     }
@@ -22,12 +22,12 @@ export async function getUserByID(userToFind) {
     try{
         
         // try to find user by ID
-        const userRef = doc(db, 'Users', userToFind.id)
+        const userRef = doc(db, 'Users', userToFind.userID)
 
         const snapshot = await getDoc(userRef);
 
         if (snapshot.data() == undefined) {
-            result = new ReturnValue(false, "No snapshots found for user with id " + userToFind.id);
+            result = new ReturnValue(false, "No snapshots found for user with id " + userToFind.userID);
             return result;
         } 
 
@@ -36,7 +36,7 @@ export async function getUserByID(userToFind) {
 
         // success
         result = new ReturnValue(true, "")
-        result.userData = userRetrieved
+        result.userData = userRetrieved.userData
 
     } catch(e){
         let error = ""; 

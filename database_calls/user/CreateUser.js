@@ -19,7 +19,7 @@ export async function createUser(newUser) {
         
         const tempCol = collection(db, 'Users')
         const docRef = await addDoc(tempCol, {...newUser});
-        newUser.id = docRef.id
+        newUser.userID = docRef.id
         
         // retrieve newly made user by calling the GetUser function
         result = await getUserByID(newUser);

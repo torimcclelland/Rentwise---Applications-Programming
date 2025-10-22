@@ -1,9 +1,6 @@
 import React, {useState} from "react";
 import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
-import {
-    createStaticNavigation,
-    useNavigation,
-  } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import LoginButton from '../components/login_signup_button'
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
@@ -21,13 +18,18 @@ export default function login() {
         const userToFind = {email: email}
         const result = await getUserByEmail(userToFind);
 
-        if (!result) {
+        if (!result.success) {
             console.log("Error:", result.errorMsg);// KELSIER: better error handling
             return;
         }
 
+        if(result.userData == null){
+            console.log("No user found!")
+            return;
+        }
+
         // success, get user from result
-        const currentUser = result
+        const currentUser = result.userData
 
         // check if password is correct
         if(currentUser.password!=password){

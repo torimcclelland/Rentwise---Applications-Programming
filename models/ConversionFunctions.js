@@ -33,7 +33,7 @@ function snapshotToUser(snapshot){
 
         result = new ReturnValue(false, error)
     }
-    return convertedUser
+    return result
 }
 
 /**
