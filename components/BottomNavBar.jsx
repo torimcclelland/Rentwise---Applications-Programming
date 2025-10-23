@@ -5,17 +5,22 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/BottomNavBarStyle';
 import Profile from './profile';
 import exampleImage from './profileexample.png'; 
-
-const tabs = [
-  { name: 'search', icon: 'compass-outline', route: 'Browse Properties' },
-  { name: 'messages', icon: 'chat-outline', route: 'Messages' },
-  { name: 'home', icon: 'home-outline', route: 'Renter Dashboard' },
-  { name: 'notifications', icon: 'bell-outline', route: 'Notifications' },
-  { name: 'profile', icon: null, route: null }, // Profile uses custom component
-];
+import { GlobalValues } from '../GlobalValues';
 
 const BottomNavBar = ({ selectedTab }) => {
+  
   const navigation = useNavigation();
+  const userType = GlobalValues.currentUser.isLandLord // check if the user is a landlord 
+
+  const tabs = [
+    { name: 'search', icon: 'compass-outline', route: 'Browse Properties' },
+    { name: 'messages', icon: 'chat-outline', route: 'Messages' },
+    { name: 'home', 
+      icon: 'home-outline', 
+      route: userType === true ? 'Landlord Dashboard' : 'Renter Dashboard'},
+    { name: 'notifications', icon: 'bell-outline', route: 'Notifications' },
+    { name: 'profile', icon: null, route: null }, // Profile uses custom component
+  ];
 
   const handleTabPress = (tab) => {
     if (tab.route) {
