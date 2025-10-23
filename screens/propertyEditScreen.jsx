@@ -17,18 +17,6 @@ export const PropertyEditScreen = () =>{
     // variables
     const [property, setProperty] = useState({}) // initialize property to empty
 
-    // this.propertyID = propertyID;
-    //     this.landlordID = landlordID;
-    //     this.address = address;
-    //     this.monthlyPrice = monthlyPrice;
-    //     this.city = city;
-    //     this.state = state;
-    //     this.zipccode = zipcode;
-    //     this.images = images;
-    //     this.description = description;
-    //     this.reviews = reviews;
-    //     this.avgRating = avgRating;
-
     useEffect(()=>{
         getPropertyInfo();
       }, [])
@@ -36,12 +24,6 @@ export const PropertyEditScreen = () =>{
     const getPropertyInfo = async() =>{
         const property = await getPropertyByID(propertyID)
         setProperty(property.propertyData)
-        // setStreetAddress(property.address)
-        // setCity(property.city)
-        // setState(property.state)
-        // setZip(property.zipcode)
-        // setRentPrice(property.monthlyPrice)
-        // setDescription(property.description)
     }
 
     const updateThisProperty = async() => {
