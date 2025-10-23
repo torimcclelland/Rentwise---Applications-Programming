@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native'
-import { View, Text, FlatList, TouchableOpacity, Image, Modal, ScrollView, Pressable} from 'react-native';
+import { View, Text, FlatList, ScrollView} from 'react-native';
 import PropertyCard from '../components/propertyCard';
 import { getPropertyByLandlord } from '../database_calls/property/GetPropertyByLandlord';
 import { GlobalValues } from '../GlobalValues';
 import { ReturnValue } from '../models/ReturnValue';
 import PrimaryButton from '../components/PrimaryButton';
-import TextField from '../components/TextField';
 import CustomDivider from '../components/divider';
-import { createProperty } from '../database_calls/property/CreateProperty';
-import Icon from 'react-native-vector-icons/Feather';
-import DropDown from '../components/DropDown';
 import {
     createStaticNavigation,
     useNavigation,
   } from '@react-navigation/native';
-import { Property } from '../models/Property';
 import BottomNavBar from '../components/BottomNavBar';
 import AddPropertyModal from '../screens/AddPropertyModal'
 
@@ -53,46 +48,47 @@ export const LandlordPropertiesScreen = () =>{
 
   return (
     <View style={styles.main}>
-        <View>
-          <View style={styles.topComponent}>
-            <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
-            <PrimaryButton
-            title= "+ Add"
-            fontWeight= {500}
-            fontSize={12}
-            size='small'
-            customStyle={styles.addButton}
-            onPress={toggleModal}
-            />
-          </View>
-          {propertiesLs.length > 0  ? (
-            <FlatList
-              data={propertiesLs}
-              keyExtractor={(item) => item.propertyID?.toString()}
-              contentContainerStyle={{ gap: 16 }}
-              renderItem={({item}) => (
-                <PropertyCard
-                address={item.address}
-                onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
-                />
-              )}
-            />
-          ) : (
-            <Text>No properties listed yet</Text>
-          )}
-          {/* nav bar divider */}
-          <CustomDivider
-          customStyles={{marginBottom: 20, marginTop: 20}}
+      <View>
+        <View style={styles.topComponent}>
+          <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
+          <PrimaryButton
+          title= "+ Add"
+          fontWeight= {500}
+          fontSize={12}
+          size='small'
+          customStyle={styles.addButton}
+          onPress={toggleModal}
           />
-          <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
-          <View style={{flex: 1}}>
-            {/* Bottom Navigation Bar */}
-            <BottomNavBar selectedTab="home"/>
-          </View>
         </View>
-        
-        {/* The add property modal is rendered here */}
-        <AddPropertyModal visible={modalVisible} onClose={toggleModal}/>
+        {propertiesLs.length > 0  ? (
+          <FlatList
+            data={propertiesLs}
+            keyExtractor={(item) => item.propertyID?.toString()}
+            contentContainerStyle={{ gap: 16 }}
+            renderItem={({item}) => (
+              <PropertyCard
+              address={item.address}
+              onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
+              />
+            )}
+          />
+        ) : (
+          <Text>No properties listed yet</Text>
+        )}
+        {/* nav bar divider */}
+        <CustomDivider
+        customStyles={{marginBottom: 20, marginTop: 20}}
+        />
+        <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
+
+        <View style={{flex: 1}}>
+          {/* Bottom Navigation Bar */}
+          <BottomNavBar selectedTab="home"/>
+        </View>
+      </View>
+      
+      {/* The add property modal is rendered here */}
+      <AddPropertyModal visible={modalVisible} onClose={toggleModal}/>
 
     </View>
   );
