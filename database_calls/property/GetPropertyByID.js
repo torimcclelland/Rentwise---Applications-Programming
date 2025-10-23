@@ -8,7 +8,7 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 
 /**
  * 
- * @param {Property} propertyToFind The details of the user to find by id (id field must not be empty)
+ * @param {string} propertyToFind The id of the property to find
  * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
  */
 export async function getPropertyByID(propertyToFind) {
@@ -28,7 +28,7 @@ export async function getPropertyByID(propertyToFind) {
 
 
         if (snapshot.data() == undefined) {
-            result = new ReturnValue(false, "No snapshots found for property with id " + propertyToFind.propertyID);
+            result = new ReturnValue(false, "No snapshots found for property with id " + propertyToFind);
             return result;
         } 
 

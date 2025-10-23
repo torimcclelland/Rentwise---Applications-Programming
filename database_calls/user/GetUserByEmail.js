@@ -33,7 +33,7 @@ export async function getUserByEmail(userToFind){
         const snapshot = await getDocs(newQuery);
 
         if(snapshot.docs.length == 0){
-            result = new ReturnValue(false, "User not found.");
+            result = new ReturnValue(true, "User not found.", null);
             return result
         }
        // i actually cared enough to come
