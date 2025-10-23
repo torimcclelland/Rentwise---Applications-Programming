@@ -34,7 +34,7 @@ const AddProperty = ({visible, onClose}) =>{
     // function to create the property and push to database
     const addProperty = async() =>{
         const property = new Property(
-            "setLater", // we will set the propertyID in the createProperty function
+            "setLater", // we will set the propertyID for the property object in the createProperty function
             landlordID,
             address,
             monthlyPrice,
@@ -68,68 +68,67 @@ const AddProperty = ({visible, onClose}) =>{
                 <View style={stylesModal.centeredView}>
                     <View style={stylesModal.modalView}>
                         <View style={stylesModal.contentView}>
-
-                    <View style={stylesModal.banner}>
-                        <View style={stylesModal.back}>
-                        <Pressable
-                        onPress={onClose}>
-                            <Image style={stylesModal.image} source={require('./backArrow.png')}/>
-                        </Pressable>
-                        <Text style={stylesModal.text}>Add Listing</Text>
-                        </View>
-                        <CustomDivider/>
-                    </View>
-                        <View style={stylesModal.spacing}>
-                        {/* for the image box */}
-                        <Pressable style={stylesModal.imageBox}>
-                            <View style={stylesModal.addImage}>
-                            <Icon name="plus" size={30} color="#666"/>
-                            <Text>Add images</Text>
+                            <View style={stylesModal.banner}>
+                                <View style={stylesModal.back}>
+                                    <Pressable
+                                    onPress={onClose}>
+                                        <Image style={stylesModal.image} source={require('./backArrow.png')}/>
+                                    </Pressable>
+                                    <Text style={stylesModal.text}>Add Listing</Text>
+                                </View>
+                                <CustomDivider/>
                             </View>
-                        </Pressable>
-                        <TextField
-                        placeholder="Street Address"
-                        value={address}
-                        onChangeText={setAddress}
-                        />
-                        <TextField
-                        placeholder="City"
-                        value={city}
-                        onChangeText={setCity}
-                        />
-                        {/* comment */}
-                        <DropDown
-                        placeholder="Select State"
-                        options={states}
-                        value={state}
-                        onSelect={setState}
-                        />
-                        <TextField
-                        textType="numeric"
-                        placeholder="Zipcode"
-                        value={zipcode}
-                        onChangeText={setZipcode}
-                        />
-                        <TextField
-                        placeholder="description"
-                        value={description}
-                        onChangeText={setDescription}
-                        />
-                        <TextField
-                        textType="numeric"
-                        placeholder="Rent price"
-                        value={monthlyPrice}
-                        onChangeText={setMonthlyPrice}
-                        />
-                        <PrimaryButton
-                        onPress={addProperty}
-                        title="Submit"
-                        size="small"
-                        fontSize={12}
-                        />
+                            <View style={stylesModal.spacing}>
+                                {/* for the image box */}
+                                <Pressable style={stylesModal.imageBox}>
+                                    <View style={stylesModal.addImage}>
+                                        <Icon name="plus" size={30} color="#666"/>
+                                        <Text>Add images</Text>
+                                    </View>
+                                </Pressable>
+                                <TextField
+                                placeholder="Street Address"
+                                value={address}
+                                onChangeText={setAddress}
+                                />
+                                <TextField
+                                placeholder="City"
+                                value={city}
+                                onChangeText={setCity}
+                                />
+                                {/* comment */}
+                                <DropDown
+                                placeholder="Select State"
+                                options={states}
+                                value={state}
+                                onSelect={setState}
+                                />
+                                <TextField
+                                textType="numeric"
+                                placeholder="Zipcode"
+                                value={zipcode}
+                                onChangeText={setZipcode}
+                                />
+                                <TextField
+                                placeholder="description"
+                                value={description}
+                                onChangeText={setDescription}
+                                />
+                                <TextField
+                                textType="numeric"
+                                placeholder="Rent price"
+                                value={monthlyPrice}
+                                onChangeText={setMonthlyPrice}
+                                />
+                                <PrimaryButton
+                                onPress={addProperty}
+                                title="Submit"
+                                size="small"
+                                fontSize={12}
+                                />
+                            </View>
                         </View>
                     </View>
-                </View>
                 </View>
             </Modal>
         </View>
