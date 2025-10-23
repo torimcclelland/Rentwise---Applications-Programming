@@ -11,7 +11,7 @@ import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
 import { GlobalValues } from "../GlobalValues";
 
 
-export default function login() {
+export default function Login() {
     const [email, setEmail] = useState("ThaidakarRental@fakeEmail.com");// MARSH clean this up
     const [password, setPassword]= useState("tempPass");
     const navigation = useNavigation();
