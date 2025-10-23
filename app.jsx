@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/login';
@@ -30,6 +30,8 @@ function RootStack() {
 }
 
 export default function App() {
+  const Scheme = useColorScheme()
+  console.log(Scheme)
   return (
     <NavigationContainer>
       <RootStack />
