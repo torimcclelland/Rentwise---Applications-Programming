@@ -1,17 +1,20 @@
 import React from 'react'
 import {useState} from 'react'
 import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
-
+import { useTheme } from '../ThemeContext';
 
 const PropertyCard = ({address, onPress, ...props}) => {
+    // grab the current system theme for styling
+    const theme = useTheme()
+    
     return (
-        <View style={styles.box}>
-            <View style={styles.border}>
+        <View style={[styles.box]}>
+            <View style={[styles.border, theme.textField]}>
                 <Image style={styles.image} source={require('./house_2.webp')}/>
                 <View style={styles.button}>
-                    <Text style={styles.address}>{address}</Text>
+                    <Text style={[styles.address, theme.textColor]}>{address}</Text>
                     <Pressable onPress={onPress}>
-                        <Image style={styles.icon} source={require('./arrowForward.jpg')}/>
+                        <Image style={[styles.icon]} source={require('./arrow_forward.svg')}/>
                     </Pressable>
                 </View>
             </View>
@@ -36,7 +39,6 @@ const styles = StyleSheet.create({
         height: 108,
         borderRadius: 12,
         borderWidth: 0.5,
-        backgroundColor: 'white',
         overflow: 'hidden',
         // borderColor: 'gray'
     },
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 12
     },
     address:{
-        backgroundColor: 'white',
         paddingLeft: 8,
         paddingTop: 2,
         font: 'inter',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useTheme } from '../ThemeContext';
 
 const DropDown = ({
   label,
@@ -11,6 +12,7 @@ const DropDown = ({
   style,
 }) => {
   const [visible, setVisible] = useState(false);
+  const theme = useTheme()
 
   const handleSelect = (item) => {
     onSelect(item);
@@ -22,14 +24,14 @@ const DropDown = ({
       {label && <Text style={styles.label}>{label}</Text>}
       {/* The input-like pressable box */}
       <TouchableOpacity
-        style={styles.inputBox}
+        style={[styles.inputBox, theme.textField]}
         onPress={() => setVisible(true)}
         activeOpacity={0.8}
       >
-        <Text style={value ? styles.inputText : styles.placeholder}>
+        <Text style={[styles.inputText, theme.textColor]}>
           {value || placeholder}
         </Text>
-        <Icon name="chevron-down" size={20} color="#666" />
+        <Icon name="chevron-down" size={20} color={theme.textColor.color}/>
       </TouchableOpacity>
       {/* Modal dropdown list */}
       <Modal
@@ -81,10 +83,6 @@ const styles = StyleSheet.create({
   },
   inputText: {
     color: '#000',
-    fontSize: 16,
-  },
-  placeholder: {
-    color: "#696969",
     fontSize: 16,
   },
   modalOverlay: {
