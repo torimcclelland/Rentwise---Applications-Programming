@@ -42,7 +42,7 @@ function snapshotToUser(snapshot){
  * @returns {ReturnValue} The results of the conversion
  */
 function snapshotToProperty(snapshot){
-
+// check if this should be explicit in making a new property object
     let result = new ReturnValue()
     let convertedProp
 
