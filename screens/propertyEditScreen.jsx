@@ -15,7 +15,7 @@ export const PropertyEditScreen = () =>{
     const {propertyID} = route.params
 
     // variables
-    const [property, setProperty] = useState(new Property()) // initialize property to empty
+    const [property, setProperty] = useState(new Property({})) // initialize property to empty
 
     // navigation
     const navigation = useNavigation();

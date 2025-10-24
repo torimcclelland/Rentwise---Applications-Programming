@@ -1,7 +1,7 @@
 
 export class Property{
 
-    constructor(
+    constructor({
         propertyID = "",
         landlordID = "",
         renterID = "",
@@ -14,7 +14,7 @@ export class Property{
         description = "",
         reviews = [],
         avgRating = 0.0,
-    )
+    })
     { 
         this.propertyID = propertyID;
         this.landlordID = landlordID;

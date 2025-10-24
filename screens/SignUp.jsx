@@ -8,6 +8,7 @@ import { getUserByEmail } from '../database_calls/user/GetUserByEmail';
 import { createUser } from '../database_calls/user/CreateUser';
 import { GlobalValues } from '../GlobalValues';
 import { useNavigation } from '@react-navigation/native';
+import { User } from '../models/User';
 
 export default function SignUpScreen () {
   const [email, setEmail] = useState('');
@@ -22,14 +23,14 @@ export default function SignUpScreen () {
 
     const isLandlord = userType === 'Landlord'
     const isPremUser = membershipType === 'Premium'
-    const userToCreate = {
-      email: email,
+    let userToCreate = new User(
+      {email: email,
       password: password,
       firstName:firstName,
       lastName:lastName,
       isLandlord:isLandlord,
       isPremUser:isPremUser
-    }
+    })
 
     let result = await getUserByEmail(userToCreate);
 

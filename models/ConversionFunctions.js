@@ -1,6 +1,7 @@
 import { DocumentSnapshot } from "firebase/firestore";
 import { ReturnValue } from "./ReturnValue";
 import { User } from "./User";
+import { Property } from "./Property";
 
 function snapshotToUser(snapshot){
 
@@ -46,7 +47,7 @@ function snapshotToProperty(snapshot){
 
     try{
         
-        convertedProp = {
+        convertedProp = new Property({
             propertyID: snapshot.id,
             landlordID: snapshot.data().landlordID,
             renterID: snapshot.data().renterID,
@@ -59,7 +60,7 @@ function snapshotToProperty(snapshot){
             description: snapshot.data().description,
             reviews: snapshot.data().reviews,
             avgRating: snapshot.data().avgRating,
-        }
+        })
         result = new ReturnValue(true, "", {}, convertedProp)
 
     } catch (e){

@@ -45,7 +45,8 @@ export const LandlordPropertiesScreen = () =>{
   }
   
   const addProperty = async () => {
-    const property = {
+    const property = new Property({
+      propertyID: "",
       landlordID: GlobalValues.currentUser.userID, // landlordId
       address: streetAddress,  
       monthlyPrice: rentPrice || 100,  
@@ -53,7 +54,7 @@ export const LandlordPropertiesScreen = () =>{
       state: state,
       zipcode: zip,
       description: description
-    };
+    });
 
     try {
       const result = await createProperty(property);
@@ -105,7 +106,7 @@ export const LandlordPropertiesScreen = () =>{
   return (
     <View style={styles.main}>
         <View style={styles.pageContent}>
-          <View style={styles.topComponent}>
+          <View style={styles.pageArea}>
             <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
             <PrimaryButton
             title= "+ Add"
@@ -115,27 +116,30 @@ export const LandlordPropertiesScreen = () =>{
             customStyle={styles.addButton}
             onPress={toggleModal}
             />
-          </View>
           {propertiesLs.length > 0  ? (
             <FlatList
-              data={propertiesLs}
-              keyExtractor={(item) => item.propertyID?.toString()}
-              contentContainerStyle={{ gap: 16 }}
-              renderItem={({item}) => (
-                <PropertyCard
+            data={propertiesLs}
+            keyExtractor={(item) => item.propertyID?.toString()}
+            contentContainerStyle={{ gap: 16 }}
+            renderItem={({item}) => (
+              <PropertyCard
                 address={item.address}
                 onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
                 />
-              )}
-            />
-          ) : (
-            <Text style={styles.text}>No properties listed yet</Text>
+                )}
+                />
+                ) : (
+                  <Text style={styles.text}>No properties listed yet</Text>
           )}
+          </View>
           {/* nav bar divider */}
           <CustomDivider
           customStyles={{marginBottom: 20, marginTop: 20}}
           />
-          <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
+          <View style={styles.pageArea}>
+
+            <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
+          </View>
         </View>
 
 
@@ -232,7 +236,10 @@ const styles = StyleSheet.create ({
   pageContent:{
     width: '100%',
     height: '100%',
-    paddingTop: '10px',
+    padding: '10px',
+  },
+  pageArea:{
+    justifyContent: 'top'
   },
   addButton: {
     height: 32,
