@@ -7,6 +7,7 @@ import styles from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
 
 
+
 const UserProfile = () => {
   return (
     <View style={styles.container}>

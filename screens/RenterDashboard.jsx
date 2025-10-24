@@ -25,7 +25,6 @@ const DashboardScreen = () => {
             <PrimaryButton title="View History" />
             <PrimaryButton title="View Current" />
           </View>
-
           <CustomDivider />
 
           {/* Recent Activity */}

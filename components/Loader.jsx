@@ -1,4 +1,5 @@
 import React from 'react';
+import { RotateLoader } from 'react-spinners';
 
 const Loader = () => (
   <RotateLoader

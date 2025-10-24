@@ -7,7 +7,6 @@ const Profile = ({ src, size = 64, style = {} }) => {
   return (
     <View style={[styles.container(size), style]}>
       <Image source={src} style={styles.image} /> 
-      <Loader></Loader>
     </View>
   );
 };
