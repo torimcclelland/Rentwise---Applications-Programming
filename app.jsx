@@ -17,14 +17,46 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={login} />
-      <Stack.Screen name="Sign Up" component={SignUpScreen} />
-      <Stack.Screen name="Renter Dashboard" component={DashboardScreen} />
-      <Stack.Screen name="Landlord Dashboard" component={LandlordPropertiesScreen} />
-      <Stack.Screen name="Browse Properties" component={BrowseProperties}/>
-      <Stack.Screen name="Messages" component={MessagesOverview}/>
-      <Stack.Screen name="Notifications" component={Notifications}/>
-      <Stack.Screen name="Property Edit" component={PropertyEditScreen} />
+      <Stack.Screen
+        name="Login"
+        component={login}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Sign Up"
+        component={SignUpScreen} 
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Renter Dashboard"
+        component={DashboardScreen}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Landlord Dashboard"
+        component={LandlordPropertiesScreen} 
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Browse Properties"
+        component={BrowseProperties}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Messages"
+        component={MessagesOverview}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Property Edit"
+        component={PropertyEditScreen} 
+        //options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }

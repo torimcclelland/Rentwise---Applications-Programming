@@ -44,6 +44,8 @@ export default function login() {
         } else {
             navigation.navigate('Renter Dashboard')
         }
+        setEmail('')
+        setPassword('')
     };
 
     return (

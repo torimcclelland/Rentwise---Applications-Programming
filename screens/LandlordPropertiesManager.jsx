@@ -16,6 +16,7 @@ import {
     useNavigation,
   } from '@react-navigation/native';
 import { Property } from '../models/Property';
+import TextFieldLong from '../components/TextFieldLong';
 
 
 export const LandlordPropertiesScreen = () =>{
@@ -68,6 +69,14 @@ export const LandlordPropertiesScreen = () =>{
     } catch (e) {
       console.log("Error creating property:", e);
     }
+
+    // clear values for next property creation
+    setStreetAddress("")
+    setCity("")
+    setState("")
+    setZip("")
+    setRentPrice("")
+    setDescription("")
   };
 
 
@@ -95,7 +104,7 @@ export const LandlordPropertiesScreen = () =>{
 
   return (
     <View style={styles.main}>
-        <View>
+        <View style={styles.pageContent}>
           <View style={styles.topComponent}>
             <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
             <PrimaryButton
@@ -120,7 +129,7 @@ export const LandlordPropertiesScreen = () =>{
               )}
             />
           ) : (
-            <Text>No properties listed yet</Text>
+            <Text style={styles.text}>No properties listed yet</Text>
           )}
           {/* nav bar divider */}
           <CustomDivider
@@ -182,15 +191,16 @@ export const LandlordPropertiesScreen = () =>{
                   onChangeText={setZip}
                   />
                   <TextField
-                  placeholder="Enter a description"
-                  value={description}
-                  onChangeText={setDescription}
-                  />
-                  <TextField
                   textType="numeric"
                   placeholder="Enter a rent price"
                   value={rentPrice}
                   onChangeText={setRentPrice}
+                  />
+                  <TextFieldLong
+                  placeholder="Enter a description (200 characters max)"
+                  value={description}
+                  onChangeText={setDescription}
+                  maxLength={200}
                   />
                   <PrimaryButton
                   onPress={addProperty}
@@ -219,6 +229,11 @@ const styles = StyleSheet.create ({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  pageContent:{
+    width: '100%',
+    height: '100%',
+    paddingTop: '10px',
+  },
   addButton: {
     height: 32,
     width: 71,
@@ -232,7 +247,7 @@ const styles = StyleSheet.create ({
   image:{
     height: 24,
     width: 24
-  },
+  }
 });
 
 const stylesModal = StyleSheet.create({

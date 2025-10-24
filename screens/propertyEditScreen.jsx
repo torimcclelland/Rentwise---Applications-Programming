@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Feather'
 import PrimaryButton from '../components/PrimaryButton'
 import { Property } from '../models/Property'
 import { updateProperty } from '../database_calls/property/UpdateProperty'
+import TextFieldLong from '../components/TextFieldLong'
 
 
 export const PropertyEditScreen = () =>{
@@ -97,11 +98,12 @@ export const PropertyEditScreen = () =>{
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={styles.label}>Description</Text>
-                <TextField
-                placeholder={property.description}
-                value={property.description}
-                onChangeText={(text) => setProperty({ ...property, description: text })}
-                />
+                <TextFieldLong
+                  placeholder={property.description}
+                  value={property.description}
+                  onChangeText={(text) => setProperty({ ...property, description: text })}
+                  maxLength={200}
+                  />
             </View>
             <PrimaryButton
             title="Save"

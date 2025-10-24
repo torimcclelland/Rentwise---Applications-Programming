@@ -60,6 +60,13 @@ export default function SignUpScreen () {
     } else {
         navigation.navigate('Renter Dashboard')
     }
+    // clear values
+    setEmail('');
+    setPassword('');
+    setFirstName('');
+    setLastName('');
+    setUserType('Renter');
+    setMembershipType('Free');
   };
 
   return (
