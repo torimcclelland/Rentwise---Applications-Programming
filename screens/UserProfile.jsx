@@ -6,14 +6,20 @@ import userImage from '../components/profileexample.png';
 import styles from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
 
-
-
 const UserProfile = () => {
+  const { firstName, lastName, email, isLandLord, isPremUser } = GlobalValues.currentUser;
+
+  //Determine membership type
+  let membershipLabel = 'Renter';
+  if (isLandLord) {
+    membershipLabel = isPremUser ? 'Premium Landlord' : 'Free Landlord';
+  }
+
   return (
     <View style={styles.container}>
       {/* Header with Profile */}
       <View style={styles.header}>
-      <Text style={styles.title}> {GlobalValues.currentUser.firstName}'s Profile</Text>
+        <Text style={styles.title}>{firstName}'s Profile</Text>
         <Profile src={userImage} size={48} style={styles.profileIcon} />
       </View>
 
@@ -21,22 +27,21 @@ const UserProfile = () => {
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Name</Text>
-          <Text style={styles.cardValue}>{GlobalValues.currentUser.firstName} {GlobalValues.currentUser.lastName}</Text>
+          <Text style={styles.cardValue}>{firstName} {lastName}</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Email</Text>
-          <Text style={styles.cardValue}>{GlobalValues.currentUser.email}</Text>
+          <Text style={styles.cardValue}>{email}</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Membership Type</Text>
-          <Text style={styles.cardValue}>Renter</Text>
+          <Text style={styles.cardValue}>{membershipLabel}</Text>
         </View>
-        {/* Add more cards or sections as needed */}
       </ScrollView>
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
-        {<BottomNavBar /> }
+        <BottomNavBar />
       </View>
     </View>
   );
