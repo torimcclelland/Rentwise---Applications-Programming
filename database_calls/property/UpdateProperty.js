@@ -3,7 +3,7 @@ import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { getPropertyByID } from './GetPropertyByID';
-import { collection, query, where, getDocs, limit, doc, updateDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, limit, doc, setDoc } from 'firebase/firestore';
 
 
 /** 
@@ -19,21 +19,10 @@ export async function updateProperty(thisProperty) {
         // try to store property in database
         if (!thisProperty) throw new Error("thisProperty is undefined");
         
-        const propertyRef = collection(db, 'Properties')
-        const newQuery = query(propertyRef, where("propertyID", "==", thisProperty.propertyID))
-        const snapshot = await getDocs(newQuery)
+        const propertyRef = doc(db, 'Properties', thisProperty.propertyID)
+        const docRef = await setDoc(propertyRef, {...thisProperty})
+        thisProperty.propertyID = propertyRef.id
         
-        const docRef = doc(db, "Properties", snapshot.docs[0].id);
-
-        // Update the document
-        await updateDoc(docRef, {
-            address: thisProperty.address,
-            city: thisProperty.city,
-            state: thisProperty.state,
-            zipcode: thisProperty.zipcode,
-            monthlyPrice: thisProperty.monthlyPrice,
-            description: thisProperty.description,
-        });
 
         // retrieve updated property details by calling the GetProperty function
         result = await getPropertyByID(thisProperty.propertyID);
