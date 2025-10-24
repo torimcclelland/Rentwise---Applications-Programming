@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from './ThemeContext';
 import Login from './screens/login';
 import DashboardScreen from './screens/RenterDashboard';
 import LandlordPropertiesScreen from './screens/LandlordPropertiesManager';
@@ -33,8 +34,10 @@ export default function App() {
   const Scheme = useColorScheme()
   console.log(Scheme)
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
