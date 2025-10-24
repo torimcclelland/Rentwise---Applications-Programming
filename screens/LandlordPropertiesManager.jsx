@@ -27,7 +27,6 @@ export const LandlordPropertiesScreen = () =>{
   const [zip, setZip] = useState("");
   const [rentPrice, setRentPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [avgRating, setAvgRating] = useState(0.0)
 
   // create an array to hold state values
   const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -45,7 +44,7 @@ export const LandlordPropertiesScreen = () =>{
   }
   
   const addProperty = async () => {
-    const property = new Property({
+    const property = {
       landlordID: GlobalValues.currentUser.userID, // landlordId
       address: streetAddress,  
       monthlyPrice: rentPrice || 100,  
@@ -53,11 +52,18 @@ export const LandlordPropertiesScreen = () =>{
       state: state,
       zipcode: zip,
       description: description
-    });
+    };
 
     try {
       const result = await createProperty(property);
-      console.log("Property created!");
+
+      if(!result.success){
+        console.log(result.errorMsg)
+        return
+      }
+
+      // add the property to our list of properties
+      setPropertiesLs(propertiesLs => [...propertiesLs, result.propertyData]);
       toggleModal(); // close modal if success
     } catch (e) {
       console.log("Error creating property:", e);

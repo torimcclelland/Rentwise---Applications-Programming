@@ -2,9 +2,10 @@ import { addDoc, collection } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
+import { getPropertyByID } from './GetPropertyByID';
 
 /** 
- * @param {User} newProperty The details of the property to create
+ * @param {Property} newProperty The details of the property to create
  * @returns {ReturnValue} The results of the operation. If successful, the propertyData field contains the details of the newly created property.
  */
 export async function createProperty(newProperty) {
@@ -21,7 +22,7 @@ export async function createProperty(newProperty) {
         newProperty.id = docRef.id
         
         // retrieve newly made property by calling the GetProperty function
-        result = await getPropertyByID(newProperty);
+        result = await getPropertyByID(newProperty.id);
 
     } catch(e){
         let error = ""; 

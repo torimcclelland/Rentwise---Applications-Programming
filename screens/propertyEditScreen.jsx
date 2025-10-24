@@ -14,7 +14,7 @@ export const PropertyEditScreen = () =>{
     const {propertyID} = route.params
 
     // variables
-    const [property, setProperty] = useState({}) // initialize property to empty
+    const [property, setProperty] = useState(new Property()) // initialize property to empty
 
     // navigation
     const navigation = useNavigation();
@@ -43,7 +43,7 @@ export const PropertyEditScreen = () =>{
             return;
         }
 
-        navigation.navigate('Property Edit', {'propertyID': propertyID});
+        navigation.navigate('Landlord Dashboard');
     }
 
     return (
