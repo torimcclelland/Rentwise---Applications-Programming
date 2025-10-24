@@ -1,7 +1,6 @@
 import { DocumentSnapshot } from "firebase/firestore";
 import { ReturnValue } from "./ReturnValue";
 import { User } from "./User";
-import { Property } from "./Property";
 
 function snapshotToUser(snapshot){
 
@@ -17,7 +16,7 @@ function snapshotToUser(snapshot){
             firstName: snapshot.data().firstName,
             lastName: snapshot.data().lastName,
             displayName: snapshot.data().displayName,
-            isLandLord: snapshot.data().isLandLord,
+            isLandlord: snapshot.data().isLandlord,
             isPremUser: snapshot.data().isPremUser,
             properties: snapshot.data().properties,
     })
@@ -42,7 +41,6 @@ function snapshotToUser(snapshot){
  * @returns {ReturnValue} The results of the conversion
  */
 function snapshotToProperty(snapshot){
-// check if this should be explicit in making a new property object
     let result = new ReturnValue()
     let convertedProp
 
@@ -51,6 +49,7 @@ function snapshotToProperty(snapshot){
         convertedProp = {
             propertyID: snapshot.id,
             landlordID: snapshot.data().landlordID,
+            renterID: snapshot.data().renterID,
             address: snapshot.data().address,
             monthlyPrice: snapshot.data().monthlyPrice,
             city: snapshot.data().city,

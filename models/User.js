@@ -8,14 +8,14 @@ export class User{
         firstName = "",
         lastName = "",
         displayName = "",
-        isLandLord = false,
+        isLandlord = false,
         isPremUser = false,
         properties = [],
     } = {}){ 
         this.userID = userID;
         this.email = email;
         this.password = password;
-        this.isLandLord = isLandLord;
+        this.isLandlord = isLandlord;
         this.isPremUser = isPremUser;
         this.properties = properties;
         this.firstName = firstName;

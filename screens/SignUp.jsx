@@ -55,7 +55,7 @@ export default function SignUpScreen () {
 
     GlobalValues.currentUser = currentUser;
     // if we get here, successful login. Navigate to the relevant screen
-    if (currentUser.isLandLord) {
+    if (currentUser.isLandlord) {
         navigation.navigate('Landlord Dashboard')
     } else {
         navigation.navigate('Renter Dashboard')

@@ -45,16 +45,15 @@ export const LandlordPropertiesScreen = () =>{
   }
   
   const addProperty = async () => {
-    const property = new Property(
-      GlobalValues.currentUser.userID, // landlordId
-      "1", // propertyId
-      streetAddress,  
-      rentPrice || 100,  
-      city,
-      state,
-      zip,
-      description
-    );
+    const property = new Property({
+      landlordID: GlobalValues.currentUser.userID, // landlordId
+      address: streetAddress,  
+      monthlyPrice: rentPrice || 100,  
+      city: city,
+      state: state,
+      zipcode: zip,
+      description: description
+    });
 
     try {
       const result = await createProperty(property);
@@ -177,13 +176,13 @@ export const LandlordPropertiesScreen = () =>{
                   onChangeText={setZip}
                   />
                   <TextField
-                  placeholder="description"
+                  placeholder="Enter a description"
                   value={description}
                   onChangeText={setDescription}
                   />
                   <TextField
                   textType="numeric"
-                  placeholder="Rent price"
+                  placeholder="Enter a rent price"
                   value={rentPrice}
                   onChangeText={setRentPrice}
                   />

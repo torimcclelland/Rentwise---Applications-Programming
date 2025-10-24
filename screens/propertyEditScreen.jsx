@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, Text, Pressable, ScrollView } from 'react-native'
 import TextField from '../components/TextField'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { getPropertyByID } from '../database_calls/property/GetPropertyByID'
 import Icon from 'react-native-vector-icons/Feather'
 import PrimaryButton from '../components/PrimaryButton'
 import { Property } from '../models/Property'
 import { updateProperty } from '../database_calls/property/UpdateProperty'
-
 
 
 export const PropertyEditScreen = () =>{
@@ -17,17 +16,8 @@ export const PropertyEditScreen = () =>{
     // variables
     const [property, setProperty] = useState({}) // initialize property to empty
 
-    // this.propertyID = propertyID;
-    //     this.landlordID = landlordID;
-    //     this.address = address;
-    //     this.monthlyPrice = monthlyPrice;
-    //     this.city = city;
-    //     this.state = state;
-    //     this.zipccode = zipcode;
-    //     this.images = images;
-    //     this.description = description;
-    //     this.reviews = reviews;
-    //     this.avgRating = avgRating;
+    // navigation
+    const navigation = useNavigation();
 
     useEffect(()=>{
         getPropertyInfo();
@@ -47,6 +37,13 @@ export const PropertyEditScreen = () =>{
     const updateThisProperty = async() => {
         console.log(property)
         const result = await updateProperty(property)
+
+        if(!result.success){
+            console.log(result.errorMsg)
+            return;
+        }
+
+        navigation.navigate('Property Edit', {'propertyID': propertyID});
     }
 
     return (
