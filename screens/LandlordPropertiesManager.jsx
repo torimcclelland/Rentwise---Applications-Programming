@@ -7,6 +7,7 @@ import { GlobalValues } from '../GlobalValues';
 import { ReturnValue } from '../models/ReturnValue';
 import PrimaryButton from '../components/PrimaryButton';
 import CustomDivider from '../components/divider';
+import { useTheme } from '../ThemeContext';
 import {
     createStaticNavigation,
     useNavigation,
@@ -20,6 +21,7 @@ export const LandlordPropertiesScreen = () =>{
   const navigation = useNavigation();
   const [propertiesLs, setPropertiesLs]= useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const theme = useTheme()
 
   // function to toggle modal visibility
   const toggleModal = () =>{
@@ -47,44 +49,50 @@ export const LandlordPropertiesScreen = () =>{
   }
 
   return (
-    <View style={styles.main}>
-      <View>
+    <View style={[styles.main, theme.container]}>
+      {/* centered content container */}
+       <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        /* optional: keyboardShouldPersistTaps="handled" */
+      >
         <View style={styles.topComponent}>
-          <Text style={[styles.text, {alignSelf: 'flex-start'}]}>My Listings</Text>
+          <Text style={[styles.text, {alignSelf: 'flex-start'}, theme.textColor]}>My Listings</Text>
           <PrimaryButton
           title= "+ Add"
           fontWeight= {500}
           fontSize={12}
           size='small'
-          customStyle={styles.addButton}
+          customStyle={[styles.addButton, theme.button]}
           onPress={toggleModal}
           />
         </View>
-        {propertiesLs.length > 0  ? (
-          <FlatList
-            data={propertiesLs}
-            keyExtractor={(item) => item.propertyID?.toString()}
-            contentContainerStyle={{ gap: 16 }}
-            renderItem={({item}) => (
-              <PropertyCard
+
+        {propertiesLs.length > 0 ? (
+          // map over your items and render PropertyCard
+          propertiesLs.map(item => (
+            <PropertyCard
+              key={item.propertyID?.toString()}
               address={item.address}
-              onPress={() => editProperty(item.propertyID)} // if the button is pressed move to edit page
-              />
-            )}
-          />
+              onPress={() => editProperty(item.propertyID)}
+            />
+          ))
         ) : (
           <Text>No properties listed yet</Text>
         )}
-        {/* nav bar divider */}
+
+        {/* custom divider */}
         <CustomDivider
         customStyles={{marginBottom: 20, marginTop: 20}}
         />
-        <Text style={[styles.text, {alignSelf: 'flex-start'}]}>Leased Properties</Text>
+        <Text style={[styles.text, {alignSelf: 'flex-start'}, theme.textColor]}>Leased Properties</Text>
+      
+      </ScrollView>
 
-        <View style={{flex: 1}}>
-          {/* Bottom Navigation Bar */}
-          <BottomNavBar selectedTab="home"/>
-        </View>
+      {/* Fixed bottom nav bar */}
+      <View style={styles.bottomNav}>
+        {/* Bottom Navigation Bar */}
+        <BottomNavBar  selectedTab="home"/>
       </View>
       
       {/* The add property modal is rendered here */}
@@ -97,9 +105,18 @@ export const LandlordPropertiesScreen = () =>{
 const styles = StyleSheet.create ({
   main:{
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white'
+  },
+  scrollContent: {
+    flexGrow: 1,                // allows vertical centering when content is short
+    justifyContent: 'center',   // centers content vertically
+    alignItems: 'center',       // centers content horizontally
+    paddingHorizontal: 16,
+    paddingTop: 24,
+    paddingBottom: 110,         // space for the fixed nav (adjust to nav height)
+    width: '100%',
+    gap: 16,                    // works on RN 0.71+, otherwise use margin on children
   },
   topComponent:{
     width: '100%',
@@ -120,6 +137,9 @@ const styles = StyleSheet.create ({
     height: 24,
     width: 24
   },
+  bottomNav:{
+    width: '100%'
+  }
 });
 
 export default LandlordPropertiesScreen
