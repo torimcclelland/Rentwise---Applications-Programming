@@ -7,7 +7,6 @@ const Profile = ({ src, size = 64, style = {} }) => {
   return (
     <View style={[styles.container(size), style]}>
       <Image source={src} style={styles.image} /> 
-      {/* //takes image it is given, stored one locally for example/tests */}
     </View>
   );
 };
