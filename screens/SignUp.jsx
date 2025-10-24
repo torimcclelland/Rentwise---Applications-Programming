@@ -8,6 +8,7 @@ import { getUserByEmail } from '../database_calls/user/GetUserByEmail';
 import { createUser } from '../database_calls/user/CreateUser';
 import { GlobalValues } from '../GlobalValues';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../ThemeContext';
 
 export default function SignUpScreen () {
   const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ export default function SignUpScreen () {
   const [userType, setUserType] = useState('Renter');
   const [membershipType, setMembershipType] = useState('Free');
   const navigation = useNavigation();
+  const theme = useTheme()
 
   const handleSignUp = async () => {
 
@@ -66,7 +68,7 @@ export default function SignUpScreen () {
     <View style={login_style.app}>
       <View style={login_style.welcome}>
           <Image style={login_style.logo} source={require('./rentwiseLogo.png')}/>
-          <Text style={login_style.name}>Rentwise</Text>
+          <Text style={[login_style.name, theme.textColor]}>Rentwise</Text>
       </View>
       <View style={login_style.input}>
         <View style={login_style.text}>
