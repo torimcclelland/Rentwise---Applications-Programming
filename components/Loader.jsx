@@ -1,9 +1,10 @@
 import React from 'react';
 
 const Loader = () => (
-  <div className="loader">
-    <div className="spinner" />
-  </div>
+  <RotateLoader
+  color="#034974"
+  speedMultiplier={0.5}
+/>
 );
 
 export default Loader;
