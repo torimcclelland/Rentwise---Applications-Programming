@@ -13,8 +13,9 @@ import { useTheme } from '../ThemeContext';
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables
-    const [propertyID, setPropertyID] = useState("")
+    const propertyID = "setLater"
     const landlordID = GlobalValues.currentUser.userID
+    const renterID = "none"
     const [address, setAddress] = useState("")
     const [monthlyPrice, setMonthlyPrice] = ("")
     const [city, setCity] = useState("")
@@ -35,9 +36,10 @@ const AddProperty = ({visible, onClose}) =>{
 
     // function to create the property and push to database
     const addProperty = async() =>{
-        const property = new Property(
-            "setLater", // we will set the propertyID for the property object in the createProperty function
+        const property = new Property({
+            propertyID, // we will set the propertyID for the property object in the createProperty function
             landlordID,
+            renterID,
             address,
             monthlyPrice,
             city,
@@ -47,7 +49,7 @@ const AddProperty = ({visible, onClose}) =>{
             description,
             reviews,
             avgRating 
-        )
+    })
 
         try{
             const result = await createProperty(property)
