@@ -7,7 +7,7 @@ import styles from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
 
 const UserProfile = () => {
-  const { firstName, lastName, email, isLandLord, isPremUser } = GlobalValues.currentUser;
+  const { firstName, lastName, email, isLandlord, isPremUser } = GlobalValues.currentUser;
 
   //Determine membership type
   let membershipLabel = 'Renter';
