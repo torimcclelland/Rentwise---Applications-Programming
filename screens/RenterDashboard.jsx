@@ -6,14 +6,18 @@ import InfoCard from '../components/InfoCard';
 import CustomDivider from '../components/divider';
 import { GlobalValues } from '../GlobalValues';
 import BottomNavBar from '../components/BottomNavBar';
+import { useTheme } from '../ThemeContext';
 
 const DashboardScreen = () => {
+
+  const theme = useTheme()
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
+      <View style={[{ flex: 1 }, theme.dashboardContainer]}>
         <ScrollView contentContainerStyle={{ padding: 20 }}>
-          <Text style={styles.header}>Hello {GlobalValues.currentUser.firstName}!</Text>
-          <Text style={styles.subheader}>Here’s your rent summary at a glance.</Text>
+          <Text style={[styles.header, theme.textColor]}>Hello {GlobalValues.currentUser.firstName}!</Text>
+          <Text style={[styles.subheader, theme.textColor]}>Here’s your rent summary at a glance.</Text>
 
           {/* Lease Summary */}
           <InfoCard
@@ -50,21 +54,21 @@ const DashboardScreen = () => {
           <CustomDivider />
 
           {/* Existing Cards */}
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Your Rentals</Text>
-            <Text style={styles.cardSubtitle}>View and manage your active listings</Text>
+          <View style={[styles.card, theme.textField]}>
+            <Text style={[styles.cardTitle, theme.textColor]}>Your Rentals</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>View and manage your active listings</Text>
             <PrimaryButton title="See my rentals" />
           </View>
 
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Payment Summary</Text>
-            <Text style={styles.cardSubtitle}>Track incoming and outgoing payments</Text>
+          <View style={[styles.card, theme.textField]}>
+            <Text style={[styles.cardTitle, theme.textColor]}>Payment Summary</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>Track incoming and outgoing payments</Text>
             <PrimaryButton title="See my payments" />
           </View>
 
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Messages</Text>
-            <Text style={styles.cardSubtitle}>Connect with renters and landlords</Text>
+          <View style={[styles.card, theme.textField]}>
+            <Text style={[styles.cardTitle, theme.textColor]}>Messages</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>Connect with renters and landlords</Text>
             <PrimaryButton title="See my messages" />
           </View>
         </ScrollView>

@@ -1,9 +1,10 @@
 
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import login from './screens/Login';
+import { ThemeProvider } from './ThemeContext';
+import Login from './screens/Login';
 import DashboardScreen from './screens/RenterDashboard';
 import LandlordPropertiesScreen from './screens/LandlordPropertiesManager';
 import BrowseProperties from './screens/BrowseProperties';
@@ -20,7 +21,7 @@ function RootStack() {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Login"
-        component={login}
+        component={Login}
         //options={{headerShown: false}}
       />
       <Stack.Screen
@@ -64,9 +65,13 @@ function RootStack() {
 }
 
 export default function App() {
+  const Scheme = useColorScheme()
+  console.log(Scheme)
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

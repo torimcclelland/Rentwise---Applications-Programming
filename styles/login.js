@@ -32,9 +32,6 @@ const login_style = StyleSheet.create ({
         fontSize: 64,
         fontStyle: 'normal',
         fontWeight: 600,
-        // textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        // textShadowOffset: { width: 0, height: 4 },
-        // textShadowRadius: 4
 
     },
     app:{

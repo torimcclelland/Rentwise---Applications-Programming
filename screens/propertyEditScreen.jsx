@@ -5,17 +5,26 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { getPropertyByID } from '../database_calls/property/GetPropertyByID'
 import Icon from 'react-native-vector-icons/Feather'
 import PrimaryButton from '../components/PrimaryButton'
+import DropDown from '../components/DropDown'
 import { Property } from '../models/Property'
 import { updateProperty } from '../database_calls/property/UpdateProperty'
+import { useTheme } from '../ThemeContext'
 import TextFieldLong from '../components/TextFieldLong'
 
 
 export const PropertyEditScreen = () =>{
     const route = useRoute();
     const {propertyID} = route.params
+    const theme = useTheme()    
 
     // variables
     const [property, setProperty] = useState(new Property({})) // initialize property to empty
+    // create an array to hold state values
+    const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']    
 
     // navigation
     const navigation = useNavigation();
@@ -27,12 +36,6 @@ export const PropertyEditScreen = () =>{
     const getPropertyInfo = async() =>{
         const property = await getPropertyByID(propertyID)
         setProperty(property.propertyData)
-        // setStreetAddress(property.address)
-        // setCity(property.city)
-        // setState(property.state)
-        // setZip(property.zipcode)
-        // setRentPrice(property.monthlyPrice)
-        // setDescription(property.description)
     }
 
     const updateThisProperty = async() => {
@@ -48,16 +51,16 @@ export const PropertyEditScreen = () =>{
     }
 
     return (
-        <ScrollView>
-        <View style={styles.component}>
-            <Pressable style={styles.imageBox}>
+        <ScrollView style = {theme.container}>
+        <View style={[styles.component, theme.container]}>
+            <Pressable style={[styles.imageBox, theme.container]}>
                 <View style={styles.addImage}>
-                <Icon name="plus" size={30} color="#666" />
-                <Text>Add images</Text>
+                <Icon name="plus" size={30} color={theme.textColor.color} />
+                <Text style={theme.textColor}>Add images</Text>
                 </View>
             </Pressable>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Street Address</Text>
+                <Text style={[styles.label, theme.textColor]}>Street Address</Text>
                 <TextField
                 placeholder={property.address}
                 value={property.address}
@@ -65,7 +68,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>City</Text>
+                <Text style={[styles.label, theme.textColor]}>City</Text>
                 <TextField
                 placeholder={property.city}
                 value={property.city}
@@ -73,15 +76,16 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>State</Text>
-                <TextField
+                <Text style={[styles.label, theme.textColor]}>State</Text>
+                <DropDown
                 placeholder={property.state}
+                options={states}
                 value={property.state}
-                onChangeText={(text) => setProperty({ ...property, state: text })}
+                onSelect={(text) => setProperty({ ...property, state: text })}
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Zip Code</Text>
+                <Text style={[styles.label, theme.textColor]}>Zip Code</Text>
                 <TextField
                 placeholder={property.zipcode}
                 value={property.zipcode}
@@ -89,7 +93,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Rent Price</Text>
+                <Text style={[styles.label, theme.textColor]}>Rent Price</Text>
                 <TextField
                 placeholder={property.monthlyPrice}
                 value={property.monthlyPrice}
@@ -97,7 +101,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Description</Text>
+                <Text style={[styles.label, theme.textColor]}>Description</Text>
                 <TextFieldLong
                   placeholder={property.description}
                   value={property.description}

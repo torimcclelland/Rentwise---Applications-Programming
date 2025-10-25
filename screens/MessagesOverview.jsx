@@ -3,6 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'rea
 import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; // placeholder profile image
 import styles from '../styles/MessagesOverviewStyle';
+import { useTheme } from '../ThemeContext';
 
 const messages = [
   { username: 'renter23', message: 'How are you today?' },
@@ -14,10 +15,11 @@ const messages = [
 const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 
 const MessagesOverview = () => {
+  const theme = useTheme()
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.container]}>
       {/* Header */}
-      <Text style={styles.header}>Messages (Landlord)</Text>
+      <Text style={[styles.header, theme.textColor]}>Messages (Landlord)</Text>
 
       {/* Filter Buttons */}
       <View style={styles.filterContainer}>
@@ -31,11 +33,11 @@ const MessagesOverview = () => {
       {/* Message List */}
       <ScrollView contentContainerStyle={styles.messageList}>
         {messages.map((msg, index) => (
-          <View key={index} style={styles.messageCard}>
+          <View key={index} style={[styles.messageCard, theme.textField]}>
             <Image source={userImage} style={styles.profileImage} />
             <View style={styles.messageTextContainer}>
-              <Text style={styles.username}>{msg.username}</Text>
-              <Text style={styles.message}>{msg.message}</Text>
+              <Text style={[styles.username, theme.textColor]}>{msg.username}</Text>
+              <Text style={[styles.message, theme.textColor]}>{msg.message}</Text>
             </View>
           </View>
         ))}
