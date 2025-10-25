@@ -78,7 +78,9 @@ export const LandlordPropertiesScreen = () =>{
             />
           ))
         ) : (
-          <Text>No properties listed yet</Text>
+          <View style={styles.noProperties}>
+            <Text style={[theme.textColor]}>No properties listed yet</Text>
+          </View>
         )}
 
         {/* custom divider */}
@@ -148,6 +150,11 @@ const styles = StyleSheet.create ({
   bottomNav:{
     width: '100%'
   },
+  noProperties:{
+    paddingVertical: 20,
+    paddingHorizontal: 90
+    
+  }
 });
 
 export default LandlordPropertiesScreen
