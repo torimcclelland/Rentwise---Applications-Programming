@@ -3,8 +3,9 @@ import { View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-nativ
 import Profile from '../components/profile'; 
 import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; 
-import styles from '../styles/UserProfileStyle.js';
+import {styles, theme} from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
+import RatingStars from '../components/RatingStars';
 
 const UserProfile = () => {
   const { firstName, lastName, email, isLandlord, isPremUser } = GlobalValues.currentUser;
@@ -20,9 +21,12 @@ const UserProfile = () => {
       {/* Header with Profile */}
       <View style={[styles.header, theme.container]}>
         <Text style={[styles.title, theme.textColor]}>{firstName}'s Profile</Text>
-        {/* <RatingStars></RatingStars> */}
         <Profile src={userImage} size={48} style={styles.profileIcon} />
       </View>
+      <View style={[styles.header, theme.container]}>
+        {<RatingStars></RatingStars>}
+      </View>
+
 
       {/* Scrollable content */}
       <ScrollView contentContainerStyle={styles.content}>
