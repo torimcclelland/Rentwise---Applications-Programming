@@ -38,7 +38,7 @@ export async function getUserByEmail(userToFind){
         }
        
         const snapshotSingle = snapshot.docs[0]
-        
+        const data = snapshotSingle.data()
         // success
         result = snapshotToUser(snapshotSingle)
 
