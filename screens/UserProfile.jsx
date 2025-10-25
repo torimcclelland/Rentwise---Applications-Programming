@@ -3,17 +3,16 @@ import { View, Text, StyleSheet, ScrollView, ImageBackground } from 'react-nativ
 import Profile from '../components/profile'; 
 import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; 
-import styles from '../styles/UserProfileStyle.js';
+import {styles, theme} from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
-import { useTheme } from '../ThemeContext';
+import RatingStars from '../components/RatingStars';
 
 const UserProfile = () => {
-  const { firstName, lastName, email, isLandLord, isPremUser } = GlobalValues.currentUser;
-  const theme = useTheme()
+  const { firstName, lastName, email, isLandlord, isPremUser } = GlobalValues.currentUser;
 
   //Determine membership type
   let membershipLabel = 'Renter';
-  if (isLandLord) {
+  if (isLandlord) {
     membershipLabel = isPremUser ? 'Premium Landlord' : 'Free Landlord';
   }
 
@@ -24,6 +23,10 @@ const UserProfile = () => {
         <Text style={[styles.title, theme.textColor]}>{firstName}'s Profile</Text>
         <Profile src={userImage} size={48} style={styles.profileIcon} />
       </View>
+      <View style={[styles.header, theme.container]}>
+        {<RatingStars></RatingStars>}
+      </View>
+
 
       {/* Scrollable content */}
       <ScrollView contentContainerStyle={styles.content}>
