@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, Image, ScrollView } from "react-native";
 import {useNavigation} from '@react-navigation/native';
 import PrimaryButton from "../components/PrimaryButton";
 import TextField from "../components/TextField";
@@ -55,6 +55,8 @@ export default function Login() {
 
     return (
         <View style={[login_style.app, theme.container]}>
+        <ScrollView
+        showsVerticalScrollIndicator={false}>
             <View style={login_style.welcome}>
                 <Image style={login_style.logo} source={logo}/>
                 <Text style={[login_style.name, theme.logoColor]}>Rentwise</Text>
@@ -87,7 +89,6 @@ export default function Login() {
                 </View>
                 <View style={login_style.divider}>
                     <CustomDivider/>
-                    <Text>Or</Text>
                 </View>
                 <View>
                     <PrimaryButton
@@ -115,6 +116,7 @@ export default function Login() {
                     />
                 </View>
             </View>
+        </ScrollView>
         </View>
     );
 }

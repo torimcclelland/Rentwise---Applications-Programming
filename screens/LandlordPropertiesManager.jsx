@@ -14,7 +14,6 @@ import {
   } from '@react-navigation/native';
 import BottomNavBar from '../components/BottomNavBar';
 import AddPropertyModal from '../screens/AddPropertyModal'
-import TextFieldLong from '../components/TextFieldLong';
 
 
 export const LandlordPropertiesScreen = () =>{
@@ -110,15 +109,15 @@ const styles = StyleSheet.create ({
     backgroundColor: 'white'
   },
   scrollContent: {
-    flexGrow: 1,                // allows vertical centering when content is short
-    justifyContent: 'center',   // centers content vertically
-    alignItems: 'center',       // centers content horizontally
+    flexGrow: 1,        
+    justifyContent: 'center',  
+    alignItems: 'center',       
     paddingHorizontal: 16,
     paddingTop: 24,
-    paddingBottom: 110,         // space for the fixed nav (adjust to nav height)
+    paddingBottom: 110,         
     width: '100%',
-    gap: 16,                    // works on RN 0.71+, otherwise use margin on children
-  },
+    gap: 16,    
+  },                
   topComponent:{
     width: '100%',
     flexDirection: 'row',
@@ -148,7 +147,7 @@ const styles = StyleSheet.create ({
   },
   bottomNav:{
     width: '100%'
-  }
+  },
 });
 
 export default LandlordPropertiesScreen
