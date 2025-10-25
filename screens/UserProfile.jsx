@@ -5,7 +5,7 @@ import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; 
 import styles from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
-import RatingStars from '../components/RatingStars';
+// import RatingStars from '../components/RatingStars';
 
 const UserProfile = () => {
   const { firstName, lastName, email, isLandlord, isPremUser } = GlobalValues.currentUser;
@@ -21,7 +21,7 @@ const UserProfile = () => {
       {/* Header with Profile */}
       <View style={styles.header}>
         <Text style={styles.title}>{firstName}'s Profile</Text>
-        <RatingStars></RatingStars>
+        {/* <RatingStars></RatingStars> */}
         <Profile src={userImage} size={48} style={styles.profileIcon} />
       </View>
 
