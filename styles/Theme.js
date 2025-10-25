@@ -16,6 +16,9 @@ export const lightTheme = {
         backgroundColor: '#FFFFFF',
         color: '#000000'
     },
+    propertyCard:{
+        backgroundColor: '#FFFFFF'
+    },
     button:{
         backgroundColor: '#034974'
     },
@@ -41,6 +44,9 @@ export const darkTheme = {
     textField:{
         backgroundColor: '#1e293b',
         color: '#f0f4f8'
+    },
+    propertyCard:{
+        backgroundColor: '#334155'
     },
     button:{
         backgroundColor: '#2563eb'
