@@ -1,6 +1,6 @@
 import { registerRootComponent } from 'expo';
 import App from './app';
-import login from './screens/login';
+import login from './screens/Login';
 import LandlordPropertiesScreen from './screens/LandlordPropertiesManager'
 import DashboardScreen from './screens/RenterDashboard';
 import UserProfile from './screens/UserProfile';
