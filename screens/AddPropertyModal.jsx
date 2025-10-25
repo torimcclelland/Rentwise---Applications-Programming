@@ -59,6 +59,14 @@ const AddProperty = ({visible, onClose}) =>{
         }catch(e){
             console.log("Error creating property:", e)
         }
+
+        // clear values for next property creation
+        setAddress("")
+        setCity("")
+        setState("")
+        setZipcode("")
+        setDescription("")
+        setMonthlyPrice("")
     }
     
     return (
@@ -76,7 +84,7 @@ const AddProperty = ({visible, onClose}) =>{
                                 <View style={stylesModal.back}>
                                     <Pressable
                                     onPress={onClose}>
-                                        <Image style={stylesModal.image} source={require('./backArrow.png')}/>
+                                        <Icon name='arrow-left' size={24} color={theme.textColor.color}/>
                                     </Pressable>
                                     <Text style={[stylesModal.text, theme.textColor]}>Add Listing</Text>
                                 </View>
@@ -114,7 +122,7 @@ const AddProperty = ({visible, onClose}) =>{
                                 onChangeText={setZipcode}
                                 />
                                 <TextField
-                                placeholder="description"
+                                placeholder="Description"
                                 value={description}
                                 onChangeText={setDescription}
                                 />
