@@ -41,7 +41,7 @@ const DropDown = ({
         onRequestClose={() => setVisible(false)}
       >
         <TouchableOpacity style={styles.modalOverlay} onPress={() => setVisible(false)}>
-          <View style={styles.dropdownContainer}>
+          <View style={[styles.dropdownContainer, theme.container]}>
             <FlatList
               data={options}
               keyExtractor={(item, index) => index.toString()}
@@ -50,7 +50,7 @@ const DropDown = ({
                   style={styles.dropdownItem}
                   onPress={() => handleSelect(item)}
                 >
-                  <Text style={styles.itemText}>{item}</Text>
+                  <Text style={[styles.itemText, theme.textColor]}>{item}</Text>
                 </TouchableOpacity>
               )}
             />
