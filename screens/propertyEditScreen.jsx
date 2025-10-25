@@ -36,10 +36,10 @@ export const PropertyEditScreen = () =>{
     return (
         <ScrollView style = {theme.container}>
         <View style={[styles.component, theme.container]}>
-            <Pressable style={styles.imageBox}>
+            <Pressable style={[styles.imageBox, theme.container]}>
                 <View style={styles.addImage}>
-                <Icon name="plus" size={30} color="#666" />
-                <Text>Add images</Text>
+                <Icon name="plus" size={30} color={theme.textColor.color} />
+                <Text style={theme.textColor}>Add images</Text>
                 </View>
             </Pressable>
             <View style={styles.fieldContainer}>
