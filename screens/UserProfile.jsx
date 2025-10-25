@@ -8,12 +8,12 @@ import { GlobalValues } from '../GlobalValues';
 import { useTheme } from '../ThemeContext';
 
 const UserProfile = () => {
-  const { firstName, lastName, email, isLandLord, isPremUser } = GlobalValues.currentUser;
+  const { firstName, lastName, email, isLandlord, isPremUser } = GlobalValues.currentUser;
   const theme = useTheme()
 
   //Determine membership type
   let membershipLabel = 'Renter';
-  if (isLandLord) {
+  if (isLandlord) {
     membershipLabel = isPremUser ? 'Premium Landlord' : 'Free Landlord';
   }
 

@@ -7,7 +7,7 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 
 /**
  * 
- * @param {User} renter The details of the property to find by landlord id (must not be empty)
+ * @param {User} renter The details of the property to find by renter id (must not be empty)
  * @returns {ReturnValue} The results of the operation. If successful, the propertyList field contains the details of the retrieved properties.
  */
 export async function getPropertyByRenter(renter) {
