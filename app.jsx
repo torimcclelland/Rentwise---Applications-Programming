@@ -21,7 +21,7 @@ function RootStack() {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Login"
-        component={login}
+        component={Login}
         //options={{headerShown: false}}
       />
       <Stack.Screen
