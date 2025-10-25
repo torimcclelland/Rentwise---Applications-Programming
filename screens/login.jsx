@@ -44,11 +44,13 @@ export default function Login() {
 
         GlobalValues.currentUser = currentUser;
         // if we get here, successful login. Navigate to the relevant screen
-        if (currentUser.isLandLord) {
+        if (currentUser.isLandlord) {
             navigation.navigate('Landlord Dashboard')
         } else {
             navigation.navigate('Renter Dashboard')
         }
+        setEmail('')
+        setPassword('')
     };
 
     return (

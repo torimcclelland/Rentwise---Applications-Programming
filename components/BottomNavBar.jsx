@@ -4,22 +4,23 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/BottomNavBarStyle';
 import Profile from './profile';
-import exampleImage from './profileexample.png'; 
+import exampleImage from './profileexample.png';
 import { GlobalValues } from '../GlobalValues';
 
 const BottomNavBar = ({ selectedTab }) => {
   
   const navigation = useNavigation();
   const userType = GlobalValues.currentUser.isLandLord // check if the user is a landlord 
-
-  const tabs = [
+ 
+  
+const tabs = [
     { name: 'search', icon: 'compass-outline', route: 'Browse Properties' },
     { name: 'messages', icon: 'chat-outline', route: 'Messages' },
     { name: 'home', 
       icon: 'home-outline', 
       route: userType === true ? 'Landlord Dashboard' : 'Renter Dashboard'},
     { name: 'notifications', icon: 'bell-outline', route: 'Notifications' },
-    { name: 'profile', icon: null, route: null }, // Profile uses custom component
+    { name: 'profile', icon: null, route: 'User Profile' }, // Profile uses custom component
   ];
 
   const handleTabPress = (tab) => {

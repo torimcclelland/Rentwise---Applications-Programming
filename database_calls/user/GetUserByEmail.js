@@ -36,7 +36,7 @@ export async function getUserByEmail(userToFind){
             result = new ReturnValue(true, "User not found.", null);
             return result
         }
-       // i actually cared enough to come
+       
         const snapshotSingle = snapshot.docs[0]
         // success
         result = snapshotToUser(snapshotSingle)

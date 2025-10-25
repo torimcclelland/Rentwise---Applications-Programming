@@ -9,6 +9,7 @@ import { createUser } from '../database_calls/user/CreateUser';
 import { GlobalValues } from '../GlobalValues';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../ThemeContext';
+import { User } from '../models/User';
 
 export default function SignUpScreen () {
   const [email, setEmail] = useState('');
@@ -24,14 +25,14 @@ export default function SignUpScreen () {
 
     const isLandlord = userType === 'Landlord'
     const isPremUser = membershipType === 'Premium'
-    const userToCreate = {
-      email: email,
+    let userToCreate = new User(
+      {email: email,
       password: password,
       firstName:firstName,
       lastName:lastName,
       isLandlord:isLandlord,
       isPremUser:isPremUser
-    }
+    })
 
     let result = await getUserByEmail(userToCreate);
 
@@ -57,11 +58,18 @@ export default function SignUpScreen () {
 
     GlobalValues.currentUser = currentUser;
     // if we get here, successful login. Navigate to the relevant screen
-    if (currentUser.isLandLord) {
+    if (currentUser.isLandlord) {
         navigation.navigate('Landlord Dashboard')
     } else {
         navigation.navigate('Renter Dashboard')
     }
+    // clear values
+    setEmail('');
+    setPassword('');
+    setFirstName('');
+    setLastName('');
+    setUserType('Renter');
+    setMembershipType('Free');
   };
 
   return (

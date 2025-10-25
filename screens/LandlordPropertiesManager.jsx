@@ -14,6 +14,7 @@ import {
   } from '@react-navigation/native';
 import BottomNavBar from '../components/BottomNavBar';
 import AddPropertyModal from '../screens/AddPropertyModal'
+import TextFieldLong from '../components/TextFieldLong';
 
 
 export const LandlordPropertiesScreen = () =>{
@@ -122,6 +123,14 @@ const styles = StyleSheet.create ({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  pageContent:{
+    width: '100%',
+    height: '100%',
+    padding: '10px',
+  },
+  pageArea:{
+    justifyContent: 'top'
   },
   addButton: {
     height: 32,

@@ -52,3 +52,9 @@ React Navigation: https://reactnavigation.org/docs/hello-react-navigation?config
 - show data storage, at least show it exists
     - and during demo, show "here's front, here's back, here's the data moving between the two"
 - for demoing different components, make a demo page, show them all. Don't do "here's the file structure, here's the code". Then demo the structure/code of one or two components
+
+- 8 total checkpoints
+- after the 8th, we'll focus on finishing the functionality of our app and preparing for a final presentation. won't have checkpoints after that, but will keep progressing
+
+
+next up for sam: check that the merged changes work!

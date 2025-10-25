@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, Text, Pressable, ScrollView } from 'react-native'
 import TextField from '../components/TextField'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { getPropertyByID } from '../database_calls/property/GetPropertyByID'
 import Icon from 'react-native-vector-icons/Feather'
 import PrimaryButton from '../components/PrimaryButton'
 import { Property } from '../models/Property'
 import { updateProperty } from '../database_calls/property/UpdateProperty'
 import { useTheme } from '../ThemeContext'
-
+import TextFieldLong from '../components/TextFieldLong'
 
 
 export const PropertyEditScreen = () =>{
@@ -17,7 +17,10 @@ export const PropertyEditScreen = () =>{
     const theme = useTheme()
 
     // variables
-    const [property, setProperty] = useState({}) // initialize property to empty
+    const [property, setProperty] = useState(new Property({})) // initialize property to empty
+
+    // navigation
+    const navigation = useNavigation();
 
     useEffect(()=>{
         getPropertyInfo();
@@ -31,6 +34,13 @@ export const PropertyEditScreen = () =>{
     const updateThisProperty = async() => {
         console.log(property)
         const result = await updateProperty(property)
+
+        if(!result.success){
+            console.log(result.errorMsg)
+            return;
+        }
+
+        navigation.navigate('Landlord Dashboard');
     }
 
     return (
@@ -84,11 +94,12 @@ export const PropertyEditScreen = () =>{
             </View>
             <View style={styles.fieldContainer}>
                 <Text style={[styles.label, theme.textColor]}>Description</Text>
-                <TextField
-                placeholder={property.description}
-                value={property.description}
-                onChangeText={(text) => setProperty({ ...property, description: text })}
-                />
+                <TextFieldLong
+                  placeholder={property.description}
+                  value={property.description}
+                  onChangeText={(text) => setProperty({ ...property, description: text })}
+                  maxLength={200}
+                  />
             </View>
             <PrimaryButton
             title="Save"
