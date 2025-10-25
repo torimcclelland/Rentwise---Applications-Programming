@@ -7,12 +7,14 @@ import Icon from 'react-native-vector-icons/Feather'
 import PrimaryButton from '../components/PrimaryButton'
 import { Property } from '../models/Property'
 import { updateProperty } from '../database_calls/property/UpdateProperty'
+import { useTheme } from '../ThemeContext'
 
 
 
 export const PropertyEditScreen = () =>{
     const route = useRoute();
     const {propertyID} = route.params
+    const theme = useTheme()
 
     // variables
     const [property, setProperty] = useState({}) // initialize property to empty
@@ -32,8 +34,8 @@ export const PropertyEditScreen = () =>{
     }
 
     return (
-        <ScrollView>
-        <View style={styles.component}>
+        <ScrollView style = {theme.container}>
+        <View style={[styles.component, theme.container]}>
             <Pressable style={styles.imageBox}>
                 <View style={styles.addImage}>
                 <Icon name="plus" size={30} color="#666" />
@@ -41,7 +43,7 @@ export const PropertyEditScreen = () =>{
                 </View>
             </Pressable>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Street Address</Text>
+                <Text style={[styles.label, theme.textColor]}>Street Address</Text>
                 <TextField
                 placeholder={property.address}
                 value={property.address}
@@ -49,7 +51,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>City</Text>
+                <Text style={[styles.label, theme.textColor]}>City</Text>
                 <TextField
                 placeholder={property.city}
                 value={property.city}
@@ -57,7 +59,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>State</Text>
+                <Text style={[styles.label, theme.textColor]}>State</Text>
                 <TextField
                 placeholder={property.state}
                 value={property.state}
@@ -65,7 +67,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Zip Code</Text>
+                <Text style={[styles.label, theme.textColor]}>Zip Code</Text>
                 <TextField
                 placeholder={property.zipcode}
                 value={property.zipcode}
@@ -73,7 +75,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Rent Price</Text>
+                <Text style={[styles.label, theme.textColor]}>Rent Price</Text>
                 <TextField
                 placeholder={property.monthlyPrice}
                 value={property.monthlyPrice}
@@ -81,7 +83,7 @@ export const PropertyEditScreen = () =>{
                 />
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Description</Text>
+                <Text style={[styles.label, theme.textColor]}>Description</Text>
                 <TextField
                 placeholder={property.description}
                 value={property.description}

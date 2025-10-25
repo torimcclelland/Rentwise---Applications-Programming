@@ -1,9 +1,13 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import DashboardScreen from '../screens/RenterDashboard'
 
 export const lightTheme = {
     container:{
         backgroundColor: '#FFFFFF'
+    },
+    dashboardContainer:{
+        backgroundColor: '#f0efefff'
     },
     textColor:{
         color: '#000000'
@@ -18,11 +22,17 @@ export const lightTheme = {
     altButton:{
         backgroundColor: '#dadadaff'
     },
+    logoColor:{
+        color: '#034974'
+    },
     placeHolderTextColor: '#034974',
 }
 
 export const darkTheme = {
     container:{
+        backgroundColor: '#0d1b2a'
+    },
+    dashboardContainer:{
         backgroundColor: '#0d1b2a'
     },
     textColor:{
@@ -37,6 +47,9 @@ export const darkTheme = {
     },
     altButton:{
         backgroundColor: '#334155'
+    },
+    logoColor:{
+        color: '#f0f4f8'
     },
     placeHolderTextColor: '#f0f4f8',
 }

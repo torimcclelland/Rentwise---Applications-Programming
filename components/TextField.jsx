@@ -10,7 +10,7 @@ const TextField = ({ placeholder, isPassword=false, textType, hint='', ...props 
       <TextInput 
         style={[styles.input, theme.textField]} {...props}
         placeholder={placeholder}
-        placeholderTextColor= {theme.placeHolderTextColor}
+        placeholderTextColor= {theme.textColor.color}
         secureTextEntry={isPassword}
         keyboardType={textType}
         accessibilityLabel={`Input ${placeholder} into text box`}

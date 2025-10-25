@@ -14,7 +14,7 @@ const DashboardScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={[{ flex: 1 }, theme.container]}>
+      <View style={[{ flex: 1 }, theme.dashboardContainer]}>
         <ScrollView contentContainerStyle={{ padding: 20 }}>
           <Text style={[styles.header, theme.textColor]}>Hello {GlobalValues.currentUser.firstName}!</Text>
           <Text style={[styles.subheader, theme.textColor]}>Here’s your rent summary at a glance.</Text>
@@ -57,19 +57,19 @@ const DashboardScreen = () => {
           {/* Existing Cards */}
           <View style={[styles.card, theme.textField]}>
             <Text style={[styles.cardTitle, theme.textColor]}>Your Rentals</Text>
-            <Text style={styles.cardSubtitle}>View and manage your active listings</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>View and manage your active listings</Text>
             <PrimaryButton title="See my rentals" />
           </View>
 
           <View style={[styles.card, theme.textField]}>
             <Text style={[styles.cardTitle, theme.textColor]}>Payment Summary</Text>
-            <Text style={styles.cardSubtitle}>Track incoming and outgoing payments</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>Track incoming and outgoing payments</Text>
             <PrimaryButton title="See my payments" />
           </View>
 
           <View style={[styles.card, theme.textField]}>
             <Text style={[styles.cardTitle, theme.textColor]}>Messages</Text>
-            <Text style={styles.cardSubtitle}>Connect with renters and landlords</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>Connect with renters and landlords</Text>
             <PrimaryButton title="See my messages" />
           </View>
         </ScrollView>

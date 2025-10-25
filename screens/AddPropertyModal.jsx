@@ -8,6 +8,7 @@ import DropDown from '../components/DropDown'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
 import CustomDivider from '../components/divider'
+import { useTheme } from '../ThemeContext';
 
 
 const AddProperty = ({visible, onClose}) =>{
@@ -23,6 +24,7 @@ const AddProperty = ({visible, onClose}) =>{
     const [description, setDescription] = useState("")
     const [reviews, setReviews] = useState([])
     const [avgRating, setAvgRating] = useState(0.0)
+    const theme = useTheme()
 
     // create an array to hold state values
     const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -66,7 +68,7 @@ const AddProperty = ({visible, onClose}) =>{
             animationType= 'slide' // pop-up slides up on the screen
             >
                 <View style={stylesModal.centeredView}>
-                    <View style={stylesModal.modalView}>
+                    <View style={[stylesModal.modalView, theme.container]}>
                         <View style={stylesModal.contentView}>
                             <View style={stylesModal.banner}>
                                 <View style={stylesModal.back}>
@@ -74,16 +76,16 @@ const AddProperty = ({visible, onClose}) =>{
                                     onPress={onClose}>
                                         <Image style={stylesModal.image} source={require('./backArrow.png')}/>
                                     </Pressable>
-                                    <Text style={stylesModal.text}>Add Listing</Text>
+                                    <Text style={[stylesModal.text, theme.textColor]}>Add Listing</Text>
                                 </View>
                                 <CustomDivider/>
                             </View>
                             <View style={stylesModal.spacing}>
                                 {/* for the image box */}
-                                <Pressable style={stylesModal.imageBox}>
+                                <Pressable style={[stylesModal.imageBox, theme.container]}>
                                     <View style={stylesModal.addImage}>
-                                        <Icon name="plus" size={30} color="#666"/>
-                                        <Text>Add images</Text>
+                                        <Icon name="plus" size={30} color={theme.textColor.color}/>
+                                        <Text style={theme.textColor}>Add images</Text>
                                     </View>
                                 </Pressable>
                                 <TextField
@@ -140,7 +142,6 @@ const stylesModal = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   banner:{
     alignItems: 'center',

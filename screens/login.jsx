@@ -8,6 +8,7 @@ import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
 import { GlobalValues } from "../GlobalValues";
 import {login_style} from "../styles/login";
 import { useTheme } from "../ThemeContext";
+import { useColorScheme } from "react-native";
 
 
 export default function Login() {
@@ -15,6 +16,8 @@ export default function Login() {
     const [password, setPassword]= useState("tempPass");
     const navigation = useNavigation();
     const theme = useTheme()
+    const scheme = useColorScheme()
+    const logo = scheme === 'dark' ? require('./rentwiseLogoDarkMode.png') : require('./rentwiseLogo.png')
 
     const validateUser = async () => {
         const userToFind = {email: email}
@@ -51,8 +54,8 @@ export default function Login() {
     return (
         <View style={[login_style.app, theme.container]}>
             <View style={login_style.welcome}>
-                <Image style={login_style.logo} source={require('./rentwiseLogo.png')}/>
-                <Text style={[login_style.name, theme.textColor]}>Rentwise</Text>
+                <Image style={login_style.logo} source={logo}/>
+                <Text style={[login_style.name, theme.logoColor]}>Rentwise</Text>
             </View>
             <View style={login_style.input}>
                 <View style={login_style.text}>
