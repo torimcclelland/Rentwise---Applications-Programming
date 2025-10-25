@@ -6,11 +6,13 @@ import styles from '../styles/BottomNavBarStyle';
 import Profile from './profile';
 import exampleImage from './profileexample.png';
 import { GlobalValues } from '../GlobalValues';
+import { useTheme } from '../ThemeContext';
 
 const BottomNavBar = ({ selectedTab }) => {
   
   const navigation = useNavigation();
   const userType = GlobalValues.currentUser.isLandLord // check if the user is a landlord 
+  const theme = useTheme()
  
   
 const tabs = [
@@ -30,7 +32,7 @@ const tabs = [
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.container]}>
       {tabs.map((tab) => (
         <TouchableOpacity key={tab.name} onPress={() => handleTabPress(tab)}>
           {tab.name === 'profile' ? (

@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from 'react'
 import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
 import { useTheme } from '../ThemeContext';
+import Icon from 'react-native-vector-icons/Feather';
 
 const PropertyCard = ({address, onPress, ...props}) => {
     // grab the current system theme for styling
@@ -14,7 +15,7 @@ const PropertyCard = ({address, onPress, ...props}) => {
                 <View style={styles.button}>
                     <Text style={[styles.address, theme.textColor]}>{address}</Text>
                     <Pressable onPress={onPress}>
-                        <Image style={[styles.icon]} source={require('./arrow_forward.svg')}/>
+                        <Icon name="arrow-right" size={24} color={theme.textColor.color}/>
                     </Pressable>
                 </View>
             </View>

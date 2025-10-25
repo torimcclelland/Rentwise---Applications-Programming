@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useTheme } from '../ThemeContext';
+import { login_style } from '../styles/login';
 
 const DropDown = ({
   label,
@@ -21,7 +22,7 @@ const DropDown = ({
 
   return (
     <View style={[styles.container, style]}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <Text style={[login_style.typetext, theme.textColor]}>{label}</Text>}
       {/* The input-like pressable box */}
       <TouchableOpacity
         style={[styles.inputBox, theme.textField]}
