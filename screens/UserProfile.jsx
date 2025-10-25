@@ -5,9 +5,11 @@ import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; 
 import styles from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
+import { useTheme } from '../ThemeContext';
 
 const UserProfile = () => {
   const { firstName, lastName, email, isLandLord, isPremUser } = GlobalValues.currentUser;
+  const theme = useTheme()
 
   //Determine membership type
   let membershipLabel = 'Renter';
@@ -16,26 +18,26 @@ const UserProfile = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.container]}>
       {/* Header with Profile */}
-      <View style={styles.header}>
-        <Text style={styles.title}>{firstName}'s Profile</Text>
+      <View style={[styles.header, theme.container]}>
+        <Text style={[styles.title, theme.textColor]}>{firstName}'s Profile</Text>
         <Profile src={userImage} size={48} style={styles.profileIcon} />
       </View>
 
       {/* Scrollable content */}
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Name</Text>
-          <Text style={styles.cardValue}>{firstName} {lastName}</Text>
+        <View style={[styles.card, theme.textField]}>
+          <Text style={[styles.cardTitle, theme.textColor]}>Name</Text>
+          <Text style={[styles.cardValue, theme.textColor]}>{firstName} {lastName}</Text>
         </View>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Email</Text>
-          <Text style={styles.cardValue}>{email}</Text>
+        <View style={[styles.card, theme.textField]}>
+          <Text style={[styles.cardTitle, theme.textColor]}>Email</Text>
+          <Text style={[styles.cardValue, theme.textColor]}>{email}</Text>
         </View>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Membership Type</Text>
-          <Text style={styles.cardValue}>{membershipLabel}</Text>
+        <View style={[styles.card, theme.textField]}>
+          <Text style={[styles.cardTitle, theme.textColor]}>Membership Type</Text>
+          <Text style={[styles.cardValue, theme.textColor]}>{membershipLabel}</Text>
         </View>
       </ScrollView>
 
