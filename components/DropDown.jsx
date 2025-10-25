@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useTheme } from '../ThemeContext';
+import { login_style } from '../styles/login';
 
 const DropDown = ({
   label,
@@ -11,6 +13,7 @@ const DropDown = ({
   style,
 }) => {
   const [visible, setVisible] = useState(false);
+  const theme = useTheme()
 
   const handleSelect = (item) => {
     onSelect(item);
@@ -19,17 +22,17 @@ const DropDown = ({
 
   return (
     <View style={[styles.container, style]}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <Text style={[login_style.typetext, theme.textColor]}>{label}</Text>}
       {/* The input-like pressable box */}
       <TouchableOpacity
-        style={styles.inputBox}
+        style={[styles.inputBox, theme.textField]}
         onPress={() => setVisible(true)}
         activeOpacity={0.8}
       >
-        <Text style={value ? styles.inputText : styles.placeholder}>
+        <Text style={[styles.inputText, theme.textColor]}>
           {value || placeholder}
         </Text>
-        <Icon name="chevron-down" size={20} color="#666" />
+        <Icon name="chevron-down" size={20} color={theme.textColor.color}/>
       </TouchableOpacity>
       {/* Modal dropdown list */}
       <Modal
@@ -39,7 +42,7 @@ const DropDown = ({
         onRequestClose={() => setVisible(false)}
       >
         <TouchableOpacity style={styles.modalOverlay} onPress={() => setVisible(false)}>
-          <View style={styles.dropdownContainer}>
+          <View style={[styles.dropdownContainer, theme.container]}>
             <FlatList
               data={options}
               keyExtractor={(item, index) => index.toString()}
@@ -48,7 +51,7 @@ const DropDown = ({
                   style={styles.dropdownItem}
                   onPress={() => handleSelect(item)}
                 >
-                  <Text style={styles.itemText}>{item}</Text>
+                  <Text style={[styles.itemText, theme.textColor]}>{item}</Text>
                 </TouchableOpacity>
               )}
             />
@@ -81,10 +84,6 @@ const styles = StyleSheet.create({
   },
   inputText: {
     color: '#000',
-    fontSize: 16,
-  },
-  placeholder: {
-    color: "#696969",
     fontSize: 16,
   },
   modalOverlay: {

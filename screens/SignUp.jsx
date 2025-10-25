@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 import {login_style} from '../styles/login';
 import TextField from '../components/TextField';
 import LoginButton from '../components/login_signup_button'
@@ -8,6 +8,10 @@ import { getUserByEmail } from '../database_calls/user/GetUserByEmail';
 import { createUser } from '../database_calls/user/CreateUser';
 import { GlobalValues } from '../GlobalValues';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../ThemeContext';
+import { useColorScheme } from 'react-native';
+import { User } from '../models/User';
+import PrimaryButton from '../components/PrimaryButton';
 
 export default function SignUpScreen () {
   const [email, setEmail] = useState('');
@@ -17,19 +21,22 @@ export default function SignUpScreen () {
   const [userType, setUserType] = useState('Renter');
   const [membershipType, setMembershipType] = useState('Free');
   const navigation = useNavigation();
+  const theme = useTheme()
+  const scheme = useColorScheme()
+  const logo = scheme === 'dark' ? require('./rentwiseLogoDarkMode.png') : require('./rentwiseLogo.png')
 
   const handleSignUp = async () => {
 
     const isLandlord = userType === 'Landlord'
     const isPremUser = membershipType === 'Premium'
-    const userToCreate = {
-      email: email,
+    let userToCreate = new User(
+      {email: email,
       password: password,
       firstName:firstName,
       lastName:lastName,
       isLandlord:isLandlord,
       isPremUser:isPremUser
-    }
+    })
 
     let result = await getUserByEmail(userToCreate);
 
@@ -55,47 +62,57 @@ export default function SignUpScreen () {
 
     GlobalValues.currentUser = currentUser;
     // if we get here, successful login. Navigate to the relevant screen
-    if (currentUser.isLandLord) {
+    if (currentUser.isLandlord) {
         navigation.navigate('Landlord Dashboard')
     } else {
         navigation.navigate('Renter Dashboard')
     }
+    // clear values
+    setEmail('');
+    setPassword('');
+    setFirstName('');
+    setLastName('');
+    setUserType('Renter');
+    setMembershipType('Free');
   };
 
   return (
-    <View style={login_style.app}>
-      <View style={login_style.welcome}>
-          <Image style={login_style.logo} source={require('./rentwiseLogo.png')}/>
-          <Text style={login_style.name}>Rentwise</Text>
+    <View style={[login_style.app, theme.container]}>
+    <ScrollView
+    showsVerticalScrollIndicator={false}
+    >
+      <View style={[login_style.welcome, {paddingLeft: 20}]}>
+          <Image style={login_style.logo} source={logo}/>
+          <Text style={[login_style.name, theme.logoColor]}>Rentwise</Text>
       </View>
       <View style={login_style.input}>
         <View style={login_style.text}>
-            <Text style={login_style.typetext}>Sign Up</Text>
-            <Text style={login_style.typetext}>Enter your credentials to make a new account</Text>
+            <Text style={[login_style.typetext, theme.textColor]}>Sign Up</Text>
+            <Text style={[login_style.typetext, theme.textColor]}>Enter your credentials to make a new account</Text>
         </View>
         <View>
-          <Text style={login_style.typetext}>Email:</Text>
+          <Text style={[login_style.typetext, theme.textColor]}>Email:</Text>
           <TextField
               placeholder="Enter your email here"
               value={email}
               onChangeText={setEmail}
               hint="Enter your email here"
               />
-          <Text style={login_style.typetext}>Password:</Text>
+          <Text style={[login_style.typetext, theme.textColor]}>Password:</Text>
           <TextField
               placeholder="Enter your password here"
               value={password}
               onChangeText={setPassword}
               hint="Enter your password here"
               />
-          <Text style={login_style.typetext}>First Name:</Text>
+          <Text style={[login_style.typetext, theme.textColor]}>First Name:</Text>
           <TextField
               placeholder="Enter your first name here"
               value={firstName}
               onChangeText={setFirstName}
               hint="Enter your first name here"
               />
-          <Text style={login_style.typetext}>Last Name:</Text>
+          <Text style={[login_style.typetext, theme.textColor]}>Last Name:</Text>
           <TextField
               placeholder="Enter your last name here"
               value={lastName}
@@ -118,15 +135,14 @@ export default function SignUpScreen () {
           />
         </View>
         <View>
-          <LoginButton
+          <PrimaryButton
               title="Sign up"
               onPress={() => handleSignUp()}
               style={login_style.loginButton}
-              textStyle={{color: "white"}}
               />
         </View>
       </View>
-
+    </ScrollView>
     </View>
   );
 };

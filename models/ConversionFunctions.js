@@ -17,7 +17,7 @@ function snapshotToUser(snapshot){
             firstName: snapshot.data().firstName,
             lastName: snapshot.data().lastName,
             displayName: snapshot.data().displayName,
-            isLandLord: snapshot.data().isLandLord,
+            isLandlord: snapshot.data().isLandlord,
             isPremUser: snapshot.data().isPremUser,
             properties: snapshot.data().properties,
     })
@@ -42,15 +42,15 @@ function snapshotToUser(snapshot){
  * @returns {ReturnValue} The results of the conversion
  */
 function snapshotToProperty(snapshot){
-// check if this should be explicit in making a new property object
     let result = new ReturnValue()
     let convertedProp
 
     try{
         
-        convertedProp = {
+        convertedProp = new Property({
             propertyID: snapshot.id,
             landlordID: snapshot.data().landlordID,
+            renterID: snapshot.data().renterID,
             address: snapshot.data().address,
             monthlyPrice: snapshot.data().monthlyPrice,
             city: snapshot.data().city,
@@ -60,7 +60,7 @@ function snapshotToProperty(snapshot){
             description: snapshot.data().description,
             reviews: snapshot.data().reviews,
             avgRating: snapshot.data().avgRating,
-        }
+        })
         result = new ReturnValue(true, "", {}, convertedProp)
 
     } catch (e){
