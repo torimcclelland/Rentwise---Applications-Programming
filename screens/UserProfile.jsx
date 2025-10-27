@@ -6,8 +6,10 @@ import userImage from '../components/profileexample.png';
 import {styles, theme} from '../styles/UserProfileStyle.js';
 import { GlobalValues } from '../GlobalValues';
 import RatingStars from '../components/RatingStars';
+import { useTheme } from '../ThemeContext';
 
 const UserProfile = () => {
+  const theme = useTheme()
   const { firstName, lastName, email, isLandlord, isPremUser } = GlobalValues.currentUser;
 
   //Determine membership type
@@ -23,7 +25,7 @@ const UserProfile = () => {
         <Text style={[styles.title, theme.textColor]}>{firstName}'s Profile</Text>
         <Profile src={userImage} size={48} style={styles.profileIcon} />
       </View>
-      <View style={[styles.header, theme.container]}>
+      <View style={[styles.header, theme.container, {color: theme.textColor.color}]}>
         {<RatingStars></RatingStars>}
       </View>
 
