@@ -9,6 +9,7 @@ import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
 import CustomDivider from '../components/divider'
 import { useTheme } from '../ThemeContext';
+import TextFieldLong from '../components/TextFieldLong';
 
 
 const AddProperty = ({visible, onClose}) =>{
@@ -121,10 +122,11 @@ const AddProperty = ({visible, onClose}) =>{
                                 value={zipcode}
                                 onChangeText={setZipcode}
                                 />
-                                <TextField
+                                <TextFieldLong
                                 placeholder="Description"
                                 value={description}
                                 onChangeText={setDescription}
+                                maxLength={200}
                                 />
                                 <TextField
                                 textType="numeric"
