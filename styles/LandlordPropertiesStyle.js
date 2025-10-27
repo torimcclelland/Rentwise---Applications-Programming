@@ -1,58 +1,54 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
-  container: {
+export const styles = StyleSheet.create ({
+  main:{
     flex: 1,
-    padding: 16,
-    backgroundColor: '#F5F5F5',
+    alignItems: 'center',
+    backgroundColor: 'white'
   },
-  sectionHeader: {
+  scrollContent: {
+    flexGrow: 1,        
+    justifyContent: 'center',  
+    alignItems: 'center',       
+    paddingHorizontal: 16,
+    paddingTop: 24,
+    paddingBottom: 110,         
+    width: '100%',
+    gap: 16,    
+  },                
+  topComponent:{
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
   },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginVertical: 8,
+  pageContent:{
+    width: '100%',
+    height: '100%',
+    padding: '10px',
+  },
+  pageArea:{
+    justifyContent: 'top'
   },
   addButton: {
-    fontSize: 16,
-    color: '#007AFF',
+    height: 32,
+    width: 71,
+    alignSelf: 'flex-end'
   },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    padding: 12,
-    marginVertical: 6,
-    borderRadius: 8,
-    elevation: 1,
+  text: {
+    font: 'inter',
+    fontWeight: 500,
+    fontSize: 14,
   },
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 6,
-    marginRight: 12,
+  image:{
+    height: 24,
+    width: 24
   },
-  address: {
-    flex: 1,
-    fontSize: 16,
+  bottomNav:{
+    width: '100%'
   },
-  arrow: {
-    fontSize: 20,
-    color: '#999',
-  },
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderColor: '#DDD',
-    backgroundColor: '#FFF',
-  },
-  navIcon: {
-    fontSize: 24,
-  },
+  noProperties:{
+    paddingVertical: 20,
+    paddingHorizontal: 90
+    
+  }
 });

@@ -26,7 +26,6 @@ export async function getPropertyByID(propertyToFind) {
     
          const snapshot = await getDoc(propertyRef);
 
-
         if (snapshot.data() == undefined) {
             result = new ReturnValue(false, "No snapshots found for property with id " + propertyToFind);
             return result;
