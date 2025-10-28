@@ -3,22 +3,26 @@ import { View, Text, TextInput } from 'react-native';
 import styles from '../styles/TextFieldStyles';
 import { useTheme } from '../ThemeContext';
 
-const TextField = ({ placeholder, isPassword=false, textType, hint='', ...props }) => {
+const TextFieldLong = ({ placeholder, textType, hint='', maxLength=100, ...props }) => {
+  
   const theme = useTheme()
+
   return (
     <View style={styles.wrapper}>
       <TextInput 
-        style={[styles.input, theme.textField]} {...props}
+        style={[styles.multilineInput, theme.textField]} {...props}
         placeholder={placeholder}
-        placeholderTextColor= {theme.textColor.color}
-        secureTextEntry={isPassword}
+        placeholderTextColor={theme.textField.color}
         keyboardType={textType}
         accessibilityLabel={`Input ${placeholder} into text box`}
         accessibilityRole='Text Box'
         accessibilityHint={hint}
+        numberOfLines={4}
+        maxLength={maxLength}
+        multiline={true}
       />
     </View>
   );
 };
 
-export default TextField;
+export default TextFieldLong;

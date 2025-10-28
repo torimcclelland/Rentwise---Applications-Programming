@@ -6,12 +6,19 @@ interface LoginButtonProps {
   title: string;
   style: ViewStyle;
   textStyle: TextStyle;
+  hint: string;
 }
 
-const loginButton: React.FC<LoginButtonProps> = ({onPress, title, style, textStyle}) => {
+const loginButton: React.FC<LoginButtonProps> = ({onPress, title, style, textStyle, hint=""}) => {
     return (
         <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-            <Text style={[styles.text, textStyle]}>{title}</Text>
+            <Text
+                style={[styles.text, textStyle]}
+                accessibilityLabel={"Button for " + title}
+                accessibilityHint={hint}
+            >
+                {title}
+            </Text>
         </TouchableOpacity>
     );
 };
@@ -24,10 +31,10 @@ const styles = StyleSheet.create({
         height: 40
     },
     text:{
-        fontFamily: 'inter',
         fontSize: 14,
         fontStyle: 'normal',
-        fontWeight: 500
+        fontWeight: 500,
+        font: 'inter'
         
     }
 });

@@ -1,24 +1,23 @@
 
 export class User{
 
-    constructor(
-        id = "",
+    constructor({
+        userID = "",
         email = "",
         password = "",
         firstName = "",
         lastName = "",
         displayName = "",
-        isLandLord = false,
+        isLandlord = false,
         isPremUser = false,
         properties = [],
-    )
-    { 
+    } = {}){ 
+        this.userID = userID;
         this.email = email;
         this.password = password;
-        this.isLandLord = isLandLord;
+        this.isLandlord = isLandlord;
         this.isPremUser = isPremUser;
         this.properties = properties;
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.displayName = displayName;

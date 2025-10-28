@@ -17,12 +17,12 @@ export async function updateUser(thisUser) {
         // try to store user in database
         if (!thisUser) throw new Error("thisUser is undefined");
         
-        const tempCol = collection(db, 'Users', thisUser.id)
+        const tempCol = collection(db, 'Users', thisUser.userID)
         const docRef = await setDoc(tempCol, {...thisUser});// I'm not confident in this, UNTESTED
-        thisUser.id = docRef.id
+        thisUser.userID = docRef.id
         
         // retrieve updated user details by calling the GetUser function
-        result = await getUserByID(thisUser);
+        result = await getUserByID(thisUser.userID);
 
     } catch(e){
         let error = ""; 

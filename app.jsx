@@ -1,59 +1,77 @@
-import React, { useState } from "react";
-import { Button, TextInput, View, Text, StyleSheet } from "react-native";
-import { db } from "./firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { createUser } from "./database_calls/user/CreateUser";
-import { User } from "./models/User";
-import { ReturnValue } from "./models/ReturnValue";
 
-export default function App() {
-  const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
+import * as React from 'react';
+import { useColorScheme } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from './ThemeContext';
+import Login from './screens/login';
+import DashboardScreen from './screens/RenterDashboard';
+import LandlordPropertiesScreen from './screens/LandlordPropertiesManager';
+import BrowseProperties from './screens/BrowseProperties';
+import MessagesOverview from './screens/MessagesOverview';
+import Notifications from './screens/Notifications';
+import SignUpScreen from './screens/SignUp';
+import PropertyEditScreen from './screens/propertyEditScreen';
+import UserProfile from './screens/UserProfile';
 
-  const addUser = async () => {
-    console.log(name);
-    // try {
-    //   await addDoc(collection(db, "landlordusers"), {
-    //     name: name,
-    //     createdAt: new Date()
-    //   });
-    //   setStatus("✅ User added!");
-    //   setName("");
-    // } catch (error) {
-    //   console.error("Error adding document: ", error);
-    //   setStatus("❌ Failed to add user.");
-    // }
-    let tempuser = new User("", name, "tempPass")
-    let result: ReturnValue = await createUser(tempuser)
+const Stack = createNativeStackNavigator();
 
-    if(result.success == false){
-      console.error("Error: " + result.errorMsg)
-      setStatus("❌ Failed to add user: " + result.errorMsg)
-    } else {
-      setStatus("✅ User added!");
-      setName("");
-    }
-  };
-
+function RootStack() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Add User to Firebase</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter a name"
-        value={name}
-        onChangeText={setName}
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        //options={{headerShown: false}}
       />
-      <Button title="Add User" onPress={addUser} />
-      {status ? <Text style={styles.status}>{status}</Text> : null}
-    </View>
+      <Stack.Screen
+        name="Sign Up"
+        component={SignUpScreen} 
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Renter Dashboard"
+        component={DashboardScreen}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Landlord Dashboard"
+        component={LandlordPropertiesScreen} 
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Browse Properties"
+        component={BrowseProperties}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Messages"
+        component={MessagesOverview}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Property Edit"
+        component={PropertyEditScreen} 
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen name="User Profile" component={UserProfile} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
-  title: { fontSize: 20, marginBottom: 20 },
-  input: { borderWidth: 1, width: "100%", padding: 10, marginBottom: 10 },
-  status: { marginTop: 10 }
-});
-
+export default function App() {
+  const Scheme = useColorScheme()
+  console.log(Scheme)
+  return (
+    <ThemeProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </ThemeProvider>
+  );
+}

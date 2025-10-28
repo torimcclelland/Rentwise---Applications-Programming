@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { StyleSheet, View} from 'react-native';
 
 
-const CustomDivider = () => {
+const CustomDivider = ({customStyles}) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, customStyles]}>
         </View>
     )
 }

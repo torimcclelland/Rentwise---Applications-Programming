@@ -2,13 +2,14 @@ import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
+import { snapshotToUser } from '../../models/ConversionFunctions';
 
 /**
  * 
  * @param {User} userToFind The details of the user to find by email (email field must not be empty)
  * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
- */
-/*
+ **/
+
 export async function getUserByEmail(userToFind){
 
     var result = new ReturnValue(false, "");
@@ -21,28 +22,24 @@ export async function getUserByEmail(userToFind){
     // try catch to handle any errors
     try{
         
-        
         // try to find user by ID
         const userRef = collection(db, 'Users')
 
         // query
+        //console.log("User we're searching with: " + userToFind.email)
         const newQuery = query(userRef, where("email", "==", userToFind.email), limit(1))
+        //console.log(newQuery) // added print statements for debugging
 
         const snapshot = await getDocs(newQuery);
 
+        if(snapshot.docs.length == 0){
+            result = new ReturnValue(true, "User not found.", null);
+            return result
+        }
        
-        // TODO: make a conversion function
-        const userRetrieved = new User(
-            snapshot.docs[0].data().email,
-            snapshot.docs[0].data().password,
-            snapshot.docs[0].data().isLandLord,
-            snapshot.docs[0].data().is,
-            snapshot.docs[0].data().properties,
-            userToFind.id,
-            snapshot.docs[0].data().firstName,
-            snapshot.docs[0].data().lastName,
-            snapshot.docs[0].data().displayName
-        )
+        const snapshotSingle = snapshot.docs[0]
+        // success
+        result = snapshotToUser(snapshotSingle)
 
     } catch(e){
         let error = ""; 
@@ -52,10 +49,8 @@ export async function getUserByEmail(userToFind){
             error = "Had a problem with typescript error handling when adding user."
         }
 
-        result = new ReturnValue(false, error)
+        // result = new ReturnValue(false, error)
     }
-    
-    return result;
+    return result
     
 }
-*/

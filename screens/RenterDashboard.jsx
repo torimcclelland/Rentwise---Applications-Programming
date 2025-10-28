@@ -1,37 +1,84 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import styles from '../styles/DashboardStyle';
+import PrimaryButton from '../components/PrimaryButton';
+import InfoCard from '../components/InfoCard';
+import CustomDivider from '../components/divider';
+import { GlobalValues } from '../GlobalValues';
+import BottomNavBar from '../components/BottomNavBar';
+import { useTheme } from '../ThemeContext';
 
 const DashboardScreen = () => {
+
+  const theme = useTheme()
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.header}>Welcome to Rentwise</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={[{ flex: 1 }, theme.dashboardContainer]}>
+        <ScrollView contentContainerStyle={{ padding: 20 }}>
+          <Text style={[styles.header, theme.textColor]}>Hello {GlobalValues.currentUser.firstName}!</Text>
+          <Text style={[styles.subheader, theme.textColor]}>Here’s your rent summary at a glance.</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Your Rentals</Text>
-        <Text style={styles.cardSubtitle}>View and manage your active listings</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Go to Rentals</Text>
-        </TouchableOpacity>
-      </View>
+          {/* Lease Summary */}
+          <InfoCard
+            title="Lease Summary"
+            subtitle="3013 Cherry Street $985/month Ending: January 31, 2026"
+            image={null}
+          />
+          <View style={styles.buttonRow}>
+            <PrimaryButton title="View History" />
+            <PrimaryButton title="View Current" />
+          </View>
+          <CustomDivider />
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Payment Summary</Text>
-        <Text style={styles.cardSubtitle}>Track incoming and outgoing payments</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>View Payments</Text>
-        </TouchableOpacity>
-      </View>
+          {/* Recent Activity */}
+          <InfoCard
+            title="Recent Activity"
+            subtitle="✅ Payment of $985 received on Sept. 30"
+            image={null}
+          />
+          <PrimaryButton title="Make Payment" />
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Messages</Text>
-        <Text style={styles.cardSubtitle}>Connect with renters and landlords</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Open Inbox</Text>
-        </TouchableOpacity>
+          <CustomDivider />
+
+          {/* FixIt Requests */}
+          <InfoCard
+            title="FixIt Requests"
+            subtitle="Leaky Faucet🟡 Pending Reported: Oct. 4"
+            image={null}
+          />
+          <TouchableOpacity style={styles.addRequestButton}>
+            <PrimaryButton title="Make new request" />
+          </TouchableOpacity>
+
+          <CustomDivider />
+
+          {/* Existing Cards */}
+          <View style={[styles.card, theme.textField]}>
+            <Text style={[styles.cardTitle, theme.textColor]}>Your Rentals</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>View and manage your active listings</Text>
+            <PrimaryButton title="See my rentals" />
+          </View>
+
+          <View style={[styles.card, theme.textField]}>
+            <Text style={[styles.cardTitle, theme.textColor]}>Payment Summary</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>Track incoming and outgoing payments</Text>
+            <PrimaryButton title="See my payments" />
+          </View>
+
+          <View style={[styles.card, theme.textField]}>
+            <Text style={[styles.cardTitle, theme.textColor]}>Messages</Text>
+            <Text style={[styles.cardSubtitle, theme.textColor]}>Connect with renters and landlords</Text>
+            <PrimaryButton title="See my messages" />
+          </View>
+        </ScrollView>
+
+        {/* Bottom Navigation Bar */}
+        <BottomNavBar selectedTab="home" />
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
 export default DashboardScreen;
+

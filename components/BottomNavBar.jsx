@@ -3,17 +3,28 @@ import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/BottomNavBarStyle';
-
-const tabs = [
-  { name: 'search', icon: 'compass-outline', route: 'LandlordProperties' },
-  { name: 'messages', icon: 'chat-outline', route: null },
-  { name: 'home', icon: 'home-outline', route: 'RenterDashboard' },
-  { name: 'notifications', icon: 'bell-outline', route: null },
-  { name: 'profile', icon: 'account-circle-outline', route: null },
-];
+import Profile from './profile';
+import exampleImage from './profileexample.png';
+import { GlobalValues } from '../GlobalValues';
+import { useTheme } from '../ThemeContext';
 
 const BottomNavBar = ({ selectedTab }) => {
+  
   const navigation = useNavigation();
+  const userType = GlobalValues.currentUser.isLandlord // check if the user is a landlord 
+
+  const theme = useTheme()
+ 
+  
+const tabs = [
+    { name: 'search', icon: 'compass-outline', route: 'Browse Properties' },
+    { name: 'messages', icon: 'chat-outline', route: 'Messages' },
+    { name: 'home', 
+      icon: 'home-outline', 
+      route: userType === true ? 'Landlord Dashboard' : 'Renter Dashboard'},
+    { name: 'notifications', icon: 'bell-outline', route: 'Notifications' },
+    { name: 'profile', icon: null, route: 'User Profile' }, // Profile uses custom component
+  ];
 
   const handleTabPress = (tab) => {
     if (tab.route) {
@@ -22,14 +33,25 @@ const BottomNavBar = ({ selectedTab }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.container]}>
       {tabs.map((tab) => (
         <TouchableOpacity key={tab.name} onPress={() => handleTabPress(tab)}>
-          <Icon
-            name={tab.icon}
-            size={28}
-            color={selectedTab === tab.name ? '#007AFF' : '#999'}
-          />
+          {tab.name === 'profile' ? (
+            <Profile
+              src={exampleImage}
+              size={28}
+              style={{
+                borderWidth: selectedTab === 'profile' ? 2 : 0,
+                borderColor: '#007AFF',
+              }}
+            />
+          ) : (
+            <Icon
+              name={tab.icon}
+              size={28}
+              color={selectedTab === tab.name ? '#007AFF' : '#999'}
+            />
+          )}
         </TouchableOpacity>
       ))}
     </View>

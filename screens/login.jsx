@@ -1,131 +1,122 @@
 import React, {useState} from "react";
-import { Button, TextInput, View, Text, StyleSheet, Image } from "react-native";
-import LoginButton from '../components/login_signup_button'
+import { View, Text, Image, ScrollView } from "react-native";
+import {useNavigation} from '@react-navigation/native';
+import PrimaryButton from "../components/PrimaryButton";
 import TextField from "../components/TextField";
 import CustomDivider from "../components/divider"
-import getUserByEmail from '../database_calls/user/GetUserByEmail'
+import { getUserByEmail } from '../database_calls/user/GetUserByEmail'
+import { GlobalValues } from "../GlobalValues";
+import {login_style} from "../styles/login";
+import { useTheme } from "../ThemeContext";
+import { useColorScheme } from "react-native";
 
 
-export default function login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword]= useState("");
+export default function Login() {
+    const [email, setEmail] = useState("ThaidakarRental@fakeEmail.com");// MARSH clean this up
+    const [password, setPassword]= useState("tempPass");
+    const navigation = useNavigation();
+    const theme = useTheme()
+    const scheme = useColorScheme()
+    const logo = scheme === 'dark' ? require('./rentwiseLogoDarkMode.png') : require('./rentwiseLogo.png')
 
+    const validateUser = async () => {
+        const userToFind = {email: email}
+        const result = await getUserByEmail(userToFind);
 
+        if (!result.success) {
+            console.log("Error:", result.errorMsg);// KELSIER: better error handling
+            return;
+        }
 
+        if(result.userData == null){
+            console.log("No user found!")
+            return;
+        }
+
+        // success, get user from result
+        const currentUser = result.userData
+
+        // check if password is correct
+        if(currentUser.password!=password){
+            console.log("Error: incorrect password"); // KELSIER do error handling here too
+            return
+        }
+
+        GlobalValues.currentUser = currentUser;
+        // if we get here, successful login. Navigate to the relevant screen
+        if (currentUser.isLandlord) {
+            navigation.navigate('Landlord Dashboard')
+        } else {
+            navigation.navigate('Renter Dashboard')
+        }
+        setEmail('')
+        setPassword('')
+    };
 
     return (
-        <View style={styles.app}>
-            <View style={styles.welcome}>
-                <Image style={styles.logo} source={require('./rentwiseLogo.png')}/>
-                <Text style={styles.name}>Rentwise</Text>
+        <View style={[login_style.app, theme.container]}>
+        <ScrollView
+        showsVerticalScrollIndicator={false}>
+            <View style={login_style.welcome}>
+                <Image style={login_style.logo} source={logo}/>
+                <Text style={[login_style.name, theme.logoColor]}>Rentwise</Text>
             </View>
-            <View style={styles.input}>
-                <View style={styles.text}>
-                    <Text style={styles.typetext}>Sign In</Text>
-                    <Text style={styles.typetext}>Enter your email to sign into Rentwise</Text>
+            <View style={login_style.input}>
+                <View style={login_style.text}>
+                    <Text style={[login_style.typetext, theme.textColor]}>Sign In</Text>
+                    <Text style={[login_style.typetext, theme.textColor]}>Enter your email to sign into Rentwise</Text>
                 </View>
-                <View style={styles.spacing}>
+                <View style={login_style.spacing}>
                     <TextField
                         placeholder="Email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChangeText={setEmail}
+                        hint="Enter your email here"
                     />
                     <TextField
                         placeholder="Password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        isPassword={true}
+                        onChangeText={setPassword}
+                        hint="Enter your password here"
                     />
                     <View>
-                        <LoginButton
+                        <PrimaryButton
                         title="Continue"
-                        onPress={getUserByEmail(email)}
-                        style={styles.loginButton}
-                        textStyle={{color: "white"}}
+                        onPress={validateUser}
                         />
                     </View>
                 </View>
-                <View style={styles.divider}>
+                <View style={login_style.divider}>
                     <CustomDivider/>
-                    <Text>Or</Text>
                 </View>
                 <View>
-                    <LoginButton
+                    <PrimaryButton
                     title="Continue with Google"
                     onPress={() => console.log('Another button pressed!')}
-                    style={styles.altLoginButton}
-                    textStyle={{color: '#034974'}}
+                    backgroundColor= {theme.altButton.backgroundColor} // providing a custom color for these buttons 
+                    textColor={theme.placeHolderTextColor}
                     />
-                    <LoginButton
+                    <PrimaryButton
                     title="Continue with Facebook"
                     onPress={() => console.log('Another button pressed!')}
-                    style={styles.altLoginButton}
-                    textStyle={{color: '#034974'}}
+                    backgroundColor= {theme.altButton.backgroundColor} // providing a custom color for these buttons 
+                    textColor={theme.placeHolderTextColor}
+                    />
+                </View>
+                <View style={login_style.divider}>
+                    <CustomDivider/>
+                </View>
+                <View>
+                    <Text style={[login_style.typetext, theme.textColor]}>Don't have an account?</Text>
+                    <PrimaryButton
+                    title="Sign up here!"
+                    onPress={() => navigation.navigate('Sign Up')}
+                    style={login_style.loginButton}
                     />
                 </View>
             </View>
+        </ScrollView>
         </View>
     );
 }
-
-const styles = StyleSheet.create ({
-    text: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 2
-    },
-    typetext: {
-        fontFamily: 'inter',
-        fontSize: 16,
-        fontWeight: 600,
-        color: '#034974',
-        lineHeight: 24,
-        fontStyle: 'normal'
-    },
-    spacing:{
-        flexDirection: 'column',
-        gap: 16
-    },
-    logo: {
-        height: 84,
-        width: 74
-    },
-    welcome: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    name:{
-        color: '#034974',
-        fontFamily: "Inter",
-        fontSize: 64,
-        fontStyle: 'normal',
-        fontWeight: 600,
-        textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: { width: 0, height: 4 },
-        textShadowRadius: 4
-
-    },
-    divider:{
-
-    },
-    app:{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-
-    },
-    input:{
-        flex: 1,
-        paddingHorizontal: 24,
-        flexDirection: 'column',
-        gap: 23
-    },
-    loginButton:{
-        backgroundColor: '#034974'
-    },
-    altLoginButton:{
-        backgroundColor: 'gray',
-        marginBottom: 10
-    }
-});

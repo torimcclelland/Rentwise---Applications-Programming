@@ -1,9 +1,10 @@
 
 export class Property{
 
-    constructor(
-        id = "",
+    constructor({
+        propertyID = "",
         landlordID = "",
+        renterID = "",
         address = "",
         monthlyPrice = 0.0,
         city = "",
@@ -13,15 +14,16 @@ export class Property{
         description = "",
         reviews = [],
         avgRating = 0.0,
-    )
+    })
     { 
-        this.id = id;
+        this.propertyID = propertyID;
         this.landlordID = landlordID;
+        this.renterID = renterID;
         this.address = address;
         this.monthlyPrice = monthlyPrice;
         this.city = city;
         this.state = state;
-        this.zipccode = zipcode;
+        this.zipcode = zipcode;
         this.images = images;
         this.description = description;
         this.reviews = reviews;
