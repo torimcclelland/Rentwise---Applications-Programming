@@ -11,7 +11,8 @@ import { useTheme } from '../ThemeContext';
 const BottomNavBar = ({ selectedTab }) => {
   
   const navigation = useNavigation();
-  const userType = GlobalValues.currentUser.isLandLord // check if the user is a landlord 
+  const userType = GlobalValues.currentUser.isLandlord // check if the user is a landlord 
+
   const theme = useTheme()
  
   

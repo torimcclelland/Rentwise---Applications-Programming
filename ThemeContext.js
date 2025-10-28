@@ -7,7 +7,7 @@ import { useColorScheme } from 'react-native';
 const ThemeContext = createContext(lightTheme)
 
 export const ThemeProvider =({children}) => {
-    const scheme = useColorScheme()
+    const scheme = useColorScheme() // 'light' or 'dark'
     const theme = scheme === 'dark' ? darkTheme : lightTheme;
 
     return(

@@ -4,14 +4,14 @@ import { useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from './ThemeContext';
-import Login from './screens/login';
+import Login from './screens/Login';
 import DashboardScreen from './screens/RenterDashboard';
 import LandlordPropertiesScreen from './screens/LandlordPropertiesManager';
 import BrowseProperties from './screens/BrowseProperties';
 import MessagesOverview from './screens/MessagesOverview';
 import Notifications from './screens/Notifications';
 import SignUpScreen from './screens/SignUp';
-import PropertyEditScreen from './screens/propertyEditScreen';
+import PropertyEditScreen from './screens/PropertyEditScreen';
 import UserProfile from './screens/UserProfile';
 
 const Stack = createNativeStackNavigator();
