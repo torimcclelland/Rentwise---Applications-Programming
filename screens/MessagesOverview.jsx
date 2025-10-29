@@ -1,21 +1,29 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import BottomNavBar from '../components/BottomNavBar';
-import userImage from '../components/profileexample.png'; // placeholder profile image
+import userImage from '../components/profileexample.png';
 import styles from '../styles/MessagesOverviewStyle';
 import { useTheme } from '../ThemeContext';
 
 const messages = [
-  { username: 'renter23', message: 'How are you today?' },
-  { username: 'bff2025', message: 'I got a new apartment in Erie!' },
-  { username: 'rentqueen', message: 'Smoking is banned in this unit.' },
-  { username: 'ms.rent', message: 'Where are good places...' },
+  { username: 'renter23', message: 'How are you today?', conversationID: 'conv1' },
+  { username: 'bff2025', message: 'I got a new apartment in Erie!', conversationID: 'conv2' },
+  { username: 'rentqueen', message: 'Smoking is banned in this unit.', conversationID: 'conv3' },
+  { username: 'ms.rent', message: 'Where are good places...', conversationID: 'conv4' },
 ];
 
 const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 
 const MessagesOverview = () => {
-  const theme = useTheme()
+  const theme = useTheme();
+  const navigation = useNavigation();
+
+  const handlePress = (conversationID) => {
+    navigation.navigate('SpecificMessage', { ConversationID: conversationID });
+    console.log('Navigating to:', conversationID);
+  };
+
   return (
     <View style={[styles.container, theme.container]}>
       {/* Header */}
@@ -33,13 +41,17 @@ const MessagesOverview = () => {
       {/* Message List */}
       <ScrollView contentContainerStyle={styles.messageList}>
         {messages.map((msg, index) => (
-          <View key={index} style={[styles.messageCard, theme.textField]}>
+          <TouchableOpacity
+            key={index}
+            style={[styles.messageCard, theme.textField]}
+            onPress={() => handlePress(msg.conversationID)}
+          >
             <Image source={userImage} style={styles.profileImage} />
             <View style={styles.messageTextContainer}>
               <Text style={[styles.username, theme.textColor]}>{msg.username}</Text>
               <Text style={[styles.message, theme.textColor]}>{msg.message}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 

@@ -1,56 +1,47 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, ScrollView } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import BottomNavBar from '../components/BottomNavBar';
-import userImage from '../components/profileexample.png'; // placeholder profile image
-import styles from '../styles/MessagesOverviewStyle';
+import MessageBubble from '../components/MessageBubble';
+import styles from '../styles/SpecificMessageStyle';
 import { useTheme } from '../ThemeContext';
 
-const messages = [
-  { username: 'renter23', message: 'How are you today?' },
-  { username: 'bff2025', message: 'I got a new apartment in Erie!' },
-  { username: 'rentqueen', message: 'Smoking is banned in this unit.' },
-  { username: 'ms.rent', message: 'Where are good places...' },
-];
+// Sample conversation data keyed by ConversationID
+const conversationMap = {
+  'conv1': [
+    { sender: 'renter23', text: 'Hi there!' },
+    { sender: 'landlord', text: 'Hello! How can I help you today?' },
+    { sender: 'renter23', text: 'I had a question about the lease terms.' },
+  ],
+  'conv2': [
+    { sender: 'bff2025', text: 'I got a new apartment in Erie!' },
+    { sender: 'landlord', text: 'Congrats! Let me know if you need anything.' },
+  ],
+};
 
-const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
-
-const MessagesOverview = () => {
+const SpecificMessage = () => {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const route = useRoute();
+  const { ConversationID } = route.params || {};
 
-  const handleMessagePress = (messageData) => {
-    navigation.navigate('SpecificMessage', { messageData });
-  };
+  const conversation = conversationMap[ConversationID] || [];
 
   return (
     <View style={[styles.container, theme.container]}>
       {/* Header */}
-      <Text style={[styles.header, theme.textColor]}>Messages (Landlord)</Text>
+      <Text style={[styles.header, theme.textColor]}>
+        Conversation: {ConversationID || 'Unknown'}
+      </Text>
 
-      {/* Filter Buttons */}
-      <View style={styles.filterContainer}>
-        {filters.map((filter, index) => (
-          <TouchableOpacity key={index} style={styles.filterButton}>
-            <Text style={styles.filterText}>{filter}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Message List */}
+      {/* Message Thread */}
       <ScrollView contentContainerStyle={styles.messageList}>
-        {messages.map((msg, index) => (
-          <TouchableOpacity
+        {conversation.map((msg, index) => (
+          <MessageBubble
             key={index}
-            style={[styles.messageCard, theme.textField]}
-            onPress={() => handleMessagePress(msg)}
-          >
-            <Image source={userImage} style={styles.profileImage} />
-            <View style={styles.messageTextContainer}>
-              <Text style={[styles.username, theme.textColor]}>{msg.username}</Text>
-              <Text style={[styles.message, theme.textColor]}>{msg.message}</Text>
-            </View>
-          </TouchableOpacity>
+            sender={msg.sender}
+            text={msg.text}
+            isUser={msg.sender !== 'landlord'}
+          />
         ))}
       </ScrollView>
 
@@ -62,4 +53,4 @@ const MessagesOverview = () => {
   );
 };
 
-export default MessagesOverview;
+export default SpecificMessage;
