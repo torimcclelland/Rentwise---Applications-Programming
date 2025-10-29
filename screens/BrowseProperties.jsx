@@ -40,8 +40,8 @@ const BrowseProperties = () => {
         
     }
 
-    const viewProperty=()=>{
-        
+    const viewProperty=({propertyID})=>{
+        navigation.navigate('View Property', {'propertyID': propertyID}) // navigate to the property view page 
     }
 
     return (
@@ -69,30 +69,31 @@ const BrowseProperties = () => {
                     />
                 </View>
                 <BrowsePropertyCard />
+                <BrowsePropertyCard />
                 
-            
-            
-                {properties.length > 0 ? (
+                {/* Here we want to use a flatlist */}
+
+                {/* {properties.length > 0 ? (
                 // map over your items and render PropertyCard
                 properties.map(item => (
                     <BrowsePropertyCard
                     key={item.propertyID?.toString()}
                     address={item.address}
                     price={item.monthlyPrice}
-                    onPress={viewProperty()}
+                    onPress={viewProperty(item.propertyID)}
                     />
                 ))
                 ) : (
                 <View style={styles.noProperties}>
                     <Text style={[theme.textColor]}>No properties listed yet</Text>
                 </View>
-                )}
+                )} */}
             
 
                 {/* Fixed bottom nav bar */}
                 <View style={styles.bottomNav}>
-                        {/* Bottom Navigation Bar */}
-                        <BottomNavBar  selectedTab="home"/>
+                    {/* Bottom Navigation Bar */}
+                    <BottomNavBar  selectedTab="home"/>
                 </View>
             </View>
         </View>
