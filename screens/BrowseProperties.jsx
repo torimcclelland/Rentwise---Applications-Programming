@@ -8,6 +8,7 @@ import BrowsePropertyCard from "../components/BrowsePropertyCard";
 import { useNavigation }from "@react-navigation/native";
 import { styles } from "../styles/LandlordPropertiesStyle";
 import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DocumentSnapshot } from "firebase/firestore";
 import { ReturnValue } from "../models/ReturnValue";
 import { getProperties } from "../database_calls/property/GetProperties";
@@ -22,16 +23,14 @@ const BrowseProperties = () => {
 
     // called when this window opened, use to call property update
     useEffect(()=>{
-        getNextBatch();
+        getAllProperties();
     }, [])
     
-    const getNextBatch = async () => {
+    const getAllProperties = async () => {
 
         let result = new ReturnValue();
         
-        result = await getProperties(10, lastProperty, "") // ordering field, set here
-        console.log(result)
-
+        result = await getProperties()// ordering field, set here
         if(!result.success){
             console.log("Error: " + result.errorMsg)
             return
