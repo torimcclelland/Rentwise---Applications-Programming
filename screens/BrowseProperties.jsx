@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ScrollView , StyleSheet, Text } from "react-native";
+import { View, Text, FlatList, ScrollView , StyleSheet } from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
 import TextField from "../components/TextField";
 import Icon from "react-native-vector-icons/Feather";
@@ -6,16 +6,15 @@ import { useTheme } from "../ThemeContext";
 import Filter from "../components/PropertyFilters";
 import BrowsePropertyCard from "../components/BrowsePropertyCard";
 
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/LandlordPropertiesStyle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DocumentSnapshot } from "firebase/firestore";
 import { ReturnValue } from "../models/ReturnValue";
 import { getProperties } from "../database_calls/property/GetProperties";
 
 const BrowseProperties = () => {
 
-    const theme = useTheme()
     console.log(theme.borderLeft)
 
     const theme = useTheme()
@@ -26,16 +25,14 @@ const BrowseProperties = () => {
 
     // called when this window opened, use to call property update
     useEffect(()=>{
-        getNextBatch();
+        getAllProperties();
     }, [])
     
-    const getNextBatch = async () => {
+    const getAllProperties = async () => {
 
         let result = new ReturnValue();
         
-        result = await getProperties(10, lastProperty, "")// ordering field, set here
-        console.log(result)
-
+        result = await getProperties()// ordering field, set here
         if(!result.success){
             console.log("Error: " + result.errorMsg)
             return
