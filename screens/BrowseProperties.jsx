@@ -15,9 +15,9 @@ import { getProperties } from "../database_calls/property/GetProperties";
 
 const BrowseProperties = () => {
 
-    console.log(theme.borderLeft)
-
+    
     const theme = useTheme()
+    console.log(theme.borderLeft)
     const navigation = useNavigation();
     const [properties, setProperties] = useState([]);
     const [modalVisible, setModalVisible] = useState(false)
