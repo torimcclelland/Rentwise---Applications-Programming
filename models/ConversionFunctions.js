@@ -16,7 +16,6 @@ function snapshotToUser(snapshot){
             password: snapshot.data().password,
             firstName: snapshot.data().firstName,
             lastName: snapshot.data().lastName,
-            displayName: snapshot.data().displayName,
             isLandlord: snapshot.data().isLandlord,
             isPremUser: snapshot.data().isPremUser,
             properties: snapshot.data().properties,

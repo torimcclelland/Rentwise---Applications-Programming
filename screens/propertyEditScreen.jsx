@@ -13,6 +13,7 @@ import TextFieldLong from '../components/TextFieldLong'
 
 
 export const PropertyEditScreen = () =>{
+    
     const route = useRoute();
     const {propertyID} = route.params
     const theme = useTheme()    

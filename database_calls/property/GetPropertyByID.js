@@ -1,6 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
-import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { Property } from '../../models/Property';
@@ -25,7 +24,6 @@ export async function getPropertyByID(propertyToFind) {
          const propertyRef = doc(db, 'Properties', propertyToFind)
     
          const snapshot = await getDoc(propertyRef);
-
 
         if (snapshot.data() == undefined) {
             result = new ReturnValue(false, "No snapshots found for property with id " + propertyToFind);
