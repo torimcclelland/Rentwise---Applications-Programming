@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, Text, ScrollView} from 'react-native'
+import {View, Text, ScrollView, StyleSheet} from 'react-native'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -9,13 +9,16 @@ import TextFieldLong from '../components/TextFieldLong';
 import { GlobalValues } from '../GlobalValues';
 import { Application } from '../models/Application';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useTheme } from '../ThemeContext';
+import Icon from 'react-native-vector-icons/Feather'
 
-export const Application = () => {
+export const ApplicationPage = () => {
 
     const currentUser = GlobalValues.currentUser
     const userID = currentUser.userID
     const route = useRoute()
     const {landlordID} = route.params
+    const theme = useTheme()
     const applicationID = "setLater"
 
     // personal info
@@ -66,9 +69,12 @@ export const Application = () => {
 
 
     return (
-        <View>
-            <View style={{marginBottom: 10}}>
-                <Text>Personal Information</Text>
+        <View style={[application_style.container, theme.container]}>
+            <ScrollView
+            showsVerticalScrollIndicator={false}
+            >
+            <View style={[application_style.infoCard, theme.textField]}>
+                <Text style={[application_style.headers, theme.textColor]}>Personal Information</Text>
                 <TextField
                 placeholder="First Name"
                 value={firstName}
@@ -86,15 +92,17 @@ export const Application = () => {
                 value={email}
                 onChangeText={setEmail}
                 />
-
-                <Text>Date of birth:</Text>
-                <DateTimePicker
-                testID="dateTimePicker"
-                value={dob}
-                mode="date" // Can also be "time" or "datetime"
-                is24Hour={true}
-                display="default" // "spinner" or "calendar" on Android
-                />
+                <View style={application_style.times}>
+                    <Icon name="calendar" size={15} color={theme.textColor.color}/>
+                    <Text style={[theme.textColor, {marginLeft: 5}]}>Date of birth:</Text>
+                    <DateTimePicker
+                    testID="dateTimePicker"
+                    value={dob}
+                    mode="date" // Can also be "time" or "datetime"
+                    is24Hour={true}
+                    display="default" // "spinner" or "calendar" on Android
+                    />
+                </View>
 
                 <TextField
                 placeholder="Phone number"
@@ -118,8 +126,8 @@ export const Application = () => {
 
             <CustomDivider/>
 
-            <View>
-                <Text>Rental History</Text>
+            <View style={[application_style.infoCard, theme.textField]}>
+                <Text style={[application_style.headers, theme.textColor]}>Rental History</Text>
 
                 <TextField
                 placeholder="Previous Address"
@@ -127,23 +135,30 @@ export const Application = () => {
                 onChangeText={setPrevAddress}
                 />
                 
-                <Text>Length of Time at Previous Home</Text>
-                <Text>From</Text>
-                <DateTimePicker
-                testID="dateTimePicker"
-                value={startDate}
-                mode="date" // Can also be "time" or "datetime"
-                is24Hour={true}
-                display="default" // "spinner" or "calendar" on Android
-                />
-                <Text>To</Text>
-                <DateTimePicker
-                testID="dateTimePicker"
-                value={endDate}
-                mode="date" // Can also be "time" or "datetime"
-                is24Hour={true}
-                display="default" // "spinner" or "calendar" on Android
-                />
+                <View style={application_style.lengthOfTime}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 8}}>
+                        <Icon name="clock" size={15} color={theme.textColor.color}></Icon>
+                        <Text style={[theme.textColor, {marginLeft: 8, fontSize: 16}]}>Length of Time at Previous Home</Text>
+                    </View>
+                    <View style={application_style.dates}>
+                            <Text style={[theme.textColor]}>From</Text>
+                            <DateTimePicker
+                            testID="dateTimePicker"
+                            value={startDate}
+                            mode="date" // Can also be "time" or "datetime"
+                            is24Hour={true}
+                            display="default" // "spinner" or "calendar" on Android
+                            />
+                            <Text style={[theme.textColor, {marginLeft: 5}]}>To</Text>
+                            <DateTimePicker
+                            testID="dateTimePicker"
+                            value={endDate}
+                            mode="date" // Can also be "time" or "datetime"
+                            is24Hour={true}
+                            display="default" // "spinner" or "calendar" on Android
+                            />
+                    </View>
+                </View>
 
                 <TextField
                 placeholder="Present Landlord Name"
@@ -175,9 +190,53 @@ export const Application = () => {
             <PrimaryButton
             title="Submit"
             />
+            </ScrollView>
                 
         </View>
     )
 }
 
-export default Application
+export default ApplicationPage
+
+const application_style = StyleSheet.create({
+    container:{
+        flex: 1,
+        alignItems: 'center'
+    },
+    headers:{
+        alignSelf: 'center',
+        fontWeight: 700,
+        fontSize: 20,
+    },
+    times:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: "#E0E0E0", 
+        borderWidth: 1,
+        borderRadius: 6,
+        paddingHorizontal: 15,
+        paddingTop: 15,
+        paddingBottom: 15
+    },
+    dates:{
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    infoCard:{
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+        flexDirection: 'column',
+        gap: 15,
+        marginTop: 20,
+        marginBottom: 20,
+        borderRadius: 12
+    },
+    lengthOfTime:{
+        borderColor: "#E0E0E0", 
+        borderWidth: 1,
+        borderRadius: 6,
+        paddingHorizontal: 15,
+        paddingTop: 15,
+        paddingBottom: 15
+    }
+})

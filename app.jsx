@@ -14,7 +14,7 @@ import SignUpScreen from './screens/SignUp';
 import PropertyEditScreen from './screens/propertyEditScreen';
 import UserProfile from './screens/UserProfile';
 import PropertyInfo from './screens/PropertyInformation';
-import Application from './screens/Application';
+import ApplicationPage from './screens/Application';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,7 +72,7 @@ function RootStack() {
       />
       <Stack.Screen
       name="Apply Property"
-      component={Application}
+      component={ApplicationPage}
       //options={headerShown: false}}
       />
     </Stack.Navigator>
