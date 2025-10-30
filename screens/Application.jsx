@@ -7,11 +7,16 @@ import CustomDivider from '../components/divider';
 import DropDown from '../components/DropDown';
 import TextFieldLong from '../components/TextFieldLong';
 import { GlobalValues } from '../GlobalValues';
-
+import { Application } from '../models/Application';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export const Application = () => {
 
     const currentUser = GlobalValues.currentUser
+    const userID = currentUser.userID
+    const route = useRoute()
+    const {landlordID} = route.params
+    const applicationID = "setLater"
 
     // personal info
     const [firstName, setFirstName] = useState(currentUser.firstName)
@@ -35,7 +40,28 @@ export const Application = () => {
 
     const submitApplication = () => {
 
+        const application = new Application({
+            applicationID,
+            landlordID,
+            userID,
+            firstName,
+            lastName,
+            email,
+            dob, 
+            phoneNumber,
+            DLNumber,
+            maritialStatus,
+            prevAddress,
+            startDate,
+            endDate,
+            presentLandlord,
+            landlordPhone,
+            leaveReason,
+            rentAmount
+        })
     }
+
+    // call function to submit application
 
 
 
