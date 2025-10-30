@@ -32,13 +32,13 @@ const BrowseProperties = () => {
 
         let result = new ReturnValue();
         
-        result = await getProperties()// ordering field, set here
+        result = await getProperties()
         if(!result.success){
             console.log("Error: " + result.errorMsg)
             return
         }
-        setProperties(result.propertyList) // set the properties from result
-        
+        //setProperties(result.propertyList) // set the properties from result
+        console.log(result.propertyList)
     }
 
     return (
@@ -75,9 +75,9 @@ const BrowseProperties = () => {
           >
             
             
-            {propertiesLs.length > 0 ? (
+            {properties.length > 0 ? (
             // map over your items and render PropertyCard
-            propertiesLs.map(item => (
+            properties.map(item => (
                 <PropertyCard
                 key={item.propertyID?.toString()}
                 address={item.address}

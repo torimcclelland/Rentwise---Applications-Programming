@@ -29,7 +29,7 @@ export async function getProperties() {
             return result;
         }
 
-        propList = [];
+        const propList = [];
         snapshot.forEach((doc) => {
             const property = snapshotToProperty(doc);
             if(!property.success){
