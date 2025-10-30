@@ -1,5 +1,4 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { snapshotToUser } from '../../models/ConversionFunctions';

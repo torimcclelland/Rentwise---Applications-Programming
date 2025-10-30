@@ -1,8 +1,9 @@
-import { addDoc, collection } from 'firebase/firestore';
-import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { getUserByID } from './GetUserByID';
+import { doc, setDoc } from 'firebase/firestore';
+import { User } from '../../models/User';
+
 
 /** 
  * @param {User} thisUser The details of the user to update
@@ -17,11 +18,12 @@ export async function updateUser(thisUser) {
         // try to store user in database
         if (!thisUser) throw new Error("thisUser is undefined");
         
-        const tempCol = collection(db, 'Users', thisUser.userID)
-        const docRef = await setDoc(tempCol, {...thisUser});// I'm not confident in this, UNTESTED
-        thisUser.userID = docRef.id
+        const userRef = doc(db, 'Users', thisUser.userID)
+        const docRef = await setDoc(userRef, {...thisUser})
+        thisUser.userID = userRef.id
         
-        // retrieve updated user details by calling the GetUser function
+
+        // retrieve updated user details by calling the getuser function
         result = await getUserByID(thisUser.userID);
 
     } catch(e){
@@ -38,3 +40,4 @@ export async function updateUser(thisUser) {
     return result;
     
 }
+

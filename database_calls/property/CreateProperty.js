@@ -1,5 +1,4 @@
 import { addDoc, collection } from 'firebase/firestore';
-import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { getPropertyByID } from './GetPropertyByID';
