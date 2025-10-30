@@ -4,20 +4,28 @@ import { useTheme } from '../ThemeContext'
 import PrimaryButton from './PrimaryButton'
 
 
-const BrowsePropertyCard = ({address, price}) =>{
+const BrowsePropertyCard = ({address, price, onPress}) =>{
+
+    const theme = useTheme()
+
     return(
         <View>
             <Image style={browseProps.image} source={require('./house_2.webp')} /> 
             <View style={browseProps.allInfo}>
                 <View style={browseProps.info}>
-                    <Text>Hello</Text>
-                    <Text>house</Text>
+                    <Text style={[browseProps.text, theme.textColor]}>{address}</Text>
+                    <View style={browseProps.price}>
+                        <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>{price}</Text>
+                        <Text style={[browseProps.month, theme.textcolor]}>/ month</Text>
+                    </View>
                 </View>
                 <View style={browseProps.next}>
-                    <Text>stars</Text>
+                    <Text style={[browseProps.text, theme.textColor]}>stars</Text>
                     <PrimaryButton
-                    title="View ->"
+                    title="View"
                     size="small"
+                    customStyle={{height: 30, width: 91}}
+                    onPress={onPress}
                     />
                 </View>
             </View>
@@ -33,13 +41,31 @@ const browseProps = StyleSheet.create({
     },
     allInfo:{
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: 10,
+        paddingHorizontal: 10
     },
     info:{
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        marginTop: 5
     },
     next:{
         alignItems: 'flex-end',
+    },
+    price:{
+        flexDirection: 'row',
+        alignItems: 'baseline'
+    },
+    month:{
+        fontSize: 12,
+        marginLeft: 5,
+        fontStyle: 'Inter',
+        fontWeight: 600
+    },
+    text:{
+        fontStyle: 'Inter',
+        fontSize: 16,
+        fontWeight: 500,
     }
 })
 

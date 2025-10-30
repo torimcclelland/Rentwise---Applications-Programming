@@ -1,12 +1,11 @@
-import { View, Text, FlatList, ScrollView , StyleSheet } from "react-native";
+import { View, Text, FlatList, ScrollView , StyleSheet} from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
 import TextField from "../components/TextField";
 import Icon from "react-native-vector-icons/Feather";
 import { useTheme } from "../ThemeContext";
 import Filter from "../components/PropertyFilters";
 import BrowsePropertyCard from "../components/BrowsePropertyCard";
-
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation }from "@react-navigation/native";
 import { styles } from "../styles/LandlordPropertiesStyle";
 import { useState, useEffect } from "react";
 import { DocumentSnapshot } from "firebase/firestore";
@@ -15,9 +14,7 @@ import { getProperties } from "../database_calls/property/GetProperties";
 
 const BrowseProperties = () => {
 
-    
     const theme = useTheme()
-    console.log(theme.borderLeft)
     const navigation = useNavigation();
     const [properties, setProperties] = useState([]);
     const [modalVisible, setModalVisible] = useState(false)
@@ -37,8 +34,10 @@ const BrowseProperties = () => {
             console.log("Error: " + result.errorMsg)
             return
         }
-        //setProperties(result.propertyList) // set the properties from result
-        console.log(result.propertyList)
+    }
+
+    const viewProperty = async(propertyID) => {
+        navigation.navigate('View Property', {'propertyID': propertyID}) // navigate to the property view page 
     }
 
     return (
@@ -65,38 +64,32 @@ const BrowseProperties = () => {
                     iconName="user-check"
                     />
                 </View>
-                <BrowsePropertyCard />
-                <View style={[styles.main, theme.container]}>
-          {/* centered content container */}
-           <ScrollView
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
-            /* optional: keyboardShouldPersistTaps="handled" */
-          >
-            
-            
-            {properties.length > 0 ? (
-            // map over your items and render PropertyCard
-            properties.map(item => (
-                <PropertyCard
-                key={item.propertyID?.toString()}
-                address={item.address}
-                onPress={() => editProperty(item.propertyID)}
-                />
-            ))
-            ) : (
-            <View style={styles.noProperties}>
-                <Text style={[theme.textColor]}>No properties listed yet</Text>
-            </View>
-            )}
-            </ScrollView>
+                
+                {/* Here we want to use a flatlist */}
+                <ScrollView>
 
-            {/* Fixed bottom nav bar */}
-            <View style={styles.bottomNav}>
-                        {/* Bottom Navigation Bar */}
-                        <BottomNavBar  selectedTab="home"/>
+                {properties.length > 0 ? (
+                // map over your items and render PropertyCard
+                properties.map(item => (
+                    <BrowsePropertyCard
+                    key={item.propertyID?.toString()}
+                    address={item.address}
+                    price={item.monthlyPrice}
+                    onPress={() => viewProperty(item.propertyID)}
+                    />
+                ))
+                ) : (
+                <View style={styles.noProperties}>
+                    <Text style={[theme.textColor]}>No properties listed yet</Text>
                 </View>
-            </View>
+                )}
+                </ScrollView>
+
+                {/* Fixed bottom nav bar */}
+                <View style={styles.bottomNav}>
+                    {/* Bottom Navigation Bar */}
+                    <BottomNavBar  selectedTab="home"/>
+                </View>
             </View>
         </View>
     );
