@@ -2,6 +2,7 @@ export class Application{
 
 
     constructor({
+        applicationID = "",
         landlordID = "",
         renterID = "",
         firstName= "",
@@ -20,6 +21,7 @@ export class Application{
         rentAmount = ""
     })
     {
+        this.applicationID = applicationID
         this.landlordID = landlordID,
         this.renterID = renterID,
         this.firstName= firstName,
@@ -28,7 +30,7 @@ export class Application{
         this.dob = dob,
         this.phoneNumber= phoneNumber,
         this.DLNumber = DLNumber,
-        this.maritialStatus = DLNumber,
+        this.maritialStatus = maritialStatus,
         this.prevAddress = prevAddress,
         this.startDate = startDate,
         this.endDate = endDate,
