@@ -13,13 +13,16 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
             <Image style={browseProps.image} source={require('./house_2.webp')} /> 
             <View style={browseProps.allInfo}>
                 <View style={browseProps.info}>
-                    <Text style={[browseProps.text, theme.textColor]}>Hello</Text>
-                    <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>house</Text>
+                    <Text style={[browseProps.text, theme.textColor]}>{address}</Text>
+                    <View style={browseProps.price}>
+                        <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>{price}</Text>
+                        <Text style={[browseProps.month, theme.textcolor]}>/ month</Text>
+                    </View>
                 </View>
                 <View style={browseProps.next}>
                     <Text style={[browseProps.text, theme.textColor]}>stars</Text>
                     <PrimaryButton
-                    title="View ->"
+                    title="View"
                     size="small"
                     customStyle={{height: 30, width: 91}}
                     onPress={onPress}
@@ -49,10 +52,20 @@ const browseProps = StyleSheet.create({
     next:{
         alignItems: 'flex-end',
     },
+    price:{
+        flexDirection: 'row',
+        alignItems: 'baseline'
+    },
+    month:{
+        fontSize: 12,
+        marginLeft: 5,
+        fontStyle: 'Inter',
+        fontWeight: 600
+    },
     text:{
-        font: 'Inter',
+        fontStyle: 'Inter',
         fontSize: 16,
-        fontWeight: 500
+        fontWeight: 500,
     }
 })
 

@@ -8,7 +8,6 @@ import BrowsePropertyCard from "../components/BrowsePropertyCard";
 import { useNavigation }from "@react-navigation/native";
 import { styles } from "../styles/LandlordPropertiesStyle";
 import { useState, useEffect } from "react";
-import { useState, useEffect } from "react";
 import { DocumentSnapshot } from "firebase/firestore";
 import { ReturnValue } from "../models/ReturnValue";
 import { getProperties } from "../database_calls/property/GetProperties";
@@ -39,7 +38,7 @@ const BrowseProperties = () => {
         
     }
 
-    const viewProperty=({propertyID})=>{
+    const viewProperty = async(propertyID) => {
         navigation.navigate('View Property', {'propertyID': propertyID}) // navigate to the property view page 
     }
 
@@ -67,27 +66,26 @@ const BrowseProperties = () => {
                     iconName="user-check"
                     />
                 </View>
-                <BrowsePropertyCard />
-                <BrowsePropertyCard />
                 
                 {/* Here we want to use a flatlist */}
+                <ScrollView>
 
-                {/* {properties.length > 0 ? (
+                {properties.length > 0 ? (
                 // map over your items and render PropertyCard
                 properties.map(item => (
                     <BrowsePropertyCard
                     key={item.propertyID?.toString()}
                     address={item.address}
                     price={item.monthlyPrice}
-                    onPress={viewProperty(item.propertyID)}
+                    onPress={() => viewProperty(item.propertyID)}
                     />
                 ))
                 ) : (
                 <View style={styles.noProperties}>
                     <Text style={[theme.textColor]}>No properties listed yet</Text>
                 </View>
-                )} */}
-            
+                )}
+                </ScrollView>
 
                 {/* Fixed bottom nav bar */}
                 <View style={styles.bottomNav}>
