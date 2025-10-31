@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View, Text, ScrollView, StyleSheet} from 'react-native'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker'; // is not supported on web
 import CustomDivider from '../components/divider';
 import DropDown from '../components/DropDown';
 import TextFieldLong from '../components/TextFieldLong';
@@ -95,7 +95,10 @@ export const ApplicationPage = () => {
                 <View style={application_style.times}>
                     <Icon name="calendar" size={15} color={theme.textColor.color}/>
                     <Text style={[theme.textColor, {marginLeft: 5}]}>Date of birth:</Text>
-                    <DateTimePicker
+
+                    {/* This datetime picker only works in ExpoGo, not supported on web */}
+
+                    <DateTimePicker 
                     testID="dateTimePicker"
                     value={dob}
                     mode="date" // Can also be "time" or "datetime"
@@ -185,6 +188,7 @@ export const ApplicationPage = () => {
                 onChangeText={rentAmount}
                 textType="numeric"
                 />
+
             </View>
 
             <PrimaryButton
