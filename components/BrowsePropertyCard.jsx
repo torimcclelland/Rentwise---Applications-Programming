@@ -15,8 +15,8 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
                 <View style={browseProps.info}>
                     <Text style={[browseProps.text, theme.textColor]}>{address}</Text>
                     <View style={browseProps.price}>
-                        <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>{price}</Text>
-                        <Text style={[browseProps.month, theme.textcolor]}>/ month</Text>
+                        <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>${price}</Text>
+                        <Text style={[browseProps.month, theme.textColor]}>/ month</Text>
                     </View>
                 </View>
                 <View style={browseProps.next}>
