@@ -70,11 +70,16 @@ export const PropertyInfo = () =>{
                         size={40}
                         />
                         <View>
-                            <Text style={[theme.textColor, {marginRight: 80, marginLeft: 20}]}>Listed by {landlord.displayName}</Text>
+                            <Text style={[theme.textColor, {marginRight: 80, marginLeft: 20}]}>Listed by {landlord.firstName}</Text>
                         </View>
                     </View>
 
                     <CustomDivider/>
+                    
+                    <View style={propertyInfo.map}>
+                        <Icon name="map-pin" size={20}/>
+                        <Text>Property Info</Text>
+                    </View>
 
                     <View style={[propertyInfo.description]}>
                         <Text style={[theme.textColor, {textAlign: 'center'}]}>{property.description}</Text>
@@ -136,7 +141,7 @@ const propertyInfo = StyleSheet.create({
         alignItems: 'center'
     },
     content:{
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
         alignItems: 'center'
     },
     image:{
@@ -149,7 +154,7 @@ const propertyInfo = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
         fontFamily: 'Inter',
         fontSize: 16,
         marginBottom: 5,
@@ -171,7 +176,7 @@ const propertyInfo = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        paddingHorizontal: 25,
+        paddingHorizontal: 30,
         marginTop: 10,
         marginBottom: 10
     },
@@ -209,5 +214,10 @@ const propertyInfo = StyleSheet.create({
     listText:{
         fontSize: 14,
         fontWeight: 500
+    },
+    map:{
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+        marginTop: 10
     }
 })
