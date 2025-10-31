@@ -10,6 +10,7 @@ import { getUserByID } from '../database_calls/user/GetUserByID'
 import Profile from '../components/profile'
 import RatingStars from '../components/RatingStars'
 import PrimaryButton from '../components/PrimaryButton'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export const PropertyInfo = () =>{
 
@@ -46,17 +47,18 @@ export const PropertyInfo = () =>{
 
     return(
         <View style={[propertyInfo.container, theme.container]}>
-            <ScrollView>
+            <ScrollView
+            showsVerticalScrollIndicator={false}>
                 <View style={propertyInfo.content}>
                     <Image style={propertyInfo.image} source={require('./image.png')} />
 
                     <View style={propertyInfo.info}>
                         <View>
-                            <Text style={{fontWeight: 600, fontSize: 16}}>{property.address}</Text>
-                            <Text>{property.city}, {property.state} {property.zipcode}</Text>
+                            <Text style={[theme.textColor, {fontWeight: 600, fontSize: 20}]}>{property.address}</Text>
+                            <Text style={[theme.textColor]}>{property.city}, {property.state} {property.zipcode}</Text>
                         </View>
                         <View style={propertyInfo.pricing}>
-                            <Text style={[propertyInfo.price, theme.textColor]}>{property.monthlyPrice}</Text>
+                            <Text style={[propertyInfo.price, theme.textColor]}>${property.monthlyPrice}</Text>
                             <Text style={[propertyInfo.month, theme.textColor]}>/ month</Text>
                         </View>
                     </View>
@@ -68,16 +70,48 @@ export const PropertyInfo = () =>{
                         size={40}
                         />
                         <View>
-                            <Text style={[theme.textColor, {marginRight: 80}]}>Listed by {landlord.displayName}</Text>
+                            <Text style={[theme.textColor, {marginRight: 80, marginLeft: 20}]}>Listed by {landlord.displayName}</Text>
                         </View>
                     </View>
 
                     <CustomDivider/>
 
-                    <View style={[propertyInfo.description, theme.textColor]}>
-                        <Text>{property.description}</Text>
+                    <View style={[propertyInfo.description]}>
+                        <Text style={[theme.textColor, {textAlign: 'center'}]}>{property.description}</Text>
+                    </View>
+
+                    <CustomDivider/>
+                    
+                    <Text style={propertyInfo.featuresText}>Features</Text>
+
+                    <View style={[propertyInfo.features, theme.textField, theme.dashboardContainer]}>
+                        <View style={propertyInfo.list}>
+                            <Icon name="bed" size={30}/>
+                            <Text style={propertyInfo.listText}>{property.numBeds} Beds</Text>
+                        </View>
+
+                        <View style={propertyInfo.list}>
+                            <Icon name="bath" size={30}/>
+                            <Text style={propertyInfo.listText}>{property.numBath} Bath</Text>
+                        </View>
+
+                        <View style={propertyInfo.list}>
+                            <Icon name="car" size={29}/>
+                            <Text style={propertyInfo.listText}>{property.parking}</Text>
+                        </View>
+
+                        <View style={propertyInfo.list}>
+                            <Icon name="paw" size={30}/>
+                            <Text style={propertyInfo.listText}>{property.petsAllowed}</Text>
+                        </View>
+                        
+                        <View style={propertyInfo.list}>
+                            <Icon name="home" size={30}/>
+                            <Text style={propertyInfo.listText}>{property.typeOfHome}</Text>
+                        </View>
                     </View>
                 </View>
+
             </ScrollView>
 
             <View style={propertyInfo.buttons}>
@@ -102,22 +136,25 @@ const propertyInfo = StyleSheet.create({
         alignItems: 'center'
     },
     content:{
+        paddingHorizontal: 20,
         alignItems: 'center'
     },
     image:{
-        height: 342,
-        width: 276,
-        marginTop: 10
+        height: 274,
+        width: '90%',
+        marginTop: 10,
+        borderRadius: 8
     },
     info:{
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        paddingHorizontal: 25,
+        paddingHorizontal: 15,
         fontFamily: 'Inter',
         fontSize: 16,
-        marginBottom: 10,
-        marginTop: 10
+        marginBottom: 5,
+        marginTop: 5,
+        padding: 10
     },
     pricing:{
         flexDirection: 'row',
@@ -140,10 +177,37 @@ const propertyInfo = StyleSheet.create({
     },
     description:{
         fontFamily: 'Inter',
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10,
     },
     buttons:{
         flexDirection: 'row',
         gap: 10
+    },
+    featuresText:{
+        fontSize: 20,
+        fontWeight: 600,
+        alignSelf: 'flex-start',
+        marginBottom: 10,
+        marginTop: 10
+    },
+    features:{
+        borderRadius: 8,
+        backgroundColor: 'gray',
+        width: '100%',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        gap: 20,
+        paddingVertical: 20,
+        paddingLeft: 30
+    },
+    list:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 20
+    },
+    listText:{
+        fontSize: 14,
+        fontWeight: 500
     }
 })
