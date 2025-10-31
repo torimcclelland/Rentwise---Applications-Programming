@@ -3,6 +3,7 @@ import { ReturnValue } from "./ReturnValue";
 import { User } from "./User";
 import { Property } from "./Property";
 import { Application } from "./Application";
+import { Notification } from "./Notification";
 
 function snapshotToUser(snapshot){
 
@@ -129,4 +130,36 @@ function snapshotToApplication(snapshot){
     return result
 }
 
-export {snapshotToUser, snapshotToProperty, snapshotToApplication}
+/**
+ * 
+ * @param {DocumentSnapshot} snapshot The snapshot to convert to a notification
+ * @return {ReturnValue} The results of the conversion (stored in the notificationData value)
+ */
+function snapshotToNotification(snapshot){
+    let result = new ReturnValue()
+    let convertedApp
+
+    try{
+        
+        convertedApp = new Notification({
+            notificationID: snapshot.id,
+            userID: snapshot.data().userID,
+            message: snapshot.data().message
+        })
+        result = new ReturnValue()
+        result.applicationData = convertedApp
+
+    } catch (e){
+        let error = ""; 
+        if (e instanceof Error) {
+            error = e.message // works, `e` narrowed to Error
+        } else{
+            error = "Had a problem with typescript error handling when converting snapshot to notification."
+        }
+
+        result = new ReturnValue(false, error)
+    }
+    return result
+}
+
+export {snapshotToUser, snapshotToProperty, snapshotToApplication, snapshotToNotification}
