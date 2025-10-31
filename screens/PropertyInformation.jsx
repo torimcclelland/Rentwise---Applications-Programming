@@ -78,10 +78,10 @@ export const PropertyInfo = () =>{
                     
                     <View style={propertyInfo.map}>
                         <Icon name="map-pin" size={20}/>
-                        <Text>Property Info</Text>
+                        <Text style={[propertyInfo.featuresText, {marginLeft: 10}]}>Property Info</Text>
                     </View>
 
-                    <View style={[propertyInfo.description]}>
+                    <View style={[propertyInfo.description, theme.dashboardContainer]}>
                         <Text style={[theme.textColor, {textAlign: 'center'}]}>{property.description}</Text>
                     </View>
 
@@ -184,6 +184,16 @@ const propertyInfo = StyleSheet.create({
         fontFamily: 'Inter',
         marginTop: 10,
         marginBottom: 10,
+        borderRadius: 8,
+        width: '100%',
+        paddingTop: 20,
+        paddingBottom: 20,
+        marginBottom: 20,
+
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
     },
     buttons:{
         flexDirection: 'row',
@@ -204,7 +214,13 @@ const propertyInfo = StyleSheet.create({
         flexDirection: 'column',
         gap: 20,
         paddingVertical: 20,
-        paddingLeft: 30
+        paddingLeft: 30,
+
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        marginBottom: 20
     },
     list:{
         flexDirection: 'row',
@@ -218,6 +234,7 @@ const propertyInfo = StyleSheet.create({
     map:{
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        marginTop: 10
+        marginTop: 10,
+        alignItems: 'center'
     }
 })
