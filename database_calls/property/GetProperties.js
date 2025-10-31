@@ -1,5 +1,4 @@
 import { DocumentSnapshot, collection, getDocs, limit, orderBy, query, startAfter, where } from 'firebase/firestore';
-import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { Property } from '../../models/Property';

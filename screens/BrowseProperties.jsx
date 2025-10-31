@@ -29,13 +29,11 @@ const BrowseProperties = () => {
 
         let result = new ReturnValue();
         
-        result = await getProperties()// ordering field, set here
+        result = await getProperties()
         if(!result.success){
             console.log("Error: " + result.errorMsg)
             return
         }
-        setProperties(result.propertyList) // set the properties from result
-        
     }
 
     const viewProperty = async(propertyID) => {

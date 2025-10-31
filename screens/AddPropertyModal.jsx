@@ -10,7 +10,7 @@ import PrimaryButton from '../components/PrimaryButton'
 import CustomDivider from '../components/divider'
 import { useTheme } from '../ThemeContext';
 import TextFieldLong from '../components/TextFieldLong';
-
+import { stylesModal } from '../styles/ModalStyle';
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables

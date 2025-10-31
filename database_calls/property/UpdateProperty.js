@@ -1,9 +1,7 @@
-import { addDoc } from 'firebase/firestore';
-import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { getPropertyByID } from './GetPropertyByID';
-import { collection, query, where, getDocs, limit, doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 /** 
