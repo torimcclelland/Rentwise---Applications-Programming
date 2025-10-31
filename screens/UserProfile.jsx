@@ -9,7 +9,7 @@ import RatingStars from '../components/RatingStars';
 import { useTheme } from '../ThemeContext';
 import Icon from "react-native-vector-icons/AntDesign";
 import { EditUserModal } from '../modals/EditUserModal';
-import { login_style } from '../styles/login';
+import { login_style } from '../styles/Login';
 import { useNavigation } from '@react-navigation/native';
 import { User } from '../models/User';
 import PrimaryButton from '../components/PrimaryButton';
