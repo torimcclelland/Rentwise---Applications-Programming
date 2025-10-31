@@ -14,6 +14,13 @@ export class Property{
         description = "",
         reviews = [],
         avgRating = 0.0,
+        numBeds = "",
+        numBath = "",
+        laundry = "",
+        parking = "",
+        typeOfHome = "",
+        petsAllowed = "",
+        furnished = ""
     })
     { 
         this.propertyID = propertyID;
@@ -28,5 +35,12 @@ export class Property{
         this.description = description;
         this.reviews = reviews;
         this.avgRating = avgRating;
+        this.numBeds = numBeds;
+        this.numBath = numBath;
+        this.laundry = laundry;
+        this.parking = parking;
+        this.typeOfHome = typeOfHome;
+        this.petsAllowed = petsAllowed;
+        this.furnished = furnished;
     }
 }

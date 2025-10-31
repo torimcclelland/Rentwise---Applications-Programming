@@ -60,6 +60,13 @@ function snapshotToProperty(snapshot){
             description: snapshot.data().description,
             reviews: snapshot.data().reviews,
             avgRating: snapshot.data().avgRating,
+            numBeds: snapshot.data().numBeds,
+            numBath: snapshot.data().numBath,
+            laundry: snapshot.data().laundry,
+            parking: snapshot.data().parking,
+            typeOfHome: snapshot.data().typeOfHome,
+            petsAllowed: snapshot.data().petsAllowed,
+            furnished: snapshot.data().furnished
         })
         result = new ReturnValue(true, "", {}, convertedProp)
 

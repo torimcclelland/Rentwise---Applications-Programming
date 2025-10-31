@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Property } from '../models/Property'
 import { GlobalValues } from '../GlobalValues'
 import { createProperty } from '../database_calls/property/CreateProperty'
-import {View, Text, Pressable, Modal, Image, StyleSheet} from 'react-native'
+import {View, Text, Pressable, Modal, ScrollView, StyleSheet} from 'react-native'
 import DropDown from '../components/DropDown'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
@@ -26,6 +26,13 @@ const AddProperty = ({visible, onClose}) =>{
     const [description, setDescription] = useState("")
     const [reviews, setReviews] = useState([])
     const [avgRating, setAvgRating] = useState(0.0)
+    const [numBeds, setNumBeds] = useState("")
+    const [numBath, setNumBath] = useState("")
+    const [laundry, setLaundry] = useState("")
+    const [parking, setParking] = useState("")
+    const [typeOfHome, setTypeOfHome] = useState("")
+    const [petsAllowed, setPetsAllowed] = useState("")
+    const [furnished, setFurnished] = useState("")
     const theme = useTheme()
 
     // create an array to hold state values
@@ -49,7 +56,14 @@ const AddProperty = ({visible, onClose}) =>{
             images,
             description,
             reviews,
-            avgRating 
+            avgRating,
+            numBeds,
+            numBath,
+            laundry,
+            parking,
+            typeOfHome,
+            petsAllowed,
+            furnished
     })
 
         try{
@@ -68,10 +82,16 @@ const AddProperty = ({visible, onClose}) =>{
         setZipcode("")
         setDescription("")
         setMonthlyPrice("")
+        setNumBeds("")
+        setNumBath("")
+        setLaundry("")
+        setParking("")
+        setTypeOfHome("")
+        setPetsAllowed("")
+        setFurnished("")
     }
     
     return (
-        <View>
             <Modal
             visible={visible}
             transparent={true}
@@ -79,73 +99,115 @@ const AddProperty = ({visible, onClose}) =>{
             animationType= 'slide' // pop-up slides up on the screen
             >
                 <View style={stylesModal.centeredView}>
-                    <View style={[stylesModal.modalView, theme.container]}>
-                        <View style={stylesModal.contentView}>
-                            <View style={stylesModal.banner}>
-                                <View style={stylesModal.back}>
-                                    <Pressable
-                                    onPress={onClose}>
-                                        <Icon name='arrow-left' size={24} color={theme.textColor.color}/>
-                                    </Pressable>
-                                    <Text style={[stylesModal.text, theme.textColor]}>Add Listing</Text>
-                                </View>
-                                <CustomDivider/>
-                            </View>
-                            <View style={stylesModal.spacing}>
-                                {/* for the image box */}
-                                <Pressable style={[stylesModal.imageBox, theme.container]}>
-                                    <View style={stylesModal.addImage}>
-                                        <Icon name="plus" size={30} color={theme.textColor.color}/>
-                                        <Text style={theme.textColor}>Add images</Text>
-                                    </View>
-                                </Pressable>
-                                <TextField
-                                placeholder="Street Address"
-                                value={address}
-                                onChangeText={setAddress}
-                                />
-                                <TextField
-                                placeholder="City"
-                                value={city}
-                                onChangeText={setCity}
-                                />
-                                {/* comment */}
-                                <DropDown
-                                placeholder="Select State"
-                                options={states}
-                                value={state}
-                                onSelect={setState}
-                                />
-                                <TextField
-                                textType="numeric"
-                                placeholder="Zipcode"
-                                value={zipcode}
-                                onChangeText={setZipcode}
-                                />
-                                <TextFieldLong
-                                placeholder="Description"
-                                value={description}
-                                onChangeText={setDescription}
-                                maxLength={200}
-                                />
-                                <TextField
-                                textType="numeric"
-                                placeholder="Rent price"
-                                value={monthlyPrice}
-                                onChangeText={setMonthlyPrice}
-                                />
-                                <PrimaryButton
-                                onPress={addProperty}
-                                title="Submit"
-                                size="small"
-                                fontSize={12}
-                                />
-                            </View>
+                  <View style={stylesModal.contentView}>
+                    <View style={stylesModal.banner}>
+                        <View style={stylesModal.back}>
+                            <Pressable
+                            onPress={onClose}>
+                                <Icon name='arrow-left' size={24} color={theme.textColor.color}/>
+                            </Pressable>
+                            <Text style={[stylesModal.text, theme.textColor]}>Add Listing</Text>
                         </View>
+                        <CustomDivider/>
                     </View>
+                    <ScrollView
+                    showsVerticalScrollIndicator={false}>
+                      <View style={stylesModal.spacing}>
+                          {/* for the image box */}
+                          <Pressable style={[stylesModal.imageBox, theme.container]}>
+                              <View style={stylesModal.addImage}>
+                                  <Icon name="plus" size={30} color={theme.textColor.color}/>
+                                  <Text style={theme.textColor}>Add images</Text>
+                              </View>
+                          </Pressable>
+                          <TextField
+                          placeholder="Street Address"
+                          value={address}
+                          onChangeText={setAddress}
+                          />
+                          <TextField
+                          placeholder="City"
+                          value={city}
+                          onChangeText={setCity}
+                          />
+                          {/* comment */}
+                          <DropDown
+                          placeholder="Select State"
+                          options={states}
+                          value={state}
+                          onSelect={setState}
+                          />
+                          <TextField
+                          textType="numeric"
+                          placeholder="Zipcode"
+                          value={zipcode}
+                          onChangeText={setZipcode}
+                          />
+                          <TextFieldLong
+                          placeholder="Description"
+                          value={description}
+                          onChangeText={setDescription}
+                          maxLength={200}
+                          />
+                          <TextField
+                          textType="numeric"
+                          placeholder="Rent price"
+                          value={monthlyPrice}
+                          onChangeText={setMonthlyPrice}
+                          />
+                          <TextField
+                          textType="numeric"
+                          placeholder="Number of Beds"
+                          value={numBeds}
+                          onChangeText={setNumBeds}
+                          />
+                          <TextField
+                          textType="numeric"
+                          placeholder="Number of Baths"
+                          value={numBath}
+                          onChangeText={setNumBath}
+                          />
+                          <DropDown
+                          placeholder="Washer/Dryer"
+                          options={["In-unit", "Shared", "None"]}
+                          value={laundry}
+                          onSelect={setLaundry}
+                          />
+                          <DropDown
+                          placeholder="Parking"
+                          options={["Street Parking", "On Premises", "Garage Parking"]}
+                          value={parking}
+                          onSelect={setParking}
+                          />
+                          <DropDown
+                          placeholder="Housing Type"
+                          options={["Home", "Apartment", "Condo", "Town House"]}
+                          value={typeOfHome}
+                          onSelect={setTypeOfHome}
+                          />
+                          <DropDown
+                          placeholder="Pets Allowed?"
+                          options={["Yes", "No"]}
+                          value={petsAllowed}
+                          onSelect={setPetsAllowed}
+                          />
+                          <DropDown
+                          placeholder='Furnished?'
+                          options={["Yes", "No"]}
+                          value={furnished}
+                          onSelect={setFurnished}
+                          />
+                          <PrimaryButton
+                          onPress={addProperty}
+                          title="Submit"
+                          size="small"
+                          fontSize={12}
+                          />
+                      </View>
+                    </ScrollView>
+                  </View>
                 </View>
             </Modal>
-        </View>
     )
 }
 
@@ -164,16 +226,15 @@ const stylesModal = StyleSheet.create({
     flexDirection: 'column',
     gap: 16
   },
-  modalView:{
+  contentView:{
+    paddingHorizontal: 20,
     backgroundColor: 'white',
     borderRadius: 8,
     elevation: 5,
-    width: '80%',
+    width: '88%',
+    height: '88%',
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2}
-  },
-  contentView:{
-    paddingHorizontal: 10
   },
   textBoxes:{
     flexDirection: 'row'
