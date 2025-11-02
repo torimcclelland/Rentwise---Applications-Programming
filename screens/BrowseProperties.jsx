@@ -42,7 +42,7 @@ const BrowseProperties = () => {
     }
 
     return (
-        <View style={[browse.container, theme.container]}>
+        <View style={[browse.container, theme.dashboardContainer]}>
             <View style={browse.content}>
                 <View style={browse.searchbar}>
                     <Icon name="search" size={24} color={theme.textColor.color} style={browse.searchIcon}/>

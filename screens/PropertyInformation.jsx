@@ -46,7 +46,7 @@ export const PropertyInfo = () =>{
     }
 
     return(
-        <View style={[propertyInfo.container, theme.container]}>
+        <View style={[propertyInfo.container, theme.dashboardContainer]}>
             <ScrollView
             showsVerticalScrollIndicator={false}>
                 <View style={propertyInfo.content}>
@@ -54,23 +54,23 @@ export const PropertyInfo = () =>{
 
                     <View style={propertyInfo.info}>
                         <View>
-                            <Text style={[theme.textColor, {fontWeight: 600, fontSize: 20}]}>{property.address}</Text>
+                            <Text style={[theme.logoColor, {fontWeight: 600, fontSize: 20}]}>{property.address}</Text>
                             <Text style={[theme.textColor]}>{property.city}, {property.state} {property.zipcode}</Text>
                         </View>
                         <View style={propertyInfo.pricing}>
-                            <Text style={[propertyInfo.price, theme.textColor]}>${property.monthlyPrice}</Text>
+                            <Text style={[propertyInfo.price, theme.logoColor]}>${property.monthlyPrice}</Text>
                             <Text style={[propertyInfo.month, theme.textColor]}>/ month</Text>
                         </View>
                     </View>
 
                     <CustomDivider/>
                     
-                    <View style={propertyInfo.landlordInfo}>
+                    <View style={[propertyInfo.features, propertyInfo.landlordInfo, theme.textField]}>
                         <Profile
                         size={40}
                         />
-                        <View style={{marginRight: 80, marginLeft: 20}}>
-                            <Text style={[theme.textColor, {fontSize: 17}]}>Listed by {landlord.firstName}</Text>
+                        <View style={{marginRight: 140}}>
+                            <Text style={[theme.textColor, {fontSize: 17, fontWeight: 600}]}>Listed by {landlord.firstName}</Text>
                             {/* <RatingStars/> */}
                         </View>
                     </View>
@@ -78,44 +78,48 @@ export const PropertyInfo = () =>{
                     <CustomDivider/>
                     
                     <View style={propertyInfo.map}>
-                        <Icon name="map-pin" size={20}/>
-                        <Text style={[propertyInfo.featuresText, {marginLeft: 10}]}>Property Info</Text>
+                        <Icon name="map-pin" size={20} color={theme.logoColor.color}/>
+                        <Text style={[propertyInfo.featuresText, theme.logoColor, {marginLeft: 10}]}>Property Info</Text>
                     </View>
 
-                    <View style={[propertyInfo.description, theme.dashboardContainer]}>
+                    <View style={[propertyInfo.description, theme.textField]}>
                         <Text style={[theme.textColor, {textAlign: 'center'}]}>{property.description}</Text>
                     </View>
 
                     <CustomDivider/>
                     
                     <View style={propertyInfo.map}>
-                        <Icon name="key" size={20}/>
-                        <Text style={[propertyInfo.featuresText, {marginLeft: 10}]}>Features</Text>
+                        <Icon name="key" size={20} color={theme.logoColor.color}/>
+                        <Text style={[propertyInfo.featuresText, theme.logoColor, {marginLeft: 10}]}>Features</Text>
                     </View>
 
-                    <View style={[propertyInfo.features, theme.textField, theme.dashboardContainer]}>
+                    <View style={[propertyInfo.features, theme.textField, theme.textField]}>
                         <View style={propertyInfo.list}>
-                            <Icon name="bed" size={30}/>
+                            <Icon name="bed" size={30} color={theme.logoColor.color}/>
                             <Text style={propertyInfo.listText}>{property.numBeds} Beds</Text>
                         </View>
 
                         <View style={propertyInfo.list}>
-                            <Icon name="bath" size={30}/>
+                            <Icon name="bath" size={30} color={theme.logoColor.color}/>
                             <Text style={propertyInfo.listText}>{property.numBath} Bath</Text>
                         </View>
 
                         <View style={propertyInfo.list}>
-                            <Icon name="car" size={29}/>
+                            <Icon name="car" size={29} color={theme.logoColor.color}/>
                             <Text style={propertyInfo.listText}>{property.parking}</Text>
                         </View>
 
                         <View style={propertyInfo.list}>
-                            <Icon name="paw" size={30}/>
-                            <Text style={propertyInfo.listText}>{property.petsAllowed}</Text>
+                            <Icon name="paw" size={30} color={theme.logoColor.color}/>
+                            {property.petsAllowed == "Yes" ? (
+                                <Text style={propertyInfo.listText}>Pets Allowed</Text>
+                            ) : (
+                                <Text style={propertyInfo.listText}>Pets Not Allowed</Text>
+                            )}
                         </View>
                         
                         <View style={propertyInfo.list}>
-                            <Icon name="home" size={30}/>
+                            <Icon name="home" size={30} color={theme.logoColor.color}/>
                             <Text style={propertyInfo.listText}>{property.typeOfHome}</Text>
                         </View>
                     </View>

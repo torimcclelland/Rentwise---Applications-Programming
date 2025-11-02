@@ -12,6 +12,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/Feather'
 import { createApplication } from '../database_calls/application/CreateApplication';
+import { Notification } from '../models/Notification';
+import { createNotification } from '../database_calls/notifications/CreateNotification';
 
 export const ApplicationPage = () => {
 
@@ -28,7 +30,7 @@ export const ApplicationPage = () => {
     const [email, setEmail] = useState(currentUser.email)
     const [dob, setDob] = useState(new Date()) // date of birth
     const [phoneNumber, setPhoneNumber] = useState("")
-    const [DLNumber, setDLNumber] = ("") // driver's license number
+    const [DLNumber, setDLNumber] = useState("") // driver's license number
     const [maritalStatus, setMaritalStatus] = useState("")
 
     // rental history
@@ -38,7 +40,7 @@ export const ApplicationPage = () => {
     const [presentLandlord, setPresentLandlord] = useState("")
     const [landlordPhone, setLandlordPhone] = useState("")
     const [leaveReason, setLeaveReason] = useState("")
-    const [rentAmount, setRentAmount] = useState("")
+    const [rentAmount, setRentAmount] = useState(0)
 
     // proposed occupants
 
@@ -66,13 +68,22 @@ export const ApplicationPage = () => {
 
         const result = await createApplication(application)
         console.log(result)
+
+        // create a notification for the landlord
+
+        // const notificationID = "setLater"
+        // const userID = landlordID
+        // const message = "Application submitted for property by" + firstName + " " + lastName
+
+        // const notif = new Notification({
+        //     notificationID,
+        //     userID,
+        //     message
+        // })
+
+        // const notifResult = await createNotification(notif)
+        // console.log(notifResult)
     }
-
-    // call function to submit application
-
-
-
-
 
     return (
         <View style={[application_style.container, theme.container]}>
@@ -191,7 +202,7 @@ export const ApplicationPage = () => {
                 <TextField
                 placeholder="Rent Amount"
                 value={rentAmount}
-                onChangeText={rentAmount}
+                onChangeText={setRentAmount}
                 textType="numeric"
                 />
 

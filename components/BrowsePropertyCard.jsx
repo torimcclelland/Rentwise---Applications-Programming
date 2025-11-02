@@ -9,7 +9,7 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
     const theme = useTheme()
 
     return(
-        <View>
+        <View style={[theme.textField, browseProps.container]}>
             <Image style={browseProps.image} source={require('./house_2.webp')} /> 
             <View style={browseProps.allInfo}>
                 <View style={browseProps.info}>
@@ -34,6 +34,13 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
 }
 
 const browseProps = StyleSheet.create({
+    container:{
+        borderRadius: 14,
+        paddingTop: 10,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        paddingBottom: 5
+    },
     image:{
         height: 141,
         width: '100%',

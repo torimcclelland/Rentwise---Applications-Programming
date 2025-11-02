@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-import { getNotificationByID } from './GetNotificationByID';
+// import { getNotificationByID } from './GetNotificationByID';
 import { Notification } from '../../models/Notification';
 
 /** 
@@ -25,7 +25,7 @@ export async function createNotification(newNotification) {
         newNotification.notificationID = docRef.id
         
         // retrieve newly made notification by calling the getNotificationByID function
-        result = await getNotificationByID(newNotification.notificationID);
+        // result = await getNotificationByID(newNotification.notificationID);
 
     } catch(e){
         let error = ""; 

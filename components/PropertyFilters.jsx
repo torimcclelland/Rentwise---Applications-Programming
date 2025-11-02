@@ -9,7 +9,7 @@ const Filter = ({text, iconName}) =>{
     const theme = useTheme()
 
     return(
-        <TouchableOpacity style={[filter.container]}>
+        <TouchableOpacity style={[filter.container, theme.container]}>
             <View style={filter.content}>
                 <Icon name={iconName} size={10} color={theme.textColor.color} style={filter.icon}/>
                 <Text style={theme.textColor}>{text}</Text>
