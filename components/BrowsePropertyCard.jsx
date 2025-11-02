@@ -9,14 +9,14 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
     const theme = useTheme()
 
     return(
-        <View>
+        <View style={[theme.textField, browseProps.container]}>
             <Image style={browseProps.image} source={require('./house_2.webp')} /> 
             <View style={browseProps.allInfo}>
                 <View style={browseProps.info}>
                     <Text style={[browseProps.text, theme.textColor]}>{address}</Text>
                     <View style={browseProps.price}>
-                        <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>{price}</Text>
-                        <Text style={[browseProps.month, theme.textcolor]}>/ month</Text>
+                        <Text style={[browseProps.text, theme.textColor, {fontSize: 20}]}>${price}</Text>
+                        <Text style={[browseProps.month, theme.textColor]}>/ month</Text>
                     </View>
                 </View>
                 <View style={browseProps.next}>
@@ -24,6 +24,7 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
                     <PrimaryButton
                     title="View"
                     size="small"
+                    fontSize={14}
                     customStyle={{height: 30, width: 91}}
                     onPress={onPress}
                     />
@@ -34,6 +35,13 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
 }
 
 const browseProps = StyleSheet.create({
+    container:{
+        borderRadius: 14,
+        paddingTop: 10,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        paddingBottom: 5
+    },
     image:{
         height: 141,
         width: '100%',

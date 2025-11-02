@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View, Text, ScrollView, StyleSheet} from 'react-native'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker'; // is not supported on web
 import CustomDivider from '../components/divider';
 import DropDown from '../components/DropDown';
 import TextFieldLong from '../components/TextFieldLong';
@@ -11,11 +11,15 @@ import { Application } from '../models/Application';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/Feather'
+import { createApplication } from '../database_calls/application/CreateApplication';
+import { Notification } from '../models/Notification';
+import { createNotification } from '../database_calls/notifications/CreateNotification';
+import NotificationModal from '../components/NotificationModal';
 
 export const ApplicationPage = () => {
 
     const currentUser = GlobalValues.currentUser
-    const userID = currentUser.userID
+    const renterID = currentUser.userID
     const route = useRoute()
     const {landlordID} = route.params
     const theme = useTheme()
@@ -27,8 +31,8 @@ export const ApplicationPage = () => {
     const [email, setEmail] = useState(currentUser.email)
     const [dob, setDob] = useState(new Date()) // date of birth
     const [phoneNumber, setPhoneNumber] = useState("")
-    const [DLNumber, setDLNumber] = ("") // driver's license number
-    const [maritialStatus, setMaritialStatus] = useState("")
+    const [DLNumber, setDLNumber] = useState("") // driver's license number
+    const [maritalStatus, setMaritalStatus] = useState("")
 
     // rental history
     const [prevAddress, setPrevAddress] = useState("")
@@ -37,23 +41,23 @@ export const ApplicationPage = () => {
     const [presentLandlord, setPresentLandlord] = useState("")
     const [landlordPhone, setLandlordPhone] = useState("")
     const [leaveReason, setLeaveReason] = useState("")
-    const [rentAmount, setRentAmount] = useState("")
+    const [rentAmount, setRentAmount] = useState(0)
 
     // proposed occupants
 
-    const submitApplication = () => {
+    const submitApplication = async() => {
 
         const application = new Application({
             applicationID,
             landlordID,
-            userID,
+            renterID,
             firstName,
             lastName,
             email,
             dob, 
             phoneNumber,
             DLNumber,
-            maritialStatus,
+            maritalStatus,
             prevAddress,
             startDate,
             endDate,
@@ -62,11 +66,30 @@ export const ApplicationPage = () => {
             leaveReason,
             rentAmount
         })
+
+        const result = await createApplication(application)
+        console.log(result)
+
+        toggleModal()
+
+        const notificationID = "setLater"
+        const userID = landlordID
+        const message = "Application submitted for property by " + firstName + " " + lastName
+
+        const notif = new Notification({
+            notificationID,
+            userID,
+            message
+        })
+
+        const notifResult = await createNotification(notif)
+        console.log(notifResult)
     }
 
-    // call function to submit application
-
-
+    const [modalVisible, setModalVisible] = useState(false)
+    const toggleModal = () => {
+        setModalVisible(!modalVisible)
+    }
 
     return (
         <View style={[application_style.container, theme.container]}>
@@ -95,7 +118,10 @@ export const ApplicationPage = () => {
                 <View style={application_style.times}>
                     <Icon name="calendar" size={15} color={theme.textColor.color}/>
                     <Text style={[theme.textColor, {marginLeft: 5}]}>Date of birth:</Text>
-                    <DateTimePicker
+
+                    {/* This datetime picker only works in ExpoGo, not supported on web */}
+
+                    <DateTimePicker 
                     testID="dateTimePicker"
                     value={dob}
                     mode="date" // Can also be "time" or "datetime"
@@ -119,8 +145,8 @@ export const ApplicationPage = () => {
                 <DropDown
                 placeholder="Maritial Status"
                 options={["Single", "Married"]}
-                value={maritialStatus}
-                onSelect={setMaritialStatus}
+                value={maritalStatus}
+                onSelect={setMaritalStatus}
                 />
             </View>
 
@@ -182,16 +208,24 @@ export const ApplicationPage = () => {
                 <TextField
                 placeholder="Rent Amount"
                 value={rentAmount}
-                onChangeText={rentAmount}
+                onChangeText={setRentAmount}
                 textType="numeric"
                 />
+
             </View>
 
             <PrimaryButton
             title="Submit"
+            onPress={()=>submitApplication()}
             />
             </ScrollView>
-                
+
+
+            <NotificationModal visible={modalVisible} 
+            onClose={toggleModal} 
+            message="Application submitted!" />
+
+                    
         </View>
     )
 }
@@ -238,5 +272,5 @@ const application_style = StyleSheet.create({
         paddingHorizontal: 15,
         paddingTop: 15,
         paddingBottom: 15
-    }
+    },
 })

@@ -31,7 +31,7 @@ export const lightTheme = {
   sectionHeaderColor: {
     color: '#444444',
   },
-  placeHolderTextColor: '#034974',
+  placeHolderTextColor: '#034974'
 };
 
 export const darkTheme = {

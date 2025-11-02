@@ -11,14 +11,14 @@ export class Application{
         dob = Date(),
         phoneNumber= "",
         DLNumber = "",
-        maritialStatus = "",
+        maritalStatus = "",
         prevAddress = "",
         startDate = Date(),
         endDate = Date(),
         presentLandlord = "",
         landlordPhone = "",
         leaveReason = "",
-        rentAmount = ""
+        rentAmount = 0
     })
     {
         this.applicationID = applicationID
@@ -30,7 +30,7 @@ export class Application{
         this.dob = dob,
         this.phoneNumber= phoneNumber,
         this.DLNumber = DLNumber,
-        this.maritialStatus = maritialStatus,
+        this.maritalStatus = maritalStatus,
         this.prevAddress = prevAddress,
         this.startDate = startDate,
         this.endDate = endDate,

@@ -6,7 +6,7 @@ import TextField from "../components/TextField";
 import CustomDivider from "../components/divider";
 import { getUserByEmail } from '../database_calls/user/GetUserByEmail';
 import { GlobalValues } from "../GlobalValues";
-import { login_style } from "../styles/Login";
+import { login_style } from "../styles/login";
 import { useTheme } from "../ThemeContext";
 import { useColorScheme } from "react-native";
 
@@ -57,7 +57,7 @@ export default function Login() {
   return (
     <View style={[login_style.app, theme.container]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={login_style.welcome}>
+        <View style={[login_style.welcome, {marginLeft: 40}]}>
           <Image style={login_style.logo} source={logo} />
           <Text style={[login_style.name, theme.logoColor]}>Rentwise</Text>
         </View>
