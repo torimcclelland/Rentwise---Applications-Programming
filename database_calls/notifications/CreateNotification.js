@@ -26,6 +26,7 @@ export async function createNotification(newNotification) {
         
         // retrieve newly made notification by calling the getNotificationByID function
         // result = await getNotificationByID(newNotification.notificationID);
+        result = new ReturnValue(true)
 
     } catch(e){
         let error = ""; 

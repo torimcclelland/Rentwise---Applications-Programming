@@ -72,20 +72,18 @@ export const ApplicationPage = () => {
 
         toggleModal()
 
-        // create a notification for the landlord
+        const notificationID = "setLater"
+        const userID = landlordID
+        const message = "Application submitted for property by " + firstName + " " + lastName
 
-        // const notificationID = "setLater"
-        // const userID = landlordID
-        // const message = "Application submitted for property by" + firstName + " " + lastName
+        const notif = new Notification({
+            notificationID,
+            userID,
+            message
+        })
 
-        // const notif = new Notification({
-        //     notificationID,
-        //     userID,
-        //     message
-        // })
-
-        // const notifResult = await createNotification(notif)
-        // console.log(notifResult)
+        const notifResult = await createNotification(notif)
+        console.log(notifResult)
     }
 
     const [modalVisible, setModalVisible] = useState(false)
