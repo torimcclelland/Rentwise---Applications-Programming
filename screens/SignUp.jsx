@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
-import {login_style} from '../styles/Login';
+import {login_style} from '../styles/login';
 import TextField from '../components/TextField';
 import LoginButton from '../components/login_signup_button'
 import DropDown from '../components/DropDown';
