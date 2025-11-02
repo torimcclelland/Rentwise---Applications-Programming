@@ -18,7 +18,7 @@ export class Application{
         presentLandlord = "",
         landlordPhone = "",
         leaveReason = "",
-        rentAmount = ""
+        rentAmount = 0
     })
     {
         this.applicationID = applicationID

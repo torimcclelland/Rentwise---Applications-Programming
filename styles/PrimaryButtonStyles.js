@@ -18,7 +18,7 @@ const PrimaryButtonStyles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    font: 'inter'
+    fontFamily: 'Inter'
   },
   small: {
     paddingVertical: 8,

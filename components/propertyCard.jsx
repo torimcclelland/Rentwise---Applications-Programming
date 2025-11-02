@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     address:{
         paddingLeft: 8,
         paddingTop: 2,
-        font: 'inter',
+        fontFamily: 'Inter',
         fontWeight: 500
     },
     icon:{
