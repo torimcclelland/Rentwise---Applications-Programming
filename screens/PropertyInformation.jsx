@@ -42,7 +42,7 @@ export const PropertyInfo = () =>{
     }
 
     const applyForProperty = () => {
-        navigation.navigate('Apply Property', {landlordID: 'landlord.UserID'})
+        navigation.navigate('Apply Property', {'landlordID': landlord.userID})
     }
 
     return(
@@ -69,8 +69,9 @@ export const PropertyInfo = () =>{
                         <Profile
                         size={40}
                         />
-                        <View>
-                            <Text style={[theme.textColor, {marginRight: 80, marginLeft: 20}]}>Listed by {landlord.firstName}</Text>
+                        <View style={{marginRight: 80, marginLeft: 20}}>
+                            <Text style={[theme.textColor, {fontSize: 17}]}>Listed by {landlord.firstName}</Text>
+                            {/* <RatingStars/> */}
                         </View>
                     </View>
 
@@ -87,7 +88,10 @@ export const PropertyInfo = () =>{
 
                     <CustomDivider/>
                     
-                    <Text style={propertyInfo.featuresText}>Features</Text>
+                    <View style={propertyInfo.map}>
+                        <Icon name="key" size={20}/>
+                        <Text style={[propertyInfo.featuresText, {marginLeft: 10}]}>Features</Text>
+                    </View>
 
                     <View style={[propertyInfo.features, theme.textField, theme.dashboardContainer]}>
                         <View style={propertyInfo.list}>
@@ -142,7 +146,8 @@ const propertyInfo = StyleSheet.create({
     },
     content:{
         paddingHorizontal: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: 20
     },
     image:{
         height: 274,
@@ -175,6 +180,7 @@ const propertyInfo = StyleSheet.create({
     landlordInfo:{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         width: '100%',
         paddingHorizontal: 30,
         marginTop: 10,
@@ -188,6 +194,7 @@ const propertyInfo = StyleSheet.create({
         width: '100%',
         paddingTop: 20,
         paddingBottom: 20,
+        paddingHorizontal: 5,
         marginBottom: 20,
 
         shadowColor: '#000',
@@ -220,7 +227,8 @@ const propertyInfo = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
-        marginBottom: 20
+        marginBottom: 20,
+        marginTop: 10
     },
     list:{
         flexDirection: 'row',

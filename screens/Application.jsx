@@ -11,11 +11,12 @@ import { Application } from '../models/Application';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/Feather'
+import { createApplication } from '../database_calls/application/CreateApplication';
 
 export const ApplicationPage = () => {
 
     const currentUser = GlobalValues.currentUser
-    const userID = currentUser.userID
+    const renterID = currentUser.userID
     const route = useRoute()
     const {landlordID} = route.params
     const theme = useTheme()
@@ -28,7 +29,7 @@ export const ApplicationPage = () => {
     const [dob, setDob] = useState(new Date()) // date of birth
     const [phoneNumber, setPhoneNumber] = useState("")
     const [DLNumber, setDLNumber] = ("") // driver's license number
-    const [maritialStatus, setMaritialStatus] = useState("")
+    const [maritalStatus, setMaritalStatus] = useState("")
 
     // rental history
     const [prevAddress, setPrevAddress] = useState("")
@@ -41,19 +42,19 @@ export const ApplicationPage = () => {
 
     // proposed occupants
 
-    const submitApplication = () => {
+    const submitApplication = async() => {
 
         const application = new Application({
             applicationID,
             landlordID,
-            userID,
+            renterID,
             firstName,
             lastName,
             email,
             dob, 
             phoneNumber,
             DLNumber,
-            maritialStatus,
+            maritalStatus,
             prevAddress,
             startDate,
             endDate,
@@ -62,9 +63,14 @@ export const ApplicationPage = () => {
             leaveReason,
             rentAmount
         })
+
+        const result = await createApplication(application)
+        console.log(result)
     }
 
     // call function to submit application
+
+
 
 
 
@@ -122,8 +128,8 @@ export const ApplicationPage = () => {
                 <DropDown
                 placeholder="Maritial Status"
                 options={["Single", "Married"]}
-                value={maritialStatus}
-                onSelect={setMaritialStatus}
+                value={maritalStatus}
+                onSelect={setMaritalStatus}
                 />
             </View>
 
@@ -193,6 +199,7 @@ export const ApplicationPage = () => {
 
             <PrimaryButton
             title="Submit"
+            onPress={()=>submitApplication()}
             />
             </ScrollView>
                 
