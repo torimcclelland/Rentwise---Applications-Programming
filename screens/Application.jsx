@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/Feather'
 import { createApplication } from '../database_calls/application/CreateApplication';
 import { Notification } from '../models/Notification';
 import { createNotification } from '../database_calls/notifications/CreateNotification';
+import NotificationModal from '../components/NotificationModal';
 
 export const ApplicationPage = () => {
 
@@ -69,6 +70,8 @@ export const ApplicationPage = () => {
         const result = await createApplication(application)
         console.log(result)
 
+        toggleModal()
+
         // create a notification for the landlord
 
         // const notificationID = "setLater"
@@ -83,6 +86,11 @@ export const ApplicationPage = () => {
 
         // const notifResult = await createNotification(notif)
         // console.log(notifResult)
+    }
+
+    const [modalVisible, setModalVisible] = useState(false)
+    const toggleModal = () => {
+        setModalVisible(!modalVisible)
     }
 
     return (
@@ -213,7 +221,13 @@ export const ApplicationPage = () => {
             onPress={()=>submitApplication()}
             />
             </ScrollView>
-                
+
+
+            <NotificationModal visible={modalVisible} 
+            onClose={toggleModal} 
+            message="Application submitted!" />
+
+                    
         </View>
     )
 }
@@ -260,5 +274,5 @@ const application_style = StyleSheet.create({
         paddingHorizontal: 15,
         paddingTop: 15,
         paddingBottom: 15
-    }
+    },
 })

@@ -4,7 +4,7 @@ import { useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from './ThemeContext';
-import Login from './screens/Login';
+import Login from './screens/login';
 import DashboardScreen from './screens/RenterDashboard';
 import LandlordPropertiesScreen from './screens/LandlordPropertiesManager';
 import BrowseProperties from './screens/BrowseProperties';

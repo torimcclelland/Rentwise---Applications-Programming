@@ -24,6 +24,7 @@ const BrowsePropertyCard = ({address, price, onPress}) =>{
                     <PrimaryButton
                     title="View"
                     size="small"
+                    fontSize={14}
                     customStyle={{height: 30, width: 91}}
                     onPress={onPress}
                     />

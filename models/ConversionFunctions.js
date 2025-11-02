@@ -137,17 +137,18 @@ function snapshotToApplication(snapshot){
  */
 function snapshotToNotification(snapshot){
     let result = new ReturnValue()
-    let convertedApp
+    let convertedNotif
 
     try{
         
-        convertedApp = new Notification({
+        convertedNotif = new Notification({
             notificationID: snapshot.id,
             userID: snapshot.data().userID,
             message: snapshot.data().message
         })
         result = new ReturnValue()
-        result.applicationData = convertedApp
+        result.notificationData = convertedNotif
+        result.success = true
 
     } catch (e){
         let error = ""; 
