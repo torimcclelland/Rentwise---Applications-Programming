@@ -17,14 +17,29 @@ export const styles = StyleSheet.create({
     borderBottomColor: '#E0E0E0',
   },
   title: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#333',
-  },
+  fontSize: 28,
+  fontWeight: '700',
+  color: '#034974',
+  letterSpacing: 0.5
+},
   profileIcon: {
-    borderWidth: 2,
-    borderColor: '#4F46E5',
-  },
+  height: 48,
+  width: 48,
+  borderRadius: 24,
+  backgroundColor: '#E0E7FF',
+  justifyContent: 'center',
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  elevation: 3
+},
+welcomeText: {
+    fontSize: 16,
+    color: '#4B5563',
+    marginBottom: 16,
+    textAlign: 'center'
+},
   content: {
     paddingHorizontal: 24,
     paddingVertical: 16,
@@ -40,21 +55,45 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   cardTitle: {
-    fontSize: 14,
-    color: '#888',
-    marginBottom: 4,
-  },
-  cardValue: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333',
-  },
+  fontSize: 13,
+  color: '#6B7280', // softer gray
+  marginBottom: 2,
+  textTransform: 'uppercase',
+  letterSpacing: 1
+},
+cardValue: {
+  fontSize: 17,
+  fontWeight: '600',
+  color: '#1F2937'
+},
   bottomNav: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
   },
+  membershipBadge: {
+  alignSelf: 'flex-start',
+  paddingVertical: 4,
+  paddingHorizontal: 10,
+  borderRadius: 12,
+  marginTop: 4,
+  marginBottom: 8
+},
+renterBadge: {
+  backgroundColor: '#E0F2FE', // light blue
+},
+premiumBadge: {
+  backgroundColor: '#FDE68A', // gold
+},
+freeBadge: {
+  backgroundColor: '#E5E7EB', // gray
+},
+badgeText: {
+  fontSize: 12,
+  fontWeight: '600',
+  color: '#1F2937'
+}
 });
 
 

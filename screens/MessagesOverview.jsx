@@ -1,9 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png'; // placeholder profile image
 import styles from '../styles/MessagesOverviewStyle';
 import { useTheme } from '../ThemeContext';
+import { useNavigation } from '@react-navigation/native';
 
 const messages = [
   { username: 'renter23', message: 'How are you today?' },
@@ -15,7 +22,9 @@ const messages = [
 const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 
 const MessagesOverview = () => {
-  const theme = useTheme()
+  const theme = useTheme();
+  const navigation = useNavigation();
+
   return (
     <View style={[styles.container, theme.container]}>
       {/* Header */}
@@ -33,13 +42,17 @@ const MessagesOverview = () => {
       {/* Message List */}
       <ScrollView contentContainerStyle={styles.messageList}>
         {messages.map((msg, index) => (
-          <View key={index} style={[styles.messageCard, theme.textField]}>
+          <TouchableOpacity
+            key={index}
+            style={[styles.messageCard, theme.textField]}
+            onPress={() => navigation.navigate('SpecificMessage')}
+          >
             <Image source={userImage} style={styles.profileImage} />
             <View style={styles.messageTextContainer}>
               <Text style={[styles.username, theme.textColor]}>{msg.username}</Text>
               <Text style={[styles.message, theme.textColor]}>{msg.message}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 
