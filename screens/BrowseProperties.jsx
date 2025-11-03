@@ -87,11 +87,11 @@ const BrowseProperties = () => {
                 </ScrollView>
 
                 {/* Fixed bottom nav bar */}
+            </View>
                 <View style={styles.bottomNav}>
                     {/* Bottom Navigation Bar */}
                     <BottomNavBar  selectedTab="home"/>
                 </View>
-            </View>
         </View>
     );
 }

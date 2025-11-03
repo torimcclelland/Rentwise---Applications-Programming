@@ -6,13 +6,13 @@ import TextField from "../components/TextField";
 import CustomDivider from "../components/divider";
 import { getUserByEmail } from '../database_calls/user/GetUserByEmail';
 import { GlobalValues } from "../GlobalValues";
-import { login_style } from "../styles/login";
+import { login_style } from "../styles/Login";
 import { useTheme } from "../ThemeContext";
 import { useColorScheme } from "react-native";
 
 export default function Login() {
-  const [email, setEmail] = useState("kaladinStormblessed@fakeEmail.com");
-  const [password, setPassword] = useState("tempPass");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [pressed, setPressed] = useState(false);
   const navigation = useNavigation();
   const theme = useTheme();
