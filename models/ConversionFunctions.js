@@ -4,6 +4,7 @@ import { User } from "./User";
 import { Property } from "./Property";
 import { Application } from "./Application";
 import { Notification } from "./Notification";
+import { Conversation } from "./Conversation";
 
 function snapshotToUser(snapshot){
 
@@ -163,4 +164,38 @@ function snapshotToNotification(snapshot){
     return result
 }
 
-export {snapshotToUser, snapshotToProperty, snapshotToApplication, snapshotToNotification}
+
+/**
+ * Converts a snapshot to a conversation object.
+ * @param {DocumentSnapshot} snapshot The snapshot to convert to a conversation
+ * @return {ReturnValue} The results of the conversion (stored in the conversationData value)
+ */
+function snapshotToConversation(snapshot){
+
+    let result = new ReturnValue()
+    let convertedConv
+
+    try{
+        
+        convertedConv = new Conversation({
+            conversationID: snapshot.id,
+            users: snapshot.data().users,
+            messages: snapshot.data().messages
+        })
+        result = new ReturnValue(true, "")
+        result.resultData = convertedConv
+
+    } catch (e){
+        let error = ""; 
+        if (e instanceof Error) {
+            error = e.message // works, `e` narrowed to Error
+        } else{
+            error = "Had a problem with typescript error handling when converting snapshot to notification."
+        }
+
+        result = new ReturnValue(false, error)
+    }
+    return result
+}
+
+export {snapshotToUser, snapshotToProperty, snapshotToApplication, snapshotToNotification, snapshotToConversation}

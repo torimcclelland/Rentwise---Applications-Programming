@@ -2,7 +2,7 @@ import { addDoc, collection } from 'firebase/firestore';
 import { Conversation } from '../../models/Conversation';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-//import { getConversationByID } from './GetConversationByID';
+import { getConversationByID } from './GetConversationByID';
 
 /** 
  * @param {Conversation} newConversation The details of the conversation to create
@@ -22,7 +22,7 @@ export async function createConversation(newConversation) {
         newConversation.id = docRef.id
         
         // retrieve newly made property by calling the GetProperty function
-        //result = await getConversationByID(newConversation.id);
+        result = await getConversationByID(newConversation.id);
 
     } catch(e){
         let error = ""; 

@@ -1,8 +1,7 @@
-import { User } from "./User";
-import { Property } from './Property';
 
 export class ReturnValue{
-    constructor(success, errorMsg, userData = {}, propertyData = {}, propertyList = [], applicationData = {}, notificationData = {}, notificationList = [])
+    constructor(success, errorMsg, userData = {}, propertyData = {}, propertyList = [], applicationData = {}, notificationData = {}, notificationList = [],
+                conversationData = {}, conversationList = [], resultData = {}, resultList = [])
     {
         this.success = success;
         this.errorMsg = errorMsg;
@@ -12,5 +11,7 @@ export class ReturnValue{
         this.applicationData = applicationData;
         this.notificationData = notificationData;
         this.notificationList = notificationList;
+        this.resultData = resultData;
+        this.resultList = resultList;
     }
 }
