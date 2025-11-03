@@ -56,7 +56,6 @@ export const EditUserModal = ({visible, onClose}) =>{
     }
     
     return (
-        <View>
             <Modal
             visible={visible}
             transparent={true}
@@ -64,8 +63,7 @@ export const EditUserModal = ({visible, onClose}) =>{
             animationType= 'slide' // pop-up slides up on the screen
             >
                 <View style={stylesModal.centeredView}>
-                    <View style={[stylesModal.modalView, theme.container]}>
-                        <View style={stylesModal.contentView}>
+                        <View style={[stylesModal.contentView, {height: '55%'}]}>
                             <View style={stylesModal.banner}>
                                 <View style={stylesModal.back}>
                                     <Pressable
@@ -112,8 +110,6 @@ export const EditUserModal = ({visible, onClose}) =>{
                             </View>
                         </View>
                     </View>
-                </View>
             </Modal>
-        </View>
     )
 }

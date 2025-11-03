@@ -23,7 +23,7 @@ const Notifications = () => {
     return (
         <View style={notifs.container}>
             <View>
-                <Text> Properties</Text>
+
                 { notifList.length > 0 ? (
                     notifList.map(item => (
                         <InfoCard
@@ -40,10 +40,8 @@ const Notifications = () => {
 
                 </View>
 
-            <View>
             {/* Bottom Navigation Bar */}
             <BottomNavBar selectedTab="notifications" />
-            </View>
         </View>
     );
 }
@@ -51,6 +49,7 @@ export default Notifications;
 
 const notifs = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'space-between'
     }
 })

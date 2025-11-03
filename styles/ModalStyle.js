@@ -24,7 +24,17 @@ export const stylesModal = StyleSheet.create({
       shadowOffset: {width: 0, height: 2}
     },
     contentView:{
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
+      backgroundColor: 'white',
+      borderRadius: 8,
+      elevation: 5,
+      width: '80%',
+      height: '70%',
+      //height: '70%',
+      borderColor: '#E6e6e6',
+      borderWidth: 1,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2}
     },
     textBoxes:{
       flexDirection: 'row'
