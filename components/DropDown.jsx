@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useTheme } from '../ThemeContext';
-import { login_style } from '../styles/Login';
+import { login_style } from '../styles/login';
 
 const DropDown = ({
   label,
