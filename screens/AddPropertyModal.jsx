@@ -11,6 +11,8 @@ import CustomDivider from '../components/divider'
 import { useTheme } from '../ThemeContext';
 import TextFieldLong from '../components/TextFieldLong';
 import { stylesModal } from '../styles/ModalStyle';
+import * as ImagePicker from 'expo-image-picker';
+import * as ImageManipulator from 'expo-image-manipulator';
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables
@@ -22,7 +24,7 @@ const AddProperty = ({visible, onClose}) =>{
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [zipcode, setZipcode] = useState("")
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState(null)
     const [description, setDescription] = useState("")
     const [reviews, setReviews] = useState([])
     const [avgRating, setAvgRating] = useState(0.0)
@@ -90,6 +92,28 @@ const AddProperty = ({visible, onClose}) =>{
         setPetsAllowed("")
         setFurnished("")
     }
+
+    const addImage = async() => {
+        const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: 'images',
+        allowsEditing: true,
+        quality: 1,
+        });
+
+        if (!result.canceled){
+            const uri = result.assets[0].uri 
+
+            const manipResult = await ImageManipulator.manipulateAsync(
+                    uri,
+                    [{ resize: { width: 300 } }],
+                    { compress: 0.4, format: ImageManipulator.SaveFormat.JPEG, base64: true }
+                    );
+
+            const base64 = manipResult.base64
+            setImages(`data:image/jpeg;base64,${base64}`)
+
+        }
+    }
     
     return (
             <Modal
@@ -114,7 +138,9 @@ const AddProperty = ({visible, onClose}) =>{
                     showsVerticalScrollIndicator={false}>
                       <View style={stylesModal.spacing}>
                           {/* for the image box */}
-                          <Pressable style={[stylesModal.imageBox, theme.container]}>
+                          <Pressable 
+                          style={[stylesModal.imageBox, theme.container]}
+                          onPress={addImage}>
                               <View style={stylesModal.addImage}>
                                   <Icon name="plus" size={30} color={theme.textColor.color}/>
                                   <Text style={theme.textColor}>Add images</Text>
