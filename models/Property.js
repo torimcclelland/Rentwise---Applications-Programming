@@ -10,7 +10,7 @@ export class Property{
         city = "",
         state = "",
         zipcode = "",
-        images = [],
+        images = null,
         description = "",
         reviews = [],
         avgRating = 0.0,
