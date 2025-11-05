@@ -4,13 +4,13 @@ import { useTheme } from '../ThemeContext'
 import PrimaryButton from './PrimaryButton'
 
 
-const BrowsePropertyCard = ({address, price, onPress}) =>{
+const BrowsePropertyCard = ({address, price, onPress, image}) =>{
 
     const theme = useTheme()
 
     return(
         <View style={[theme.textField, browseProps.container]}>
-            <Image style={browseProps.image} source={require('./house_2.webp')} /> 
+            <Image style={browseProps.image} source={{uri: image}} /> 
             <View style={browseProps.allInfo}>
                 <View style={browseProps.info}>
                     <Text style={[browseProps.text, theme.textColor]}>{address}</Text>

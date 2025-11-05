@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Property } from '../models/Property'
 import { GlobalValues } from '../GlobalValues'
 import { createProperty } from '../database_calls/property/CreateProperty'
-import {View, Text, Pressable, Modal, ScrollView, StyleSheet} from 'react-native'
+import {View, Text, Pressable, Modal, ScrollView, StyleSheet, Image} from 'react-native'
 import DropDown from '../components/DropDown'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
@@ -11,6 +11,9 @@ import CustomDivider from '../components/divider'
 import { useTheme } from '../ThemeContext';
 import TextFieldLong from '../components/TextFieldLong';
 import { stylesModal } from '../styles/ModalStyle';
+import * as ImagePicker from 'expo-image-picker';
+import * as ImageManipulator from 'expo-image-manipulator';
+import { uploadImage } from '../database_calls/uploadImages';
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables
@@ -22,7 +25,8 @@ const AddProperty = ({visible, onClose}) =>{
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [zipcode, setZipcode] = useState("")
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState(null)
+    const [uri, setUri] = useState(null)
     const [description, setDescription] = useState("")
     const [reviews, setReviews] = useState([])
     const [avgRating, setAvgRating] = useState(0.0)
@@ -89,6 +93,17 @@ const AddProperty = ({visible, onClose}) =>{
         setTypeOfHome("")
         setPetsAllowed("")
         setFurnished("")
+        setImages(null)
+    }
+
+    const addImage = async() => {
+         
+        const imageInfo = await uploadImage(true, 5)
+
+        if (imageInfo != null){
+            setImages(imageInfo)
+        }
+
     }
     
     return (
@@ -114,10 +129,18 @@ const AddProperty = ({visible, onClose}) =>{
                     showsVerticalScrollIndicator={false}>
                       <View style={stylesModal.spacing}>
                           {/* for the image box */}
-                          <Pressable style={[stylesModal.imageBox, theme.container]}>
+                          <Pressable 
+                          style={[stylesModal.imageBox, theme.container]}
+                          onPress={addImage}>
                               <View style={stylesModal.addImage}>
-                                  <Icon name="plus" size={30} color={theme.textColor.color}/>
-                                  <Text style={theme.textColor}>Add images</Text>
+                                { images == null ? (
+                                    <View>
+                                        <Icon name="plus" size={30} color={theme.textColor.color}/>
+                                        <Text style={theme.textColor}>Add images</Text>
+                                    </View>
+                                ):(
+                                    <Image source={{uri: images[0]}} style={{ width: 324, height: 150, borderRadius: 10 }}/>
+                                )}
                               </View>
                           </Pressable>
                           <TextField

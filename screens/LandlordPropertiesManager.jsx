@@ -75,6 +75,7 @@ export const LandlordPropertiesScreen = () =>{
               key={item.propertyID?.toString()}
               address={item.address}
               onPress={() => editProperty(item.propertyID)}
+              image={item.images[0]}
             />
           ))
         ) : (
