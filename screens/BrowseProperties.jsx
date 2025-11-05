@@ -77,6 +77,7 @@ const BrowseProperties = () => {
                     address={item.address}
                     price={item.monthlyPrice}
                     onPress={() => viewProperty(item.propertyID)}
+                    image={item.images[0]}
                     />
                 ))
                 ) : (

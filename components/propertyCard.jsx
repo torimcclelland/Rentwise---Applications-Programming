@@ -4,14 +4,14 @@ import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/Feather';
 
-const PropertyCard = ({address, onPress, ...props}) => {
+const PropertyCard = ({address, onPress,image, ...props}) => {
     // grab the current system theme for styling
     const theme = useTheme()
     
     return (
         <View style={[styles.box]}>
             <View style={[styles.border, theme.propertyCard]}>
-                <Image style={styles.image} source={require('./house_2.webp')}/>
+                <Image style={styles.image} source={{uri: image}} />
                 <View style={styles.button}>
                     <Text style={[styles.address, theme.textColor]}>{address}</Text>
                     <Pressable onPress={onPress}>
