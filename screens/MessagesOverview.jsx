@@ -24,9 +24,6 @@ const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 const MessagesOverview = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-;
-  const navigation = useNavigation();
-
   const handlePress = () => {
     navigation.navigate('Specific Message');
   };
