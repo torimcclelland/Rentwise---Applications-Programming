@@ -1,34 +1,42 @@
-import styled from 'styled-components/native';
-import { colors, spacing, typography } from '../../theme';
+import { StyleSheet } from 'react-native';
 
-export const BubbleContainer = styled.View`
-  align-items: ${({ fromUser }) => (fromUser ? 'flex-end' : 'flex-start')};
-  margin-vertical: ${spacing.sm}px;
-`;
-
-export const Bubble = styled.View`
-  max-width: 80%;
-  background-color: ${({ fromUser }) =>
-    fromUser ? colors.primary : colors.surface};
-  padding: ${spacing.md}px;
-  border-radius: ${spacing.sm}px;
-  border-top-left-radius: ${({ fromUser }) => (fromUser ? spacing.sm : 0)}px;
-  border-top-right-radius: ${({ fromUser }) => (fromUser ? 0 : spacing.sm)}px;
-`;
-
-export const TextContent = styled.Text`
-  font-size: ${typography.body};
-  color: ${colors.onSurface};
-`;
-
-export const Timestamp = styled.Text`
-  font-size: ${typography.caption};
-  color: ${colors.secondaryText};
-  margin-top: ${spacing.xs}px;
-`;
-
-export const StatusText = styled.Text`
-  font-size: ${typography.caption};
-  color: ${colors.accent};
-  margin-top: ${spacing.xs}px;
-`;
+export default StyleSheet.create({
+  bubbleContainer: {
+    marginVertical: 8,
+  },
+  alignRight: {
+    alignItems: 'flex-end',
+  },
+  alignLeft: {
+    alignItems: 'flex-start',
+  },
+  bubble: {
+    maxWidth: '80%',
+    padding: 12,
+    borderRadius: 8,
+  },
+  userBubble: {
+    backgroundColor: '#cce5ff',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 0,
+  },
+  agentBubble: {
+    backgroundColor: '#e2e3e5',
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 8,
+  },
+  textContent: {
+    fontSize: 16,
+    color: '#333',
+  },
+  timestamp: {
+    fontSize: 12,
+    color: '#777',
+    marginTop: 4,
+  },
+  statusText: {
+    fontSize: 12,
+    color: '#007bff',
+    marginTop: 4,
+  },
+});

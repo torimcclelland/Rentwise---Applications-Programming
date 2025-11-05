@@ -1,32 +1,32 @@
-import styled from 'styled-components/native';
-import { colors, spacing, typography } from '../../theme';
+const styles = {
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '2rem',
+    backgroundColor: '#fff',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  header: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    marginBottom: '1.5rem',
+    textAlign: 'center',
+    color: '#333',
+  },
+  bubbleContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+  empty: {
+    textAlign: 'center',
+    fontStyle: 'italic',
+    color: '#999',
+    padding: '2rem',
+  },
+};
 
-export const Container = styled.View`
-  flex: 1;
-  background-color: ${colors.background};
-  padding: ${spacing.lg}px ${spacing.md}px 0 ${spacing.md}px;
-`;
-
-export const Title = styled.Text`
-  font-size: ${typography.title};
-  font-weight: bold;
-  color: ${colors.primaryText};
-  margin-top: ${spacing.md}px;
-`;
-
-export const Subtitle = styled.Text`
-  font-size: ${typography.caption};
-  color: ${colors.secondaryText};
-  margin-bottom: ${spacing.sm}px;
-`;
-
-export const MessageSection = styled.View`
-  margin-top: ${spacing.md}px;
-`;
-
-export const ButtonWrapper = styled.View`
-  padding: ${spacing.md}px;
-  border-top-width: 1px;
-  border-color: ${colors.border};
-  background-color: ${colors.surface};
-`;
+export default styles;

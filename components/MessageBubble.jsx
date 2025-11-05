@@ -1,23 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import {
-  BubbleContainer,
-  Bubble,
-  TextContent,
-  Timestamp,
-  StatusText,
-} from './MessageBubbleStyle';
+import styles from '../styles/MessageBubbleStyle';
 
 const MessageBubble = ({ text, fromUser, timestamp, status }) => {
   return (
-    <BubbleContainer fromUser={fromUser}>
-      <Bubble fromUser={fromUser}>
-        <TextContent>{text}</TextContent>
-        {timestamp && <Timestamp>{timestamp}</Timestamp>}
-        {status && <StatusText>{status}</StatusText>}
-      </Bubble>
-    </BubbleContainer>
+    <View style={[styles.bubbleContainer, fromUser ? styles.alignRight : styles.alignLeft]}>
+      <View style={[styles.bubble, fromUser ? styles.userBubble : styles.agentBubble]}>
+        <Text style={styles.textContent}>{text}</Text>
+        {timestamp && <Text style={styles.timestamp}>{timestamp}</Text>}
+        {status && <Text style={styles.statusText}>{status}</Text>}
+      </View>
+    </View>
   );
 };
 

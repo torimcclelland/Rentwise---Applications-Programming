@@ -9,13 +9,13 @@ import { useTheme } from '../ThemeContext';
 // Sample conversation data keyed by ConversationID
 const conversationMap = {
   'conv1': [
-    { sender: 'renter23', text: 'Hi there!' },
-    { sender: 'landlord', text: 'Hello! How can I help you today?' },
-    { sender: 'renter23', text: 'I had a question about the lease terms.' },
+    { sender: 'renter23', senderName: 'You', text: 'Hi there!', timestamp: '2023-11-30T09:40:00' },
+    { sender: 'landlord', senderName: 'Mrs. Landlord', text: 'Hello! How can I help you today?', timestamp: '2023-11-30T09:41:00' },
+    { sender: 'renter23', senderName: 'You', text: 'I had a question about the lease terms.', timestamp: '2023-11-30T09:42:00' },
   ],
   'conv2': [
-    { sender: 'bff2025', text: 'I got a new apartment in Erie!' },
-    { sender: 'landlord', text: 'Congrats! Let me know if you need anything.' },
+    { sender: 'bff2025', senderName: 'You', text: 'I got a new apartment in Erie!', timestamp: '2023-11-30T10:00:00' },
+    { sender: 'landlord', senderName: 'Mrs. Landlord', text: 'Congrats! Let me know if you need anything.', timestamp: '2023-11-30T10:01:00' },
   ],
 };
 
@@ -23,14 +23,13 @@ const SpecificMessage = () => {
   const theme = useTheme();
   const route = useRoute();
   const { ConversationID } = route.params || {};
-
   const conversation = conversationMap[ConversationID] || [];
 
   return (
     <View style={[styles.container, theme.container]}>
       {/* Header */}
       <Text style={[styles.header, theme.textColor]}>
-        Conversation: {ConversationID || 'Unknown'}
+        Conversation with Mrs. Landlord
       </Text>
 
       {/* Message Thread */}
@@ -39,7 +38,9 @@ const SpecificMessage = () => {
           <MessageBubble
             key={index}
             sender={msg.sender}
+            senderName={msg.senderName}
             text={msg.text}
+            timestamp={msg.timestamp}
             isUser={msg.sender !== 'landlord'}
           />
         ))}

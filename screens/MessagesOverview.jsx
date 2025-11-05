@@ -19,9 +19,8 @@ const MessagesOverview = () => {
   const theme = useTheme();
   const navigation = useNavigation();
 
-  const handlePress = (conversationID) => {
-    navigation.navigate('SpecificMessage', { ConversationID: conversationID });
-    console.log('Navigating to:', conversationID);
+  const handlePress = () => {
+    navigation.navigate('Specific Message');
   };
 
   return (
