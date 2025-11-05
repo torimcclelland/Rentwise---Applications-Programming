@@ -11,6 +11,7 @@ import Profile from '../components/profile'
 import RatingStars from '../components/RatingStars'
 import PrimaryButton from '../components/PrimaryButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import ImageCarousel from '../components/ImageCarousel'
 
 export const PropertyInfo = () =>{
 
@@ -50,7 +51,7 @@ export const PropertyInfo = () =>{
             <ScrollView
             showsVerticalScrollIndicator={false}>
                 <View style={propertyInfo.content}>
-                    <Image style={propertyInfo.image} source={require('./image.png')} />
+                    <ImageCarousel images={property.images} imageStyle={propertyInfo.image}/>
 
                     <View style={propertyInfo.info}>
                         <View>
