@@ -3,10 +3,12 @@ import { View, Text, TextInput } from 'react-native';
 import styles from '../styles/TextFieldStyles';
 import { useTheme } from '../ThemeContext';
 
-const TextField = ({ placeholder, isPassword=false, textType, hint='', ...props }) => {
+const TextField = ({ placeholder, isPassword=false, textType, style, hint='', ...props }) => {
+  // style: pass custom styles to the View that wraps the TextInput
+  
   const theme = useTheme()
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, style]}>
       <TextInput 
         style={[styles.input, theme.textField]} {...props}
         placeholder={placeholder}

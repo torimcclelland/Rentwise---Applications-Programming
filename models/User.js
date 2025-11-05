@@ -7,7 +7,6 @@ export class User{
         password = "",
         firstName = "",
         lastName = "",
-        displayName = "",
         isLandlord = false,
         isPremUser = false,
         properties = [],
@@ -20,6 +19,5 @@ export class User{
         this.properties = properties;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.displayName = displayName;
     }
 }

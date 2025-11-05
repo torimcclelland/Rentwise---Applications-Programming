@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontStyle: 'normal',
         fontWeight: 500,
-        font: 'inter'
+        
         
     }
 });

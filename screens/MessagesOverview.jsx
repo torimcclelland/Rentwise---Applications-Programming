@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import BottomNavBar from '../components/BottomNavBar';
 import userImage from '../components/profileexample.png';
 import styles from '../styles/MessagesOverviewStyle';
 import { useTheme } from '../ThemeContext';
+import { useNavigation } from '@react-navigation/native';
 
 const messages = [
   { username: 'renter23', message: 'How are you today?', conversationID: 'conv1' },
@@ -17,6 +23,8 @@ const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 
 const MessagesOverview = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
+;
   const navigation = useNavigation();
 
   const handlePress = () => {
@@ -43,7 +51,7 @@ const MessagesOverview = () => {
           <TouchableOpacity
             key={index}
             style={[styles.messageCard, theme.textField]}
-            onPress={() => handlePress(msg.conversationID)}
+            onPress={() => navigation.navigate('SpecificMessage')}
           >
             <Image source={userImage} style={styles.profileImage} />
             <View style={styles.messageTextContainer}>
@@ -63,3 +71,4 @@ const MessagesOverview = () => {
 };
 
 export default MessagesOverview;
+

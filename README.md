@@ -43,6 +43,10 @@ Typescript cheatsheet: https://www.typescriptlang.org/cheatsheets/
 
 React Navigation: https://reactnavigation.org/docs/hello-react-navigation?config=dynamic
 
+Retrieving data in batches: https://rnfirebase.io/firestore/usage-with-flatlists
+^ check out the Canvas page, seems incredibly relevant
+
+
 ## Checkpoint notes:
 
 - Fluff stuff first
