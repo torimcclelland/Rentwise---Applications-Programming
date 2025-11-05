@@ -8,7 +8,7 @@ import { snapshotToApplication } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} applicationToFind The id of the application to find
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved user.
  */
 export async function getApplicationByID(applicationToFind) {
 

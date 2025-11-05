@@ -8,7 +8,7 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {User} landlord The details of the property to find by landlord id (must not be empty)
- * @returns {ReturnValue} The results of the operation. If successful, the propertyList field contains the details of the retrieved properties.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultList field contains the details of the retrieved properties.
  */
 export async function getPropertyByLandlord(landlord) {
 
@@ -43,12 +43,13 @@ export async function getPropertyByLandlord(landlord) {
                 console.log(property.errorMsg)
                 return;
             }
-            property.propertyData.propertyID = doc.id;
-            propList.push(property.propertyData);
+            property.resultData.propertyID = doc.id;
+            propList.push(property.resultData);
         });
 
         // success
-        result = new ReturnValue(true, "", {}, {}, propList)
+        result = new ReturnValue(true, "")
+        result.resultList = propList;
 
     } catch(e){
         let error = ""; 

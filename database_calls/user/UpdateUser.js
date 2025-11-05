@@ -7,7 +7,7 @@ import { User } from '../../models/User';
 
 /** 
  * @param {User} thisUser The details of the user to update
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the updated user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the updated user.
  */
 export async function updateUser(thisUser) {
 

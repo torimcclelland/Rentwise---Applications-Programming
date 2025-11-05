@@ -71,7 +71,8 @@ function snapshotToProperty(snapshot){
             petsAllowed: snapshot.data().petsAllowed,
             furnished: snapshot.data().furnished
         })
-        result = new ReturnValue(true, "", {}, convertedProp)
+        result = new ReturnValue(true, "")
+        result.resultData = convertedProp
 
     } catch (e){
         let error = ""; 

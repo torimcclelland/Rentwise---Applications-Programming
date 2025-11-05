@@ -36,7 +36,7 @@ export const PropertyEditScreen = () =>{
 
     const getPropertyInfo = async() =>{
         const property = await getPropertyByID(propertyID)
-        setProperty(property.propertyData)
+        setProperty(property.resultData)
     }
 
     const updateThisProperty = async() => {

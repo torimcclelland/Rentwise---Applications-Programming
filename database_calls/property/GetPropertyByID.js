@@ -30,15 +30,11 @@ export async function getPropertyByID(propertyToFind) {
             return result;
         } 
 
-        // TODO: make a conversion function
         const propertyRetrieved = snapshotToProperty(snapshot);
 
         // success
         result = new ReturnValue(true, "")
-        result.propertyData = propertyRetrieved.propertyData
-        // console.log(result.propertyData)
-        // we can prob remove
-
+        result.resultData = propertyRetrieved.resultData
 
     } catch(e){
         let error = ""; 

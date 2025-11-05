@@ -43,8 +43,8 @@ export async function getConversationByUser(user) {
                 console.log(property.errorMsg)
                 return;
             }
-            property.propertyData.propertyID = doc.id;
-            propList.push(property.propertyData);
+            property.resultData.propertyID = doc.id;
+            propList.push(property.resultData);
         });
 
         // success
