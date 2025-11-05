@@ -48,7 +48,7 @@ const MessagesOverview = () => {
           <TouchableOpacity
             key={index}
             style={[styles.messageCard, theme.textField]}
-            onPress={() => navigation.navigate('SpecificMessage')}
+            onPress={() => navigation.navigate('Specific Message')}
           >
             <Image source={userImage} style={styles.profileImage} />
             <View style={styles.messageTextContainer}>
