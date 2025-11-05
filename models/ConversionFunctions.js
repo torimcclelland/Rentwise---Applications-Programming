@@ -23,7 +23,8 @@ function snapshotToUser(snapshot){
             isPremUser: snapshot.data().isPremUser,
             properties: snapshot.data().properties,
     })
-        result = new ReturnValue(true, "", convertedUser)
+        result = new ReturnValue(true, "")
+        result.resultData = convertedUser
 
     } catch (e){
         let error = ""; 

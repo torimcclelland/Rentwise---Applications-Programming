@@ -8,7 +8,7 @@ import { snapshotToNotification } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} notificationToFind The id of the notification to find
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved notification.
  */
 export async function getNotificationByID(notificationToFind) {
 

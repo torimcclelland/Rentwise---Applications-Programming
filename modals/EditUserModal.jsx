@@ -46,7 +46,7 @@ export const EditUserModal = ({visible, onClose}) =>{
             return
           }
           // update global value
-          GlobalValues.currentUser = result.userData
+          GlobalValues.currentUser = result.resultData
           // close the modal after submission
           onClose() 
       }catch(e){

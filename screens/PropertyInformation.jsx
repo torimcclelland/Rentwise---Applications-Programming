@@ -38,7 +38,7 @@ export const PropertyInfo = () =>{
 
     const getLandlordInfo = async(landlordID) => {
         const landlord = await getUserByID(landlordID)
-        setLandlord(landlord.userData)
+        setLandlord(landlord.resultData)
     }
 
     const applyForProperty = () => {

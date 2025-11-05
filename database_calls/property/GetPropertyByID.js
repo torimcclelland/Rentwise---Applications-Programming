@@ -8,7 +8,7 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} propertyToFind The id of the property to find
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved property.
  */
 export async function getPropertyByID(propertyToFind) {
 
