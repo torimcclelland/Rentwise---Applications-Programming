@@ -1,31 +1,41 @@
 import React, {useState} from 'react'
 import {View, Image, FlatList, StyleSheet, Dimensions} from "react-native"
 
-const {width} = Dimensions.get("window");
+const {width} = Dimensions.get('window');
 
-const ImageCarousel = ({images, imageStyle}) => {
+const ImageCarousel = ({images, onActiveImageChange, imageStyle}) => {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handleScroll = (event) => {
+
         const index = Math.round(event.nativeEvent.contentOffset.x / width);
         setActiveIndex(index);
+
+        // here we send the active index back to the caller if they request it (for deleting the current image in AddPropertyModal)
+        if(onActiveImageChange){
+            onActiveImageChange(index)
+        }
+
     } 
 
     return (
-        <View style={{width: 300}}>
+        <View style={{width, justifyContent: 'center'}}>
             <FlatList
             data={images}
             horizontal
             pagingEnabled
+            nestedScrollEnabled={true}
+            scrollEnabled={true}
+            scrollEventThrottle={16}
             showsHorizontalScrollIndicator={false}
             onScroll={handleScroll}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
-                <View style={{width: 300}}>
+                <View style={{width}}>
                     <Image
                     source = {{uri: item}}
-                    style = {[{width: 300}, imageStyle]}
+                    style = {[{width: '100%'}, imageStyle]}
                     />
                 </View>
             )}
