@@ -49,7 +49,8 @@ export const PropertyInfo = () =>{
     return(
         <View style={[propertyInfo.container, theme.dashboardContainer]}>
             <ScrollView
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            >
                 <View style={propertyInfo.content}>
                     <ImageCarousel images={property.images} imageStyle={propertyInfo.image}/>
 
@@ -125,7 +126,6 @@ export const PropertyInfo = () =>{
                         </View>
                     </View>
                 </View>
-
             </ScrollView>
 
             <View style={propertyInfo.buttons}>
@@ -147,16 +147,16 @@ export default PropertyInfo
 const propertyInfo = StyleSheet.create({
     container:{
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%'
     },
     content:{
-        paddingHorizontal: 10,
         alignItems: 'center',
-        paddingHorizontal: 20
+        paddingHorizontal: 30
     },
     image:{
         height: 274,
-        width: '90%',
+        width: '100%',
         marginTop: 10,
         borderRadius: 8
     },
@@ -164,7 +164,6 @@ const propertyInfo = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        paddingHorizontal: 10,
         fontFamily: 'Inter',
         fontSize: 16,
         marginBottom: 5,
