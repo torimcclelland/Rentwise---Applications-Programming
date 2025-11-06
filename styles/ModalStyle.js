@@ -8,7 +8,6 @@ export const stylesModal = StyleSheet.create({
     },
     banner:{
       alignItems: 'center',
-      width: '100%',
       paddingVertical: 10,
       marginBottom: 10
     },
