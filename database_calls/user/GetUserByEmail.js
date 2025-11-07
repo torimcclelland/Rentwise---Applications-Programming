@@ -7,7 +7,7 @@ import { snapshotToUser } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {User} userToFind The details of the user to find by email (email field must not be empty)
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved user.
  **/
 
 export async function getUserByEmail(userToFind){

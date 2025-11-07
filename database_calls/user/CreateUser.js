@@ -6,7 +6,7 @@ import { getUserByID } from './GetUserByID';
 
 /** 
  * @param {User} newUser The details of the user to create
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the newly created user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created user.
  */
 export async function createUser(newUser) {
 

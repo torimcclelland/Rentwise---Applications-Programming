@@ -8,7 +8,7 @@ import { snapshotToApplication } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} applicationToFind The id of the application to find
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved user.
  */
 export async function getApplicationByID(applicationToFind) {
 
@@ -30,15 +30,11 @@ export async function getApplicationByID(applicationToFind) {
             return result;
         } 
 
-        // TODO: make a conversion function
         const applicationRetrieved = snapshotToApplication(snapshot);
 
         // success
         result = new ReturnValue(true, "")
-        result.applicationData = applicationRetrieved.applicationData
-        // console.log(result.applicationData)
-        // we can prob remove
-
+        result.resultData = applicationRetrieved.resultData
 
     } catch(e){
         let error = ""; 

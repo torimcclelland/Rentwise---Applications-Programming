@@ -40,7 +40,7 @@ export const LandlordPropertiesScreen = () =>{
     result = await getPropertyByLandlord(GlobalValues.currentUser)
     console.log(result)
 
-    setPropertiesLs(result.propertyList) // set the landlords properties from result
+    setPropertiesLs(result.resultList) // set the landlords properties from result
     
   }
 

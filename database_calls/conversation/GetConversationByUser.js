@@ -1,4 +1,5 @@
-import { DocumentSnapshot, collection, getDocs, limit, orderBy, query, startAfter, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { Property } from '../../models/Property';
@@ -6,20 +7,27 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 
 /**
  * 
- * @returns {ReturnValue} The results of the operation. If successful, the resultList field contains the details of the retrieved properties.
+ * @param {User} user The user for whom to retrieve all conversations
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved conversations.
  */
-export async function getProperties() {
+export async function getConversationByUser(user) {
 
     var result = new ReturnValue(false, "");
+    let propList;
+    
+    if(user.userID == ""){
+        result = new ReturnValue(false, "User ID must not be empty.")
+        return result
+    }
 
     // try catch to handle any errors
     try{
         
-        // get reference
-        const propertyRef = collection(db, 'Properties')
+        // try to find user by ID
+        const propertyRef = collection(db, 'Conversations')
         
-        // query database (if no starting point, don't specify one)
-        const newQuery = query(propertyRef, limit(100))
+        // query
+        const newQuery = query(propertyRef, where('users', 'array-contains', user.userID))
         
         const snapshot = await getDocs(newQuery);
         
@@ -28,7 +36,8 @@ export async function getProperties() {
             return result;
         }
 
-        const propList = [];
+        // ALERT SAM CHANGE THIS!!!
+        propList = [];
         snapshot.forEach((doc) => {
             const property = snapshotToProperty(doc);
             if(!property.success){
@@ -42,13 +51,13 @@ export async function getProperties() {
         // success
         result = new ReturnValue(true, "")
         result.resultList = propList
-
+    
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
-            error = e.message + " (problem while fetching all properties)" // works, `e` narrowed to Error
+            error = e.message + " (problem while finding property)" // works, `e` narrowed to Error
         } else{
-            error = "Had a problem with typescript error handling when fetching all properties."
+            error = "Had a problem with typescript error handling when finding property."
         }
 
         result = new ReturnValue(false, error)

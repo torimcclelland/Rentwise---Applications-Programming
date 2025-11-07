@@ -11,7 +11,8 @@ import { useTheme } from '../ThemeContext';
 const BottomNavBar = ({ selectedTab }) => {
   
   const navigation = useNavigation();
-  const userType = GlobalValues.currentUser.isLandlord // check if the user is a landlord 
+  const currentUser = GlobalValues.currentUser
+  const userType = currentUser.isLandlord // check if the user is a landlord 
 
   const theme = useTheme()
  
@@ -38,7 +39,7 @@ const tabs = [
         <TouchableOpacity key={tab.name} onPress={() => handleTabPress(tab)}>
           {tab.name === 'profile' ? (
             <Profile
-              src={exampleImage}
+              src={currentUser.profilePicture}
               size={28}
               style={{
                 borderWidth: selectedTab === 'profile' ? 2 : 0,
