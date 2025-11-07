@@ -91,7 +91,7 @@ const BrowseProperties = () => {
             </View>
                 <View style={styles.bottomNav}>
                     {/* Bottom Navigation Bar */}
-                    <BottomNavBar  selectedTab="home"/>
+                    <BottomNavBar  selectedTab="search"/>
                 </View>
         </View>
     );

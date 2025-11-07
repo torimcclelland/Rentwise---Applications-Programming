@@ -5,6 +5,13 @@ import * as ImageManipulator from 'expo-image-manipulator';
 
 export async function uploadImage(allowsMultipleSelection = false, selectionLimit = 1){
 
+    // Ask for permission every time (iOS can silently deny if not requested)
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+        alert("Permission to access the photo library is required!");
+        return null;
+    }
+    
     let manipResultList = [] // initialize empty array to store photos 
 
     const result = await ImagePicker.launchImageLibraryAsync({
