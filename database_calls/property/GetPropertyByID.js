@@ -8,7 +8,7 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} propertyToFind The id of the property to find
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved property.
  */
 export async function getPropertyByID(propertyToFind) {
 
@@ -30,15 +30,11 @@ export async function getPropertyByID(propertyToFind) {
             return result;
         } 
 
-        // TODO: make a conversion function
         const propertyRetrieved = snapshotToProperty(snapshot);
 
         // success
         result = new ReturnValue(true, "")
-        result.propertyData = propertyRetrieved.propertyData
-        // console.log(result.propertyData)
-        // we can prob remove
-
+        result.resultData = propertyRetrieved.resultData
 
     } catch(e){
         let error = ""; 

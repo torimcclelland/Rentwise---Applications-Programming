@@ -67,5 +67,17 @@ export const stylesModal = StyleSheet.create({
       height: 24,
       width: 24
     },
+    editButtons: {
+    position: 'absolute',
+    top: 0,
+    right: 10,
+    flexDirection: 'row',
+    gap: 10
+    },
+    iconButton: {
+      padding: 8,
+      borderRadius: 20,
+      elevation: 2,
+    },
   })
   

@@ -30,12 +30,12 @@ export default function Login() {
       return;
     }
 
-    if (result.userData == null) {
+    if (result.resultData == null) {
       console.log("No user found!");
       return;
     }
 
-    const currentUser = result.userData;
+    const currentUser = result.resultData;
 
     if (currentUser.password !== password) {
       console.log("Error: incorrect password");

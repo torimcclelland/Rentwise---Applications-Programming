@@ -17,7 +17,7 @@ const Notifications = () => {
       const getNotifications = async() => {
 
         const result = await getNotificationByUser(userID)
-        setNotifList(result.notificationList)
+        setNotifList(result.resultList)
 
       }
     return (

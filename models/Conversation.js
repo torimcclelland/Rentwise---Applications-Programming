@@ -1,16 +1,14 @@
 
-export class Property{
+export class Conversation{
 
     constructor({
         conversationID = "",
-        landlordID = "",
-        renterID = "",
+        users = [],
         messages = []
     })
     { 
         this.conversationID = conversationID;
-        this.landlordID = landlordID;
-        this.renterID = renterID;
+        this.users = users;
         this.messages = messages;
     }
 }

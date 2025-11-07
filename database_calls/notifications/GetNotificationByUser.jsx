@@ -45,12 +45,12 @@ export async function getNotificationByUser(userID) {
                 console.log(notification.errorMsg)
                 return;
             }
-            notificationList.push(notification.notificationData);
+            notificationList.push(notification.resultData);
         })
 
-        // success
-        result = new ReturnValue(true, "", {}, {}, {}, {}, {}, notificationList)
-
+        // success FIX HERE
+        result = new ReturnValue(true, "")
+        result.resultList = notificationList;
     }catch(e){
         let error = "";
         if (e instanceof Error){

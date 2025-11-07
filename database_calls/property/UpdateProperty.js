@@ -6,7 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 
 /** 
  * @param {Property} thisProperty The details of the property to update
- * @returns {ReturnValue} The results of the operation. If successful, the propertyData field contains the details of the updated property.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the updated property.
  */
 export async function updateProperty(thisProperty) {
 

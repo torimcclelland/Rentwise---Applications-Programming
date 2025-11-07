@@ -5,7 +5,7 @@ import { getPropertyByID } from './GetPropertyByID';
 
 /** 
  * @param {Property} newProperty The details of the property to create
- * @returns {ReturnValue} The results of the operation. If successful, the propertyData field contains the details of the newly created property.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created property.
  */
 
 export async function createProperty(newProperty) {

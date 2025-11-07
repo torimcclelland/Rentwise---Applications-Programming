@@ -6,7 +6,7 @@ import { Notification } from '../../models/Notification';
 
 /** 
  * @param {Notification} newNotification The details of the notification to create
- * @returns {ReturnValue} The results of the operation. If successful, the notificationData field contains the details of the newly created notification.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created notification.
  */
 
 export async function createNotification(newNotification) {
@@ -25,8 +25,7 @@ export async function createNotification(newNotification) {
         newNotification.notificationID = docRef.id
         
         // retrieve newly made notification by calling the getNotificationByID function
-        // result = await getNotificationByID(newNotification.notificationID);
-        result = new ReturnValue(true)
+        result = await getNotificationByID(newNotification.notificationID);
 
     } catch(e){
         let error = ""; 

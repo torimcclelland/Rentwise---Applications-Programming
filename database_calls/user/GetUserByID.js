@@ -6,7 +6,7 @@ import { snapshotToUser } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} userToFind The id of the user to find by id
- * @returns {ReturnValue} The results of the operation. If successful, the userData field contains the details of the retrieved user.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved user.
  */
 export async function getUserByID(userToFind) {
 
@@ -30,12 +30,11 @@ export async function getUserByID(userToFind) {
             return result;
         } 
 
-        // TODO: make a conversion function
         const userRetrieved = snapshotToUser(snapshot);
 
         // success
         result = new ReturnValue(true, "")
-        result.userData = userRetrieved.userData
+        result.resultData = userRetrieved.resultData
 
     } catch(e){
         let error = ""; 
