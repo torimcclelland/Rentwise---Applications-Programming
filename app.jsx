@@ -16,6 +16,7 @@ import UserProfile from './screens/UserProfile';
 import PropertyInfo from './screens/PropertyInformation';
 import ApplicationPage from './screens/Application';
 import SpecificMessage from './screens/SpecificMessage';
+import Payment from './screens/Payment';
 
 const Stack = createNativeStackNavigator();
 
@@ -79,6 +80,11 @@ function RootStack() {
       <Stack.Screen
       name="Apply Property"
       component={ApplicationPage}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Payment"
+      component={Payment}
       //options={headerShown: false}}
       />
     </Stack.Navigator>
