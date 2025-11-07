@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const Profile = ({ src, size = 64, style = {} }) => {
   return (
     <View style={[styles.container(size), style]}>
-      <Image source={require('./profile_picture.jpg')} style={styles.image} /> 
+      <Image source={{uri: src }} style={styles.image} /> 
     </View>
   );
 };

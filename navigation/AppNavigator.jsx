@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import SignUpScreen from '../screens/SignUp';
 import DashboardScreen from '../screens/RenterDashboardS';
 import BrowsePropertiesScreen from '../screens/BrowseProperties';
 import ApplicationScreen from '../screens/Application';
 import PaymentScreen from '../screens/Payment';
+import MessagesOverview from '../screens/MessagesOverview';
+import SpecificMessageScreen from '../screens/SpecificMessage';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,8 @@ const AppNavigator = () => {
         <Stack.Screen name="BrowseProperties" component={BrowsePropertiesScreen} />
         <Stack.Screen name="Application" component={ApplicationScreen} />
         <Stack.Screen name="Payment" component={PaymentScreen} />
+        <Stack.Screen name="MessagesOverview" component={MessagesOverview} />
+        <Stack.Screen name="SpecificMessage" component={SpecificMessageScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

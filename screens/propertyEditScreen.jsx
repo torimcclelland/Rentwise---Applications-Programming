@@ -10,6 +10,7 @@ import { Property } from '../models/Property'
 import { updateProperty } from '../database_calls/property/UpdateProperty'
 import { useTheme } from '../ThemeContext'
 import TextFieldLong from '../components/TextFieldLong'
+import ImageCarousel from '../components/ImageCarousel'
 
 
 export const PropertyEditScreen = () =>{
@@ -35,8 +36,8 @@ export const PropertyEditScreen = () =>{
       }, [])
 
     const getPropertyInfo = async() =>{
-        const property = await getPropertyByID(propertyID)
-        setProperty(property.resultData)
+        const result = await getPropertyByID(propertyID)
+        setProperty(result.resultData)
     }
 
     const updateThisProperty = async() => {
@@ -52,14 +53,11 @@ export const PropertyEditScreen = () =>{
     }
 
     return (
-        <ScrollView style = {theme.container}>
         <View style={[styles.component, theme.container]}>
-            <Pressable style={[styles.imageBox, theme.container]}>
-                <View style={styles.addImage}>
-                <Icon name="plus" size={30} color={theme.textColor.color} />
-                <Text style={theme.textColor}>Add images</Text>
-                </View>
-            </Pressable>
+
+            <ScrollView>
+            <ImageCarousel images={property.images} imageStyle={{height: 300}}/>
+            
             <View style={styles.fieldContainer}>
                 <Text style={[styles.label, theme.textColor]}>Street Address</Text>
                 <TextField
@@ -96,8 +94,8 @@ export const PropertyEditScreen = () =>{
             <View style={styles.fieldContainer}>
                 <Text style={[styles.label, theme.textColor]}>Rent Price</Text>
                 <TextField
-                placeholder={property.monthlyPrice}
-                value={property.monthlyPrice}
+                placeholder={String(property.monthlyPrice)}
+                value={String(property.monthlyPrice)}
                 onChangeText={(text) => setProperty({ ...property, monthlyPrice: text })}
                 />
             </View>
@@ -115,8 +113,8 @@ export const PropertyEditScreen = () =>{
             size="small"
             onPress={updateThisProperty}
             />
+            </ScrollView>
         </View>
-        </ScrollView>
     );
 }
 

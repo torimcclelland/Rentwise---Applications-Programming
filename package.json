@@ -24,7 +24,8 @@
     "react-native-screens": "~4.16.0",
     "react-native-vector-icons": "^10.3.0",
     "react-native-web": "^0.21.0",
-    "react-spinners": "^0.17.0"
+    "react-spinners": "^0.17.0",
+    "styled-components": "^6.1.19"
   },
   "name": "rentwise---applications-programming",
   "version": "1.0.0",

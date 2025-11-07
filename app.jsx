@@ -15,6 +15,7 @@ import PropertyEditScreen from './screens/PropertyEditScreen';
 import UserProfile from './screens/UserProfile';
 import PropertyInfo from './screens/PropertyInformation';
 import ApplicationPage from './screens/Application';
+import SpecificMessage from './screens/SpecificMessage';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +60,11 @@ function RootStack() {
       <Stack.Screen
         name="Property Edit"
         component={PropertyEditScreen} 
+        //options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Specific Message"
+        component={SpecificMessage} 
         //options={{headerShown: false}}
       />
       <Stack.Screen 

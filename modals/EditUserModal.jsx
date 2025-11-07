@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Icon from 'react-native-vector-icons/Feather';
 import { GlobalValues } from '../GlobalValues'
 import { createProperty } from '../database_calls/property/CreateProperty'
-import {View, Text, Pressable, Modal, Image, StyleSheet} from 'react-native'
+import {View, Text, Pressable, Modal, Image, StyleSheet, ScrollView} from 'react-native'
 import DropDown from '../components/DropDown'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
@@ -12,6 +12,8 @@ import TextFieldLong from '../components/TextFieldLong';
 import { User } from '../models/User';
 import { updateUser } from '../database_calls/user/UpdateUser';
 import { stylesModal } from '../styles/ModalStyle';
+import Profile from '../components/profile';
+import { uploadImage } from '../database_calls/uploadImages';
 
 export const EditUserModal = ({visible, onClose}) =>{
     
@@ -22,6 +24,7 @@ export const EditUserModal = ({visible, onClose}) =>{
     const [password, setPassword] = useState(GlobalValues.currentUser.password)
     const [firstName, setFirstName] = useState(GlobalValues.currentUser.firstName)
     const [lastName, setLastName] = useState(GlobalValues.currentUser.lastName)
+    const [profilePicture, setProfilePicture] = useState(GlobalValues.currentUser.profilePicture)
     const [membership, setMembership] = useState('Free Tier')
 
     const memberships = ['Free Tier', 'Premium Tier']
@@ -35,7 +38,8 @@ export const EditUserModal = ({visible, onClose}) =>{
           lastName: lastName,
           isLandlord:GlobalValues.currentUser.isLandlord,
           isPremUser:membership === 'Premium Tier',
-          properties: GlobalValues.currentUser.properties
+          properties: GlobalValues.currentUser.properties,
+          profilePicture: profilePicture
       })
 
       try{
@@ -53,6 +57,13 @@ export const EditUserModal = ({visible, onClose}) =>{
           console.log("Error updating user:", e)
       }
 
+    }
+
+    const updateProfilePicture = async() => {
+        const result = await uploadImage()
+        setProfilePicture(result[0])
+
+        GlobalValues.currentUser.profilePicture = profilePicture
     }
     
     return (
@@ -74,40 +85,53 @@ export const EditUserModal = ({visible, onClose}) =>{
                                 </View>
                                 <CustomDivider/>
                             </View>
-                            <View style={stylesModal.spacing}>
-                                <TextField
-                                placeholder="First Name"
-                                value={firstName}
-                                onChangeText={setFirstName}
-                                />
-                                <TextField
-                                placeholder="Last Name"
-                                value={lastName}
-                                onChangeText={setLastName}
-                                />
-                                <TextField
-                                placeholder="Email Address"
-                                value={email}
-                                onChangeText={setEmail}
-                                />
-                                <TextField
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                                />
-                                <DropDown
-                                placeholder="Select Membership Type"
-                                options={memberships}
-                                value={membership}
-                                onSelect={setMembership}
-                                />
-                                <PrimaryButton
-                                onPress={editUser}
-                                title="Save"
-                                size="small"
-                                fontSize={12}
-                                />
-                            </View>
+
+                            {/* This is the content--from profile picture to submit button--that will be scrollable */}
+                            <ScrollView>
+                                <View style={{alignSelf: 'center', alignItems: 'center', marginBottom: 10, flexDirection: 'column', gap: 10}}>
+                                    <Profile src={profilePicture}/>
+                                    <Pressable
+                                    onPress={updateProfilePicture}>
+                                        <Text style={{textDecorationLine: 'underline'}}>Edit Profile Picture</Text>
+                                    </Pressable>
+                                </View>
+                            
+                                <View style={stylesModal.spacing}>
+                                    <TextField
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChangeText={setFirstName}
+                                    />
+                                    <TextField
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChangeText={setLastName}
+                                    />
+                                    <TextField
+                                    placeholder="Email Address"
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    />
+                                    <TextField
+                                    placeholder="Password"
+                                    value={password}
+                                    onChangeText={setPassword}
+                                    />
+                                    <DropDown
+                                    placeholder="Select Membership Type"
+                                    options={memberships}
+                                    value={membership}
+                                    onSelect={setMembership}
+                                    />
+                                    <PrimaryButton
+                                    onPress={editUser}
+                                    title="Save"
+                                    size="small"
+                                    fontSize={12}
+                                    />
+                                </View>
+                            </ScrollView>
+
                         </View>
                     </View>
             </Modal>

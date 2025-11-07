@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native'
+import {View, Text, StyleSheet, ScrollView} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '../ThemeContext'
 import CustomDivider from '../components/divider'
@@ -24,8 +24,8 @@ export const PropertyInfo = () =>{
 
     useEffect(()=>{
         const fetchData = async() => {
-            const property = await getPropertyInfo();
-            await getLandlordInfo(property.landlordID)
+            const property = await getPropertyInfo();   // 1. Grab the property information
+            await getLandlordInfo(property.landlordID)  // 2. After grabbing the property info, use it to grab the landlord's information
         };
         fetchData()
     }, [])
@@ -43,15 +43,24 @@ export const PropertyInfo = () =>{
     }
 
     const applyForProperty = () => {
-        navigation.navigate('Apply Property', {'landlordID': landlord.userID})
+        navigation.navigate('Apply Property', {'landlordID': landlord.userID}) // navigate to the property information page
     }
 
     return(
         <View style={[propertyInfo.container, theme.dashboardContainer]}>
             <ScrollView
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            >
+                <View style={{paddingHorizontal: 10}}>
+                    {property.images.length > 0 ? (
+                        <ImageCarousel images={property.images} imageStyle={{borderRadius: 8, height: 300}}/>
+                    ) : (
+                        <Text></Text> // empty tag to display nothing
+                    )}
+                </View>
+
                 <View style={propertyInfo.content}>
-                    <ImageCarousel images={property.images} imageStyle={propertyInfo.image}/>
 
                     <View style={propertyInfo.info}>
                         <View>
@@ -69,6 +78,7 @@ export const PropertyInfo = () =>{
                     <View style={[propertyInfo.features, propertyInfo.landlordInfo, theme.textField]}>
                         <Profile
                         size={40}
+                        src={landlord.profilePicture}
                         />
                         <View style={{marginRight: 140}}>
                             <Text style={[theme.textColor, {fontSize: 17, fontWeight: 600}]}>Listed by {landlord.firstName}</Text>
@@ -112,11 +122,13 @@ export const PropertyInfo = () =>{
 
                         <View style={propertyInfo.list}>
                             <Icon name="paw" size={30} color={theme.logoColor.color}/>
+
                             {property.petsAllowed == "Yes" ? (
                                 <Text style={propertyInfo.listText}>Pets Allowed</Text>
                             ) : (
                                 <Text style={propertyInfo.listText}>Pets Not Allowed</Text>
                             )}
+
                         </View>
                         
                         <View style={propertyInfo.list}>
@@ -125,19 +137,20 @@ export const PropertyInfo = () =>{
                         </View>
                     </View>
                 </View>
-
             </ScrollView>
-
+            
+            {/* Schedule and Apply buttons at the bottom of the page */}
             <View style={propertyInfo.buttons}>
                 <PrimaryButton
                 title="Shedule Visit"
-                src='./profileexample.png'
+                // Need to implement the schedule visit functionality 
                 />
                 <PrimaryButton
                 title="Apply Now"
                 onPress={() => applyForProperty()}
                 />
             </View>
+
         </View>
     )
 }
@@ -147,16 +160,15 @@ export default PropertyInfo
 const propertyInfo = StyleSheet.create({
     container:{
         flex: 1,
-        alignItems: 'center'
+        width: '100%'
     },
     content:{
-        paddingHorizontal: 10,
         alignItems: 'center',
-        paddingHorizontal: 20
+        paddingHorizontal: 30
     },
     image:{
         height: 274,
-        width: '90%',
+        width: 400,
         marginTop: 10,
         borderRadius: 8
     },
@@ -164,7 +176,6 @@ const propertyInfo = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        paddingHorizontal: 10,
         fontFamily: 'Inter',
         fontSize: 16,
         marginBottom: 5,
@@ -209,7 +220,9 @@ const propertyInfo = StyleSheet.create({
     },
     buttons:{
         flexDirection: 'row',
-        gap: 10
+        gap: 10,
+        alignSelf: 'center',
+        marginBottom: 10
     },
     featuresText:{
         fontSize: 20,

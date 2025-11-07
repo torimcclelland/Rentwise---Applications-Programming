@@ -7,16 +7,16 @@ import {
   Image
 } from 'react-native';
 import BottomNavBar from '../components/BottomNavBar';
-import userImage from '../components/profileexample.png'; // placeholder profile image
+import userImage from '../components/profileexample.png';
 import styles from '../styles/MessagesOverviewStyle';
 import { useTheme } from '../ThemeContext';
 import { useNavigation } from '@react-navigation/native';
 
 const messages = [
-  { username: 'renter23', message: 'How are you today?' },
-  { username: 'bff2025', message: 'I got a new apartment in Erie!' },
-  { username: 'rentqueen', message: 'Smoking is banned in this unit.' },
-  { username: 'ms.rent', message: 'Where are good places...' },
+  { username: 'renter23', message: 'How are you today?', conversationID: 'conv1' },
+  { username: 'bff2025', message: 'I got a new apartment in Erie!', conversationID: 'conv2' },
+  { username: 'rentqueen', message: 'Smoking is banned in this unit.', conversationID: 'conv3' },
+  { username: 'ms.rent', message: 'Where are good places...', conversationID: 'conv4' },
 ];
 
 const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
@@ -24,6 +24,9 @@ const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 const MessagesOverview = () => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const handlePress = () => {
+    navigation.navigate('Specific Message');
+  };
 
   return (
     <View style={[styles.container, theme.container]}>
@@ -45,7 +48,7 @@ const MessagesOverview = () => {
           <TouchableOpacity
             key={index}
             style={[styles.messageCard, theme.textField]}
-            onPress={() => navigation.navigate('SpecificMessage')}
+            onPress={() => navigation.navigate('Specific Message')}
           >
             <Image source={userImage} style={styles.profileImage} />
             <View style={styles.messageTextContainer}>
@@ -65,3 +68,4 @@ const MessagesOverview = () => {
 };
 
 export default MessagesOverview;
+

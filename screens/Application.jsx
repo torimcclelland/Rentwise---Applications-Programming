@@ -96,128 +96,133 @@ export const ApplicationPage = () => {
             <ScrollView
             showsVerticalScrollIndicator={false}
             >
-            <View style={[application_style.infoCard, theme.textField]}>
-                <Text style={[application_style.headers, theme.textColor]}>Personal Information</Text>
-                <TextField
-                placeholder="First Name"
-                value={firstName}
-                onChangeText={setFirstName}
-                />
+                <View style={{alignSelf: 'center', flexDirection: 'column', alignItems: 'center', gap: 10, marginTop: 12}}>
+                    <Icon name="home" size={30} color={theme.logoColor.color}/>
+                    <Text>To new beginnings</Text>
+                </View>
 
-                <TextField
-                placeholder="Last Name"
-                value={lastName}
-                onChangeText={setLastName}
-                />
+                <View style={[application_style.infoCard, theme.textField]}>
+                    <Text style={[application_style.headers, theme.textColor]}>Personal Information</Text>
+                    <TextField
+                    placeholder="First Name"
+                    value={firstName}
+                    onChangeText={setFirstName}
+                    />
 
-                <TextField
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                />
-                <View style={application_style.times}>
-                    <Icon name="calendar" size={15} color={theme.textColor.color}/>
-                    <Text style={[theme.textColor, {marginLeft: 5}]}>Date of birth:</Text>
+                    <TextField
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChangeText={setLastName}
+                    />
 
-                    {/* This datetime picker only works in ExpoGo, not supported on web */}
+                    <TextField
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                    />
+                    <View style={application_style.times}>
+                        <Icon name="calendar" size={15} color={theme.textColor.color}/>
+                        <Text style={[theme.textColor, {marginLeft: 5}]}>Date of birth:</Text>
 
-                    <DateTimePicker 
-                    testID="dateTimePicker"
-                    value={dob}
-                    mode="date" // Can also be "time" or "datetime"
-                    is24Hour={true}
-                    display="default" // "spinner" or "calendar" on Android
+                        {/* This datetime picker only works in ExpoGo, not supported on web */}
+
+                        <DateTimePicker 
+                        testID="dateTimePicker"
+                        value={dob}
+                        mode="date" // Can also be "time" or "datetime"
+                        is24Hour={true}
+                        display="default" // "spinner" or "calendar" on Android
+                        />
+                    </View>
+
+                    <TextField
+                    placeholder="Phone number"
+                    value={phoneNumber}
+                    onChangeText={setPhoneNumber}
+                    />
+
+                    <TextField
+                    placeholder="Drivers License Number"
+                    value={DLNumber}
+                    onChangeText={setDLNumber}
+                    />
+
+                    <DropDown
+                    placeholder="Maritial Status"
+                    options={["Single", "Married"]}
+                    value={maritalStatus}
+                    onSelect={setMaritalStatus}
                     />
                 </View>
 
-                <TextField
-                placeholder="Phone number"
-                value={phoneNumber}
-                onChangeText={setPhoneNumber}
-                />
+                <CustomDivider/>
 
-                <TextField
-                placeholder="Drivers License Number"
-                value={DLNumber}
-                onChangeText={setDLNumber}
-                />
+                <View style={[application_style.infoCard, theme.textField]}>
+                    <Text style={[application_style.headers, theme.textColor]}>Rental History</Text>
 
-                <DropDown
-                placeholder="Maritial Status"
-                options={["Single", "Married"]}
-                value={maritalStatus}
-                onSelect={setMaritalStatus}
-                />
-            </View>
-
-            <CustomDivider/>
-
-            <View style={[application_style.infoCard, theme.textField]}>
-                <Text style={[application_style.headers, theme.textColor]}>Rental History</Text>
-
-                <TextField
-                placeholder="Previous Address"
-                value={prevAddress}
-                onChangeText={setPrevAddress}
-                />
-                
-                <View style={application_style.lengthOfTime}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 8}}>
-                        <Icon name="clock" size={15} color={theme.textColor.color}></Icon>
-                        <Text style={[theme.textColor, {marginLeft: 8, fontSize: 16}]}>Length of Time at Previous Home</Text>
+                    <TextField
+                    placeholder="Previous Address"
+                    value={prevAddress}
+                    onChangeText={setPrevAddress}
+                    />
+                    
+                    <View style={application_style.lengthOfTime}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 8}}>
+                            <Icon name="clock" size={15} color={theme.textColor.color}></Icon>
+                            <Text style={[theme.textColor, {marginLeft: 8, fontSize: 16}]}>Length of Time at Previous Home</Text>
+                        </View>
+                        <View style={application_style.dates}>
+                                <Text style={[theme.textColor]}>From</Text>
+                                <DateTimePicker
+                                testID="dateTimePicker"
+                                value={startDate}
+                                mode="date" // Can also be "time" or "datetime"
+                                is24Hour={true}
+                                display="default" // "spinner" or "calendar" on Android
+                                />
+                                <Text style={[theme.textColor, {marginLeft: 5}]}>To</Text>
+                                <DateTimePicker
+                                testID="dateTimePicker"
+                                value={endDate}
+                                mode="date" // Can also be "time" or "datetime"
+                                is24Hour={true}
+                                display="default" // "spinner" or "calendar" on Android
+                                />
+                        </View>
                     </View>
-                    <View style={application_style.dates}>
-                            <Text style={[theme.textColor]}>From</Text>
-                            <DateTimePicker
-                            testID="dateTimePicker"
-                            value={startDate}
-                            mode="date" // Can also be "time" or "datetime"
-                            is24Hour={true}
-                            display="default" // "spinner" or "calendar" on Android
-                            />
-                            <Text style={[theme.textColor, {marginLeft: 5}]}>To</Text>
-                            <DateTimePicker
-                            testID="dateTimePicker"
-                            value={endDate}
-                            mode="date" // Can also be "time" or "datetime"
-                            is24Hour={true}
-                            display="default" // "spinner" or "calendar" on Android
-                            />
-                    </View>
+
+                    <TextField
+                    placeholder="Present Landlord Name"
+                    value={presentLandlord}
+                    onChangeText={setPresentLandlord}
+                    />
+
+                    <TextField
+                    placeholder="Present Landlord Phone"
+                    value={landlordPhone}
+                    onChangeText={setLandlordPhone}
+                    />
+
+                    <TextFieldLong
+                    placeholder="Reason for Leaving"
+                    value={leaveReason}
+                    onChangeText={setLeaveReason}
+                    maxLength={200}
+                    />
+
+                    <TextField
+                    placeholder="Rent Amount"
+                    value={rentAmount}
+                    onChangeText={setRentAmount}
+                    textType="numeric"
+                    />
+
                 </View>
 
-                <TextField
-                placeholder="Present Landlord Name"
-                value={presentLandlord}
-                onChangeText={setPresentLandlord}
+                <PrimaryButton
+                title="Submit"
+                onPress={()=>submitApplication()}
                 />
-
-                <TextField
-                placeholder="Present Landlord Phone"
-                value={landlordPhone}
-                onChangeText={setLandlordPhone}
-                />
-
-                <TextFieldLong
-                placeholder="Reason for Leaving"
-                value={leaveReason}
-                onChangeText={setLeaveReason}
-                maxLength={200}
-                />
-
-                <TextField
-                placeholder="Rent Amount"
-                value={rentAmount}
-                onChangeText={setRentAmount}
-                textType="numeric"
-                />
-
-            </View>
-
-            <PrimaryButton
-            title="Submit"
-            onPress={()=>submitApplication()}
-            />
             </ScrollView>
 
 

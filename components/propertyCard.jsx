@@ -3,6 +3,8 @@ import {useState} from 'react'
 import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/Feather';
+import PrimaryButton from './PrimaryButton';
+
 
 const PropertyCard = ({address, onPress,image, ...props}) => {
     // grab the current system theme for styling
@@ -14,9 +16,22 @@ const PropertyCard = ({address, onPress,image, ...props}) => {
                 <Image style={styles.image} source={{uri: image}} />
                 <View style={styles.button}>
                     <Text style={[styles.address, theme.textColor]}>{address}</Text>
-                    <Pressable onPress={onPress}>
-                        <Icon name="arrow-right" size={24} color={theme.textColor.color}/>
-                    </Pressable>
+                    <View style={styles.buttonsSide}>
+                        <PrimaryButton
+                        title="View"
+                        size="small"
+                        fontSize={15}
+                        customStyle={{height: 35, width: 150}}
+                        onPress={onPress}
+                        />
+                        <PrimaryButton
+                        title="Edit"
+                        size="small"
+                        fontSize={15}
+                        customStyle={{height: 35, width: 150}}
+                        onPress={onPress}
+                        />
+                    </View>
                 </View>
             </View>
         </View>
@@ -25,43 +40,46 @@ const PropertyCard = ({address, onPress,image, ...props}) => {
 
 const styles = StyleSheet.create({
     box:{
-        width: 342,
-        height: 108,
+        // height: 108,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 0.5 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5, 
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
         borderRadius: 12,
         // borderColor: 'gray'
     },
     border:{
-        width: 342,
-        height: 108,
+        width: 350,
+        height: 260,
         borderRadius: 12,
-        borderWidth: 0.5,
         overflow: 'hidden',
-        // borderColor: 'gray'
+        borderColor: '#034974'
     },
     button:{
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        flexDirection: 'column',
+        alignItems: 'center'
     },
     image:{
-        height: 80,
+        height: 180,
         width: '100%',
-        borderTopLeftRadius: 12,
-        borderTopRightRadius: 12
+        borderRadius: 12
+        
     },
     address:{
         paddingLeft: 8,
         paddingTop: 2,
-        fontFamily: 'Inter',
+        font: 'Inter',
+        fontSize: 20,
         fontWeight: 500
     },
     icon:{
         height: 24,
         width: 24
+    },
+    buttonsSide:{
+        flexDirection: 'row',
+        gap: 10
+        
     }
 })
 
