@@ -1,15 +1,23 @@
 import React, {useState} from 'react'
 import {View, Image, FlatList, StyleSheet, Dimensions} from "react-native"
 
-const {width} = Dimensions.get('window');
 
 const ImageCarousel = ({images, onActiveImageChange, imageStyle}) => {
 
     const [activeIndex, setActiveIndex] = useState(0);
+    const [containerWidth, setContainerWidth] = useState(0)
+
+    const handleLayout = (event) => {
+
+        const width = event.nativeEvent.layout;
+        setContainerWidth(width)
+        console.log(containerWidth)
+
+    }
 
     const handleScroll = (event) => {
 
-        const index = Math.round(event.nativeEvent.contentOffset.x / width);
+        const index = Math.round(event.nativeEvent.contentOffset.x / containerWidth.width);
         setActiveIndex(index);
 
         // here we send the active index back to the caller if they request it (for deleting the current image in AddPropertyModal)
@@ -20,7 +28,7 @@ const ImageCarousel = ({images, onActiveImageChange, imageStyle}) => {
     } 
 
     return (
-        <View style={{width, justifyContent: 'center'}}>
+        <View onLayout={handleLayout} style={{width: '100%'}}>
             <FlatList
             data={images}
             horizontal
@@ -32,7 +40,7 @@ const ImageCarousel = ({images, onActiveImageChange, imageStyle}) => {
             onScroll={handleScroll}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
-                <View style={{width}}>
+                <View style={{width: containerWidth.width}}>
                     <Image
                     source = {{uri: item}}
                     style = {[{width: '100%'}, imageStyle]}
