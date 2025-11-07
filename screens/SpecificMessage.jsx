@@ -5,6 +5,7 @@ import BottomNavBar from '../components/BottomNavBar';
 import MessageBubble from '../components/MessageBubble';
 import styles from '../styles/SpecificMessageStyle';
 import { useTheme } from '../ThemeContext';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Sample conversation data keyed by ConversationID
 const conversationMap = {
@@ -12,10 +13,8 @@ const conversationMap = {
     { sender: 'renter23', senderName: 'You', text: 'Hi there!', timestamp: '2023-11-30T09:40:00' },
     { sender: 'landlord', senderName: 'Mrs. Landlord', text: 'Hello! How can I help you today?', timestamp: '2023-11-30T09:41:00' },
     { sender: 'renter23', senderName: 'You', text: 'I had a question about the lease terms.', timestamp: '2023-11-30T09:42:00' },
-  ],
-  'conv2': [
-    { sender: 'bff2025', senderName: 'You', text: 'I got a new apartment in Erie!', timestamp: '2023-11-30T10:00:00' },
-    { sender: 'landlord', senderName: 'Mrs. Landlord', text: 'Congrats! Let me know if you need anything.', timestamp: '2023-11-30T10:01:00' },
+    { sender: 'landlord', senderName: 'Mrs. Landlord', text: 'Sure! Pets are allowed and rent is due on the 1st.', timestamp: '2023-11-30T09:43:00' },
+    { sender: 'renter23', senderName: 'You', text: 'Perfect, thank you!', timestamp: '2023-11-30T09:44:00' },
   ],
 };
 
@@ -28,20 +27,21 @@ const SpecificMessage = () => {
   return (
     <View style={[styles.container, theme.container]}>
       {/* Header */}
-      <Text style={[styles.header, theme.textColor]}>
-        Conversation with Mrs. Landlord
-      </Text>
+      <View style={styles.headerContainer}>
+        <Icon name="account-circle-outline" size={24} color={theme.textColor.color} />
+        <Text style={[styles.header, theme.textColor]}>
+          Conversation with Mrs. Landlord
+        </Text>
+      </View>
 
       {/* Message Thread */}
       <ScrollView contentContainerStyle={styles.messageList}>
         {conversation.map((msg, index) => (
           <MessageBubble
             key={index}
-            sender={msg.sender}
-            senderName={msg.senderName}
             text={msg.text}
+            fromUser={msg.sender !== 'landlord'}
             timestamp={msg.timestamp}
-            isUser={msg.sender !== 'landlord'}
           />
         ))}
       </ScrollView>

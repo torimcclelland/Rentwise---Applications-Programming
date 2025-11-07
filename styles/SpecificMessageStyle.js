@@ -1,32 +1,31 @@
-const styles = {
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '2rem',
-    backgroundColor: '#fff',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-    maxWidth: '600px',
-    margin: '0 auto',
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    backgroundColor: '#f9f9f9',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+    gap: 8,
   },
   header: {
-    fontSize: '1.25rem',
+    fontSize: 18,
     fontWeight: '600',
-    marginBottom: '1.5rem',
-    textAlign: 'center',
-    color: '#333',
   },
-  bubbleContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1rem',
+  messageList: {
+    paddingBottom: 80,
   },
-  empty: {
-    textAlign: 'center',
-    fontStyle: 'italic',
-    color: '#999',
-    padding: '2rem',
+  bottomNav: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
-};
+});
 
 export default styles;
