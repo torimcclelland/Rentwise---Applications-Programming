@@ -136,19 +136,24 @@ function snapshotToApplication(snapshot){
 
 /**
  * 
- * @param {DocumentSnapshot} snapshot The snapshot to convert to a notification
+ * @param {DocumentSnapshot} snapshot The snapshot to convert to a list of notifications under a specific user
  * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
-function snapshotToNotification(snapshot){
+function snapshotToNotifUserList(snapshot){
     let result = new ReturnValue()
+    let convertedNotifList
     let convertedNotif
 
     try{
         
         convertedNotif = new Notification({
+            
+        })
+
+        convertedNotifList = new Notification({
             notificationID: snapshot.id,
             userID: snapshot.data().userID,
-            message: snapshot.data().message
+            notifications: snapshot.data().notifications,
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedNotif
@@ -165,6 +170,41 @@ function snapshotToNotification(snapshot){
     }
     return result
 }
+
+
+/**
+ * 
+ * @param {DocumentSnapshot} snapshot The snapshot to convert to a notification object
+ * @return {ReturnValue} The results of the conversion (stored in the resultData value)
+ */
+function snapshotToNotif(snapshot){
+    let result = new ReturnValue()
+    let convertedNotif
+
+    try{
+        
+        convertedNotif = new Notification({
+            notificationID: snapshot.id,
+            userID: snapshot.data().userID,
+            notifications: snapshot.data().notifications,
+        })
+        result = new ReturnValue(true, "")
+        result.resultData = convertedNotif
+
+    } catch (e){
+        let error = ""; 
+        if (e instanceof Error) {
+            error = e.message // works, `e` narrowed to Error
+        } else{
+            error = "Had a problem with typescript error handling when converting snapshot to notification."
+        }
+
+        result = new ReturnValue(false, error)
+    }
+    return result
+}
+
+
 
 
 /**
@@ -200,4 +240,4 @@ function snapshotToConversation(snapshot){
     return result
 }
 
-export {snapshotToUser, snapshotToProperty, snapshotToApplication, snapshotToNotification, snapshotToConversation}
+export {snapshotToUser, snapshotToProperty, snapshotToApplication, snapshotToNotifUserList, snapshotToNotif, snapshotToConversation}
