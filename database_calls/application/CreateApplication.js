@@ -6,7 +6,7 @@ import { Application } from '../../models/Application';
 
 /** 
  * @param {Application} newApplication The details of the application to create
- * @returns {ReturnValue} The results of the operation. If successful, the applicationData field contains the details of the newly created application.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created application.
  */
 
 export async function createApplication(newApplication) {

@@ -90,7 +90,7 @@ function snapshotToProperty(snapshot){
 /**
  * 
  * @param {DocumentSnapshot} snapshot The snapshot to convert to an application
- * @return {ReturnValue} The results of the conversion (stored in the applicationData value)
+ * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
 function snapshotToApplication(snapshot){
     let result = new ReturnValue()
@@ -118,7 +118,7 @@ function snapshotToApplication(snapshot){
             rentAmount: snapshot.data().rentAmount,
         })
         result = new ReturnValue()
-        result.applicationData = convertedApp
+        result.resultData = convertedApp
 
     } catch (e){
         let error = ""; 
@@ -136,7 +136,7 @@ function snapshotToApplication(snapshot){
 /**
  * 
  * @param {DocumentSnapshot} snapshot The snapshot to convert to a notification
- * @return {ReturnValue} The results of the conversion (stored in the notificationData value)
+ * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
 function snapshotToNotification(snapshot){
     let result = new ReturnValue()
@@ -149,9 +149,8 @@ function snapshotToNotification(snapshot){
             userID: snapshot.data().userID,
             message: snapshot.data().message
         })
-        result = new ReturnValue()
-        result.notificationData = convertedNotif
-        result.success = true
+        result = new ReturnValue(true, "")
+        result.resultData = convertedNotif
 
     } catch (e){
         let error = ""; 
@@ -170,7 +169,7 @@ function snapshotToNotification(snapshot){
 /**
  * Converts a snapshot to a conversation object.
  * @param {DocumentSnapshot} snapshot The snapshot to convert to a conversation
- * @return {ReturnValue} The results of the conversion (stored in the conversationData value)
+ * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
 function snapshotToConversation(snapshot){
 

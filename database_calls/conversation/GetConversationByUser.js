@@ -8,7 +8,7 @@ import { snapshotToProperty } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {User} user The user for whom to retrieve all conversations
- * @returns {ReturnValue} The results of the operation. If successful, the conversationData field contains the details of the retrieved conversations.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved conversations.
  */
 export async function getConversationByUser(user) {
 
@@ -36,6 +36,7 @@ export async function getConversationByUser(user) {
             return result;
         }
 
+        // ALERT SAM CHANGE THIS!!!
         propList = [];
         snapshot.forEach((doc) => {
             const property = snapshotToProperty(doc);

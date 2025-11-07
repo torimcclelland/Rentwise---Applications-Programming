@@ -6,7 +6,7 @@ import { getConversationByID } from './GetConversationByID';
 
 /** 
  * @param {Conversation} newConversation The details of the conversation to create
- * @returns {ReturnValue} The results of the operation. If successful, the conversationData field contains the details of the newly created conversation.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created conversation.
  */
 export async function createConversation(newConversation) {
 

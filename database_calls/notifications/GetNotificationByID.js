@@ -31,11 +31,7 @@ export async function getNotificationByID(notificationToFind) {
         } 
 
         // TODO: make a conversion function
-        const notificationRetrieved = snapshotToNotification(snapshot);
-
-        // success
-        result = new ReturnValue(true, "")
-        result.notificationData = notificationRetrieved.notificationData
+        result = snapshotToNotification(snapshot);
 
     } catch(e){
         let error = ""; 

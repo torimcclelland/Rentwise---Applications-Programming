@@ -30,15 +30,11 @@ export async function getApplicationByID(applicationToFind) {
             return result;
         } 
 
-        // TODO: make a conversion function
         const applicationRetrieved = snapshotToApplication(snapshot);
 
         // success
         result = new ReturnValue(true, "")
-        result.applicationData = applicationRetrieved.applicationData
-        // console.log(result.applicationData)
-        // we can prob remove
-
+        result.resultData = applicationRetrieved.resultData
 
     } catch(e){
         let error = ""; 

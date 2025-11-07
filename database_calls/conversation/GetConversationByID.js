@@ -8,7 +8,7 @@ import { snapshotToConversation } from '../../models/ConversionFunctions';
 /**
  * 
  * @param {string} conversationToFind The id of the conversation to find
- * @returns {ReturnValue} The results of the operation. If successful, the conversationData field contains the details of the retrieved conversation.
+ * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved conversation.
  */
 export async function getConversationByID(conversationToFind) {
 
@@ -30,11 +30,8 @@ export async function getConversationByID(conversationToFind) {
             return result;
         } 
 
-        const conversationRetrieved = snapshotToConversation(snapshot);
+        result = snapshotToConversation(snapshot);
 
-        // success
-        result = new ReturnValue(true, "")
-        result.resultData = conversationRetrieved.resultData
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
