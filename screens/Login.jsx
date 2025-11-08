@@ -11,8 +11,8 @@ import { useTheme } from "../ThemeContext";
 import { useColorScheme } from "react-native";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("ThaidakarRental@fakeEmail.com");
+  const [password, setPassword] = useState("tempPass");
   const [pressed, setPressed] = useState(false);
   const navigation = useNavigation();
   const theme = useTheme();
