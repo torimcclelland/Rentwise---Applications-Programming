@@ -34,7 +34,7 @@ const BrowseProperties = () => {
             console.log("Error: " + result.errorMsg)
             return
         }
-        setProperties(result.propertyList)
+        setProperties(result.resultList)
     }
 
     const viewProperty = async(propertyID) => {

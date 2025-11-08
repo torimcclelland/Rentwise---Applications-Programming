@@ -44,7 +44,7 @@ export default function SignUpScreen () {
       console.log("Error:", result.errorMsg);// KELSIER: better error handling
       return;
     }
-    if(result.userData != null){
+    if(result.resultData != null){
       console.log("A user with that email already exists!")// KELSIER: better error handling
       return
     }
@@ -58,7 +58,7 @@ export default function SignUpScreen () {
     }
 
     console.log("User successfully created.")// KELSIER push
-    const currentUser = result.userData
+    const currentUser = result.resultData
 
     GlobalValues.currentUser = currentUser;
     // if we get here, successful login. Navigate to the relevant screen

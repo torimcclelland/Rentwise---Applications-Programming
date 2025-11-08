@@ -32,14 +32,14 @@ export const PropertyInfo = () =>{
 
     const getPropertyInfo = async() => {
         const property = await getPropertyByID(propertyID)
-        setProperty(property.propertyData)
-        return property.propertyData
+        setProperty(property.resultData)
+        return property.resultData
 
     }
 
     const getLandlordInfo = async(landlordID) => {
         const landlord = await getUserByID(landlordID)
-        setLandlord(landlord.userData)
+        setLandlord(landlord.resultData)
     }
 
     const applyForProperty = () => {

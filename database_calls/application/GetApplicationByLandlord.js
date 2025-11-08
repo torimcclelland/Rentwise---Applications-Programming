@@ -7,34 +7,47 @@ import { snapshotToApplication } from '../../models/ConversionFunctions';
 
 /**
  * 
- * @param {string} applicationToFind The id of the application to find
+ * @param {Application} applicationToFind The id of the application to find
  * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved user.
  */
 export async function getApplicationByID(applicationToFind) {
 
     var result = new ReturnValue(false, "");
+    let appList;
     
-    if(!applicationToFind){
-        result = new ReturnValue(false, "Application ID must not be empty.")
+    if(!applicationToFind.landlordID){
+        result = new ReturnValue(false, "Landlord ID must not be empty.")
         return result
     }
 
     // try catch to handle any errors
     try{
-         const applicationRef = doc(db, 'Applications', applicationToFind)
-    
-         const snapshot = await getDoc(applicationRef);
+        const applicationRef = doc(db, 'Applications')
 
-        if (snapshot.data() == undefined) {
-            result = new ReturnValue(false, "No snapshots found for application with id " + applicationToFind);
+        // query
+        const newQuery = query(applicationRef, where("landlordID", "==", applicationToFind.landlordID))
+        
+        const snapshot = await getDoc(newQuery);
+
+        if (snapshot.docs.length == 0) {
+            result = new ReturnValue(true, "");
             return result;
-        } 
+        }
 
-        const applicationRetrieved = snapshotToApplication(snapshot);
+        appList = [];
+        snapshot.forEach((doc) => {
+            const application = snapshotToApplication(doc);
+            if(!application.success){
+                console.log(application.errorMsg)
+                return;
+            }
+            application.resultData.applicationID = doc.id;
+            appList.push(application.resultData);
+        });
 
         // success
         result = new ReturnValue(true, "")
-        result.resultData = applicationRetrieved.resultData
+        result.resultList = appList
 
     } catch(e){
         let error = ""; 

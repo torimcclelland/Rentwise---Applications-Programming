@@ -1,14 +1,28 @@
 
-export class Notification{
+class Notification{
 
+    constructor({
+        date = "",
+        message = "",
+        image = ""
+    })
+    { 
+    }
+}
+
+class NotificationList{
+    
     constructor({
         notificationID = "",
         userID = "",
-        message = ""
+        notifications = [],
+        isNew = 0,
     })
     { 
         this.notificationID = notificationID;
         this.userID = userID;
-        this.message = message;
+        this.notifications = notifications;
     }
 }
+
+export { Notification, NotificationList }

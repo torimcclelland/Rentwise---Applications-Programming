@@ -93,8 +93,7 @@ const AddProperty = ({visible, onClose}) =>{
 
         try{
             const result = await createProperty(property)
-            console.log("Property created", result.propertyData)
-
+            console.log("Property created", result.resultData)
             // close the modal after submission
             onClose() 
 

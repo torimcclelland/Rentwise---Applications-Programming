@@ -37,8 +37,7 @@ export const PropertyEditScreen = () =>{
 
     const getPropertyInfo = async() =>{
         const result = await getPropertyByID(propertyID)
-        setProperty(result.propertyData)
-        console.log(property.images)
+        setProperty(result.resultData)
     }
 
     const updateThisProperty = async() => {
