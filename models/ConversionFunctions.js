@@ -103,6 +103,7 @@ function snapshotToApplication(snapshot){
             applicationID: snapshot.id,
             landlordID: snapshot.data().landlordID,
             renterID: snapshot.data().renterID,
+            propertyID: snapshot.data().propertyID,
             firstName: snapshot.data().firstName,
             lastName: snapshot.data().lastName,
             email: snapshot.data().email,
@@ -118,7 +119,7 @@ function snapshotToApplication(snapshot){
             leaveReason: snapshot.data().leaveReason,
             rentAmount: snapshot.data().rentAmount,
         })
-        result = new ReturnValue()
+        result = new ReturnValue("true")
         result.resultData = convertedApp
 
     } catch (e){
