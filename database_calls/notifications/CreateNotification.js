@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-// import { getNotificationByID } from './GetNotificationByID';
+import { getNotificationByID } from './GetNotificationByID';
 import { Notification } from '../../models/Notification';
 
 /** 
