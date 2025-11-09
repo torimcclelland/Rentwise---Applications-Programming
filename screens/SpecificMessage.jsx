@@ -3,8 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -70,26 +68,23 @@ const SpecificMessage = () => {
           </ScrollView>
         </View>
 
-        {/* Input Bar */}
-        <View style={styles.inputBar}>
-          <TextFieldLong
-            value={inputText}
-            onChangeText={setInputText}
-            placeholder="Type a message..."
-            customStyle={styles.textField}
-          />
-          <PrimaryButton
-            title="Send"
-            size="small"
-            onPress={handleSend}
-            disabled={!inputText.trim()}
-            customStyle={styles.sendButton}
-          />
-</View>
-
-
-        {/* Bottom Navigation Bar */}
-        <View style={styles.bottomNav}>
+        {/* Input and Bottom Navigation */}
+        <View style={styles.bottomContainer}>
+          <View style={styles.inputBar}>
+            <TextFieldLong
+              value={inputText}
+              onChangeText={setInputText}
+              placeholder="Type a message..."
+              customStyle={styles.textField}
+            />
+            <PrimaryButton
+              title="Send"
+              size="small"
+              onPress={handleSend}
+              disabled={!inputText.trim()}
+              customStyle={styles.sendButton}
+            />
+          </View>
           <BottomNavBar selectedTab="messages" />
         </View>
       </View>
@@ -98,4 +93,3 @@ const SpecificMessage = () => {
 };
 
 export default SpecificMessage;
-
