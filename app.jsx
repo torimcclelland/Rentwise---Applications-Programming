@@ -11,12 +11,13 @@ import BrowseProperties from './screens/BrowseProperties';
 import MessagesOverview from './screens/MessagesOverview';
 import Notifications from './screens/Notifications';
 import SignUpScreen from './screens/SignUp';
-import PropertyEditScreen from './screens/propertyEditScreen';
+import PropertyEditScreen from './screens/PropertyEditScreen';
 import UserProfile from './screens/UserProfile';
 import PropertyInfo from './screens/PropertyInformation';
 import ApplicationPage from './screens/Application';
 import SpecificMessage from './screens/SpecificMessage';
 import ListedProperty from './screens/ListedProperty';
+import ViewApplication from './screens/ViewApplication';
 
 const Stack = createNativeStackNavigator();
 
@@ -85,6 +86,11 @@ function RootStack() {
       <Stack.Screen
       name="Landlord Property View"
       component={ListedProperty}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="View Application"
+      component={ViewApplication}
       //options={headerShown: false}}
       />
     </Stack.Navigator>
