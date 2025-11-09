@@ -8,9 +8,11 @@ import CustomDivider from '../components/divider';
 import { GlobalValues } from '../GlobalValues';
 import BottomNavBar from '../components/BottomNavBar';
 import { useTheme } from '../ThemeContext';
+import { useNavigation } from '@react-navigation/native';
 
 const DashboardScreen = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -40,8 +42,7 @@ const DashboardScreen = () => {
             subtitle="$985/month • Ends Jan 31, 2026"
           />
           <View style={styles.buttonRow}>
-            <PrimaryButton title="View History" />
-            <PrimaryButton title="View Current" />
+            <PrimaryButton title="View Lease" onPress={() => navigation.navigate('Lease Info')} />
           </View>
 
           <CustomDivider />
@@ -53,7 +54,7 @@ const DashboardScreen = () => {
             title="Last Payment"
             subtitle="✅ $985 received on Sept. 30"
           />
-          <PrimaryButton title="Make Payment" />
+          <PrimaryButton title="Make Payment" onPress={() => navigation.navigate('Payment')} />
 
           <CustomDivider />
 
