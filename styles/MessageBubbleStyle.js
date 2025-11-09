@@ -1,51 +1,44 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
-const MessageBubble = ({ text, fromUser, timestamp }) => {
-  return (
-    <View style={[styles.bubbleContainer, fromUser ? styles.userAlign : styles.otherAlign]}>
-      <View style={[styles.bubble, fromUser ? styles.userBubble : styles.otherBubble]}>
-        <Text style={styles.messageText}>{text}</Text>
-        <Text style={styles.timestamp}>{new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
-      </View>
-    </View>
-  );
-};
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   bubbleContainer: {
     marginVertical: 6,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
   },
-  userAlign: {
-    alignSelf: 'flex-end',
+  alignRight: {
+    justifyContent: 'flex-end',
   },
-  otherAlign: {
-    alignSelf: 'flex-start',
+  alignLeft: {
+    justifyContent: 'flex-start',
   },
   bubble: {
     maxWidth: '80%',
-    padding: 10,
+    padding: 12,
     borderRadius: 16,
+    elevation: 1,
   },
   userBubble: {
-    backgroundColor: '#007AFF', // iMessage-style blue
     borderTopRightRadius: 0,
   },
   otherBubble: {
-    backgroundColor: '#E5E5EA', // light gray
     borderTopLeftRadius: 0,
   },
   messageText: {
-    color: '#fff',
     fontSize: 16,
   },
   timestamp: {
-    color: '#e0e0e0',
     fontSize: 12,
     marginTop: 4,
     textAlign: 'right',
+    color: '#888',
+  },
+  statusText: {
+    fontSize: 12,
+    marginTop: 2,
+    textAlign: 'right',
+    color: '#aaa',
   },
 });
 
-export default MessageBubble;
+export default styles;

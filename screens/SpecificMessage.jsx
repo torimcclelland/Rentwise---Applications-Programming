@@ -13,6 +13,8 @@ import MessageBubble from '../components/MessageBubble';
 import styles from '../styles/SpecificMessageStyle';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PrimaryButton from '../components/PrimaryButton';
+import TextFieldLong from '../components/TextFieldLong';
 
 const staticConversation = [
   { sender: 'renter23', senderName: 'You', text: 'Hi there!', timestamp: '2023-11-30T09:40:00' },
@@ -70,17 +72,21 @@ const SpecificMessage = () => {
 
         {/* Input Bar */}
         <View style={styles.inputBar}>
-          <TextInput
-            style={styles.input}
+          <TextFieldLong
             value={inputText}
             onChangeText={setInputText}
             placeholder="Type a message..."
-            placeholderTextColor="#999"
+            customStyle={styles.textField}
           />
-          <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
-            <Icon name="send" size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
+          <PrimaryButton
+            title="Send"
+            size="small"
+            onPress={handleSend}
+            disabled={!inputText.trim()}
+            customStyle={styles.sendButton}
+          />
+</View>
+
 
         {/* Bottom Navigation Bar */}
         <View style={styles.bottomNav}>
