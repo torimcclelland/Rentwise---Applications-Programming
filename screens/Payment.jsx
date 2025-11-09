@@ -12,10 +12,12 @@ import {
 } from '../styles/PaymentStyle';
 import PrimaryButton from '../components/PrimaryButton';
 import DropDown from '../components/DropDown';
+import { useNavigation } from '@react-navigation/native';
 
 const Payment = () => {
     const [selectedMethod, setSelectedMethod] = useState('');
     const paymentOptions = ['Visa ending in *1234', 'Mastercard ending in *5678'];
+    const navigation = useNavigation();
   
     const handleConfirm = () => {
       console.log('Payment confirmed with:', selectedMethod);
@@ -45,12 +47,7 @@ const Payment = () => {
           </Section>
   
           <ButtonGroup>
-            <PrimaryButton
-              title="View Lease Terms"
-              iconName="file-document-outline"
-              onPress={handleViewLease}
-              size="medium"
-            />
+            <PrimaryButton title="View Lease" onPress={() => navigation.navigate('Lease Info')} />
           </ButtonGroup>
   
           <Disclaimer>
