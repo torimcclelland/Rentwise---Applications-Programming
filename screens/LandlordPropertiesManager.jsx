@@ -48,6 +48,10 @@ export const LandlordPropertiesScreen = () =>{
     navigation.navigate('Property Edit', {'propertyID': propertyID}); // pass the property ID to the screen
   }
 
+  const viewProperty = async(propertyID) => {
+    navigation.navigate('Landlord Property View', {'propertyID': propertyID});
+  }
+
   return (
     <View style={[styles.main, theme.container]}>
       {/* centered content container */}
@@ -74,7 +78,8 @@ export const LandlordPropertiesScreen = () =>{
             <PropertyCard
               key={item.propertyID?.toString()}
               address={item.address}
-              onPress={() => editProperty(item.propertyID)}
+              edit={() => editProperty(item.propertyID)} // navigate to the edit screen
+              view={() => viewProperty(item.propertyID)} // navigate to the view screen
               image={item.images[0]}
             />
           ))

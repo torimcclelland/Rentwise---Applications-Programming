@@ -5,6 +5,7 @@ export class Application{
         applicationID = "",
         landlordID = "",
         renterID = "",
+        propertyID = "",
         firstName= "",
         lastName= "",
         email= "",
@@ -24,6 +25,7 @@ export class Application{
         this.applicationID = applicationID
         this.landlordID = landlordID,
         this.renterID = renterID,
+        this.propertyID = propertyID,
         this.firstName= firstName,
         this.lastName= lastName,
         this.email= email,

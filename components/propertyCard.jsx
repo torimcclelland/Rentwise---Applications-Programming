@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import PrimaryButton from './PrimaryButton';
 
 
-const PropertyCard = ({address, onPress,image, ...props}) => {
+const PropertyCard = ({address, view, edit, image, ...props}) => {
     // grab the current system theme for styling
     const theme = useTheme()
     
@@ -22,14 +22,14 @@ const PropertyCard = ({address, onPress,image, ...props}) => {
                         size="small"
                         fontSize={15}
                         customStyle={{height: 35, width: 150}}
-                        onPress={onPress}
+                        onPress={view}
                         />
                         <PrimaryButton
                         title="Edit"
                         size="small"
                         fontSize={15}
                         customStyle={{height: 35, width: 150}}
-                        onPress={onPress}
+                        onPress={edit}
                         />
                     </View>
                 </View>

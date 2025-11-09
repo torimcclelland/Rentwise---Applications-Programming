@@ -42,8 +42,8 @@ export const PropertyInfo = () =>{
         setLandlord(landlord.resultData)
     }
 
-    const applyForProperty = () => {
-        navigation.navigate('Apply Property', {'landlordID': landlord.userID}) // navigate to the property information page
+    const applyForProperty = async() => {
+        navigation.navigate('Apply Property', {'landlordID': landlord.userID, 'propertyID': propertyID}) // navigate to the property information page
     }
 
     return(
