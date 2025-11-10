@@ -20,6 +20,7 @@ import Payment from './screens/Payment';
 import RenterLeaseScreen from './screens/RenterLease';
 import ListedProperty from './screens/ListedProperty';
 import ViewApplication from './screens/ViewApplication';
+import PropertyMapView from './screens/PropertyMapView';
 
 const Stack = createNativeStackNavigator();
 
@@ -103,6 +104,11 @@ function RootStack() {
       <Stack.Screen
       name="View Application"
       component={ViewApplication}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Property Map View"
+      component={PropertyMapView}
       //options={headerShown: false}}
       />
     </Stack.Navigator>

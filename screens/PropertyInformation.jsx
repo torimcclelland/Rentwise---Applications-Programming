@@ -12,6 +12,7 @@ import RatingStars from '../components/RatingStars'
 import PrimaryButton from '../components/PrimaryButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ImageCarousel from '../components/ImageCarousel'
+import MapView from 'react-native-maps'
 
 export const PropertyInfo = () =>{
 
@@ -48,10 +49,14 @@ export const PropertyInfo = () =>{
 
     return(
         <View style={[propertyInfo.container, theme.dashboardContainer]}>
+
+            <MapView style={propertyInfo.map} />
+
             <ScrollView
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             >
+            <View style={propertyInfo.bottomPortion}>
                 <View style={{paddingHorizontal: 10}}>
                     {property.images.length > 0 ? (
                         <ImageCarousel images={property.images} imageStyle={{borderRadius: 8, height: 300}}/>
@@ -137,6 +142,7 @@ export const PropertyInfo = () =>{
                         </View>
                     </View>
                 </View>
+            </View>
             </ScrollView>
             
             {/* Schedule and Apply buttons at the bottom of the page */}
@@ -262,5 +268,12 @@ const propertyInfo = StyleSheet.create({
         alignSelf: 'flex-start',
         marginTop: 10,
         alignItems: 'center'
+    },
+    bottomPortion:{
+        marginTop: 380,
+        paddingTop: 30,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        backgroundColor: 'white'
     }
 })
