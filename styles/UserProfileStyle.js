@@ -29,9 +29,9 @@ export const styles = StyleSheet.create({
   backgroundColor: '#E0E7FF',
   justifyContent: 'center',
   alignItems: 'center',
-  shadowColor: '#000',
-  shadowOpacity: 0.1,
-  shadowRadius: 4,
+  boxShadowColor: '#000',
+  boxShadowOpacity: 0.1,
+  boxShadowRadius: 4,
   elevation: 3
 },
 welcomeText: {
@@ -49,9 +49,9 @@ welcomeText: {
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    boxShadowColor: '#000',
+    boxShadowOpacity: 0.05,
+    boxShadowRadius: 4,
     elevation: 2,
   },
   cardTitle: {
@@ -108,9 +108,9 @@ export const theme = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 12,
     padding: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    boxShadowColor: '#000',
+    boxShadowOpacity: 0.05,
+    boxShadowRadius: 4,
     elevation: 2,
   },
 });

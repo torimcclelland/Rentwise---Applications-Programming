@@ -48,11 +48,11 @@ const notifModal = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 5, // Android shadow
-    shadowColor: '#000', // iOS shadow
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
+    elevation: 5, // Android boxShadow
+    boxShadowColor: '#000', // iOS boxShadow
+    boxShadowOpacity: 0.3,
+    boxShadowRadius: 8,
+    boxShadowOffset: { width: 0, height: 2 },
   },
   message: {
     fontSize: 16,

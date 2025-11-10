@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadowColor: '#000',
+    boxShadowOpacity: 0.08,
+    boxShadowRadius: 6,
     elevation: 3,
   },
   value: {
