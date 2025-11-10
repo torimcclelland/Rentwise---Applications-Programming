@@ -12,6 +12,7 @@ import { useTheme } from '../ThemeContext';
 import { useColorScheme } from 'react-native';
 import { User } from '../models/User';
 import PrimaryButton from '../components/PrimaryButton';
+import NotificationModal from '../components/NotificationModal';
 
 export default function SignUpScreen () {
   const [email, setEmail] = useState('');
@@ -24,6 +25,12 @@ export default function SignUpScreen () {
   const theme = useTheme()
   const scheme = useColorScheme()
   const logo = scheme === 'dark' ? require('./rentwiseLogoDarkMode.png') : require('./rentwiseLogo.png')
+
+  const [modalVisible, setModalVisible] = useState(false)
+  const[errorMessage, setErrorMessage] = useState("")
+  const toggleModal = () => {
+      setModalVisible(!modalVisible)
+  }
 
   const handleSignUp = async () => {
 
@@ -41,19 +48,34 @@ export default function SignUpScreen () {
     let result = await getUserByEmail(userToCreate);
 
     if(!result.success){
-      console.log("Error:", result.errorMsg);// KELSIER: better error handling
+      console.log("Error:", result.errorMsg);
+      setErrorMessage("Error:", result.errorMsg)
+      toggleModal()
       return;
     }
     if(result.resultData != null){
-      console.log("A user with that email already exists!")// KELSIER: better error handling
+      console.log("A user with that email already exists!")
+      setErrorMessage("A user with that email already exists!")
+      toggleModal()
       return
+    }
+
+    if(result.email === null
+      || result.password === null
+      || result.firstName === null
+      || result.lastName === null){
+      console.log("Must enter a value for all fields")
+      setErrorMessage("Must enter a value for all fields.")
+      toggleModal()
     }
 
     // confirmed it's a new email, create user
     result = await createUser(userToCreate);
 
     if(!result.success){
-      console.log("Error:", result.errorMsg);// KELSIER: better error handling
+      console.log("Error:", result.errorMsg);
+      setErrorMessage("Error:", result.errorMsg)
+      toggleModal()
       return;
     }
 
@@ -143,6 +165,10 @@ export default function SignUpScreen () {
         </View>
       </View>
     </ScrollView>
+    
+      <NotificationModal visible={modalVisible} 
+              onClose={toggleModal} 
+              message={errorMessage} />
     </View>
   );
 };
