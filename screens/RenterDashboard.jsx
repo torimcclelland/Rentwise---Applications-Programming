@@ -66,7 +66,7 @@ const DashboardScreen = () => {
             subtitle="🟡 Pending • Reported Oct. 4"
           />
           <TouchableOpacity style={styles.addRequestButton}>
-            <PrimaryButton title="Make New Request" />
+          <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit')} />
           </TouchableOpacity>
 
           <CustomDivider />
