@@ -109,8 +109,8 @@ export default function SignUpScreen () {
       </View>
       <View style={login_style.input}>
         <View style={login_style.text}>
-            <Text style={[login_style.typetext, theme.textColor]}>Sign Up</Text>
-            <Text style={[login_style.typetext, theme.textColor]}>Enter your credentials to make a new account</Text>
+            <Text style={[login_style.subText, theme.textColor]}>Sign Up</Text>
+            <Text style={[login_style.subText, theme.textColor]}>Enter your credentials to make a new account</Text>
         </View>
         <View>
           <Text style={[login_style.typetext, theme.textColor]}>Email:</Text>
