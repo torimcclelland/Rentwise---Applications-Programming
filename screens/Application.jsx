@@ -81,9 +81,9 @@ export const ApplicationPage = () => {
         const message = "Application submitted for property by " + firstName + " " + lastName
 
         const notif = new Notification({
-            notificationID,
-            userID,
-            message
+            date: new Date().toLocaleString(),
+            message: message,
+            listID: userID
         })
 
         const notifResult = await createNotification(notif)

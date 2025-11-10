@@ -97,3 +97,23 @@ CODE/PROJECT REVIEW, 11/12/2025:
     - interaction between renters and landlords
     - break out code to not just be in one user role
 - polish is missing 
+
+
+
+
+
+
+* Need a slightly better lead in and hook for the audience. Why is this an issue for them. what is the pain point. what does your app do to solve those pain points.
+* As discussed in class could have used this narrative to walk through creating the user and having them setup from scratch. Instead there is a lot of dead air in the demo while doing the setup. want to avoid that.
+* The ask was to start from the beginning, setup account, configure profile, add properties, manage those properties submit complaints/tasks etc.
+    > Same with the renter walkthrough....connect to the audience and make them understand the pain point and why your app does that.
+* You mention free membership so then i would like to have known what a free account gets me, what does premium offer and how much. Then to show a user who is free and then one with premium features enabled. Or say as demoing the renter that some of these features are premium.
+    * maybe while demoing each user type: 
+* Wouldnt I setup my personal information on account creation and the data you entered for applying would be prefilled. As a user I dont want to have to enter it each time.
+    * say we have the most basic information autofilled
+* You have the bits and pieces of the demo just the narrative is lacking and the feeling of excitement for the user.
+  > What about saving properties I like, sharing those with friends/family, landlord notifications that someone applied, commenting or messaging back and forth, etc. There are many features that users come to expect in these types of apps and you will need to work over the next month to add those into the application. 
+    * features to come once the core functionality is complete
+
+Feedback during class 11/10:
+
