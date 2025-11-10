@@ -212,10 +212,10 @@ const application_styles = StyleSheet.create({
         gap: 20,
         alignSelf: 'center',
         marginTop: 10,
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 4
+        boxShadowColor: '#000',
+        boxShadowOffset: {width: 0, height: 4},
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4
     },
     name: {
         fontSize: 30
@@ -232,10 +232,10 @@ const application_styles = StyleSheet.create({
         height: 100,
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: {width: 0, height: 4},
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
 
     },
     ratings_dob:{
@@ -257,10 +257,10 @@ const application_styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 15,
         borderRadius: 8,
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: {width: 0, height: 4},
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
     },
     bottomBar: {
         position: 'absolute',

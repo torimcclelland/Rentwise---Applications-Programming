@@ -41,10 +41,10 @@ const PropertyCard = ({address, view, edit, image, ...props}) => {
 const styles = StyleSheet.create({
     box:{
         // height: 108,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: { width: 0, height: 4 },
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
         borderRadius: 12,
         // borderColor: 'gray'
     },

@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    boxShadowColor: '#000',
+    boxShadowOpacity: 0.05,
+    boxShadowRadius: 4,
     elevation: 2,
   },
   profileImage: {
