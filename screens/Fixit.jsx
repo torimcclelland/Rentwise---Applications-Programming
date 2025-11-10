@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import styles from './FixitStyle';
+import styles from '../styles/FixitStyle';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
