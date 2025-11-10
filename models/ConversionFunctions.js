@@ -142,21 +142,27 @@ function snapshotToApplication(snapshot){
 function snapshotToNotifUserList(snapshot){
     let result = new ReturnValue()
     let convertedNotifList
-    let convertedNotif
+    let allNotifs
 
     try{
         
-        convertedNotif = new Notification({
-            
-        })
+        allNotifs = []
 
+        snapshot.data().notifications.forEach((notification) => {
+            const notif = snapshotToNotif(notification);
+            if(!notif.success){
+                console.log(notif.errorMsg)
+                return;
+            }
+            allNotifs.push(notif.resultData);
+        });
         convertedNotifList = new Notification({
             notificationID: snapshot.id,
             userID: snapshot.data().userID,
-            notifications: snapshot.data().notifications,
+            notifications: allNotifs
         })
         result = new ReturnValue(true, "")
-        result.resultData = convertedNotif
+        result.resultData = convertedNotifList
 
     } catch (e){
         let error = ""; 
@@ -174,7 +180,7 @@ function snapshotToNotifUserList(snapshot){
 
 /**
  * 
- * @param {DocumentSnapshot} snapshot The snapshot to convert to a notification object
+ * @param {} inputObject The snapshot to convert to a notification object
  * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
 function snapshotToNotif(snapshot){
@@ -184,9 +190,8 @@ function snapshotToNotif(snapshot){
     try{
         
         convertedNotif = new Notification({
-            notificationID: snapshot.id,
-            userID: snapshot.data().userID,
-            notifications: snapshot.data().notifications,
+            message: inputObject.message,
+            date: inputObject.date
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedNotif
