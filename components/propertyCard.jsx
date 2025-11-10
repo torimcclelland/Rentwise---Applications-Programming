@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     address:{
         paddingLeft: 8,
         paddingTop: 2,
-        font: 'Inter',
+        fontFamily: 'Inter',
         fontSize: 20,
         fontWeight: 500
     },
