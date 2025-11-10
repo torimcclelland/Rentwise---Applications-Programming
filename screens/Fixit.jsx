@@ -36,12 +36,13 @@ const Fixit = () => {
 
       <Text style={styles.label}>Select Maintenance Category:</Text>
       <View style={styles.pickerContainer}>
-      <DropDown
-              options={maintenanceCategories}
-              value={selectedMethod}
-              onSelect={setSelectedMethod}
-              placeholder="Select an issue category"
-            />
+          <DropDown
+            options={maintenanceCategories}
+            value={category}
+            onSelect={setCategory}
+            placeholder="Select an issue category"
+          />
+
       </View>
 
       <Text style={styles.label}>Describe the issue:</Text>
