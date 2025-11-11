@@ -1,7 +1,7 @@
 
 const getAddressCoordinates = async(address) => {
 
-    const api_key = "AIzaSyCl7jPXbhc7vj_5cCv1uaxKf_wJkwMiV5o" // ENCRYPT THIS
+    const api_key =  // ENCRYPT THIS
 
 
     console.log("Calling API..")
