@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {View, Text, StyleSheet, ScrollView} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '../ThemeContext'
@@ -12,7 +12,8 @@ import RatingStars from '../components/RatingStars'
 import PrimaryButton from '../components/PrimaryButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ImageCarousel from '../components/ImageCarousel'
-import MapView from 'react-native-maps'
+import MapView, {Marker, AnimatedRegion} from 'react-native-maps'
+import getAddressCoordinates from '../database_calls/api/GetAddressCoordinates'
 
 export const PropertyInfo = () =>{
 
@@ -22,11 +23,15 @@ export const PropertyInfo = () =>{
     const theme = useTheme()
     const route = useRoute()
     const {propertyID} = route.params
+    const mapRef = useRef(null)
+    const [houseCoordinates, setHouseCoordinates] = useState(null)
 
     useEffect(()=>{
         const fetchData = async() => {
             const property = await getPropertyInfo();   // 1. Grab the property information
             await getLandlordInfo(property.landlordID)  // 2. After grabbing the property info, use it to grab the landlord's information
+            await getAddress();
+            console.log("coords: ", coords)
         };
         fetchData()
     }, [])
@@ -43,6 +48,23 @@ export const PropertyInfo = () =>{
         setLandlord(landlord.resultData)
     }
 
+    const getAddress = async() => {
+
+        const address = `${property.address}, ${property.city} ${property.state}`
+        console.log(address)
+
+        const houseCoordinates = await getAddressCoordinates(address)
+        setHouseCoordinates(houseCoordinates)
+
+        if (mapRef.current) {
+        mapRef.current.animateToRegion({
+            ...houseCoordinates,
+            latitudeDelta: 0.005,   // Smaller = closer zoom
+            longitudeDelta: 0.005,
+        }, 1000); // duration in ms
+        }
+    }
+
     const applyForProperty = async() => {
         navigation.navigate('Apply Property', {'landlordID': landlord.userID, 'propertyID': propertyID}) // navigate to the property information page
     }
@@ -50,13 +72,27 @@ export const PropertyInfo = () =>{
     return(
         <View style={[propertyInfo.container, theme.dashboardContainer]}>
 
-            <MapView style={propertyInfo.map} />
+            <MapView 
+            style={propertyInfo.maps}
+            ref={mapRef}
+            initialRegion={{
+                ...houseCoordinates,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }}>
+            <Marker
+                coordinate={houseCoordinates}
+                title="House Location"
+                description="This is where the house is"
+                />
+            </MapView>
 
             <ScrollView
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             >
             <View style={propertyInfo.bottomPortion}>
+                <Icon name="chevron-up" size={30} style={{alignSelf: 'center'}}/>
                 <View style={{paddingHorizontal: 10}}>
                     {property.images.length > 0 ? (
                         <ImageCarousel images={property.images} imageStyle={{borderRadius: 8, height: 300}}/>
@@ -270,10 +306,13 @@ const propertyInfo = StyleSheet.create({
         alignItems: 'center'
     },
     bottomPortion:{
-        marginTop: 380,
-        paddingTop: 30,
+        height: '60%',
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         backgroundColor: 'white'
+    },
+    maps:{
+        width: '100%',
+        height: '40%',
     }
 })
