@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../styles/FixitStyle';
+import DropDown from '../components/DropDown';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
@@ -22,7 +23,6 @@ const Fixit = () => {
     const timestamp = new Date().toISOString();
     setSubmittedAt(timestamp);
 
-    // Simulate form submission
     Alert.alert('Request Submitted', `Category: ${category}\nDetails: ${details}\nSubmitted At: ${timestamp}`);
     
     // Reset form
@@ -36,16 +36,13 @@ const Fixit = () => {
 
       <Text style={styles.label}>Select Maintenance Category:</Text>
       <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={category}
-          onValueChange={(itemValue) => setCategory(itemValue)}
-          style={styles.picker}
-        >
-          <Picker.Item label="-- Choose Category --" value="" />
-          {maintenanceCategories.map((cat, index) => (
-            <Picker.Item key={index} label={cat} value={cat} />
-          ))}
-        </Picker>
+          <DropDown
+            options={maintenanceCategories}
+            value={category}
+            onSelect={setCategory}
+            placeholder="Select an issue category"
+          />
+
       </View>
 
       <Text style={styles.label}>Describe the issue:</Text>
