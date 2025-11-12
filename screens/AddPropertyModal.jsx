@@ -147,6 +147,7 @@ const AddProperty = ({visible, onClose}) =>{
                             >
                                 <Icon name='arrow-left' size={24} color={theme.textColor.color} />
                             </Pressable>
+                            <View style={{ width: 20 }} /> {/* Empty space of 20 units height */}
 
                             <Text style={[stylesModal.text, theme.textColor, {alignSelf: 'center'}]}>Add Listing</Text>
                         </View>

@@ -25,7 +25,7 @@ export const stylesModal = StyleSheet.create({
     },
     contentView:{
       paddingHorizontal: 10,
-      backgroundColor: 'white',
+      backgroundColor: '#034974',
       borderRadius: 8,
       elevation: 5,
       width: '80%',
@@ -78,6 +78,6 @@ export const stylesModal = StyleSheet.create({
       padding: 8,
       borderRadius: 20,
       elevation: 2,
-    },
+    }
   })
   
