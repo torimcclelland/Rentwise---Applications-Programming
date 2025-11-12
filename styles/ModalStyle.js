@@ -20,8 +20,8 @@ export const stylesModal = StyleSheet.create({
       borderRadius: 8,
       elevation: 5,
       width: '80%',
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2}
+      boxShadowColor: '#000',
+      boxShadowOffset: {width: 0, height: 2}
     },
     contentView:{
       paddingHorizontal: 10,
@@ -33,8 +33,8 @@ export const stylesModal = StyleSheet.create({
       //height: '70%',
       borderColor: '#E6e6e6',
       borderWidth: 1,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2}
+      boxShadowColor: '#000',
+      boxShadowOffset: {width: 0, height: 2}
     },
     textBoxes:{
       flexDirection: 'row'
@@ -59,7 +59,7 @@ export const stylesModal = StyleSheet.create({
       justifyContent: 'center'
     },
     text: {
-      font: 'inter',
+      fontFamily: 'Inter',
       fontWeight: 500,
       fontSize: 14,
     },

@@ -10,24 +10,24 @@ import { snapshotToApplication } from '../../models/ConversionFunctions';
  * @param {Application} applicationToFind The id of the application to find
  * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the retrieved user.
  */
-export async function getApplicationByID(applicationToFind) {
+export async function getApplicationByProperty(propertyID) {
 
     var result = new ReturnValue(false, "");
     let appList;
     
-    if(!applicationToFind.landlordID){
+    if(!propertyID){
         result = new ReturnValue(false, "Landlord ID must not be empty.")
         return result
     }
 
     // try catch to handle any errors
     try{
-        const applicationRef = doc(db, 'Applications')
+        const applicationRef = collection(db, 'Applications')
 
         // query
-        const newQuery = query(applicationRef, where("landlordID", "==", applicationToFind.landlordID))
+        const newQuery = query(applicationRef, where("propertyID", "==", propertyID))
         
-        const snapshot = await getDoc(newQuery);
+        const snapshot = await getDocs(newQuery);
 
         if (snapshot.docs.length == 0) {
             result = new ReturnValue(true, "");

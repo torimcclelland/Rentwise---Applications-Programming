@@ -18,6 +18,11 @@ import ApplicationPage from './screens/Application';
 import SpecificMessage from './screens/SpecificMessage';
 import Payment from './screens/Payment';
 import RenterLeaseScreen from './screens/RenterLease';
+import ListedProperty from './screens/ListedProperty';
+import ViewApplication from './screens/ViewApplication';
+import Fixit from './screens/Fixit';
+import PaymentSummary from './screens/PaymentSummary';
+import LoadingScreen from './screens/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,6 +96,31 @@ function RootStack() {
       <Stack.Screen
       name="Lease Info"
       component={RenterLeaseScreen}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Landlord Property View"
+      component={ListedProperty}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="View Application"
+      component={ViewApplication}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Fixit"
+      component={Fixit}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Payment Summary"
+      component={PaymentSummary}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Loading"
+      component={LoadingScreen}
       //options={headerShown: false}}
       />
     </Stack.Navigator>

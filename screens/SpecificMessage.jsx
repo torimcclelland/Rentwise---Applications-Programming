@@ -3,8 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
-  TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -13,6 +11,8 @@ import MessageBubble from '../components/MessageBubble';
 import styles from '../styles/SpecificMessageStyle';
 import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PrimaryButton from '../components/PrimaryButton';
+import TextFieldLong from '../components/TextFieldLong';
 
 const staticConversation = [
   { sender: 'renter23', senderName: 'You', text: 'Hi there!', timestamp: '2023-11-30T09:40:00' },
@@ -68,22 +68,23 @@ const SpecificMessage = () => {
           </ScrollView>
         </View>
 
-        {/* Input Bar */}
-        <View style={styles.inputBar}>
-          <TextInput
-            style={styles.input}
-            value={inputText}
-            onChangeText={setInputText}
-            placeholder="Type a message..."
-            placeholderTextColor="#999"
-          />
-          <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
-            <Icon name="send" size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
-
-        {/* Bottom Navigation Bar */}
-        <View style={styles.bottomNav}>
+        {/* Input and Bottom Navigation */}
+        <View style={styles.bottomContainer}>
+          <View style={styles.inputBar}>
+            <TextFieldLong
+              value={inputText}
+              onChangeText={setInputText}
+              placeholder="Type a message..."
+              customStyle={styles.textField}
+            />
+            <PrimaryButton
+              title="Send"
+              size="small"
+              onPress={handleSend}
+              disabled={!inputText.trim()}
+              customStyle={styles.sendButton}
+            />
+          </View>
           <BottomNavBar selectedTab="messages" />
         </View>
       </View>
@@ -92,4 +93,3 @@ const SpecificMessage = () => {
 };
 
 export default SpecificMessage;
-

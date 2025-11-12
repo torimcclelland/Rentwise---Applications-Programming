@@ -66,7 +66,7 @@ const DashboardScreen = () => {
             subtitle="🟡 Pending • Reported Oct. 4"
           />
           <TouchableOpacity style={styles.addRequestButton}>
-            <PrimaryButton title="Make New Request" />
+          <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit')} />
           </TouchableOpacity>
 
           <CustomDivider />
@@ -75,15 +75,13 @@ const DashboardScreen = () => {
           <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Quick Access</Text>
 
           {[
-            { title: 'Your Rentals', subtitle: 'Manage active listings', nav: 'Rentals' },
-            { title: 'Payment Summary', subtitle: 'Track transactions', nav: 'Payments' },
-            { title: 'Messages', subtitle: 'Connect with landlords', nav: 'Messages' },
+            { title: 'Payment Summary', subtitle: 'View past transactions', nav: 'Payments' },
           ].map((card, index) => (
             <TouchableOpacity key={index} onPress={() => console.log(`Navigate to ${card.nav}`)}>
               <View style={[styles.card, theme.textField]}>
                 <Text style={[styles.cardTitle, theme.textColor]}>{card.title}</Text>
                 <Text style={[styles.cardSubtitle, theme.textColor]}>{card.subtitle}</Text>
-                <PrimaryButton title={`Go to ${card.nav}`} />
+                <PrimaryButton title={`Go to ${card.nav}`} onPress={() => navigation.navigate('Payment Summary')}/>
               </View>
             </TouchableOpacity>
           ))}

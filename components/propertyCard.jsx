@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import PrimaryButton from './PrimaryButton';
 
 
-const PropertyCard = ({address, onPress,image, ...props}) => {
+const PropertyCard = ({address, view, edit, image, ...props}) => {
     // grab the current system theme for styling
     const theme = useTheme()
     
@@ -22,14 +22,14 @@ const PropertyCard = ({address, onPress,image, ...props}) => {
                         size="small"
                         fontSize={15}
                         customStyle={{height: 35, width: 150}}
-                        onPress={onPress}
+                        onPress={view}
                         />
                         <PrimaryButton
                         title="Edit"
                         size="small"
                         fontSize={15}
                         customStyle={{height: 35, width: 150}}
-                        onPress={onPress}
+                        onPress={edit}
                         />
                     </View>
                 </View>
@@ -41,10 +41,10 @@ const PropertyCard = ({address, onPress,image, ...props}) => {
 const styles = StyleSheet.create({
     box:{
         // height: 108,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: { width: 0, height: 4 },
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
         borderRadius: 12,
         // borderColor: 'gray'
     },
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     address:{
         paddingLeft: 8,
         paddingTop: 2,
-        font: 'Inter',
+        fontFamily: 'Inter',
         fontSize: 20,
         fontWeight: 500
     },

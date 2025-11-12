@@ -35,7 +35,7 @@ export const styles = StyleSheet.create ({
     alignSelf: 'flex-end'
   },
   text: {
-    font: 'inter',
+    fontFamily: 'inter',
     fontWeight: 500,
     fontSize: 14,
   },

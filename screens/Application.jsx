@@ -21,7 +21,8 @@ export const ApplicationPage = () => {
     const currentUser = GlobalValues.currentUser
     const renterID = currentUser.userID
     const route = useRoute()
-    const {landlordID} = route.params
+    const {landlordID, propertyID} = route.params
+    console.log(propertyID)
     const theme = useTheme()
     const applicationID = "setLater"
 
@@ -47,10 +48,13 @@ export const ApplicationPage = () => {
 
     const submitApplication = async() => {
 
+        console.log(propertyID)
+
         const application = new Application({
             applicationID,
             landlordID,
             renterID,
+            propertyID,
             firstName,
             lastName,
             email,
