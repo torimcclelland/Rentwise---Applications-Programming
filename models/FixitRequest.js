@@ -1,21 +1,20 @@
-export class FixitRequest{
+export const maintenanceCategories = [
+    'Plumbing',
+    'Electrical',
+    'Heating/Cooling',
+    'Appliance Repair',
+    'Pest Control',
+    'General Repairs',
+    'Other',
+  ];
 
-    const maintenanceCategories = [
-        'Plumbing',
-        'Electrical',
-        'Heating/Cooling',
-        'Appliance Repair',
-        'Pest Control',
-        'General Repairs',
-        'Other',
-      ];
+export class FixitRequest{
 
     constructor({
         userID = "",
         explanation = "",
         category = "",
         submissontime = "",
-
 
     } = {}){ 
         this.userID = userID;

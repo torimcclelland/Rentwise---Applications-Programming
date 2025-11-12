@@ -21,6 +21,7 @@ import RenterLeaseScreen from './screens/RenterLease';
 import ListedProperty from './screens/ListedProperty';
 import ViewApplication from './screens/ViewApplication';
 import Fixit from './screens/Fixit';
+import PaymentSummary from './screens/PaymentSummary';
 
 const Stack = createNativeStackNavigator();
 
@@ -111,6 +112,11 @@ function RootStack() {
         name="Fixit"
         component={Fixit}
         //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Payment Summary"
+      component={PaymentSummary}
+      //options={headerShown: false}}
       />
     </Stack.Navigator>
   );
