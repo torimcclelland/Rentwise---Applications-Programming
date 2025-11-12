@@ -20,6 +20,7 @@ export async function createProperty(newProperty) {
         || !newProperty.zipcode.trim()
         || !newProperty.description.trim()
         || !newProperty.numBeds.trim()
+        || !newProperty.numBath.trim()
         || !newProperty.laundry.trim()
         || !newProperty.parking.trim()
         || !newProperty.typeOfHome.trim()
@@ -30,17 +31,18 @@ export async function createProperty(newProperty) {
         return result;
     }
 
-    if(!Number.isInteger(newProperty.monthlyPrice)
-        ||!Number.isInteger(newProperty.numuBeds)
-    ){
-        result = new ReturnValue(false, "All data fields must contain valid values.")
-        return result;
-    }
+    // if(!Number.isInteger(newProperty.monthlyPrice)
+    //     ||!Number.isInteger(newProperty.numBeds)
+    //     ||!Number.isInteger(newProperty.numBath)
+    // ){
+    //     result = new ReturnValue(false, "All data fields must contain valid values.")
+    //     return result;
+    // }
 
-    if(newProperty.images.length == 0){
-        result = new ReturnValue(false, "At least one image must be provided.")
-        return result;
-    }
+    // if(newProperty.images.length == 0){
+    //     result = new ReturnValue(false, "At least one image must be provided.")
+    //     return result;
+    // }
     if(!newProperty.landlordID){
         result = new ReturnValue(false, "A landlord must be provided.")
         return result;
