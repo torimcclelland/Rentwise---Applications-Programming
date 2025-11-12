@@ -306,7 +306,7 @@ const propertyInfo = StyleSheet.create({
         alignItems: 'center'
     },
     bottomPortion:{
-        height: '60%',
+        height: '30%',
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         backgroundColor: 'white'
