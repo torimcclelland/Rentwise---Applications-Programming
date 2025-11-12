@@ -12,6 +12,32 @@ export async function createProperty(newProperty) {
 
     var result = new ReturnValue(false, "");
 
+    // bad data handling
+    if(!newProperty.address
+        || !newProperty.monthlyPrice
+        || !newProperty.city
+        || !newProperty.state
+        || !newProperty.zipcode
+        || !newProperty.description
+        || !newProperty.numBeds
+        || !newProperty.laundry
+        || !newProperty.parking
+        || !newProperty.typeOfHome
+        || !newProperty.petsAllowed
+        || !newProperty.furnished
+        ){
+        result = new ReturnValue(false, "All data fields must have a value.")
+        return result;
+    }
+    if(newProperty.images.length == 0){
+        result = new ReturnValue(false, "At least one image must be provided.")
+        return result;
+    }
+    if(!newProperty.landlordID){
+        result = new ReturnValue(false, "A landlord must be provided.")
+        return result;
+    }
+
     // try catch to handle any errors
     try{
         // try to store property in database

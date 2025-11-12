@@ -12,6 +12,15 @@ export async function createUser(newUser) {
 
     var result = new ReturnValue(false, "");
 
+    // bad data error handling
+    if(!newUser.email
+        || !newUser.password
+        || !newUser.firstName
+        || !newUser.lastName){
+        result = new ReturnValue(false, "All data fields must have a value.")
+        return result;
+    }
+
     // try catch to handle any errors
     try{
         // try to store user in database

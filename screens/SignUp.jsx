@@ -48,8 +48,8 @@ export default function SignUpScreen () {
     let result = await getUserByEmail(userToCreate);
 
     if(!result.success){
-      console.log("Error:", result.errorMsg);
-      setErrorMessage("Error:", result.errorMsg)
+      console.log("Error:" + result.errorMsg);
+      setErrorMessage("Error: " + result.errorMsg)
       toggleModal()
       return;
     }
@@ -60,21 +60,23 @@ export default function SignUpScreen () {
       return
     }
 
-    if(result.email === null
-      || result.password === null
-      || result.firstName === null
-      || result.lastName === null){
+    if(!result.email
+      || !result.password
+      || !result.firstName
+      || !result.lastName){
       console.log("Must enter a value for all fields")
       setErrorMessage("Must enter a value for all fields.")
       toggleModal()
+
+      return;
     }
 
     // confirmed it's a new email, create user
     result = await createUser(userToCreate);
 
     if(!result.success){
-      console.log("Error:", result.errorMsg);
-      setErrorMessage("Error:", result.errorMsg)
+      console.log("Error:" + result.errorMsg);
+      setErrorMessage("Error:" + result.errorMsg)
       toggleModal()
       return;
     }
