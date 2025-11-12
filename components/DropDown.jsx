@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
     marginBottom: 4,
+    fontFamily: 'Inter'
   },
   inputBox: {
     flexDirection: 'row',
@@ -81,10 +82,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     backgroundColor: '#fff',
+    fontFamily: 'Inter'
   },
   inputText: {
     color: '#000',
     fontSize: 16,
+    fontFamily: 'Inter'
   },
   modalOverlay: {
     flex: 1,
@@ -106,9 +109,8 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
+    fontFamily: 'Inter'
   },
 });
-
-
 
 export default DropDown;
