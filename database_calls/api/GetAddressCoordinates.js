@@ -5,7 +5,7 @@ const getAddressCoordinates = async(address) => {
 
     const { API_KEY } = Constants.expoConfig.extra;
 
-    console.log("Calling API..")
+    console.log("Calling API...")
 
     const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY.toString()}`
@@ -21,11 +21,8 @@ const getAddressCoordinates = async(address) => {
         }
     }else{
         return data
-    }
+    } 
 
 }
 
 export default getAddressCoordinates
-
-
-getAddressCoordinates()

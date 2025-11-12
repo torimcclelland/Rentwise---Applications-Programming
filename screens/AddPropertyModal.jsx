@@ -13,6 +13,8 @@ import TextFieldLong from '../components/TextFieldLong';
 import { stylesModal } from '../styles/ModalStyle';
 import { uploadImage } from '../database_calls/uploadImages';
 import ImageCarousel from '../components/ImageCarousel';
+import NotificationModal from '../components/NotificationModal';
+import ValidateAddress from '../database_calls/api/ValidateAddress';
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables
@@ -37,6 +39,8 @@ const AddProperty = ({visible, onClose}) =>{
     const [petsAllowed, setPetsAllowed] = useState("")
     const [furnished, setFurnished] = useState("")
     const theme = useTheme()
+    const [isVisible, setIsVisible] = useState(false)
+    const [message, setMessage] = useState("")
 
     // create an array to hold state values
     const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -66,6 +70,65 @@ const AddProperty = ({visible, onClose}) =>{
             // close the modal
             onClose()
     }
+
+    const toggleNotifModal = () =>{
+        setIsVisible(!isVisible)
+    }
+
+    const verifyInput = async() => {
+        const requiredFields = {
+            address, 
+            city, 
+            state, 
+            zipcode, 
+            description, 
+            monthlyPrice, 
+            numBath, 
+            numBeds, 
+            laundry, 
+            parking, 
+            typeOfHome, 
+            petsAllowed, 
+            furnished}
+
+            const emptyFields = Object.entries(requiredFields)
+            .filter(([key, value]) => !value.trim())
+            .map(([key]) => key);
+
+            if (emptyFields.length > 0) {
+            setMessage("Please fill in the empty fields")
+            toggleNotifModal()
+            return;
+            }else{
+                verifyAddress()
+            }
+    }
+
+    const verifyAddress = async() =>{
+        
+        const data = {
+            address: {
+                regionCode: "US",
+                addressLines: [`${address}`, `${city}, ${state} ${zipcode}`],
+            },
+            };
+        
+        console.log("reached")
+        const response = await ValidateAddress(data)
+        console.log("done")
+        
+        const possibleAction = response.result.verdict.possibleNextAction
+        console.log("PossibleAction: ", possibleAction)
+
+        if (possibleAction == "ACCEPT"){
+            addProperty();
+        }else{
+            setMessage("Address cannot be verified!")
+            toggleNotifModal()
+        }
+
+    }
+
 
     // function to create the property and push to database
     const addProperty = async() =>{
@@ -282,7 +345,7 @@ const AddProperty = ({visible, onClose}) =>{
                           />
 
                           <PrimaryButton
-                          onPress={addProperty}
+                          onPress={verifyInput}
                           title="Submit"
                           size="small"
                           fontSize={12}
@@ -292,6 +355,13 @@ const AddProperty = ({visible, onClose}) =>{
                     </ScrollView>
                   </View>
                 </View>
+
+                <NotificationModal
+                message={message}
+                visible={isVisible}
+                onClose={toggleNotifModal}
+                />
+
             </Modal>
     )
 }
