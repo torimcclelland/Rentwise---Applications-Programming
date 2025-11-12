@@ -79,8 +79,11 @@ CODE/PROJECT REVIEW, 11/12/2025:
     - let them track what's in the area
     - additional statistics
     - providing them with marketing information (premium account)
-- city state and zip on one field
-- need to update the edit property page
+
+- city state and zip on one field (**Inesa**)
+
+- need to update the edit property page  (**Inesa**)
+
 - also check zillow to see the values for properties that we NEED to have
 - rent price should be formatted as actual dollar amounts
     - no decmials, doesn't need to track down to that
