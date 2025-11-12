@@ -60,17 +60,6 @@ export default function SignUpScreen () {
       return
     }
 
-    if(!result.email
-      || !result.password
-      || !result.firstName
-      || !result.lastName){
-      console.log("Must enter a value for all fields")
-      setErrorMessage("Must enter a value for all fields.")
-      toggleModal()
-
-      return;
-    }
-
     // confirmed it's a new email, create user
     result = await createUser(userToCreate);
 

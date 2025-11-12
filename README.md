@@ -65,5 +65,33 @@ Retrieving data in batches: https://rnfirebase.io/firestore/usage-with-flatlists
 
 
 
-CODE/PROJECT REVIEW, 11/10/2025:
-- 
+CODE/PROJECT REVIEW, 11/12/2025:
+- text on labels should be left justified, not center
+- text on sign up should 
+- need password requirements
+- mask password on sign up page
+- landlords shouldn't be able to apply to properties
+    - analytics should be improved (try to convey who's looking at what)
+- why can landlords browse properties? (shouldn't be able to apply)
+    - allows them to more easily access information on what's trending or what's valued
+    - if they're looking to purchase and re-sell a properties
+    - can maybe make list that landlords save properties to
+    - let them track what's in the area
+    - additional statistics
+    - providing them with marketing information (premium account)
+- city state and zip on one field
+- need to update the edit property page
+- also check zillow to see the values for properties that we NEED to have
+- rent price should be formatted as actual dollar amounts
+    - no decmials, doesn't need to track down to that
+- standardize property creation data a bit more (num baths shouldn't be number they have to enter, like 100)
+- give ability to view public listing AS LANDLORD (what does a property look like to renters?)
+- limit characters in zipcode field a bit more
+- organize property creation a bit better
+    - fix in general
+    - if pets yes, should them prompt further fields
+- need to be able to see difference between renter and landlord, should be pretty apparent
+- make sure flow of "using it" makes sense
+    - interaction between renters and landlords
+    - break out code to not just be in one user role
+- polish is missing 
