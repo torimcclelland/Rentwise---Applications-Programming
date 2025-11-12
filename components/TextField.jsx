@@ -18,6 +18,7 @@ const TextField = ({ placeholder, isPassword=false, textType, style, hint='', ..
         accessibilityLabel={`Input ${placeholder} into text box`}
         accessibilityRole='Text Box'
         accessibilityHint={hint}
+        maxLength={100}
       />
     </View>
   );

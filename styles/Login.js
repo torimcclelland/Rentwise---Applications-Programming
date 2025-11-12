@@ -68,10 +68,10 @@ const login_style = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    boxShadowColor: '#000',
+    boxShadowOffset: { width: 0, height: 2 },
+    boxShadowOpacity: 0.2,
+    boxShadowRadius: 4,
     elevation: 3
   },
   loginButtonPressed: {
@@ -84,10 +84,10 @@ const login_style = StyleSheet.create({
     paddingVertical: 12,
     alignItems: 'center',
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    boxShadowColor: '#000',
+    boxShadowOffset: { width: 0, height: 1 },
+    boxShadowOpacity: 0.1,
+    boxShadowRadius: 2,
     elevation: 2
   },
   inputField: {

@@ -32,9 +32,9 @@ const DashboardStyles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
+    boxShadowColor: '#000',
+    boxShadowOpacity: 0.08,
+    boxShadowRadius: 8,
     elevation: 4,
   },
   cardTitle: {

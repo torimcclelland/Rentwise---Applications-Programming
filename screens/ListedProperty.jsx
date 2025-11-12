@@ -130,10 +130,10 @@ const listedProp = StyleSheet.create({
         height: 100,
         width: 100,
         borderRadius: 8,
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: {width: 0, height: 4},
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
         backgroundColor: 'white'
     },
     topSections: {

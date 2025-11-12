@@ -255,10 +255,10 @@ const propertyInfo = StyleSheet.create({
         paddingHorizontal: 5,
         marginBottom: 20,
 
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: { width: 0, height: 4 },
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
     },
     buttons:{
         flexDirection: 'row',
@@ -283,10 +283,10 @@ const propertyInfo = StyleSheet.create({
         paddingVertical: 20,
         paddingLeft: 30,
 
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        boxShadowColor: '#000',
+        boxShadowOffset: { width: 0, height: 4 },
+        boxShadowOpacity: 0.2,
+        boxShadowRadius: 4,
         marginBottom: 20,
         marginTop: 10
     },
