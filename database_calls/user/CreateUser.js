@@ -13,10 +13,10 @@ export async function createUser(newUser) {
     var result = new ReturnValue(false, "");
 
     // bad data error handling
-    if(!newUser.email
-        || !newUser.password
-        || !newUser.firstName
-        || !newUser.lastName){
+    if(!newUser.email.trim()
+        || !newUser.password.trim()
+        || !newUser.firstName.trim()
+        || !newUser.lastName.trim()){
         result = new ReturnValue(false, "All data fields must have a value.")
         return result;
     }

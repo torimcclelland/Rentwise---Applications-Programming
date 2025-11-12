@@ -116,7 +116,7 @@ export default function Login() {
           <View style={login_style.divider}>
             <CustomDivider />
           </View>
-
+{/* 
           <View>
             <PrimaryButton
               title="Continue with Google"
@@ -130,11 +130,11 @@ export default function Login() {
               backgroundColor={theme.altButton.backgroundColor}
               textColor={theme.placeHolderTextColor}
             />
-          </View>
+          </View> 
 
           <View style={login_style.divider}>
             <CustomDivider />
-          </View>
+          </View>*/}
 
           <View>
             <Text style={[login_style.typetext, theme.textColor]}>
