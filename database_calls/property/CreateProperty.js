@@ -39,10 +39,10 @@ export async function createProperty(newProperty) {
     //     return result;
     // }
 
-    // if(newProperty.images.length == 0){
-    //     result = new ReturnValue(false, "At least one image must be provided.")
-    //     return result;
-    // }
+    if(!newProperty.images){
+        result = new ReturnValue(false, "At least one image must be provided.")
+        return result;
+    }
     if(!newProperty.landlordID){
         result = new ReturnValue(false, "A landlord must be provided.")
         return result;
