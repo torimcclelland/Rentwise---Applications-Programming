@@ -15,6 +15,7 @@ import { uploadImage } from '../database_calls/uploadImages';
 import ImageCarousel from '../components/ImageCarousel';
 import NotificationModal from '../components/NotificationModal';
 import ValidateAddress from '../database_calls/api/ValidateAddress';
+import NotificationModal from '../components/NotificationModal';
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables
@@ -48,6 +49,12 @@ const AddProperty = ({visible, onClose}) =>{
     'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
     'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
     'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']    
+    
+    const [errorModalVisible, setErrModalVisible] = useState(false)
+    const[errorMessage, setErrorMessage] = useState("")
+    const toggleErrorModal = () => {
+        setErrModalVisible(!errorModalVisible)
+    }
 
     const closeModal = () => {
 
@@ -156,7 +163,11 @@ const AddProperty = ({visible, onClose}) =>{
 
         try{
             const result = await createProperty(property)
-            console.log("Property created", result.resultData)
+            if(!result.success){
+                setErrorMessage(result.errorMsg)
+                setErrModalVisible()
+                return;
+            }
             // close the modal after submission
             onClose() 
 
@@ -354,6 +365,10 @@ const AddProperty = ({visible, onClose}) =>{
                       </View>
                     </ScrollView>
                   </View>
+                  
+                    <NotificationModal visible={errorModalVisible} 
+                        onClose={toggleErrorModal} 
+                        message={errorMessage} />
                 </View>
 
                 <NotificationModal

@@ -63,4 +63,7 @@ Retrieving data in batches: https://rnfirebase.io/firestore/usage-with-flatlists
 - make it EVEN MORE of a pitch. start with appealing to the user, go back to our original "problem statement"
 - have no "dead air" while typing into fields
 
-SAM: make get application by landlord
+
+
+CODE/PROJECT REVIEW, 11/10/2025:
+- 

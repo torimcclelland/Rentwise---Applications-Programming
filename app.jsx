@@ -31,7 +31,7 @@ function RootStack() {
       <Stack.Screen
         name="Login"
         component={Login}
-        //options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Sign Up"
@@ -41,27 +41,27 @@ function RootStack() {
       <Stack.Screen
         name="Renter Dashboard"
         component={DashboardScreen}
-        //options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Landlord Dashboard"
         component={LandlordPropertiesScreen} 
-        //options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Browse Properties"
         component={BrowseProperties}
-        //options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Messages"
         component={MessagesOverview}
-        //options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Notifications"
         component={Notifications}
-        //options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Property Edit"
@@ -74,48 +74,49 @@ function RootStack() {
         //options={{headerShown: false}}
       />
       <Stack.Screen 
-      name="User Profile" 
-      component={UserProfile} 
+        name="User Profile" 
+        component={UserProfile} 
+        options={{headerShown: false}}
       />
       <Stack.Screen
-      name="View Property"
-      component={PropertyInfo}
-      //options={{headerShown: false}}
+        name="View Property"
+        component={PropertyInfo}
+        //options={{headerShown: false}}
       />
       <Stack.Screen
-      name="Apply Property"
-      component={ApplicationPage}
-      //options={headerShown: false}}
+        name="Apply Property"
+        component={ApplicationPage}
+        //options={headerShown: false}}
       />
       <Stack.Screen
-      name="Payment"
-      component={Payment}
-      //options={headerShown: false}}
+        name="Payment"
+        component={Payment}
+        //options={headerShown: false}}
       />
       <Stack.Screen
-      name="Lease Info"
-      component={RenterLeaseScreen}
-      //options={headerShown: false}}
+        name="Lease Info"
+        component={RenterLeaseScreen}
+        //options={headerShown: false}}
       />
       <Stack.Screen
-      name="Landlord Property View"
-      component={ListedProperty}
-      //options={headerShown: false}}
+        name="Landlord Property View"
+        component={ListedProperty}
+        //options={headerShown: false}}
       />
       <Stack.Screen
-      name="View Application"
-      component={ViewApplication}
+        name="View Application"
+        component={ViewApplication}
       //options={headerShown: false}}
       />
       <Stack.Screen
       name="Property Map View"
       component={PropertyMapView}
-      //options={headerShown: false}}
+        //options={headerShown: false}}
       />
       <Stack.Screen
-      name="Fixit"
-      component={Fixit}
-      //options={headerShown: false}}
+        name="Fixit"
+        component={Fixit}
+        //options={headerShown: false}}
       />
     </Stack.Navigator>
   );
