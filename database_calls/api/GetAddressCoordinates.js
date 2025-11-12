@@ -1,13 +1,14 @@
+import Constants from 'expo-constants';
+
 
 const getAddressCoordinates = async(address) => {
 
-    const api_key =  // ENCRYPT THIS
-
+    const { API_KEY } = Constants.expoConfig.extra;
 
     console.log("Calling API..")
 
     const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${api_key}`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY.toString()}`
     )
 
     const data = await response.json()
