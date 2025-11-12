@@ -59,7 +59,7 @@ export const stylesModal = StyleSheet.create({
       justifyContent: 'center'
     },
     text: {
-      fontFamily: 'inter',
+      fontFamily: 'Inter',
       fontWeight: 500,
       fontSize: 14,
     },
