@@ -15,7 +15,7 @@ import { uploadImage } from '../database_calls/uploadImages';
 import ImageCarousel from '../components/ImageCarousel';
 import NotificationModal from '../components/NotificationModal';
 import ValidateAddress from '../database_calls/api/ValidateAddress';
-import NotificationModal from '../components/NotificationModal';
+
 
 const AddProperty = ({visible, onClose}) =>{
     // declare variables

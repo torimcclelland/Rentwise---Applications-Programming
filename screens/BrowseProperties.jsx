@@ -105,7 +105,8 @@ const browse = StyleSheet.create({
     content:{
         flex: 1,
         paddingHorizontal: 10,
-        paddingTop: 10
+        paddingTop: 10,
+        marginTop: 40
     },
     searchbar:{
         flexDirection: 'row',

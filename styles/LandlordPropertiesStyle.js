@@ -4,7 +4,7 @@ export const styles = StyleSheet.create ({
   main:{
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: '#E6E6E6'
   },
   scrollContent: {
     flexGrow: 1,        

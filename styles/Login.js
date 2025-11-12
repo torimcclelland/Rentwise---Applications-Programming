@@ -49,13 +49,14 @@ const login_style = StyleSheet.create({
   },
   welcome: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 60
   },
   app: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   input: {
     flex: 1,

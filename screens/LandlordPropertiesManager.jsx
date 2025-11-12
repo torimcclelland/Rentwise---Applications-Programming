@@ -54,7 +54,7 @@ export const LandlordPropertiesScreen = () =>{
   }
 
   return (
-    <View style={[styles.main, theme.container]}>
+    <View style={[styles.main]}>
       {/* centered content container */}
        <ScrollView
         contentContainerStyle={styles.scrollContent}

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         // borderColor: 'gray'
     },
     border:{
-        width: 350,
+        width: 370,
         height: 260,
         borderRadius: 12,
         overflow: 'hidden',
@@ -62,7 +62,9 @@ const styles = StyleSheet.create({
     image:{
         height: 180,
         width: '100%',
-        borderRadius: 12
+        borderRadius: 12,
+        paddingHorizontal: 10,
+        paddingTop: 10
         
     },
     address:{
