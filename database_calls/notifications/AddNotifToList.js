@@ -5,11 +5,12 @@ import { getNotificationByID } from './GetNotificationByID';
 import { Notification } from '../../models/Notification';
 
 /** 
- * @param {} newNotification The details of the notification to create
+ * @param {Notification} newNotification The details of the notification to create
+ * @param {string} userID The id of the user to add this notification to
  * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created notification.
  */
 
-export async function createNotification(newNotification) {
+export async function addNotifToList(newNotification, userID) {
 
     var result = new ReturnValue(false, "");
 

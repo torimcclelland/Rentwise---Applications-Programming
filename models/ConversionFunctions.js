@@ -158,8 +158,7 @@ function snapshotToNotifUserList(snapshot){
             allNotifs.push(notif.resultData);
         });
         convertedNotifList = new Notification({
-            notificationID: snapshot.id,
-            userID: snapshot.data().userID,
+            userID: snapshot.id,
             notifications: allNotifs
         })
         result = new ReturnValue(true, "")
@@ -184,7 +183,7 @@ function snapshotToNotifUserList(snapshot){
  * @param {} inputObject The snapshot to convert to a notification object
  * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
-function snapshotToNotif(snapshot){
+function snapshotToNotif(inputObject){
     let result = new ReturnValue()
     let convertedNotif
 

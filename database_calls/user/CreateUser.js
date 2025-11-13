@@ -3,6 +3,8 @@ import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { getUserByID } from './GetUserByID';
+import { createNotifList } from '../notifications/CreateNotifList';
+import { deleteUser } from './DeleteUser';
 
 /** 
  * @param {User} newUser The details of the user to create
@@ -21,6 +23,20 @@ export async function createUser(newUser) {
         const docRef = await addDoc(tempCol, {...newUser});
         newUser.userID = docRef.id
         
+        // make a notification list for the user
+        result = await createNotifList(newUser.userID);
+        if(!result.success){
+            result = deleteUser(newUser)
+
+            if(!result.success){
+                result.errorMsg = "Multiple errors have occurred in notification creation and user clean-up. Please contact IT for further help."
+                return result;
+            } else {
+                result.errorMsg = "There was an error enabling notifications for this user."
+                return result
+            }
+        }
+
         // retrieve newly made user by calling the GetUser function
         result = await getUserByID(newUser.userID);
 

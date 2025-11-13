@@ -4,13 +4,11 @@ class Notification{
     constructor({
         date = "",
         message = "",
-        listID = "",
         isNew = 0,
     })
     { 
         this.date = date;
         this.message = message;
-        this.listID = listID;
         this.isNew = isNew;
     }
 }
