@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Property } from '../models/Property'
 import { GlobalValues } from '../GlobalValues'
 import { createProperty } from '../database_calls/property/CreateProperty'
-import {View, Text, Pressable, Modal, ScrollView} from 'react-native'
+import {View, Text, Pressable, StyleSheet, ScrollView} from 'react-native'
 import DropDown from '../components/DropDown'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
@@ -17,7 +17,7 @@ import NotificationModal from '../components/NotificationModal';
 import ValidateAddress from '../database_calls/api/ValidateAddress';
 
 
-const AddProperty = ({visible, onClose}) =>{
+const AddProperty = () =>{
     // declare variables
     const propertyID = "setLater"
     const landlordID = GlobalValues.currentUser.userID
@@ -192,38 +192,11 @@ const AddProperty = ({visible, onClose}) =>{
     }
 
     return (
-            <Modal
-            visible={visible}
-            transparent={true} // transparent background
-            onRequestClose={onClose} // for Android hardware back button
-            animationType= 'slide' // pop-up slides up on the screen
+        <View style={addProp_styles.container}>
+            <ScrollView
+            showsVerticalScrollIndicator={false}
             >
-                <View style={stylesModal.centeredView}>
-
-                  <View style={stylesModal.contentView}>
-
-                    <View style={stylesModal.banner}>
-                        <View style={stylesModal.back}>
-                            {/* Back button */}
-                            <Pressable
-                            onPress={closeModal}
-                            >
-                                <Icon name='arrow-left' size={24} color={theme.textColor.color} />
-                            </Pressable>
-                            <View style={{ width: 20 }} /> {/* Empty space of 20 units height */}
-
-                            <Text style={[stylesModal.text, theme.textColor, {alignSelf: 'center'}]}>Add Listing</Text>
-                        </View>
-
-                        <CustomDivider/>
-                    </View>
-
-                    <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    nestedScrollEnabled={true}
-                    >
-                      <View style={stylesModal.spacing}>
-    
+                    <View style={addProp_styles.spacing}>
                         { /* Display the pressable image box if there are no images- 
                         otherwise display the image carousel with edit/delete functionality */}
 
@@ -267,119 +240,178 @@ const AddProperty = ({visible, onClose}) =>{
                             </View>
                         )}
                         
-                          <TextField
-                          placeholder="Street Address"
-                          value={address}
-                          onChangeText={setAddress}
-                          />
+                        <View>
+                            <Text>Street Address</Text>
+                            <TextField
+                            placeholder="Street Address"
+                            value={address}
+                            onChangeText={setAddress}
+                            />
+                        </View>
 
-                          <TextField
-                          placeholder="City"
-                          value={city}
-                          onChangeText={setCity}
-                          />
+                        <View style={addProp_styles.cityStateZip}>
+                            <View style={{ flex: 1, marginRight: 6 }}>
+                                <Text>City</Text>
+                                <TextField
+                                placeholder="City"
+                                value={city}
+                                onChangeText={setCity}
+                                />
+                            </View>
 
-                          <DropDown
-                          placeholder="Select State"
-                          options={states}
-                          value={state}
-                          onSelect={setState}
-                          />
+                            <View style={{ flex: 0.5, marginRight: 6 }}>
+                                <Text>State</Text>
+                                <DropDown
+                                placeholder="State"
+                                options={states}
+                                value={state}
+                                onSelect={setState}
+                                />
+                            </View>
 
-                          <TextField
-                          textType="numeric"
-                          placeholder="Zipcode"
-                          value={zipcode}
-                          onChangeText={setZipcode}
-                          />
+                            <View style={{ flex: 0.8 }}>
+                                <Text>Zipcode</Text>
+                                <TextField
+                                textType="numeric"
+                                placeholder="Zipcode"
+                                value={zipcode}
+                                onChangeText={setZipcode}
+                                maxLength={15}
+                                />
+                            </View>
+                        </View>
 
-                          <TextFieldLong
-                          placeholder="Description"
-                          value={description}
-                          onChangeText={setDescription}
-                          maxLength={200}
-                          />
+                        <View>
+                            <Text>Description</Text>
+                            <TextFieldLong
+                            placeholder="Description"
+                            value={description}
+                            onChangeText={setDescription}
+                            maxLength={200}
+                            />
+                        </View>
+                        
+                        <View>
+                            <Text>Rent Price</Text>
+                            <TextField
+                            textType="numeric"
+                            placeholder="Rent price"
+                            value={monthlyPrice}
+                            onChangeText={setMonthlyPrice}
+                            />
+                        </View>
 
-                          <TextField
-                          textType="numeric"
-                          placeholder="Rent price"
-                          value={monthlyPrice}
-                          onChangeText={setMonthlyPrice}
-                          />
+                        <View>
+                            <Text>Number of Beds</Text>
+                            <TextField
+                            textType="numeric"
+                            placeholder="Number of Beds"
+                            value={numBeds}
+                            onChangeText={setNumBeds}
+                            />
+                        </View>
 
-                          <TextField
-                          textType="numeric"
-                          placeholder="Number of Beds"
-                          value={numBeds}
-                          onChangeText={setNumBeds}
-                          />
+                        <View>
+                            <Text>Number of Baths</Text>
+                            <TextField
+                            textType="numeric"
+                            placeholder="Number of Baths"
+                            value={numBath}
+                            onChangeText={setNumBath}
+                            />
+                        </View>
 
-                          <TextField
-                          textType="numeric"
-                          placeholder="Number of Baths"
-                          value={numBath}
-                          onChangeText={setNumBath}
-                          />
+                        <View>
+                            <Text>Washer/Dryer</Text>
+                            <DropDown
+                            placeholder="Washer/Dryer"
+                            options={["In-unit", "Shared", "None"]}
+                            value={laundry}
+                            onSelect={setLaundry}
+                            />
+                        </View>
 
-                          <DropDown
-                          placeholder="Washer/Dryer"
-                          options={["In-unit", "Shared", "None"]}
-                          value={laundry}
-                          onSelect={setLaundry}
-                          />
+                        <View>
+                            <Text>Parking Options</Text>
+                            <DropDown
+                            placeholder="Parking"
+                            options={["Street Parking", "On Premises", "Garage Parking"]}
+                            value={parking}
+                            onSelect={setParking}
+                            />
+                        </View>
 
-                          <DropDown
-                          placeholder="Parking"
-                          options={["Street Parking", "On Premises", "Garage Parking"]}
-                          value={parking}
-                          onSelect={setParking}
-                          />
+                        <View>
+                            <Text>Housing Type</Text>
+                            <DropDown
+                            placeholder="Housing Type"
+                            options={["Home", "Apartment", "Condo", "Town House"]}
+                            value={typeOfHome}
+                            onSelect={setTypeOfHome}
+                            />
+                        </View>
 
-                          <DropDown
-                          placeholder="Housing Type"
-                          options={["Home", "Apartment", "Condo", "Town House"]}
-                          value={typeOfHome}
-                          onSelect={setTypeOfHome}
-                          />
+                        <View>
+                            <Text>Pets Allowed</Text>
+                            <DropDown
+                            placeholder="Pets Allowed?"
+                            options={["Yes", "No"]}
+                            value={petsAllowed}
+                            onSelect={setPetsAllowed}
+                            />
+                        </View>
 
-                          <DropDown
-                          placeholder="Pets Allowed?"
-                          options={["Yes", "No"]}
-                          value={petsAllowed}
-                          onSelect={setPetsAllowed}
-                          />
+                        <View>
+                            <Text>Is this property furnished?</Text>
+                            <DropDown
+                            placeholder='Furnished?'
+                            options={["Yes", "No"]}
+                            value={furnished}
+                            onSelect={setFurnished}
+                            />
+                        </View>
 
-                          <DropDown
-                          placeholder='Furnished?'
-                          options={["Yes", "No"]}
-                          value={furnished}
-                          onSelect={setFurnished}
-                          />
-
-                          <PrimaryButton
-                          onPress={verifyInput}
-                          title="Submit"
-                          size="small"
-                          fontSize={12}
-                          />
-
-                      </View>
-                    </ScrollView>
-                  </View>
+                        <PrimaryButton
+                        onPress={verifyInput}
+                        title="Submit"
+                        size="small"
+                        fontSize={12}
+                        />
+                    </View>
+                </ScrollView>
                   
-                    <NotificationModal visible={errorModalVisible} 
-                        onClose={toggleErrorModal} 
-                        message={errorMessage} />
-                </View>
+                 <NotificationModal visible={errorModalVisible} 
+                 onClose={toggleErrorModal} 
+                 message={errorMessage} 
+                 />
 
-                <NotificationModal
-                message={message}
-                visible={isVisible}
-                onClose={toggleNotifModal}
-                />
 
-            </Modal>
+                 <NotificationModal
+                 message={message}
+                 visible={isVisible}
+                 onClose={toggleNotifModal}
+                 />
+    </View>
     )
 }
+
+const addProp_styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        paddingHorizontal: 16
+    },
+    cityStateZip:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    spacing:{
+      flexDirection: 'column',
+      gap: 16,
+      marginTop: 10
+    }
+
+})
 
 export default AddProperty

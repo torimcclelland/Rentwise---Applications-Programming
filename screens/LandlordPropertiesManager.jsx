@@ -53,6 +53,10 @@ export const LandlordPropertiesScreen = () =>{
     navigation.navigate('Landlord Property View', {'propertyID': propertyID});
   }
 
+  const createNewProperty = async() => {
+    navigation.navigate('Add Property');
+  }
+
   return (
     <View style={[styles.main]}>
       {/* centered content container */}
@@ -69,7 +73,7 @@ export const LandlordPropertiesScreen = () =>{
           fontSize={12}
           size='small'
           customStyle={[styles.addButton, theme.button]}
-          onPress={toggleModal}
+          onPress={createNewProperty}
           />
         </View>
 
@@ -104,9 +108,6 @@ export const LandlordPropertiesScreen = () =>{
         <BottomNavBar  selectedTab="home"/>
       </View>
       
-      {/* The add property modal is rendered here */}
-      <AddPropertyModal visible={modalVisible} onClose={toggleModal}/>
-
     </View>
   );
 };

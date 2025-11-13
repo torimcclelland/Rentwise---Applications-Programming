@@ -3,7 +3,7 @@ import { View, Text, TextInput } from 'react-native';
 import styles from '../styles/TextFieldStyles';
 import { useTheme } from '../ThemeContext';
 
-const TextField = ({ placeholder, isPassword=false, textType, style, hint='', ...props }) => {
+const TextField = ({ placeholder, isPassword=false, textType, style, hint='', maxLength=100, ...props }) => {
   // style: pass custom styles to the View that wraps the TextInput
   
   const theme = useTheme()
@@ -18,7 +18,7 @@ const TextField = ({ placeholder, isPassword=false, textType, style, hint='', ..
         accessibilityLabel={`Input ${placeholder} into text box`}
         accessibilityRole='Text Box'
         accessibilityHint={hint}
-        maxLength={100}
+        maxLength={maxLength}
       />
     </View>
   );

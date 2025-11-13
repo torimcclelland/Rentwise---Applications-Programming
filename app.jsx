@@ -20,8 +20,8 @@ import Payment from './screens/Payment';
 import RenterLeaseScreen from './screens/RenterLease';
 import ListedProperty from './screens/ListedProperty';
 import ViewApplication from './screens/ViewApplication';
-import PropertyMapView from './screens/PropertyMapView';
 import Fixit from './screens/Fixit';
+import AddProperty from './screens/AddPropertyModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -109,13 +109,13 @@ function RootStack() {
       //options={headerShown: false}}
       />
       <Stack.Screen
-      name="Property Map View"
-      component={PropertyMapView}
+        name="Fixit"
+        component={Fixit}
         //options={headerShown: false}}
       />
       <Stack.Screen
-        name="Fixit"
-        component={Fixit}
+        name="Add Property"
+        component={AddProperty}
         //options={headerShown: false}}
       />
     </Stack.Navigator>
