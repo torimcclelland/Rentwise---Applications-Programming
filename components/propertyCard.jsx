@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         // borderColor: 'gray'
     },
     border:{
-        width: 370,
+        width: 350,
         height: 260,
         borderRadius: 12,
         overflow: 'hidden',

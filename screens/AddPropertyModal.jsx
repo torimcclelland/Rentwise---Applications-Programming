@@ -408,7 +408,7 @@ const addProp_styles = StyleSheet.create({
     },
     spacing:{
       flexDirection: 'column',
-      gap: 16,
+      gap: 8,
       marginTop: 10
     }
 

@@ -3,31 +3,20 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create ({
   main:{
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#E6E6E6'
+    backgroundColor: '#E6E6E6',
+    paddingHorizontal: 12
   },
-  scrollContent: {
-    flexGrow: 1,        
-    justifyContent: 'center',  
+  scrollContent: {      
     alignItems: 'center',       
-    paddingHorizontal: 16,
-    paddingTop: 24,
     paddingBottom: 110,         
-    width: '100%',
     gap: 16,    
   },                
   topComponent:{
+    marginTop: 24,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  pageContent:{
-    width: '100%',
-    height: '100%',
-    padding: '10px',
-  },
-  pageArea:{
-    justifyContent: 'top'
+    alignItems: 'center'
   },
   addButton: {
     height: 32,
@@ -44,7 +33,10 @@ export const styles = StyleSheet.create ({
     width: 24
   },
   bottomNav:{
-    width: '100%'
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0
   },
   noProperties:{
     paddingVertical: 20,

@@ -8,12 +8,18 @@ import { User } from '../models/User'
 import { getPropertyByID } from '../database_calls/property/GetPropertyByID'
 import { getUserByID } from '../database_calls/user/GetUserByID'
 import Profile from '../components/profile'
-import RatingStars from '../components/RatingStars'
 import PrimaryButton from '../components/PrimaryButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ImageCarousel from '../components/ImageCarousel'
-import MapView, {Marker, AnimatedRegion} from 'react-native-maps'
+// import MapView, {Marker, AnimatedRegion} from 'react-native-maps'
 import getAddressCoordinates from '../database_calls/api/GetAddressCoordinates'
+import { Platform } from 'react-native'
+
+// let MapView, Marker;
+// if (Platform.OS !== "web") {
+//   MapView = require("react-native-maps").default;
+//   Marker = require("react-native-maps").Marker;
+// }
 
 export const PropertyInfo = () =>{
 
@@ -71,8 +77,11 @@ export const PropertyInfo = () =>{
 
     return(
         <View style={[propertyInfo.container, theme.dashboardContainer]}>
-
-            <MapView 
+            
+            {Platform.OS === 'web' ? (
+                <Text></Text>
+            ) : (
+                <MapView 
             style={propertyInfo.maps}
             ref={mapRef}
             initialRegion={{
@@ -86,6 +95,8 @@ export const PropertyInfo = () =>{
                 description="This is where the house is"
                 />
             </MapView>
+
+            )}
 
             <ScrollView
             showsVerticalScrollIndicator={false}

@@ -60,13 +60,13 @@ export const LandlordPropertiesScreen = () =>{
   return (
     <View style={[styles.main]}>
       {/* centered content container */}
-       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+      <ScrollView
         showsVerticalScrollIndicator={false}
-        /* optional: keyboardShouldPersistTaps="handled" */
       >
+        <View style={styles.scrollContent}>
+
         <View style={styles.topComponent}>
-          <Text style={[styles.text, {alignSelf: 'flex-start'}, theme.textColor]}>My Listings</Text>
+          <Text style={[styles.text, theme.textColor]}>My Listings</Text>
           <PrimaryButton
           title= "+ Add"
           fontWeight= {500}
@@ -80,6 +80,7 @@ export const LandlordPropertiesScreen = () =>{
         {propertiesLs.length > 0 ? (
           // map over your items and render PropertyCard
           propertiesLs.map(item => (
+          <View>
             <PropertyCard
               key={item.propertyID?.toString()}
               address={item.address}
@@ -87,6 +88,7 @@ export const LandlordPropertiesScreen = () =>{
               view={() => viewProperty(item.propertyID)} // navigate to the view screen
               image={item.images[0]}
             />
+          </View>
           ))
         ) : (
           <View style={styles.noProperties}>
@@ -99,8 +101,11 @@ export const LandlordPropertiesScreen = () =>{
         customStyles={{marginBottom: 20, marginTop: 20}}
         />
         <Text style={[styles.text, {alignSelf: 'flex-start'}, theme.textColor]}>Leased Properties</Text>
-      
+
+      </View>
+
       </ScrollView>
+
 
       {/* Fixed bottom nav bar */}
       <View style={styles.bottomNav}>

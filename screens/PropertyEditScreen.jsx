@@ -11,6 +11,8 @@ import { updateProperty } from '../database_calls/property/UpdateProperty'
 import { useTheme } from '../ThemeContext'
 import TextFieldLong from '../components/TextFieldLong'
 import ImageCarousel from '../components/ImageCarousel'
+import { stylesModal } from '../styles/ModalStyle'
+import { uploadImage } from '../database_calls/uploadImages'
 
 
 export const PropertyEditScreen = () =>{
@@ -18,6 +20,7 @@ export const PropertyEditScreen = () =>{
     const route = useRoute();
     const {propertyID} = route.params
     const theme = useTheme()    
+    const [activeImageIndex, setActiveImageIndex] = useState(0)
 
     // variables
     const [property, setProperty] = useState(new Property({})) // initialize property to empty
@@ -40,6 +43,8 @@ export const PropertyEditScreen = () =>{
         setProperty(result.resultData)
     }
 
+
+
     const updateThisProperty = async() => {
         console.log(property)
         const result = await updateProperty(property)
@@ -52,55 +57,117 @@ export const PropertyEditScreen = () =>{
         navigation.navigate('Landlord Dashboard');
     }
 
+    const addImage = async() => {
+             
+        const imageInfo = await uploadImage(true, 5) // allowsMultipleSelection = true, selectionLimit = 5
+
+        if (imageInfo != null){
+            setProperty({...property, images: imageInfo})
+        }
+    
+    }
+    
+    const deleteImage = async() => {
+        setProperty(prevProperty => ({
+        ...prevProperty,
+        images: prevProperty.images.filter((_, i) => i !== activeImageIndex),
+        }));
+    }
+
     return (
         <View style={[styles.component, theme.container]}>
 
-            <ScrollView>
-            <ImageCarousel images={property.images} imageStyle={{height: 300}}/>
+            <ScrollView
+            showsVerticalScrollIndicator={false}
+            >
+
+                <View style={styles.spacing}>
+
+                { property.images == null || property.images.length == 0 ? (
+                
+                    // Add images box
+                    <Pressable
+                    style={[stylesModal.imageBox, theme.container]}
+                    onPress={addImage}
+                    >
+                        <View style={stylesModal.addImage}>
+                            <Icon name="plus" size={30} color={theme.textColor.color}/>
+                            <Text style={theme.textColor}>Add images</Text>
+                        </View>    
+                    </Pressable>
+
+                ) : (
+                    <View>
+                        <ImageCarousel 
+                        images={property.images} 
+                        imageStyle={{height: 300}}
+                        onActiveImageChange={setActiveImageIndex}
+                        />
+
+                        <View style={stylesModal.editButtons}>
+
+                            { /* edit button */}
+                            <Pressable style={stylesModal.iconButton} onPress={addImage}>
+                                <Icon name="edit-3" size={20} />
+                            </Pressable>
+
+                            {/* delete button */}
+                            <Pressable style={stylesModal.iconButton} onPress={deleteImage}>
+                                <Icon name="trash-2" size={20} />
+                            </Pressable>
+                        </View>
+                    </View>
+                )}
             
-            <View style={styles.fieldContainer}>
-                <Text style={[styles.label, theme.textColor]}>Street Address</Text>
+            <View>
+                <Text>Street Address</Text>
                 <TextField
                 placeholder={property.address}
                 value={property.address}
                 onChangeText={(text) => setProperty({ ...property, address: text })}
                 />
             </View>
-            <View style={styles.fieldContainer}>
-                <Text style={[styles.label, theme.textColor]}>City</Text>
-                <TextField
-                placeholder={property.city}
-                value={property.city}
-                onChangeText={(text) => setProperty({ ...property, city: text })}
-                />
+            <View style={styles.cityStateZip}>
+                <View style={{ flex: 1, marginRight: 6 }}>
+                    <Text>City</Text>
+                    <TextField
+                    placeholder={property.city}
+                    value={property.city}
+                    onChangeText={(text) => setProperty({ ...property, city: text })}
+                    />
+                </View>
+
+                <View style={{ flex: 0.5, marginRight: 6 }}>
+                    <Text>State</Text>
+                    <DropDown
+                    placeholder={property.state}
+                    options={states}
+                    value={property.state}
+                    onSelect={(text) => setProperty({ ...property, state: text })}
+                    />
+                </View>
+
+                <View style={{ flex: 0.8 }}>
+                    <Text>Zip Code</Text>
+                    <TextField
+                    placeholder={property.zipcode}
+                    value={property.zipcode}
+                    onChangeText={(text) => setProperty({ ...property, zipcode: text })}
+                    />
+                </View>
             </View>
-            <View style={styles.fieldContainer}>
-                <Text style={[styles.label, theme.textColor]}>State</Text>
-                <DropDown
-                placeholder={property.state}
-                options={states}
-                value={property.state}
-                onSelect={(text) => setProperty({ ...property, state: text })}
-                />
-            </View>
-            <View style={styles.fieldContainer}>
-                <Text style={[styles.label, theme.textColor]}>Zip Code</Text>
-                <TextField
-                placeholder={property.zipcode}
-                value={property.zipcode}
-                onChangeText={(text) => setProperty({ ...property, zipcode: text })}
-                />
-            </View>
-            <View style={styles.fieldContainer}>
-                <Text style={[styles.label, theme.textColor]}>Rent Price</Text>
+
+            <View>
+                <Text>Rent Price</Text>
                 <TextField
                 placeholder={String(property.monthlyPrice)}
                 value={String(property.monthlyPrice)}
                 onChangeText={(text) => setProperty({ ...property, monthlyPrice: text })}
                 />
             </View>
-            <View style={styles.fieldContainer}>
-                <Text style={[styles.label, theme.textColor]}>Description</Text>
+
+            <View>
+                <Text>Description</Text>
                 <TextFieldLong
                   placeholder={property.description}
                   value={property.description}
@@ -108,11 +175,76 @@ export const PropertyEditScreen = () =>{
                   maxLength={200}
                   />
             </View>
+
+            <View>
+                <Text>Number of Beds</Text>
+                <TextField
+                placeholder={property.numBeds}
+                value={property.numBeds}
+                onChangeText={(text) => setProperty({...property, numBeds: text})}
+                />
+            </View>
+
+            <View>
+                <Text>Number of Baths</Text>
+                <TextField
+                placeholder={property.numBath}
+                value={property.numBath}
+                onChangeText={(text) => setProperty({...property, numBath: text})}
+                />
+            </View>
+
+            <View>
+                <Text>Washer/Dryer</Text>
+                <TextField
+                placeholder={property.laundry}
+                value={property.laundry}
+                onChangeText={(text) => setProperty({...property, laundry: text})}
+                />
+            </View>
+
+            <View>
+                <Text>Parking Options</Text>
+                <TextField
+                placeholder={property.parking}
+                value={property.parking}
+                onChangeText={(text) => setProperty({...property, parking: text})}
+                />
+            </View>
+
+            <View>
+                <Text>Housing Type</Text>
+                <TextField
+                placeholder={property.typeOfHome}
+                value={property.typeOfHome}
+                onChangeText={(text) => setProperty({...property, typeOfHome: text})}
+                />
+            </View>
+
+            <View>
+                <Text>Are Pets Allowed</Text>
+                <TextField 
+                placeholder={property.petsAllowed}
+                value={property.petsAllowed}
+                onChangeText={(text) => setProperty({...property, petsAllowed: text})}
+                />
+            </View>
+
+            <View>
+                <Text>Is this property furnished?</Text>
+                <TextField
+                placeholder={property.furnished}
+                value={property.furnished}
+                onChangeText={(text) => setProperty({...property, furnished: text})}
+                />
+            </View>
+
             <PrimaryButton
             title="Save"
             size="small"
             onPress={updateThisProperty}
             />
+            </View>
             </ScrollView>
         </View>
     );
@@ -122,7 +254,8 @@ const styles = StyleSheet.create({
     component:{
         width: '100%',
         justifyContent: 'center',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        flex: 1
     },
     fieldContainer: {
     marginBottom: 10, 
@@ -143,7 +276,17 @@ const styles = StyleSheet.create({
   addImage:{
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  spacing:{
+    flexDirection: 'column',
+    gap: 8
+  },
+  cityStateZip:{
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+}
 })
 
 export default PropertyEditScreen;
