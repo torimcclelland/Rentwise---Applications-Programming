@@ -9,6 +9,7 @@ import { GlobalValues } from "../GlobalValues";
 import { login_style } from "../styles/Login";
 import { useTheme } from "../ThemeContext";
 import { useColorScheme } from "react-native";
+import NotificationModal from "../components/NotificationModal";
 
 export default function Login() {
   const [email, setEmail] = useState("ThaidakarRental@fakeEmail.com");
@@ -21,24 +22,36 @@ export default function Login() {
     ? require('./rentwiseLogoDarkMode.png')
     : require('./rentwiseLogo.png');
 
+    
+  const [modalVisible, setModalVisible] = useState(false)
+  const[errorMessage, setErrorMessage] = useState("")
+  const toggleModal = () => {
+      setModalVisible(!modalVisible)
+  }
+
   const validateUser = async () => {
     const userToFind = { email: email };
     const result = await getUserByEmail(userToFind);
 
     if (!result.success) {
       console.log("Error:", result.errorMsg);
+      setErrorMessage("Error:", result.errorMsg)
+      toggleModal()
       return;
     }
 
     if (result.resultData == null) {
       console.log("No user found!");
+      setErrorMessage("No user found!")
+      toggleModal()
       return;
     }
 
     const currentUser = result.resultData;
 
     if (currentUser.password !== password) {
-      console.log("Error: incorrect password");
+      setErrorMessage("Error: incorrect password")
+      toggleModal()
       return;
     }
 
@@ -103,7 +116,7 @@ export default function Login() {
           <View style={login_style.divider}>
             <CustomDivider />
           </View>
-
+{/* 
           <View>
             <PrimaryButton
               title="Continue with Google"
@@ -117,11 +130,11 @@ export default function Login() {
               backgroundColor={theme.altButton.backgroundColor}
               textColor={theme.placeHolderTextColor}
             />
-          </View>
+          </View> 
 
           <View style={login_style.divider}>
             <CustomDivider />
-          </View>
+          </View>*/}
 
           <View>
             <Text style={[login_style.typetext, theme.textColor]}>
@@ -135,6 +148,12 @@ export default function Login() {
           </View>
         </View>
       </ScrollView>
+
+      
+      <NotificationModal visible={modalVisible} 
+            onClose={toggleModal} 
+            message={errorMessage} />
+
     </View>
   );
 }

@@ -15,6 +15,7 @@ import {
 import BottomNavBar from '../components/BottomNavBar';
 import AddPropertyModal from '../screens/AddPropertyModal'
 import { styles } from "../styles/LandlordPropertiesStyle";
+import NotificationModal from '../components/NotificationModal';
 
 export const LandlordPropertiesScreen = () =>{
   // navigation
