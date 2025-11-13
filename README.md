@@ -80,9 +80,9 @@ CODE/PROJECT REVIEW, 11/12/2025:
     - additional statistics
     - providing them with marketing information (premium account)
 
-- city state and zip on one field (**Inesa**)
+- city state and zip on one field (**DONE Inesa**)
 
-- need to update the edit property page  (**Inesa**)
+- need to update the edit property page  (**DONE Inesa**)
 
 - also check zillow to see the values for properties that we NEED to have
 - rent price should be formatted as actual dollar amounts
