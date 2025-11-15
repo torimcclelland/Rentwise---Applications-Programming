@@ -1,54 +1,57 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Image, useColorScheme } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, ScrollView } from 'react-native';
+import {login_style} from '../styles/Login';
 import TextField from '../components/TextField';
 import DropDown from '../components/DropDown';
-import PrimaryButton from '../components/PrimaryButton';
-import NotificationModal from '../components/NotificationModal';
 import { getUserByEmail } from '../database_calls/user/GetUserByEmail';
 import { createUser } from '../database_calls/user/CreateUser';
-import User from '../models/User';
-import GlobalValues from '../GlobalValues';
-import SignUpStyles from '../styles/SignUpStyle'; // ✅ corrected import
+import { GlobalValues } from '../GlobalValues';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../ThemeContext';
+import { useColorScheme } from 'react-native';
+import { User } from '../models/User';
+import PrimaryButton from '../components/PrimaryButton';
+import NotificationModal from '../components/NotificationModal';
 
 export default function SignUpScreen () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userType, setUserType] = useState('Renter');
   const [membershipType, setMembershipType] = useState('Free');
   const navigation = useNavigation();
+  const theme = useTheme();
   const scheme = useColorScheme();
-  const logo = scheme === 'dark' 
-    ? require('./rentwiseLogoDarkMode.png') 
-    : require('./rentwiseLogo.png');
+  const logo = scheme === 'dark' ? require('./rentwiseLogoDarkMode.png') : require('./rentwiseLogo.png');
 
   const [modalVisible, setModalVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const toggleModal = () => setModalVisible(!modalVisible);
 
-  // 🔒 Password validation rules
+  // 🔒 Password validation rules (returns all errors)
   const validatePassword = (pwd) => {
-    const minLength = /.{8,}/;               // at least 8 characters
-    const upperCase = /[A-Z]/;               // at least one uppercase
-    const lowerCase = /[a-z]/;               // at least one lowercase
-    const number = /[0-9]/;                  // at least one digit
-    const specialChar = /[^A-Za-z0-9]/;      // at least one special character
-
-    if (!minLength.test(pwd)) return "Password must be at least 8 characters long.";
-    if (!upperCase.test(pwd)) return "Password must contain at least one uppercase letter.";
-    if (!lowerCase.test(pwd)) return "Password must contain at least one lowercase letter.";
-    if (!number.test(pwd)) return "Password must contain at least one number.";
-    if (!specialChar.test(pwd)) return "Password must contain at least one special character.";
-    return null; // ✅ valid
+    const errors = [];
+    if (!/.{8,}/.test(pwd)) errors.push("Password must be at least 8 characters long.");
+    if (!/[A-Z]/.test(pwd)) errors.push("Password must contain at least one uppercase letter.");
+    if (!/[a-z]/.test(pwd)) errors.push("Password must contain at least one lowercase letter.");
+    if (!/[0-9]/.test(pwd)) errors.push("Password must contain at least one number.");
+    if (!/[^A-Za-z0-9]/.test(pwd)) errors.push("Password must contain at least one special character.");
+    return errors;
   };
 
   const handleSignUp = async () => {
-    // 🔍 Check password first
-    const passwordError = validatePassword(password);
-    if (passwordError) {
-      setErrorMessage(passwordError);
+    // 🔍 Validate password
+    const passwordErrors = validatePassword(password);
+    const errors = [...passwordErrors];
+
+    if (password !== confirmPassword) {
+      errors.push("Passwords do not match.");
+    }
+
+    if (errors.length > 0) {
+      setErrorMessage(errors.join("\n")); // show all errors at once
       toggleModal();
       return;
     }
@@ -102,6 +105,7 @@ export default function SignUpScreen () {
     // clear values
     setEmail('');
     setPassword('');
+    setConfirmPassword('');
     setFirstName('');
     setLastName('');
     setUserType('Renter');
@@ -109,43 +113,51 @@ export default function SignUpScreen () {
   };
 
   return (
-    <View style={[SignUpStyles.app]}>
+    <View style={[login_style.app, theme.container]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={[SignUpStyles.welcome, {paddingLeft: 20}]}>
-          <Image style={SignUpStyles.logo} source={logo}/>
-          <Text style={[SignUpStyles.name]}>Rentwise</Text>
+        <View style={[login_style.welcome, {paddingLeft: 20}]}>
+          <Image style={login_style.logo} source={logo}/>
+          <Text style={[login_style.name, theme.logoColor]}>Rentwise</Text>
         </View>
-        <View style={SignUpStyles.input}>
-          <View style={SignUpStyles.text}>
-            <Text style={[SignUpStyles.subText]}>Sign Up</Text>
-            <Text style={[SignUpStyles.subText]}>
+        <View style={login_style.input}>
+          <View style={login_style.text}>
+            <Text style={[login_style.subText, theme.textColor]}>Sign Up</Text>
+            <Text style={[login_style.subText, theme.textColor]}>
               Enter your credentials to make a new account
             </Text>
           </View>
           <View>
-            <Text style={[SignUpStyles.typetext]}>Email:</Text>
+            <Text style={[login_style.typetext, theme.textColor]}>Email:</Text>
             <TextField
               placeholder="Enter your email here"
               value={email}
               onChangeText={setEmail}
               hint="Enter your email here"
             />
-            <Text style={[SignUpStyles.typetext]}>Password:</Text>
+            <Text style={[login_style.typetext, theme.textColor]}>Password:</Text>
             <TextField
               placeholder="Enter your password here"
               value={password}
               onChangeText={setPassword}
               hint="Enter your password here"
-              secureTextEntry={true}   // 🔒 hides password input
+              isPassword={true}
             />
-            <Text style={[SignUpStyles.typetext]}>First Name:</Text>
+            <Text style={[login_style.typetext, theme.textColor]}>Retype Password:</Text>
+            <TextField
+              placeholder="Re-enter your password"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              hint="Re-enter your password"
+              isPassword={true}
+            />
+            <Text style={[login_style.typetext, theme.textColor]}>First Name:</Text>
             <TextField
               placeholder="Enter your first name here"
               value={firstName}
               onChangeText={setFirstName}
               hint="Enter your first name here"
             />
-            <Text style={[SignUpStyles.typetext]}>Last Name:</Text>
+            <Text style={[login_style.typetext, theme.textColor]}>Last Name:</Text>
             <TextField
               placeholder="Enter your last name here"
               value={lastName}
@@ -171,7 +183,7 @@ export default function SignUpScreen () {
             <PrimaryButton
               title="Sign up"
               onPress={() => handleSignUp()}
-              style={SignUpStyles.loginButton}
+              style={login_style.loginButton}
             />
           </View>
         </View>
