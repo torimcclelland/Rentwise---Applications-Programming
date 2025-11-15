@@ -22,6 +22,8 @@ import ListedProperty from './screens/ListedProperty';
 import ViewApplication from './screens/ViewApplication';
 import Fixit from './screens/Fixit';
 import AddProperty from './screens/AddPropertyModal';
+import PaymentSummary from './screens/PaymentSummary';
+import LoadingScreen from './screens/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -117,6 +119,16 @@ function RootStack() {
         name="Add Property"
         component={AddProperty}
         //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Payment Summary"
+      component={PaymentSummary}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Loading"
+      component={LoadingScreen}
+      //options={headerShown: false}}
       />
     </Stack.Navigator>
   );
