@@ -70,7 +70,7 @@ CODE/PROJECT REVIEW, 11/12/2025:
 - text on sign up should be
 - need password requirements (**DONE Tori**)
 - mask password on sign up page (**DONE Tori**)
-- landlords shouldn't be able to apply to properties
+- landlords shouldn't be able to apply to properties (**DONE Inesa**)
     - analytics should be improved (try to convey who's looking at what)
 - why can landlords browse properties? (shouldn't be able to apply)
     - allows them to more easily access information on what's trending or what's valued
