@@ -3,7 +3,7 @@ import { ReturnValue } from "./ReturnValue";
 import { User } from "./User";
 import { Property } from "./Property";
 import { Application } from "./Application";
-import { Notification } from "./Notification";
+import { Notification, NotificationList } from "./Notification";
 import { Conversation } from "./Conversation";
 
 function snapshotToUser(snapshot){
@@ -157,8 +157,9 @@ function snapshotToNotifUserList(snapshot){
             }
             allNotifs.push(notif.resultData);
         });
-        convertedNotifList = new Notification({
-            userID: snapshot.id,
+        convertedNotifList = new NotificationList({
+            notifID: snapshot.id,
+            userID: snapshot.data().userID,
             notifications: allNotifs
         })
         result = new ReturnValue(true, "")
@@ -191,7 +192,7 @@ function snapshotToNotif(inputObject){
         
         convertedNotif = new Notification({
             message: inputObject.message,
-            date: inputObject.date
+            datetime: inputObject.datetime
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedNotif

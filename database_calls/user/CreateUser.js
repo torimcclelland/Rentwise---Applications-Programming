@@ -35,13 +35,14 @@ export async function createUser(newUser) {
         // make a notification list for the user
         result = await createNotifList(newUser.userID);
         if(!result.success){
-            result = deleteUser(newUser)
+            result = await deleteUser(newUser)
 
             if(!result.success){
                 result.errorMsg = "Multiple errors have occurred in notification creation and user clean-up. Please contact IT for further help."
                 return result;
             } else {
-                result.errorMsg = "There was an error enabling notifications for this user."
+                result.errorMsg = "There was an error enabling notifications for this user. Please contact IT for further help."
+                result.success = false;
                 return result
             }
         }
