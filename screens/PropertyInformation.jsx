@@ -16,11 +16,11 @@ import getAddressCoordinates from '../database_calls/api/GetAddressCoordinates'
 import { Platform, Animated } from 'react-native'
 import { GlobalValues } from '../GlobalValues'
 
-// let MapView, Marker;
-// if (Platform.OS !== "web") {
-//   MapView = require("react-native-maps").default;
-//   Marker = require("react-native-maps").Marker;
-// }
+let MapView, Marker;
+if (Platform.OS !== "web") {
+  MapView = require("react-native-maps").default;
+  Marker = require("react-native-maps").Marker;
+}
 
 export const PropertyInfo = () =>{
 
@@ -230,7 +230,9 @@ export const PropertyInfo = () =>{
             </Animated.ScrollView>
         </Animated.View>
             
-            {isLandlord == false? (
+            
+            {isLandlord == false && (
+                <View style={propertyInfo.buttonContainer}>
                 // Schedule and Apply buttons at the bottom of the page only if you are renter
                 <View style={propertyInfo.buttons}>
                     <PrimaryButton
@@ -242,9 +244,9 @@ export const PropertyInfo = () =>{
                     onPress={() => applyForProperty()}
                     />
                 </View>
-            ) : (
-                <Text></Text>
+                </View>
             )}
+            
 
 
         </View>
@@ -318,7 +320,15 @@ const propertyInfo = StyleSheet.create({
         flexDirection: 'row',
         gap: 10,
         alignSelf: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+    },
+    buttonContainer:{
+        width: '100%',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#f0efef',
     },
     featuresText:{
         fontSize: 20,
