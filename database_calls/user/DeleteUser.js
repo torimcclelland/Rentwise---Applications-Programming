@@ -6,7 +6,8 @@ import { User } from '../../models/User';
 
 
 /** 
- * @param {User} thisUser The details of the user to update
+ * NOTE: this function ONLY deletes a user, and does not do any other clean-up (like deleting properties or the notification list of this user)
+ * @param {User} thisUser The details of the user to delete (must have ID at least)
  * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the updated user.
  */
 export async function deleteUser(thisUser) {

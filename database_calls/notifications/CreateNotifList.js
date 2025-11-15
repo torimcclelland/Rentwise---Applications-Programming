@@ -1,8 +1,9 @@
 import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-import { getNotificationByID } from './GetNotificationByID';
 import { Notification, NotificationList } from '../../models/Notification';
+import { getNotifListByUserID } from './GetNotifListByUserID';
+import { getNotifListByID } from './GetNotifListByID';
 
 /** 
  * @param {string} userID The details of the id to create the notification under (corresponds to a user id)
@@ -21,13 +22,15 @@ export async function createNotifList(userID) {
             return result;
         }
 
-        //const tempList = new NotificationList({userID:userID, notifications:[]})
+        const tempList = new NotificationList({userID:userID, notifications:[]})
 
         const tempCol = collection(db, 'Notifications')
         const docRef = await addDoc(tempCol, {...tempList}, userID);
-        
+
+        tempList.notifID = docRef.id;
+
         // retrieve newly made notification by calling the getNotificationByID function
-        result = await getNotificationByID(userID);
+        result = await getNotifListByID(tempList);
 
     } catch(e){
         let error = ""; 
