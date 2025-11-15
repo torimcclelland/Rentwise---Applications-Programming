@@ -296,6 +296,7 @@ const AddProperty = () =>{
                             <TextField
                             textType="numeric"
                             placeholder="Rent price"
+                            maxLength={8}
                             value={monthlyPrice}
                             onChangeText={setMonthlyPrice}
                             />
@@ -408,7 +409,7 @@ const addProp_styles = StyleSheet.create({
     },
     spacing:{
       flexDirection: 'column',
-      gap: 8,
+      gap: 15,
       marginTop: 10
     }
 
