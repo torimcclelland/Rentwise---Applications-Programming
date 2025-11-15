@@ -2,9 +2,10 @@ import React from 'react'
 import { View, Text, Modal, StyleSheet } from 'react-native'
 import { BlurView } from 'expo-blur' 
 import PrimaryButton from './PrimaryButton'
+import TextField from './TextField'
 import { useTheme } from '../ThemeContext' 
 
-const NotificationModal = ({ message, visible, onClose }) => {
+const NotificationModal = ({ message, visible, onClose, dynamic=false}, textMessage) => {
   const theme = useTheme()
 
   return (
@@ -21,6 +22,14 @@ const NotificationModal = ({ message, visible, onClose }) => {
         {/* Centered modal box */}
         <View style={[notifModal.modalContent, theme.textField]}>
           <Text style={[notifModal.message, theme.textColor]}>{message}</Text>
+
+          {dynamic && (
+            <TextField
+              placeholder={textMessage}
+              style={{ borderWidth: 1, borderColor: 'red' }}
+            />
+          )}
+
           <PrimaryButton
             title="Close"
             size="small"

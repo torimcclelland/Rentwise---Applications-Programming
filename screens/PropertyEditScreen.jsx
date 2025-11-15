@@ -24,6 +24,8 @@ export const PropertyEditScreen = () =>{
     const theme = useTheme()    
     const [activeImageIndex, setActiveImageIndex] = useState(0)
     const [message, setMessage] = useState("")
+    const [visible, setVisible] = useState(false)
+    const [renterVisible, setRenterVisible] = useState(false)
 
     // variables
     const [property, setProperty] = useState(new Property({})) // initialize property to empty
@@ -46,7 +48,13 @@ export const PropertyEditScreen = () =>{
         setProperty(result.resultData)
     }
 
+    const toggleNotifModal = () => {
+        setVisible(!visible)
+    }
 
+    const toggleRentalModal = () => {
+        setRenterVisible(!renterVisible)
+    }
 
     const updateThisProperty = async() => {
         console.log(property)
@@ -61,14 +69,18 @@ export const PropertyEditScreen = () =>{
     }
 
     const verifyAddress = async() =>{
-        const address = {
-            regionCode: 'US',
-            addressLines: [`${property.address} ${property.city}, ${property.state} ${property.zipcode}`]
 
-        }
-        const response = await ValidateAddress(address)
+        const data = {
+            address: {
+                regionCode: "US",
+                addressLines: [`${property.address}`, `${property.city}, ${property.state}, ${property.zipcode}`]
+            }
+            };
+
+        const response = await ValidateAddress(data)
 
         const possibleAction = response.result.verdict.possibleNextAction
+        console.log("PossibleNextAction:", possibleAction)
 
         if (possibleAction == "ACCEPT"){
             updateThisProperty();
@@ -96,6 +108,12 @@ export const PropertyEditScreen = () =>{
         }));
     }
 
+    const addRenter = () => {
+        setMessage("Enter the renter's email address to send an invite")
+        toggleRentalModal()
+
+    }
+
     return (
         <View style={[styles.component, theme.container]}>
 
@@ -104,6 +122,13 @@ export const PropertyEditScreen = () =>{
             >
 
                 <View style={styles.spacing}>
+
+                <PrimaryButton
+                title="Add Renter"
+                size="small"
+                onPress={() => addRenter()}
+                customStyle={{alignSelf: 'flex-end'}}
+                />
 
                 { property.images == null || property.images.length == 0 ? (
                 
@@ -122,7 +147,7 @@ export const PropertyEditScreen = () =>{
                     <View>
                         <ImageCarousel 
                         images={property.images} 
-                        imageStyle={{height: 300}}
+                        imageStyle={{height: 300, borderRadius: 8}}
                         onActiveImageChange={setActiveImageIndex}
                         />
 
@@ -174,6 +199,7 @@ export const PropertyEditScreen = () =>{
                     <TextField
                     placeholder={property.zipcode}
                     value={property.zipcode}
+                    maxLength={15}
                     onChangeText={(text) => setProperty({ ...property, zipcode: text })}
                     />
                 </View>
@@ -264,10 +290,31 @@ export const PropertyEditScreen = () =>{
             <PrimaryButton
             title="Save"
             size="small"
-            onPress={updateThisProperty}
+            onPress={verifyAddress}
             />
+
             </View>
             </ScrollView>
+
+            {visible && (
+            <NotificationModal 
+                visible={visible}
+                message={message}
+                onClose={toggleNotifModal}
+            />
+            )}
+
+            {renterVisible && (
+            <NotificationModal
+                visible={renterVisible}
+                message={message}
+                onClose={toggleRentalModal}
+                dynamic={true}
+                textMessage={"Renter's Email Address"}
+            />
+            )}
+
+
         </View>
     );
 }
