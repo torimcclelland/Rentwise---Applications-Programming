@@ -96,7 +96,7 @@ CODE/PROJECT REVIEW, 11/12/2025:
 - make sure flow of "using it" makes sense
     - interaction between renters and landlords
     - break out code to not just be in one user role
-- polish is missing 
+- polish is missing (**Tori working**)
 
 
 
