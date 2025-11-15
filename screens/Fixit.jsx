@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import styles from '../styles/FixitStyle';
 import DropDown from '../components/DropDown';
+import PrimaryButton from '../components/PrimaryButton';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
@@ -54,9 +55,9 @@ const Fixit = () => {
         onChangeText={setDetails}
       />
 
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+      <PrimaryButton title = "Submit Request" style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitText}>Submit Request</Text>
-      </TouchableOpacity>
+      </PrimaryButton>
 
       {submittedAt && (
         <Text style={styles.timestamp}>Last submitted: {new Date(submittedAt).toLocaleString()}</Text>

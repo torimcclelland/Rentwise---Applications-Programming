@@ -15,16 +15,15 @@ export class FixitRequest{
         explanation = "",
         category = "",
         submissontime = "",
+        landlordID = "",
+        propertyID = ""
 
     } = {}){ 
         this.userID = userID;
-        this.email = email;
-        this.password = password;
-        this.isLandlord = isLandlord;
-        this.isPremUser = isPremUser;
-        this.properties = properties;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profilePicture = profilePicture
+        this.explanation = explanation;
+        this.category = category;
+        this.submissontime = submissontime;
+        this.landlordID = landlordID;
+        this.propertyID = propertyID;       
     }
 }
