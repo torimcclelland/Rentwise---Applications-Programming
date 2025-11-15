@@ -67,18 +67,20 @@ const BrowseProperties = () => {
                 </View>
                 
                 {/* Here we want to use a flatlist */}
-                <ScrollView>
+                <ScrollView
+                contentContainerStyle={{paddingBottom: 60}}
+                showsVerticalScrollIndicator={false}>
 
                 {properties.length > 0 ? (
                 // map over your items and render PropertyCard
-                properties.map(item => (
-                    <BrowsePropertyCard
-                    key={item.propertyID?.toString()}
-                    address={item.address}
-                    price={item.monthlyPrice}
-                    onPress={() => viewProperty(item.propertyID)}
-                    image={item.images[0]}
-                    />
+                    properties.map(item => (
+                        <BrowsePropertyCard
+                        key={item.propertyID?.toString()}
+                        address={item.address}
+                        price={item.monthlyPrice}
+                        onPress={() => viewProperty(item.propertyID)}
+                        image={item.images[0]}
+                        />
                 ))
                 ) : (
                 <View style={styles.noProperties}>

@@ -63,7 +63,7 @@ export const LandlordPropertiesScreen = () =>{
       <ScrollView
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.scrollContent}>
+        <View style={[styles.scrollContent, {marginTop: 20}]}>
 
         <View style={styles.topComponent}>
           <Text style={[styles.text, theme.textColor]}>My Listings</Text>
