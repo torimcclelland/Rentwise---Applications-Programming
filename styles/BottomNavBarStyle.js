@@ -16,8 +16,7 @@ const BottomNavBarStyle = StyleSheet.create({
     position: 'relative',
   },
   rightaligned: {
-    alignSelf: 'flex-end !important',
-    backgroundColorcolor: 'black'
+    alignSelf: 'end',
   }
 });
 

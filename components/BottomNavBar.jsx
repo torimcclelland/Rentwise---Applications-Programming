@@ -98,7 +98,7 @@ const BottomNavBar = ({ selectedTab }) => {
                 borderColor: '#007AFF',
               }}
             />
-          ) : ( // is not the profile (SAM: try to get the styling working here)
+          ) : ( // is not the profile
             <View>
             {tab.name === 'notifications' && hasNewNotifs ? (
               <View styling={styles.elementwithchildren}>
@@ -107,7 +107,7 @@ const BottomNavBar = ({ selectedTab }) => {
                   size={28}
                   color={selectedTab === tab.name ? '#007AFF' : '#999'}
                 />
-                <View styling={styles.rightaligned}>
+                <View style={[styles.rightaligned]}>
                   <Badge status="success"/>
                 </View>
               </View>
