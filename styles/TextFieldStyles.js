@@ -14,7 +14,8 @@ const TextFieldStyles = StyleSheet.create({
     fontSize: 16,
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 16
+    gap: 16,
+    fontFamily: 'Inter'
   },
   multilineInput: {
     borderColor: '#E0E0E0',
@@ -26,7 +27,8 @@ const TextFieldStyles = StyleSheet.create({
     fontSize: 16,
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 16
+    gap: 16,
+    fontFamily: 'Inter'
   },
 });
 
