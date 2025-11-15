@@ -15,11 +15,11 @@ import ImageCarousel from '../components/ImageCarousel'
 import getAddressCoordinates from '../database_calls/api/GetAddressCoordinates'
 import { Platform } from 'react-native'
 
-// let MapView, Marker;
-// if (Platform.OS !== "web") {
-//   MapView = require("react-native-maps").default;
-//   Marker = require("react-native-maps").Marker;
-// }
+let MapView, Marker;
+if (Platform.OS !== "web") {
+  MapView = require("react-native-maps").default;
+  Marker = require("react-native-maps").Marker;
+}
 
 export const PropertyInfo = () =>{
 
@@ -105,11 +105,13 @@ export const PropertyInfo = () =>{
             <View style={propertyInfo.bottomPortion}>
                 <Icon name="chevron-up" size={30} style={{alignSelf: 'center'}}/>
                 <View style={{paddingHorizontal: 10}}>
+
                     {property.images.length > 0 ? (
                         <ImageCarousel images={property.images} imageStyle={{borderRadius: 8, height: 300}}/>
                     ) : (
                         <Text></Text> // empty tag to display nothing
                     )}
+
                 </View>
 
                 <View style={propertyInfo.content}>

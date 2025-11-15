@@ -21,7 +21,7 @@ const getAddressCoordinates = async(address) => {
         }
     }else{
         return data
-    }  
+    }    
 
 }
 

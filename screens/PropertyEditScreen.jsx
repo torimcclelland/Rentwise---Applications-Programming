@@ -13,6 +13,8 @@ import TextFieldLong from '../components/TextFieldLong'
 import ImageCarousel from '../components/ImageCarousel'
 import { stylesModal } from '../styles/ModalStyle'
 import { uploadImage } from '../database_calls/uploadImages'
+import ValidateAddress from '../database_calls/api/ValidateAddress'
+import NotificationModal from '../components/NotificationModal'
 
 
 export const PropertyEditScreen = () =>{
@@ -21,6 +23,7 @@ export const PropertyEditScreen = () =>{
     const {propertyID} = route.params
     const theme = useTheme()    
     const [activeImageIndex, setActiveImageIndex] = useState(0)
+    const [message, setMessage] = useState("")
 
     // variables
     const [property, setProperty] = useState(new Property({})) // initialize property to empty
@@ -55,6 +58,25 @@ export const PropertyEditScreen = () =>{
         }
 
         navigation.navigate('Landlord Dashboard');
+    }
+
+    const verifyAddress = async() =>{
+        const address = {
+            regionCode: 'US',
+            addressLines: [`${property.address} ${property.city}, ${property.state} ${property.zipcode}`]
+
+        }
+        const response = await ValidateAddress(address)
+
+        const possibleAction = response.result.verdict.possibleNextAction
+
+        if (possibleAction == "ACCEPT"){
+            updateThisProperty();
+        }else{
+            setMessage("Address cannot be verified!")
+            toggleNotifModal()
+        }
+
     }
 
     const addImage = async() => {
