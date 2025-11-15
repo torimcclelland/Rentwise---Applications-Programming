@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useTheme } from '../ThemeContext';
 import BottomNavBar from '../components/BottomNavBar';
-import PropertyCard from '../components/propertyCard';
+import RenterPropertyCard from '../components/renterPropertyCard';
 import CustomDivider from '../components/divider';
 import { styles } from '../styles/LandlordPropertiesStyle';
 
@@ -15,7 +15,7 @@ const RenterLeaseScreen = () => {
     dueDate: '1st of every month',
     landlordName: 'Mrs. Landlord',
     landlordEmail: 'landlord@example.com',
-    image: 'https://cdn.remax.com/images/PA/Erie/2725-W-13th-St/front.jpg'
+    image: 'https://www.jameshardie.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2Fdzi2asncd44t%2F6pRezpMP3rQ0xG97feYlAR%2Fadf121ed2ee973afe56a2abc6d1a517f%2FContrasting-Texture-Siding.jpg&w=3840&q=75'
   };
 
   return (
@@ -25,7 +25,7 @@ const RenterLeaseScreen = () => {
           My Current Lease
         </Text>
 
-        <PropertyCard
+        <RenterPropertyCard
           address={leaseInfo.address}
           image={leaseInfo.image}
           onPress={() => {}}
