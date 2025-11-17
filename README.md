@@ -84,7 +84,7 @@ CODE/PROJECT REVIEW, 11/12/2025:
 - need to update the edit property page  (**DONE Inesa**)
 
 - also check zillow to see the values for properties that we NEED to have
-- rent price should be formatted as actual dollar amounts
+- rent price should be formatted as actual dollar amounts (**DONE Tori**)
     - no decmials, doesn't need to track down to that (**DONE Tori**)
 - standardize property creation data a bit more (num baths shouldn't be number they have to enter, like 100)
 - give ability to view public listing AS LANDLORD (what does a property look like to renters?)
