@@ -86,12 +86,12 @@ CODE/PROJECT REVIEW, 11/12/2025:
 - also check zillow to see the values for properties that we NEED to have
 - rent price should be formatted as actual dollar amounts (**DONE Tori**)
     - no decmials, doesn't need to track down to that (**DONE Tori**)
-- standardize property creation data a bit more (num baths shouldn't be number they have to enter, like 100)
+- standardize property creation data a bit more (num baths shouldn't be number they have to enter, like 100) (**DONE Tori**)
 - give ability to view public listing AS LANDLORD (what does a property look like to renters?)
-- limit characters in zipcode field a bit more
+- limit characters in zipcode field a bit more - limited to 5 now (**DONE Tori**)
 - organize property creation a bit better
     - fix in general
-    - if pets yes, should them prompt further fields
+    - if pets yes, should them prompt further fields (**DONE Tori**)
 - need to be able to see difference between renter and landlord, should be pretty apparent
 - make sure flow of "using it" makes sense
     - interaction between renters and landlords
