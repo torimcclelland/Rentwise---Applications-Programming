@@ -1,31 +1,36 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-import { getNotificationByID } from './GetNotificationByID';
-import { Notification } from '../../models/Notification';
+import { Notification, NotificationList } from '../../models/Notification';
+import { getNotifListByUserID } from './GetNotifListByUserID';
+import { getNotifListByID } from './GetNotifListByID';
 
 /** 
- * @param {Notification} newNotification The details of the notification to create
+ * @param {string} userID The details of the id to create the notification under (corresponds to a user id)
  * @returns {ReturnValue} The results of the operation. If successful, the resultData field contains the details of the newly created notification.
  */
 
-export async function createNotification(newNotification) {
+export async function createNotifList(userID) {
 
     var result = new ReturnValue(false, "");
 
     // try catch to handle any errors
     try{
         // try to store notification in database
-        if (!newNotification) throw new Error("newNotification is undefined");
-        
-        const tempCol = collection(db, 'Notifications')
-        const docRef = await addDoc(tempCol, {...newNotification});
+        if (!userID) {
+            result = new ReturnValue(false, "UserID must be defined")
+            return result;
+        }
 
-        // here the notificationID is set as the document id just in the notification object, it is still "setLater" in the database
-        newNotification.notificationID = docRef.id
-        
+        const tempList = new NotificationList({userID:userID, notifications:[]})
+
+        const tempCol = collection(db, 'Notifications')
+        const docRef = await addDoc(tempCol, {...tempList}, userID);
+
+        tempList.notifID = docRef.id;
+
         // retrieve newly made notification by calling the getNotificationByID function
-        result = await getNotificationByID(newNotification.notificationID);
+        result = await getNotifListByID(tempList);
 
     } catch(e){
         let error = ""; 

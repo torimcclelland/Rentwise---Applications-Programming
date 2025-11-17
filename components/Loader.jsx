@@ -23,7 +23,7 @@ const Loader = () => (
       marginTop: '20px',
       fontSize: '1.2rem',
       color: '#034974',
-      fontFamily: 'sans-serif'
+      fontFamily: 'Inter'
     }}>
       Hang tight! We're getting things ready for you!
     </p>

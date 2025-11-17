@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View, Image } from 'react-native';
 import styles from '../styles/InfoCardStyle';
 import { useTheme } from '../ThemeContext';
 
-const InfoCard = ({ title, subtitle, image }) => {
+const InfoCard = ({ title, subtitle, image, timestamp }) => {
 
   const theme = useTheme()
 
