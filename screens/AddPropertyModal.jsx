@@ -224,11 +224,16 @@ const AddProperty = ({visible, onClose}) =>{
                           />
 
                           <TextField
-                          textType="numeric"
-                          placeholder="Zipcode"
-                          value={zipcode}
-                          onChangeText={setZipcode}
-                          />
+                            textType="numeric"
+                            placeholder="Zipcode"
+                            value={zipcode}
+                            onChangeText={(text) => {
+                                const formatted = text.replace(/[^0-9]/g, '').slice(0, 5);
+                                setZipcode(formatted);
+                            }}
+                            maxLength={5}
+                        />
+
 
                           <TextFieldLong
                           placeholder="Description"
@@ -248,16 +253,16 @@ const AddProperty = ({visible, onClose}) =>{
                         />
                         </View>
 
-                          <TextField
-                          textType="numeric"
+                          <DropDown
                           placeholder="Number of Beds"
+                          options={["1", "1.5", "2", "2.5", "3", "3.5", "4+"]}
                           value={numBeds}
                           onChangeText={setNumBeds}
                           />
 
-                          <TextField
-                          textType="numeric"
+                          <DropDown
                           placeholder="Number of Baths"
+                          options={["1", "1.5", "2", "2.5", "3", "3.5", "4+"]}
                           value={numBath}
                           onChangeText={setNumBath}
                           />
