@@ -13,7 +13,7 @@ const login_style = StyleSheet.create({
     fontWeight: '600',
     color: '#034974',
     lineHeight: 24,
-    textAlign: 'center'
+    textAlign: 'left'
   },
   headerText: {
     fontFamily: 'Inter, System',
