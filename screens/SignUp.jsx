@@ -30,7 +30,7 @@ export default function SignUpScreen () {
   const [errorMessage, setErrorMessage] = useState("");
   const toggleModal = () => setModalVisible(!modalVisible);
 
-  // 🔒 Password validation rules (returns all errors)
+  //  Password validation rules (returns all errors)
   const validatePassword = (pwd) => {
     const errors = [];
     if (!/.{8,}/.test(pwd)) errors.push("Password must be at least 8 characters long.");
@@ -42,7 +42,7 @@ export default function SignUpScreen () {
   };
 
   const handleSignUp = async () => {
-    // 🔍 Validate password
+    //  Validate password
     const passwordErrors = validatePassword(password);
     const errors = [...passwordErrors];
 
