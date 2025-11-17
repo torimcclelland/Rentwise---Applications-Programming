@@ -13,8 +13,8 @@ import { useTheme } from '../ThemeContext';
 import Icon from 'react-native-vector-icons/Feather'
 import { createApplication } from '../database_calls/application/CreateApplication';
 import { Notification } from '../models/Notification';
-import { createNotification } from '../database_calls/notifications/CreateNotification';
 import NotificationModal from '../components/NotificationModal';
+import { addNotifToList } from '../database_calls/notifications/AddNotifToList';
 
 export const ApplicationPage = () => {
 
@@ -76,17 +76,16 @@ export const ApplicationPage = () => {
 
         toggleModal()
 
-        const notificationID = "setLater"
         const userID = landlordID
         const message = "Application submitted for property by " + firstName + " " + lastName
 
         const notif = new Notification({
-            notificationID,
-            userID,
-            message
+            datetime: new Date().toLocaleString(),
+            message: message,
+            isNew: true
         })
 
-        const notifResult = await createNotification(notif)
+        const notifResult = await addNotifToList(notif, userID)
         console.log(notifResult)
     }
 

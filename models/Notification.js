@@ -2,24 +2,26 @@
 class Notification{
 
     constructor({
-        date = "",
+        datetime = "",
         message = "",
-        image = ""
+        isNew = 0,
     })
     { 
+        this.datetime = datetime;
+        this.message = message;
+        this.isNew = isNew;
     }
 }
 
 class NotificationList{
     
     constructor({
-        notificationID = "",
+        notifID = "",
         userID = "",
         notifications = [],
-        isNew = 0,
     })
     { 
-        this.notificationID = notificationID;
+        this.notifID = notifID;
         this.userID = userID;
         this.notifications = notifications;
     }

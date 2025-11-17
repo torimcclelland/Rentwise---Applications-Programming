@@ -1,25 +1,30 @@
 import React, {useEffect, useState} from 'react'
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
-import { getNotificationByUser } from "../database_calls/notifications/GetNotificationByUser";
 import { GlobalValues } from '../GlobalValues';
 import InfoCard from '../components/InfoCard';
+import { getNotifListByUserID } from '../database_calls/notifications/GetNotifListByUserID';
 
 const Notifications = () => {
 
-    const userID = GlobalValues.currentUser.userID
     const [notifList, setNotifList] = useState([])
 
     useEffect(()=>{
         getNotifications();
-      }, [])
 
-      const getNotifications = async() => {
+    }, [])
 
-        const result = await getNotificationByUser(userID)
-        setNotifList(result.resultList)
+    const getNotifications = async() => {
+        const result = await getNotifListByUserID(GlobalValues.currentUser)
+        setNotifList(result.resultData.notifications)
 
-      }
+        await setAllToSeen()
+    }
+
+    const setAllToSeen = async() => {
+        console.log('pretend we set all our notifcations to seen')
+    }
+   
     return (
         <View style={notifs.container}>
             <View>
@@ -28,8 +33,8 @@ const Notifications = () => {
                     notifList.map(item => (
                         <InfoCard
                         key={item.notificationID?.toString()}
-                        title = "New notification"
-                        subtitle = {item.message}
+                        title = {item.message}
+                        subtitle = {item.datetime}
                         />
                     ))
 
