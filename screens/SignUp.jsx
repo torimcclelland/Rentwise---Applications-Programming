@@ -127,29 +127,32 @@ export default function SignUpScreen () {
             </Text>
           </View>
           <View>
-            <Text style={[login_style.typetext, theme.textColor]}>Email:</Text>
-            <TextField
-              placeholder="Enter your email here"
-              value={email}
-              onChangeText={setEmail}
-              hint="Enter your email here"
-            />
-            <Text style={[login_style.typetext, theme.textColor]}>Password:</Text>
-            <TextField
-              placeholder="Enter your password here"
-              value={password}
-              onChangeText={setPassword}
-              hint="Enter your password here"
-              isPassword={true}
-            />
-            <Text style={[login_style.typetext, theme.textColor]}>Retype Password:</Text>
-            <TextField
-              placeholder="Re-enter your password"
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              hint="Re-enter your password"
-              isPassword={true}
-            />
+            <View>
+              <Text style={[login_style.typetext, theme.textColor]}>Email:</Text>
+              <TextField
+                placeholder="Enter your email here"
+                value={email}
+                onChangeText={setEmail}
+                hint="Enter your email here"
+              />
+              <Text style={[login_style.typetext, theme.textColor]}>Password:</Text>
+              <TextField
+                placeholder="Enter your password here"
+                value={password}
+                onChangeText={setPassword}
+                hint="Enter your password here"
+                isPassword={true}
+              />
+              <Text style={[login_style.typetext, theme.textColor]}>Retype Password:</Text>
+              <TextField
+                placeholder="Re-enter your password"
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                hint="Re-enter your password"
+                isPassword={true}
+                style={{ marginBottom: 16 }}
+              />
+            </View>
             <Text style={[login_style.typetext, theme.textColor]}>First Name:</Text>
             <TextField
               placeholder="Enter your first name here"
