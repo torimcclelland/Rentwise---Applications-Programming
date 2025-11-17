@@ -237,12 +237,12 @@ const AddProperty = ({visible, onClose}) =>{
                           maxLength={200}
                           />
 
-                          <TextField
-                          textType="numeric"
-                          placeholder="Rent price"
-                          value={monthlyPrice}
-                          onChangeText={setMonthlyPrice}
-                          />
+                        <TextField
+                            placeholder="Enter monthly price"
+                            value={monthlyPrice}
+                            onChangeText={(val) => setMonthlyPrice(val.replace(/[^0-9]/g, ''))} //regex to stop the entry of cents/decimals
+                            keyboardType="numeric"
+                        />
 
                           <TextField
                           textType="numeric"

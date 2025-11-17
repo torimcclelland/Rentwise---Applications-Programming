@@ -66,8 +66,7 @@ Retrieving data in batches: https://rnfirebase.io/firestore/usage-with-flatlists
 
 
 CODE/PROJECT REVIEW, 11/12/2025:
-- text on labels should be left justified, not center
-- text on sign up should be
+- text on labels should be left justified, not center (**DONE Tori**)
 - need password requirements (**DONE Tori**)
 - mask password on sign up page (**DONE Tori**)
 - landlords shouldn't be able to apply to properties (**DONE Inesa**)
