@@ -37,6 +37,7 @@ const AddProperty = ({visible, onClose}) =>{
     const [typeOfHome, setTypeOfHome] = useState("")
     const [petsAllowed, setPetsAllowed] = useState("")
     const [furnished, setFurnished] = useState("")
+    const [petType, setPetType] = useState("")
     const theme = useTheme()
 
     // create an array to hold state values
@@ -67,6 +68,7 @@ const AddProperty = ({visible, onClose}) =>{
             setParking("")
             setTypeOfHome("")
             setPetsAllowed("")
+            setPetType("")
             setFurnished("")
             setImages(null)
 
@@ -95,6 +97,7 @@ const AddProperty = ({visible, onClose}) =>{
             parking,
             typeOfHome,
             petsAllowed,
+            petType,
             furnished
     })
 
@@ -234,7 +237,6 @@ const AddProperty = ({visible, onClose}) =>{
                             maxLength={5}
                         />
 
-
                           <TextFieldLong
                           placeholder="Description"
                           value={description}
@@ -257,14 +259,14 @@ const AddProperty = ({visible, onClose}) =>{
                           placeholder="Number of Beds"
                           options={["1", "1.5", "2", "2.5", "3", "3.5", "4+"]}
                           value={numBeds}
-                          onChangeText={setNumBeds}
+                          onSelect={setNumBeds}
                           />
 
                           <DropDown
                           placeholder="Number of Baths"
                           options={["1", "1.5", "2", "2.5", "3", "3.5", "4+"]}
                           value={numBath}
-                          onChangeText={setNumBath}
+                          onSelect={setNumBath}
                           />
 
                           <DropDown
@@ -289,11 +291,20 @@ const AddProperty = ({visible, onClose}) =>{
                           />
 
                           <DropDown
-                          placeholder="Pets Allowed?"
-                          options={["Yes", "No"]}
-                          value={petsAllowed}
-                          onSelect={setPetsAllowed}
-                          />
+                            placeholder="Pets Allowed?"
+                            options={["Yes", "No"]}
+                            value={petsAllowed}
+                            onSelect={setPetsAllowed}
+                            />
+
+                            {petsAllowed === "Yes" && (
+                            <DropDown
+                                placeholder="Type of Pets Allowed"
+                                options={["All", "Only Cats", "Only Dogs", "Only Fish"]}
+                                value={petType}
+                                onSelect={setPetType}
+                            />
+                            )}
 
                           <DropDown
                           placeholder='Furnished?'
