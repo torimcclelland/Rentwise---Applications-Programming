@@ -35,7 +35,7 @@ export async function getConversationByID(conversationToFind) {
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
-            error = e.message + " (find conversation problem)" // works, `e` narrowed to Error
+            error = e.message + " (retrieve conversation problem)" // works, `e` narrowed to Error
         } else{
             error = "Had a problem with typescript error handling when finding conversation."
         }

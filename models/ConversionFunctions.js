@@ -4,7 +4,7 @@ import { User } from "./User";
 import { Property } from "./Property";
 import { Application } from "./Application";
 import { Notification, NotificationList } from "./Notification";
-import { Conversation } from "./Conversation";
+import { Conversation, Message } from "./Conversation";
 
 function snapshotToUser(snapshot){
 
@@ -178,7 +178,6 @@ function snapshotToNotifUserList(snapshot){
     return result
 }
 
-
 /**
  * 
  * @param {} inputObject The snapshot to convert to a notification object
@@ -211,9 +210,6 @@ function snapshotToNotif(inputObject){
     return result
 }
 
-
-
-
 /**
  * Converts a snapshot to a conversation object.
  * @param {DocumentSnapshot} snapshot The snapshot to convert to a conversation
@@ -223,13 +219,22 @@ function snapshotToConversation(snapshot){
 
     let result = new ReturnValue()
     let convertedConv
+    let allMsgs = []
 
     try{
-        
+        snapshot.data().messages.forEach((message) => {
+            const msg = snapshotToMessage(message);
+            if(!msg.success){
+                return msg;
+            }
+            allMsgs.push(msg.resultData)
+        });
+
         convertedConv = new Conversation({
             conversationID: snapshot.id,
-            users: snapshot.data().users,
-            messages: snapshot.data().messages,
+            renterID: snapshot.data().renterID,
+            landlordID: snapshot.data().landlordID,
+            messages: allMsgs,
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedConv
@@ -246,5 +251,35 @@ function snapshotToConversation(snapshot){
     }
     return result
 }
+
+function snapshotToMessage(inputObject){
+    let result = new ReturnValue()
+    let convertedMsg
+
+    try{
+        
+        convertedMsg = new Message({
+            messageText: inputObject.messageText,
+            senderID: inputObject.senderID,
+            datetime: inputObject.datetime,
+            isNew: inputObject.isNew,
+        })
+        result = new ReturnValue(true, "")
+        result.resultData = convertedMsg
+
+    } catch (e){
+        let error = ""; 
+        if (e instanceof Error) {
+            error = e.message // works, `e` narrowed to Error
+        } else{
+            error = "Had a problem with typescript error handling when converting snapshot to message."
+        }
+
+        result = new ReturnValue(false, error)
+    }
+    return result
+}
+
+// KELSIER/SAM  work on conversation conversion functions
 
 export {snapshotToUser, snapshotToProperty, snapshotToApplication, snapshotToNotifUserList, snapshotToNotif, snapshotToConversation}
