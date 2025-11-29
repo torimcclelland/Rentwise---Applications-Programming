@@ -22,7 +22,8 @@ function snapshotToUser(snapshot){
             isLandlord: snapshot.data().isLandlord,
             isPremUser: snapshot.data().isPremUser,
             properties: snapshot.data().properties,
-            profilePicture: snapshot.data().profilePicture
+            profilePicture: snapshot.data().profilePicture,
+            propertyId: snapshot.data().propertyId || undefined
     })
         result = new ReturnValue(true, "")
         result.resultData = convertedUser

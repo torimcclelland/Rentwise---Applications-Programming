@@ -16,11 +16,11 @@ import getAddressCoordinates from '../database_calls/api/GetAddressCoordinates'
 import { Platform, Animated } from 'react-native'
 import { GlobalValues } from '../GlobalValues'
 
-let MapView, Marker;
-if (Platform.OS !== "web") {
-  MapView = require("react-native-maps").default;
-  Marker = require("react-native-maps").Marker;
-}
+// let MapView, Marker;
+// if (Platform.OS !== "web") {
+//   MapView = require("react-native-maps").default;
+//   Marker = require("react-native-maps").Marker;
+// }
 
 export const PropertyInfo = () =>{
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, } from 'react-native';
 import styles from '../styles/DashboardStyle';
 import PrimaryButton from '../components/PrimaryButton';
 import InfoCard from '../components/InfoCard';
@@ -9,10 +9,38 @@ import { GlobalValues } from '../GlobalValues';
 import BottomNavBar from '../components/BottomNavBar';
 import { useTheme } from '../ThemeContext';
 import { useNavigation } from '@react-navigation/native';
+import {getPropertyByID} from '../database_calls/property/GetPropertyByID';
+import { getFixitRequestsByUserID } from '../database_calls/fixitrequests/GetFixitRequestsByUserID';
+import { Property } from '../models/Property';
+
+
 
 const DashboardScreen = () => {
+
+  const user = GlobalValues.currentUser;
   const theme = useTheme();
   const navigation = useNavigation();
+  const [property, setProperty] = useState(new Property({}))
+  const [fixitRequests, setFixitRequests] = useState([])
+
+  useEffect(() => {
+    getPropertyInformation(user.propertyId);
+    getFixitRequests(user.userID);
+  }, [])
+
+  const getPropertyInformation = async(propertyID) => {
+    const result = await getPropertyByID(propertyID);
+
+    if (result.success){
+      setProperty(result.resultData)
+    }
+  }
+
+  const getFixitRequests = async(userID) => {
+    const result = await getFixitRequestsByUserID(userID)
+    console.log(result)
+  }
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -38,8 +66,8 @@ const DashboardScreen = () => {
           {/* Lease Summary */}
           <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Lease Summary</Text>
           <InfoCard
-            title="3013 Cherry Street"
-            subtitle="$985/month • Ends Jan 31, 2026"
+            title={`${property.address} ${property.city}, ${property.state}`}
+            subtitle={`$${property.monthlyPrice}/month • Ends Jan 31, 2026`}
           />
           <View style={styles.buttonRow}>
             <PrimaryButton title="View Lease" onPress={() => navigation.navigate('Lease Info')} />

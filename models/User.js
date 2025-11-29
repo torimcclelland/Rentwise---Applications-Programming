@@ -10,7 +10,8 @@ export class User{
         isLandlord = false,
         isPremUser = false,
         properties = [],
-        profilePicture = ""
+        profilePicture = "",
+        propertyId = ""
     } = {}){ 
         this.userID = userID;
         this.email = email;
@@ -21,5 +22,6 @@ export class User{
         this.firstName = firstName;
         this.lastName = lastName;
         this.profilePicture = profilePicture
+        this.propertyId = propertyId
     }
 }

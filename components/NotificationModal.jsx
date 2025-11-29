@@ -5,7 +5,7 @@ import PrimaryButton from './PrimaryButton'
 import TextField from './TextField'
 import { useTheme } from '../ThemeContext' 
 
-const NotificationModal = ({ message, visible, onClose, dynamic=false}, textMessage) => {
+const NotificationModal = ({ message, visible, onClose, dynamic=false, buttonTitle = "close", textMessage, setText}) => {
   const theme = useTheme()
 
   return (
@@ -27,11 +27,12 @@ const NotificationModal = ({ message, visible, onClose, dynamic=false}, textMess
             <TextField
               placeholder={textMessage}
               style={{ borderWidth: 1, borderColor: 'red' }}
+              onChangeText={(text) => setText(text)}
             />
           )}
 
           <PrimaryButton
-            title="Close"
+            title={buttonTitle}
             size="small"
             onPress={onClose}
           />

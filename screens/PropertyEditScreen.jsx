@@ -15,6 +15,9 @@ import { stylesModal } from '../styles/ModalStyle'
 import { uploadImage } from '../database_calls/uploadImages'
 import ValidateAddress from '../database_calls/api/ValidateAddress'
 import NotificationModal from '../components/NotificationModal'
+import {getUserByEmail} from '../database_calls/user/GetUserByEmail'
+import { addNotifToList } from '../database_calls/notifications/AddNotifToList'
+import { Notification } from '../models/Notification'
 
 
 export const PropertyEditScreen = () =>{
@@ -26,6 +29,7 @@ export const PropertyEditScreen = () =>{
     const [message, setMessage] = useState("")
     const [visible, setVisible] = useState(false)
     const [renterVisible, setRenterVisible] = useState(false)
+    const [renterEmail, setRenterEmail] = useState("")
 
     // variables
     const [property, setProperty] = useState(new Property({})) // initialize property to empty
@@ -108,10 +112,31 @@ export const PropertyEditScreen = () =>{
         }));
     }
 
-    const addRenter = () => {
+    const addRenter = async() => {
         setMessage("Enter the renter's email address to send an invite")
-        toggleRentalModal()
 
+        toggleRentalModal()
+    }
+
+    const handleRenterSubmit = async() => {
+
+        const userToFind = { email: renterEmail };
+        const user = await getUserByEmail(userToFind);
+        console.log(user);
+
+        const message = `You have been invited to rent the property at ${property.address} ${property.city}, ${property.state} ${property.zipcode} ID: ${property.propertyID}`;  
+
+        const notification = new Notification({
+            datetime: new Date().toLocaleString(),
+            message: message,
+            isNew: true
+        });
+
+        const result = await addNotifToList(notification, user.resultData.userID);
+
+        console.log(result);
+
+        toggleRentalModal()
     }
 
     return (
@@ -308,9 +333,11 @@ export const PropertyEditScreen = () =>{
             <NotificationModal
                 visible={renterVisible}
                 message={message}
-                onClose={toggleRentalModal}
+                onClose={handleRenterSubmit}
                 dynamic={true}
+                buttonTitle={"Send Invite"}
                 textMessage={"Renter's Email Address"}
+                setText={setRenterEmail}
             />
             )}
 
