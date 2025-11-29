@@ -20,6 +20,7 @@ export class Property{
         parking = "",
         typeOfHome = "",
         petsAllowed = "",
+        petType = "",
         furnished = ""
     })
     { 
@@ -41,6 +42,7 @@ export class Property{
         this.parking = parking;
         this.typeOfHome = typeOfHome;
         this.petsAllowed = petsAllowed;
+        this.petType = petType;
         this.furnished = furnished;
     }
 }

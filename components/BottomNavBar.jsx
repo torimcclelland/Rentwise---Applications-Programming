@@ -55,18 +55,28 @@ const BottomNavBar = ({ selectedTab }) => {
             
             const notifList = snapshotToNotifUserList(snapshot)
             
+            if(!notifList.success){
+              console.error("Error fetching notifications: ", notifList.errorMsg)
+              return
+            }
+
+            let tempList = notifList.resultData.notifications
             // only check for unread notifications if we have 
-            if(notifList.length > 0){
-              notifList.forEach(notif => {
+            if(tempList.length > 0){
+
+              for (let i = 0; i < tempList.length; i++) {
+                const notif = tempList[i];
+                
                 if(notif.isNew){
                   setNewNotifs(true)
                 }
-              });
+              }
             }
           }
         }, error => {
           console.error("Error fetching notifications: ", error);
-        });
+        }
+      );
     }
     fetchData();
 

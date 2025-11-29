@@ -39,6 +39,7 @@ const AddProperty = () =>{
     const [typeOfHome, setTypeOfHome] = useState("")
     const [petsAllowed, setPetsAllowed] = useState("")
     const [furnished, setFurnished] = useState("")
+    const [petType, setPetType] = useState("")
     const theme = useTheme()
     const [isVisible, setIsVisible] = useState(false)
     const [message, setMessage] = useState("")
@@ -71,6 +72,7 @@ const AddProperty = () =>{
             setParking("")
             setTypeOfHome("")
             setPetsAllowed("")
+            setPetType("")
             setFurnished("")
             setImages(null)
 
@@ -158,6 +160,7 @@ const AddProperty = () =>{
             parking,
             typeOfHome,
             petsAllowed,
+            petType,
             furnished
     })
 
@@ -269,58 +272,48 @@ const AddProperty = () =>{
                                 />
                             </View>
 
-                            <View style={{ flex: 0.8 }}>
-                                <Text>Zipcode</Text>
-                                <TextField
-                                textType="numeric"
-                                placeholder="Zipcode"
-                                value={zipcode}
-                                onChangeText={setZipcode}
-                                maxLength={15}
-                                />
-                            </View>
-                        </View>
-
-                        <View>
-                            <Text>Description</Text>
-                            <TextFieldLong
-                            placeholder="Description"
-                            value={description}
-                            onChangeText={setDescription}
-                            maxLength={200}
-                            />
-                        </View>
-                        
-                        <View>
-                            <Text>Rent Price</Text>
-                            <TextField
+                          <TextField
                             textType="numeric"
-                            placeholder="Rent price"
-                            maxLength={8}
+                            placeholder="Zipcode"
+                            value={zipcode}
+                            onChangeText={(text) => {
+                                const formatted = text.replace(/[^0-9]/g, '').slice(0, 5);
+                                setZipcode(formatted);
+                            }}
+                            maxLength={5}
+                        />
+
+                          <TextFieldLong
+                          placeholder="Description"
+                          value={description}
+                          onChangeText={setDescription}
+                          maxLength={200}
+                          />
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 16, marginRight: 4 }}>$</Text>
+                        <TextField
+                            placeholder="Enter monthly price"
                             value={monthlyPrice}
-                            onChangeText={setMonthlyPrice}
-                            />
+                            onChangeText={(val) => setMonthlyPrice(val.replace(/[^0-9]/g, ''))}
+                            keyboardType="numeric"
+                            style={{ flex: 1 }}
+                        />
                         </View>
 
-                        <View>
-                            <Text>Number of Beds</Text>
-                            <TextField
-                            textType="numeric"
-                            placeholder="Number of Beds"
-                            value={numBeds}
-                            onChangeText={setNumBeds}
-                            />
-                        </View>
+                          <DropDown
+                          placeholder="Number of Beds"
+                          options={["1", "1.5", "2", "2.5", "3", "3.5", "4+"]}
+                          value={numBeds}
+                          onSelect={setNumBeds}
+                          />
 
-                        <View>
-                            <Text>Number of Baths</Text>
-                            <TextField
-                            textType="numeric"
-                            placeholder="Number of Baths"
-                            value={numBath}
-                            onChangeText={setNumBath}
-                            />
-                        </View>
+                          <DropDown
+                          placeholder="Number of Baths"
+                          options={["1", "1.5", "2", "2.5", "3", "3.5", "4+"]}
+                          value={numBath}
+                          onSelect={setNumBath}
+                          />
 
                         <View>
                             <Text>Washer/Dryer</Text>
@@ -352,25 +345,28 @@ const AddProperty = () =>{
                             />
                         </View>
 
-                        <View>
-                            <Text>Pets Allowed</Text>
-                            <DropDown
+                          <DropDown
                             placeholder="Pets Allowed?"
                             options={["Yes", "No"]}
                             value={petsAllowed}
                             onSelect={setPetsAllowed}
                             />
-                        </View>
 
-                        <View>
-                            <Text>Is this property furnished?</Text>
+                            {petsAllowed === "Yes" && (
                             <DropDown
-                            placeholder='Furnished?'
-                            options={["Yes", "No"]}
-                            value={furnished}
-                            onSelect={setFurnished}
+                                placeholder="Type of Pets Allowed"
+                                options={["All", "Only Cats", "Only Dogs", "Only Fish"]}
+                                value={petType}
+                                onSelect={setPetType}
                             />
-                        </View>
+                            )}
+
+                          <DropDown
+                          placeholder='Furnished?'
+                          options={["Yes", "No"]}
+                          value={furnished}
+                          onSelect={setFurnished}
+                          />
 
                         <PrimaryButton
                         onPress={verifyInput}

@@ -193,7 +193,8 @@ function snapshotToNotif(inputObject){
         
         convertedNotif = new Notification({
             message: inputObject.message,
-            datetime: inputObject.datetime
+            datetime: inputObject.datetime,
+            isNew: inputObject.isNew,
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedNotif
@@ -229,7 +230,7 @@ function snapshotToConversation(snapshot){
         convertedConv = new Conversation({
             conversationID: snapshot.id,
             users: snapshot.data().users,
-            messages: snapshot.data().messages
+            messages: snapshot.data().messages,
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedConv

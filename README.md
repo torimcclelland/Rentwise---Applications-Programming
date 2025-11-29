@@ -66,11 +66,10 @@ Retrieving data in batches: https://rnfirebase.io/firestore/usage-with-flatlists
 
 
 CODE/PROJECT REVIEW, 11/12/2025:
-- text on labels should be left justified, not center
-- text on sign up should 
-- need password requirements
-- mask password on sign up page
-- landlords shouldn't be able to apply to properties
+- text on labels should be left justified, not center (**DONE Tori**)
+- need password requirements (**DONE Tori**)
+- mask password on sign up page (**DONE Tori**)
+- landlords shouldn't be able to apply to properties (**DONE Inesa**)
     - analytics should be improved (try to convey who's looking at what)
 - why can landlords browse properties? (shouldn't be able to apply)
     - allows them to more easily access information on what's trending or what's valued
@@ -85,16 +84,38 @@ CODE/PROJECT REVIEW, 11/12/2025:
 - need to update the edit property page  (**DONE Inesa**)
 
 - also check zillow to see the values for properties that we NEED to have
-- rent price should be formatted as actual dollar amounts
-    - no decmials, doesn't need to track down to that
-- standardize property creation data a bit more (num baths shouldn't be number they have to enter, like 100)
+    - list from Zillow: square feet, singlefamily VS condo, year built, yard acres
+        
+- rent price should be formatted as actual dollar amounts (**DONE Tori**)
+    - no decmials, doesn't need to track down to that (**DONE Tori**)
+- standardize property creation data a bit more (num baths shouldn't be number they have to enter, like 100) (**DONE Tori**)
 - give ability to view public listing AS LANDLORD (what does a property look like to renters?)
-- limit characters in zipcode field a bit more
+- limit characters in zipcode field a bit more - limited to 5 now (**DONE Tori**)
 - organize property creation a bit better
     - fix in general
-    - if pets yes, should them prompt further fields
+    - if pets yes, should them prompt further fields (**DONE Tori**)
 - need to be able to see difference between renter and landlord, should be pretty apparent
 - make sure flow of "using it" makes sense
     - interaction between renters and landlords
     - break out code to not just be in one user role
 - polish is missing (**Tori working**)
+
+
+
+
+
+
+* Need a slightly better lead in and hook for the audience. Why is this an issue for them. what is the pain point. what does your app do to solve those pain points.
+* As discussed in class could have used this narrative to walk through creating the user and having them setup from scratch. Instead there is a lot of dead air in the demo while doing the setup. want to avoid that.
+* The ask was to start from the beginning, setup account, configure profile, add properties, manage those properties submit complaints/tasks etc.
+    > Same with the renter walkthrough....connect to the audience and make them understand the pain point and why your app does that.
+* You mention free membership so then i would like to have known what a free account gets me, what does premium offer and how much. Then to show a user who is free and then one with premium features enabled. Or say as demoing the renter that some of these features are premium.
+    * maybe while demoing each user type: 
+* Wouldnt I setup my personal information on account creation and the data you entered for applying would be prefilled. As a user I dont want to have to enter it each time.
+    * say we have the most basic information autofilled
+* You have the bits and pieces of the demo just the narrative is lacking and the feeling of excitement for the user.
+  > What about saving properties I like, sharing those with friends/family, landlord notifications that someone applied, commenting or messaging back and forth, etc. There are many features that users come to expect in these types of apps and you will need to work over the next month to add those into the application. 
+    * features to come once the core functionality is complete
+
+Feedback during class 11/10:
+

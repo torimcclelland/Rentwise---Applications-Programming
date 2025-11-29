@@ -5,6 +5,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F8F9FA',
   },
+  signOutContainer: {
+  paddingHorizontal: 24,
+  paddingVertical: 12,
+},
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -73,13 +77,15 @@ cardValue: {
     right: 0,
   },
   membershipBadge: {
-  alignSelf: 'flex-start',
-  paddingVertical: 4,
-  paddingHorizontal: 10,
-  borderRadius: 12,
-  marginTop: 4,
-  marginBottom: 8
-},
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    marginTop: 4,
+    marginBottom: 8,
+  },
 renterBadge: {
   backgroundColor: '#E0F2FE', // light blue
 },
@@ -88,6 +94,16 @@ premiumBadge: {
 },
 freeBadge: {
   backgroundColor: '#E5E7EB', // gray
+},
+upgradeContainer: {
+  marginTop: 12,
+  alignItems: 'center',
+},
+upgradeButton: {
+  backgroundColor: '#F59E0B', // amber/gold
+  paddingHorizontal: 24,
+  paddingVertical: 12,
+  borderRadius: 8,
 },
 badgeText: {
   fontSize: 12,
