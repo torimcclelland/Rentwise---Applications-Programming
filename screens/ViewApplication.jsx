@@ -12,6 +12,7 @@ import { GlobalValues } from '../GlobalValues'
 import PrimaryButton from '../components/PrimaryButton'
 import CustomDivider from '../components/divider'
 import NotificationModal from '../components/NotificationModal'
+import { createConversation } from '../database_calls/conversation/CreateConversation'
 
 const ViewApplication = () => {
 
@@ -22,6 +23,12 @@ const ViewApplication = () => {
     const [renter, setRenter] = useState(new User({}))
     const [modalVisible, setModalVisible] = useState(false)
     const landlord = GlobalValues.currentUser
+
+    // error handling stuff
+    
+    const [errModalVisible, setErrModalVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const toggleErrorModal = () => setErrModalVisible(!errModalVisible);
 
     useEffect(() => {
         const fetchData = async() => {
@@ -82,6 +89,22 @@ const ViewApplication = () => {
         }
         console.log(landlord.isPremUser)
 
+    }
+
+    const onPressMessage = async() => {
+        console.log("starting conversation...")
+
+        const result = await createConversation(renter.userID, landlord.userID)
+
+        if(!result.success){
+            
+            console.log("Error:" + result.errorMsg);
+            setErrorMessage("Error:" + result.errorMsg);
+            toggleErrorModal();
+            return;
+        }
+
+        // if success, navigate to conversation
     }
 
     return (
@@ -170,10 +193,14 @@ const ViewApplication = () => {
                     </View>
                 </View>
 
-                <View style={[application_styles.basicInfo, {marginBottom: 160}]}> {/* Added padding to the bottom so it doesn't get blocked by the message user area */}
+                <View style={[application_styles.basicInfo, {marginBottom: 160}]}>
                     <View style={{flexDirection: 'column', gap: 16}}>
-                        <Text style={application_styles.leaveReason}>Reason for Leaving</Text>
-                        <Text>{application.leaveReason}</Text>
+                        <View>
+                            <Text style={application_styles.leaveReason}>Reason for Leaving</Text>
+                        </View>
+                        <View>
+                            <Text>{application.leaveReason}</Text>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -187,8 +214,15 @@ const ViewApplication = () => {
                     title="Message"
                     iconName="message-text-outline"
                     size="large"
+                    onPress={onPressMessage}
                 />
             </View>
+
+            <NotificationModal 
+                visible={modalVisible} 
+                onClose={toggleErrorModal} 
+                message={errorMessage} 
+            />
 
         </View>
     )

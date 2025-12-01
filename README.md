@@ -98,3 +98,12 @@ CODE/PROJECT REVIEW, 11/12/2025:
     - interaction between renters and landlords
     - break out code to not just be in one user role
 - polish is missing (**Tori working**)
+
+
+
+__*Before final presentation (we're almost there!)*__
+
+
+- Messages (Sam)
+    - messages can be created from application review page on landlord side
+    - messages can be created from property view page on renter side

@@ -1,9 +1,6 @@
 import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-import { Notification, NotificationList } from '../../models/Notification';
-import { getNotifListByUserID } from './GetNotifListByUserID';
-import { getNotifListByID } from './GetNotifListByID';
 import { Conversation } from '../../models/Conversation';
 import { getConversationByID } from './GetConversationByID';
 
