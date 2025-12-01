@@ -105,6 +105,7 @@ const ViewApplication = () => {
         }
 
         // if success, navigate to conversation
+        
     }
 
     return (
