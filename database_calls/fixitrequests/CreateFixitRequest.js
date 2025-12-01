@@ -5,8 +5,8 @@ import { FixitRequest } from '../../models/FixitRequest';
 import { getFixitRequestByID } from './GetFixitRequestByID';
 
 /**
- * @param {FixitRequest} newRequest The details of the maintenance request to create
- * @returns {ReturnValue} The result of the operation. If successful, resultData contains the newly created request.
+ * @param {FixitRequest} newRequest
+ * @returns {ReturnValue}
  */
 export async function createFixitRequest(newRequest) {
     let result = new ReturnValue(false, "");
