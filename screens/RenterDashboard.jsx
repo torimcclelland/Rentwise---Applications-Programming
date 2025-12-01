@@ -62,8 +62,8 @@ const DashboardScreen = () => {
           <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Fix-it Requests</Text>
 
           <InfoCard
-            title="Leaky Faucet"
-            subtitle="🟡 Pending • Reported Oct. 4"
+            title="No open requests"
+            subtitle="🟢 You're all set!"
           />
           <TouchableOpacity style={styles.addRequestButton}>
           <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit')} />
