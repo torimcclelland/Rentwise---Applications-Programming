@@ -23,6 +23,7 @@ import ViewApplication from './screens/ViewApplication';
 import Fixit from './screens/Fixit';
 import PaymentSummary from './screens/PaymentSummary';
 import LoadingScreen from './screens/LoadingScreen';
+import PurchasePremium from './screens/PurchasePremium';
 
 const Stack = createNativeStackNavigator();
 
@@ -122,6 +123,11 @@ function RootStack() {
       <Stack.Screen
       name="Loading"
       component={LoadingScreen}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="PurchasePremium"
+      component={PurchasePremium}
       //options={headerShown: false}}
       />
     </Stack.Navigator>
