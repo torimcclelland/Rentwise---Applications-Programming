@@ -5,13 +5,17 @@ class Conversation{
         conversationID = "",
         renterID = "",
         landlordID = "",
-        messages = []
-    })
+        messages = [],
+        renterData = {},
+        landlordData ={}
+    } = {})
     { 
         this.conversationID = conversationID;
         this.renterID = renterID;
         this.landlordID = landlordID;
         this.messages = messages;
+        this.renterData = renterData;
+        this.landlordData = landlordData;
     }
 }
 
@@ -21,7 +25,7 @@ class Message{
         senderID = "",
         datetime = "",
         isNew = 0
-    })
+    } = {})
     {
         this.messageText = messageText;
         this.senderID = senderID;

@@ -1,9 +1,6 @@
-import { FieldValue, addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
-import { Notification } from '../../models/Notification';
-import { getNotifListByUserID } from './GetNotifListByUserID';
-import { User } from '../../models/User';
 import { Message } from '../../models/Conversation';
 
 /** 
@@ -12,7 +9,7 @@ import { Message } from '../../models/Conversation';
  * @returns {ReturnValue} The results of the operation. NO data fields contain a value upon success
  */
 
-export async function addNotifToList(newMessage, conversationID) {
+export async function addMessageToConveration(newMessage, conversationID) {
 
     var result = new ReturnValue(false, "");
 

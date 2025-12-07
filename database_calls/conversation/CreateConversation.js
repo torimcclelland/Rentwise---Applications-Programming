@@ -20,6 +20,9 @@ export async function createConversation(renterID, landlordID) {
         if (!renterID || !landlordID) {
             result = new ReturnValue(false, "renterID and landlordID must be defined")
             return result;
+        } else if(renterID == landlordID){
+            result = new ReturnValue(false, "Conversations must be between two separate users.")
+            return result;
         }
 
         const convo = new Conversation({conversationID:"", renterID: renterID, landlordID:landlordID, messages: []})
@@ -30,7 +33,7 @@ export async function createConversation(renterID, landlordID) {
         convo.conversationID = docRef.id;
 
         // retrieve newly made conversation by calling the getConversationID function
-        result = await getConversationByID(convo);
+        result = await getConversationByID(convo.conversationID);
 
     } catch(e){
         let error = ""; 

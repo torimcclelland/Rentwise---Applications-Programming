@@ -21,17 +21,25 @@ export async function getConversationByID(conversationToFind) {
 
     // try catch to handle any errors
     try{
-         const conversationRef = doc(db, 'Conversations', conversationToFind)
-    
-         const snapshot = await getDoc(conversationRef);
+        const conversationRef = doc(db, 'Conversations', conversationToFind)
+
+        const snapshot = await getDoc(conversationRef);
 
         if (snapshot.data() == undefined) {
             result = new ReturnValue(false, "No snapshots found for conversation with id " + conversationToFind);
             return result;
         } 
+        // get users data
+        const renterResult = await getUserByID(snapshot.docs[0].data().renterID)
+        const landlordResult = await getUserByID(snapshot.docs[0].data().landlordID)
 
-        result = snapshotToConversation(snapshot);
+        if(!renterResult.success || !landlordResult.success){
+            result = new ReturnValue(false, "Error fetching user data for conversation: " + renterResult.errorMsg + landlordResult.errorMsg)
+            return result
+        }
 
+        result = snapshotToConversation(snapshot, renterResult.resultData, landlordResult.resultData);
+        
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {

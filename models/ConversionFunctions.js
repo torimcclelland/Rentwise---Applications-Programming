@@ -215,7 +215,7 @@ function snapshotToNotif(inputObject){
  * @param {DocumentSnapshot} snapshot The snapshot to convert to a conversation
  * @return {ReturnValue} The results of the conversion (stored in the resultData value)
  */
-function snapshotToConversation(snapshot){
+function snapshotToConversation(snapshot, renterData, landlordData){
 
     let result = new ReturnValue()
     let convertedConv
@@ -235,6 +235,8 @@ function snapshotToConversation(snapshot){
             renterID: snapshot.data().renterID,
             landlordID: snapshot.data().landlordID,
             messages: allMsgs,
+            renterData: renterData,
+            landlordData: landlordData
         })
         result = new ReturnValue(true, "")
         result.resultData = convertedConv

@@ -3,13 +3,14 @@ import { User } from '../../models/User';
 import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { snapshotToConversation, snapshotToProperty } from '../../models/ConversionFunctions';
+import { getUserByID } from '../user/GetUserByID';
 
 /**
  * Returns a list (in the dataList field) of all the conversations this user has access to
  * @param {string} userID The id of the user for whom to retrieve all conversations
  * @returns {ReturnValue} The results of the operation. If successful, the resultList field contains the details of the retrieved conversations.
  */
-export async function getConversationsByLandlord(userID) {
+export async function getConversationsByUser(userID) {
 
     var result = new ReturnValue(false, "");
     let convoList;
@@ -22,30 +23,53 @@ export async function getConversationsByLandlord(userID) {
     // try catch to handle any errors
     try{
         
-        result = snapshotToConversation(snapshot.docs[0]);
-        
         // try to find conversation by user ID
         const convoRef = collection(db, 'Conversations')
         
         // query
-        const newQuery = query(convoRef, where("renterID", "==", userID), where("landlordID", "==", userID))
+        let newQuery = query(convoRef, where("renterID", "==", userID))
         
-        const snapshot = await getDocs(newQuery);
+        let snapshot = await getDocs(newQuery);
         
         if (snapshot.docs.length == 0) {
-            result = new ReturnValue(true, "");
-            return result;
+
+            // check landlord id
+            // query
+            newQuery = query(convoRef, where("landlordID", "==", userID))
+            
+            snapshot = await getDocs(newQuery);
+
+            // check if still empty, if so quit
+            if (snapshot.docs.length == 0) {
+                result = new ReturnValue(true, "");
+                return result;
+            }    
         }
 
+        // convert all conversations (and messages within) to relevant objects
         convoList = [];
-        snapshot.forEach((doc) => {
-            const convo = snapshotToConversation(doc);
+
+        // foreach doc in snapshot (KELSIER)
+        for( const doc of snapshot.docs){
+            // fetch data of renter
+            const renterResult = await getUserByID(doc.data().renterID)
+
+            // fetch data of landlord
+            const landlordResult = await getUserByID(doc.data().landlordID)
+
+            if(!renterResult.success || !landlordResult.success){
+                result = new ReturnValue(false, "Error fetching user data for conversation: " + renterResult.errorMsg + landlordResult.errorMsg)
+                return result
+            }
+
+            // snapshot to conversation
+            const convo = snapshotToConversation(doc, renterResult.resultData, landlordResult.resultData);
             if(!convo.success){
                 return convo;
             }
-            //convo.resultData.conversationID = doc.id; SAM maybe need to add this back in
-            convoList.push(convo.resultData);
-        })
+            convo.resultData.conversationID = doc.id;
+            convoList.push(convo.resultData); // update list
+        }
 
         // success
         result = new ReturnValue(true, "")
@@ -54,7 +78,7 @@ export async function getConversationsByLandlord(userID) {
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
-            error = e.message + " (problem while finding property)" // works, `e` narrowed to Error
+            error = e.message + " (problem while finding conversation by user)" // works, `e` narrowed to Error
         } else{
             error = "Had a problem with typescript error handling when finding conversation."
         }

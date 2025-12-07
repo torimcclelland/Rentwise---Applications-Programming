@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native'
 import { getApplicationByID } from '../database_calls/application/GetApplicationByID'
 import { getUserByID } from '../database_calls/user/GetUserByID'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { Application } from '../models/Application'
 import { User } from '../models/User'
 import Profile from '../components/profile'
@@ -13,10 +13,12 @@ import PrimaryButton from '../components/PrimaryButton'
 import CustomDivider from '../components/divider'
 import NotificationModal from '../components/NotificationModal'
 import { createConversation } from '../database_calls/conversation/CreateConversation'
+import { getConversationsByBothUsers } from '../database_calls/conversation/GetConversationsByBothUsers'
 
 const ViewApplication = () => {
 
     const route = useRoute()
+    const navigation = useNavigation();
     const {applicationID} = route.params
 
     const [application, setApplication] = useState(new Application({}))
@@ -92,20 +94,36 @@ const ViewApplication = () => {
     }
 
     const onPressMessage = async() => {
-        console.log("starting conversation...")
-
-        const result = await createConversation(renter.userID, landlord.userID)
-
-        if(!result.success){
-            
-            console.log("Error:" + result.errorMsg);
-            setErrorMessage("Error:" + result.errorMsg);
+        
+        // already have a conversation?
+        const convoExists = await getConversationsByBothUsers(renter.userID, landlord.userID);
+        if(!convoExists.success){
+            console.log("Error:" + convoExists.errorMsg);
+            setErrorMessage("Error:" + convoExists.errorMsg);
             toggleErrorModal();
             return;
         }
 
+        // if no existing converstaion, make one
+        if(convoExists.resultData == {}){
+            
+            const result = await createConversation(renter.userID, landlord.userID)
+            
+            if(!result.success){
+                
+                console.log("Error:" + result.errorMsg);
+                setErrorMessage("Error:" + result.errorMsg);
+                toggleErrorModal();
+                return;
+            }
+            GlobalValues.conversationData = result.resultData;
+        } else {// if existing conversation, just navigate there
+            GlobalValues.conversationData = convoExists.resultData;
+        }
+
         // if success, navigate to conversation
-        
+        navigation.navigate('Specific Message');
+
     }
 
     return (
