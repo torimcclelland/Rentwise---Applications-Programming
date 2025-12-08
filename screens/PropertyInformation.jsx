@@ -149,6 +149,10 @@ export const PropertyInfo = () =>{
                 title="Apply Now"
                 onPress={() => applyForProperty()}
                 />
+                <PrimaryButton
+                title="Message Owner"
+                onPress={() => navigation.navigate('Specific Message')}
+                />
             </View>
 
         </View>

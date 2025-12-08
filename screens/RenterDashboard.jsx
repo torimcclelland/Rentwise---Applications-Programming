@@ -28,9 +28,9 @@ const DashboardScreen = () => {
 
           {/* Stats Overview */}
           <View style={styles.statsRow}>
-            <StatsCard label="Open Fixit Tickets" value="2" />
-            <StatsCard label="Nearby Available Properties" value="3" />
-            <StatsCard label="Payments Due" value="$985" />
+            <StatsCard label="Open Fixit Tickets" value="2" onPress={() => navigation.navigate('Fixit')} />
+            <StatsCard label="Nearby Available Properties" value="3" onPress={() => navigation.navigate('Browse Properties')}/>
+            <StatsCard label="Payments Due" value="$985" onPress={() => navigation.navigate('Payment')} />
           </View>
 
           <CustomDivider />
@@ -62,8 +62,8 @@ const DashboardScreen = () => {
           <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Fix-it Requests</Text>
 
           <InfoCard
-            title="Leaky Faucet"
-            subtitle="🟡 Pending • Reported Oct. 4"
+            title="No open requests"
+            subtitle="🟢 You're all set!"
           />
           <TouchableOpacity style={styles.addRequestButton}>
           <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit')} />

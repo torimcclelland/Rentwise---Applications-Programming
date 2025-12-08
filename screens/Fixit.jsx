@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 import styles from '../styles/FixitStyle';
 import DropDown from '../components/DropDown';
 import PrimaryButton from '../components/PrimaryButton';
+import { createFixitRequest } from '../database_calls/fixitrequests/CreateFixitRequest';
+import { FixitRequest } from '../models/FixitRequest';
+import { useRoute } from '@react-navigation/native';
+import { GlobalValues } from '../GlobalValues';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
   const [details, setDetails] = useState('');
   const [submittedAt, setSubmittedAt] = useState(null);
+  const currentUser = GlobalValues.currentUser
+  const renterID = currentUser.userID
+  const route = useRoute()
+  const { landlordID = "", propertyID = "" } = route.params || {};
 
   const maintenanceCategories = [
     'Plumbing',
@@ -19,15 +27,38 @@ const Fixit = () => {
     'Other',
   ];
 
-  const handleSubmit = () => {
-    const timestamp = new Date().toISOString();
-    setSubmittedAt(timestamp);
+  const handleSubmit = async () => {
+    try {
+      const timestamp = new Date().toISOString();
+      setSubmittedAt(timestamp);
 
-    Alert.alert('Request Submitted', `Category: ${category}\nDetails: ${details}\nSubmitted At: ${timestamp}`);
-    
-    // Reset form
-    setCategory('');
-    setDetails('');
+
+      const newRequest = new FixitRequest({
+        fixitID: "",
+        userID: renterID,
+        category,
+        explanation: details,
+        submissiontime: timestamp,
+        landlordID,
+        propertyID
+      });
+
+      // Call backend to create request
+      const result = await createFixitRequest(newRequest);
+
+      if (result.success) {
+        Alert.alert(
+          'Request Submitted',
+          `Category: ${category}\nDetails: ${details}\nSubmitted At: ${timestamp}`
+        );
+        setCategory('');
+        setDetails('');
+      } else {
+        Alert.alert('Submission Failed', result.message);
+      }
+    } catch (error) {
+      Alert.alert('Error', error.message || 'Unexpected error occurred.');
+    }
   };
 
   return (
@@ -36,13 +67,12 @@ const Fixit = () => {
 
       <Text style={styles.label}>Select Maintenance Category:</Text>
       <View style={styles.pickerContainer}>
-          <DropDown
-            options={maintenanceCategories}
-            value={category}
-            onSelect={setCategory}
-            placeholder="Select an issue category"
-          />
-
+        <DropDown
+          options={maintenanceCategories}
+          value={category}
+          onSelect={setCategory}
+          placeholder="Select an issue category"
+        />
       </View>
 
       <Text style={styles.label}>Describe the issue:</Text>
@@ -55,12 +85,18 @@ const Fixit = () => {
         onChangeText={setDetails}
       />
 
-      <PrimaryButton title = "Submit Request" style={styles.submitButton} onPress={handleSubmit}>
+      <PrimaryButton
+        title="Submit Request"
+        style={styles.submitButton}
+        onPress={handleSubmit}
+      >
         <Text style={styles.submitText}>Submit Request</Text>
       </PrimaryButton>
 
       {submittedAt && (
-        <Text style={styles.timestamp}>Last submitted: {new Date(submittedAt).toLocaleString()}</Text>
+        <Text style={styles.timestamp}>
+          Last submitted: {new Date(submittedAt).toLocaleString()}
+        </Text>
       )}
     </View>
   );
