@@ -14,6 +14,7 @@ import ImageCarousel from '../components/ImageCarousel'
 import { stylesModal } from '../styles/ModalStyle'
 import { uploadImage } from '../database_calls/uploadImages'
 import ValidateAddress from '../database_calls/api/ValidateAddress'
+import NotificationWithCloseModal from '../components/NotificationWithClose'
 import NotificationModal from '../components/NotificationModal'
 import {getUserByEmail} from '../database_calls/user/GetUserByEmail'
 import { addNotifToList } from '../database_calls/notifications/AddNotifToList'
@@ -30,6 +31,7 @@ export const PropertyEditScreen = () =>{
     const [visible, setVisible] = useState(false)
     const [renterVisible, setRenterVisible] = useState(false)
     const [renterEmail, setRenterEmail] = useState("")
+    const [error, setError] = useState(false)
 
     // variables
     const [property, setProperty] = useState(new Property({})) // initialize property to empty
@@ -124,6 +126,11 @@ export const PropertyEditScreen = () =>{
         const user = await getUserByEmail(userToFind);
         console.log(user);
 
+        if (!user.resultData || user.resultData.isLandlord == true) {
+            setError(true);
+            return;
+        }
+
         const message = `You have been invited to rent the property at ${property.address} ${property.city}, ${property.state} ${property.zipcode} ID: ${property.propertyID}`;  
 
         const notification = new Notification({
@@ -136,6 +143,7 @@ export const PropertyEditScreen = () =>{
 
         console.log(result);
 
+        setError(false);
         toggleRentalModal()
     }
 
@@ -330,11 +338,13 @@ export const PropertyEditScreen = () =>{
             )}
 
             {renterVisible && (
-            <NotificationModal
+            <NotificationWithCloseModal
                 visible={renterVisible}
                 message={message}
                 onClose={handleRenterSubmit}
                 dynamic={true}
+                toggle={toggleRentalModal}
+                error={error}
                 buttonTitle={"Send Invite"}
                 textMessage={"Renter's Email Address"}
                 setText={setRenterEmail}

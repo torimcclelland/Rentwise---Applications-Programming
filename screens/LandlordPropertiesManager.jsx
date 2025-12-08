@@ -53,6 +53,10 @@ export const LandlordPropertiesScreen = () =>{
     navigation.navigate('Landlord Property View', {'propertyID': propertyID});
   }
 
+  const viewLeasedProperty = async(propertyID) => {
+    navigation.navigate('Leased Property View', {'propertyID': propertyID});
+  }
+
   const createNewProperty = async() => {
     navigation.navigate('Add Property');
   }
@@ -79,16 +83,17 @@ export const LandlordPropertiesScreen = () =>{
 
         {propertiesLs.length > 0 ? (
           // map over your items and render PropertyCard
-          propertiesLs.map(item => (
-          <View>
-            <PropertyCard
-              key={item.propertyID?.toString()}
-              address={item.address}
-              edit={() => editProperty(item.propertyID)} // navigate to the edit screen
-              view={() => viewProperty(item.propertyID)} // navigate to the view screen
-              image={item.images[0]}
-            />
-          </View>
+          propertiesLs.filter(item => item.renterID === "none")
+          .map(item =>(
+              <View>
+                <PropertyCard
+                  key={item.propertyID?.toString()}
+                  address={item.address}
+                  edit={() => editProperty(item.propertyID)} // navigate to the edit screen
+                  view={() => viewProperty(item.propertyID)} // navigate to the view screen
+                  image={item.images[0]}
+                />
+              </View>
           ))
         ) : (
           <View style={styles.noProperties}>
@@ -100,7 +105,28 @@ export const LandlordPropertiesScreen = () =>{
         <CustomDivider
         customStyles={{marginBottom: 20, marginTop: 20}}
         />
+
         <Text style={[styles.text, {alignSelf: 'flex-start'}, theme.textColor]}>Leased Properties</Text>
+
+        {propertiesLs.length > 0 ? (
+          // map over your items and render PropertyCard
+          propertiesLs.filter(item => item.renterID != "none")
+          .map(item =>(
+              <View>
+                <PropertyCard
+                  key={item.propertyID?.toString()}
+                  address={item.address}
+                  edit={() => editProperty(item.propertyID)} // navigate to the edit screen
+                  view={() => viewLeasedProperty(item.propertyID)} // navigate to the view screen
+                  image={item.images[0]}
+                />
+              </View>
+          ))
+        ) : (
+          <View style={styles.noProperties}>
+            <Text style={[theme.textColor]}>No properties leased yet</Text>
+          </View>
+        )}
 
       </View>
 

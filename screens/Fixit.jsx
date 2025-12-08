@@ -3,11 +3,20 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import styles from '../styles/FixitStyle';
 import DropDown from '../components/DropDown';
 import PrimaryButton from '../components/PrimaryButton';
+import { createFixitRequest } from '../database_calls/fixitrequests/CreateFixitRequest'
+import { FixitRequest } from '../models/FixitRequest';
+import { GlobalValues } from '../GlobalValues';
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { addNotifToList } from '../database_calls/notifications/AddNotifToList';
+import { Notification } from '../models/Notification';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
   const [details, setDetails] = useState('');
   const [submittedAt, setSubmittedAt] = useState(null);
+  const user = GlobalValues.currentUser;
+  const route = useRoute();
+  const { landlordID } = route.params 
 
   const maintenanceCategories = [
     'Plumbing',
@@ -19,8 +28,24 @@ const Fixit = () => {
     'Other',
   ];
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+
     const timestamp = new Date().toISOString();
+
+    const request = new FixitRequest({
+      userID: user.userID,
+      explanation: details,
+      category: category,
+      submissontime: timestamp,
+      landlordID: landlordID,
+      propertyID: user.propertyId
+    })
+
+    const result = await createFixitRequest(request)
+    console.log(result)
+
+    await sendNotification();
+
     setSubmittedAt(timestamp);
 
     Alert.alert('Request Submitted', `Category: ${category}\nDetails: ${details}\nSubmitted At: ${timestamp}`);
@@ -29,6 +54,17 @@ const Fixit = () => {
     setCategory('');
     setDetails('');
   };
+
+  const sendNotification = async () => {
+    const notif = new Notification({
+      datetime: new Date().toISOString(),
+      message: `New fixit request submitted by ${user.firstName} ${user.lastName}: ${category}`,
+      isNew: true
+    })
+
+    const result = await addNotifToList(notif, landlordID);
+    console.log(result)
+  }
 
   return (
     <View style={styles.container}>

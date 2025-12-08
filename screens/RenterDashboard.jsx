@@ -15,6 +15,7 @@ import { Property } from '../models/Property';
 
 
 
+
 const DashboardScreen = () => {
 
   const user = GlobalValues.currentUser;
@@ -38,7 +39,10 @@ const DashboardScreen = () => {
 
   const getFixitRequests = async(userID) => {
     const result = await getFixitRequestsByUserID(userID)
-    console.log(result)
+
+    console.log(result.resultData)
+
+    setFixitRequests(result.resultData);
   }
 
 
@@ -56,9 +60,9 @@ const DashboardScreen = () => {
 
           {/* Stats Overview */}
           <View style={styles.statsRow}>
-            <StatsCard label="Open Fixit Tickets" value="2" />
+            <StatsCard label="Open Fixit Tickets" value={`${fixitRequests.length}`} />
             <StatsCard label="Nearby Available Properties" value="3" />
-            <StatsCard label="Payments Due" value="$985" />
+            <StatsCard label="Payments Due" value={`$${property.monthlyPrice}`} />
           </View>
 
           <CustomDivider />
@@ -89,12 +93,17 @@ const DashboardScreen = () => {
           {/* FixIt Requests */}
           <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Fix-it Requests</Text>
 
-          <InfoCard
-            title="Leaky Faucet"
-            subtitle="🟡 Pending • Reported Oct. 4"
-          />
+          {fixitRequests.length > 0 && (
+            fixitRequests.map(item => (
+              <InfoCard
+              title={`${item.category}`}
+              subtitle={`🟡 Pending • Submitted on ${item.submissontime.split("T0")[0]}`}
+              />
+            ))
+          )}
+          
           <TouchableOpacity style={styles.addRequestButton}>
-          <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit')} />
+          <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit', {'landlordID': property.landlordID})} />
           </TouchableOpacity>
 
           <CustomDivider />

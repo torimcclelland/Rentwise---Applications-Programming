@@ -233,7 +233,6 @@ export const PropertyInfo = () =>{
             
             {isLandlord == false && (
                 <View style={propertyInfo.buttonContainer}>
-                // Schedule and Apply buttons at the bottom of the page only if you are renter
                 <View style={propertyInfo.buttons}>
                     <PrimaryButton
                     title="Shedule Visit"

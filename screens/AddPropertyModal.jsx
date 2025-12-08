@@ -271,6 +271,7 @@ const AddProperty = () =>{
                                 onSelect={setState}
                                 />
                             </View>
+                        </View>
 
                           <TextField
                             textType="numeric"
@@ -291,14 +292,14 @@ const AddProperty = () =>{
                           />
 
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, marginRight: 4 }}>$</Text>
-                        <TextField
-                            placeholder="Enter monthly price"
-                            value={monthlyPrice}
-                            onChangeText={(val) => setMonthlyPrice(val.replace(/[^0-9]/g, ''))}
-                            keyboardType="numeric"
-                            style={{ flex: 1 }}
-                        />
+                            <Text style={{ fontSize: 16, marginRight: 4 }}>$</Text>
+                            <TextField
+                                placeholder="Enter monthly price"
+                                value={monthlyPrice}
+                                onChangeText={(val) => setMonthlyPrice(val.replace(/[^0-9]/g, ''))}
+                                keyboardType="numeric"
+                                style={{ flex: 1 }}
+                            />
                         </View>
 
                           <DropDown

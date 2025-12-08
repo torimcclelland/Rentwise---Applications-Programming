@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, Text, Modal, StyleSheet } from 'react-native'
+import { View, Text, Modal, StyleSheet, Pressable } from 'react-native'
 import { BlurView } from 'expo-blur' 
 import PrimaryButton from './PrimaryButton'
 import TextField from './TextField'
 import { useTheme } from '../ThemeContext' 
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-const NotificationModal = ({ message, visible, onClose, dynamic=false, error = false, buttonTitle = "close", textMessage, setText}) => {
+const NotificationWithCloseModal = ({ message, visible, onClose, toggle, dynamic=false, buttonTitle = "close", textMessage, setText}) => {
   const theme = useTheme()
 
   return (
@@ -18,15 +19,17 @@ const NotificationModal = ({ message, visible, onClose, dynamic=false, error = f
       {/* Full-screen background */}
       <View style={notifModal.overlay}>
         <BlurView intensity={60} tint="dark" style={StyleSheet.absoluteFill} />
-
         {/* Centered modal box */}
         <View style={[notifModal.modalContent, theme.textField]}>
+          <Pressable onPress={toggle} style={{ alignSelf: 'flex-start', marginBottom: 10 }}>
+            <Icon name="close" size={20} color="#000" />
+          </Pressable>
           <Text style={[notifModal.message, theme.textColor]}>{message}</Text>
 
           {dynamic && (
             <TextField
               placeholder={textMessage}
-              style={{ borderWidth: 1, borderColor: error === true ? 'red' : 'transparent' }}
+              style={{ borderWidth: 1, borderColor: 'red' }}
               onChangeText={(text) => setText(text)}
             />
           )}
@@ -42,7 +45,7 @@ const NotificationModal = ({ message, visible, onClose, dynamic=false, error = f
   )
 }
 
-export default NotificationModal
+export default NotificationWithCloseModal
 
 const notifModal = StyleSheet.create({
   overlay: {

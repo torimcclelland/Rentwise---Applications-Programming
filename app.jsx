@@ -25,6 +25,7 @@ import AddProperty from './screens/AddPropertyModal';
 import PaymentSummary from './screens/PaymentSummary';
 import LoadingScreen from './screens/LoadingScreen';
 import PurchasePremium from './screens/PurchasePremium';
+import LeasedPropertyScreen from './screens/LeasedProperty';
 
 const Stack = createNativeStackNavigator();
 
@@ -134,6 +135,11 @@ function RootStack() {
       <Stack.Screen
       name="PurchasePremium"
       component={PurchasePremium}
+      //options={headerShown: false}}
+      />
+      <Stack.Screen
+      name="Leased Property View"
+      component={LeasedPropertyScreen}
       //options={headerShown: false}}
       />
     </Stack.Navigator>

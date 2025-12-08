@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
 import { GlobalValues } from '../GlobalValues';
 import InfoCard from '../components/InfoCard';
@@ -7,11 +7,14 @@ import { getNotifListByUserID } from '../database_calls/notifications/GetNotifLi
 import PrimaryButton from '../components/PrimaryButton';
 import NotificationModal from '../components/NotificationModal';
 import { AddPropertyToRenter } from '../database_calls/user/AddPropertyToRenter';
+import { Property } from '../models/Property';
+import { getPropertyByID } from '../database_calls/property/GetPropertyByID';
+import {updateProperty} from '../database_calls/property/UpdateProperty';
 
 const Notifications = () => {
 
     const [notifList, setNotifList] = useState([])
-
+    const [property, setProperty] = useState(new Property({}))
     useEffect(()=>{
         getNotifications();
 
@@ -40,10 +43,18 @@ const Notifications = () => {
         }
 
         const result = await AddPropertyToRenter(propertyID);
+        const property_response = await getPropertyByID(propertyID);
+        setProperty(property_response.resultData);
+
+        property.renterID = GlobalValues.currentUser.userID;
+        const update_response = await updateProperty(property);
+
+        console.log(update_response);
     }
    
     return (
         <View style={notifs.container}>
+            <ScrollView>
             <View>
 
                 { notifList.length > 0 ? (
@@ -83,6 +94,7 @@ const Notifications = () => {
 
             {/* Bottom Navigation Bar */}
             <BottomNavBar selectedTab="notifications" />
+            </ScrollView>
         </View>
     );
 }
