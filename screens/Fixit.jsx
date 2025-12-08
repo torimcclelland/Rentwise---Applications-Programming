@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 import styles from '../styles/FixitStyle';
 import DropDown from '../components/DropDown';
 import PrimaryButton from '../components/PrimaryButton';
@@ -9,6 +9,10 @@ import { GlobalValues } from '../GlobalValues';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { addNotifToList } from '../database_calls/notifications/AddNotifToList';
 import { Notification } from '../models/Notification';
+import { createFixitRequest } from '../database_calls/fixitrequests/CreateFixitRequest';
+import { FixitRequest } from '../models/FixitRequest';
+import { useRoute } from '@react-navigation/native';
+import { GlobalValues } from '../GlobalValues';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
@@ -17,6 +21,10 @@ const Fixit = () => {
   const user = GlobalValues.currentUser;
   const route = useRoute();
   const { landlordID } = route.params 
+  const currentUser = GlobalValues.currentUser
+  const renterID = currentUser.userID
+  const route = useRoute()
+  const { landlordID = "", propertyID = "" } = route.params || {};
 
   const maintenanceCategories = [
     'Plumbing',
@@ -72,13 +80,12 @@ const Fixit = () => {
 
       <Text style={styles.label}>Select Maintenance Category:</Text>
       <View style={styles.pickerContainer}>
-          <DropDown
-            options={maintenanceCategories}
-            value={category}
-            onSelect={setCategory}
-            placeholder="Select an issue category"
-          />
-
+        <DropDown
+          options={maintenanceCategories}
+          value={category}
+          onSelect={setCategory}
+          placeholder="Select an issue category"
+        />
       </View>
 
       <Text style={styles.label}>Describe the issue:</Text>
@@ -91,12 +98,18 @@ const Fixit = () => {
         onChangeText={setDetails}
       />
 
-      <PrimaryButton title = "Submit Request" style={styles.submitButton} onPress={handleSubmit}>
+      <PrimaryButton
+        title="Submit Request"
+        style={styles.submitButton}
+        onPress={handleSubmit}
+      >
         <Text style={styles.submitText}>Submit Request</Text>
       </PrimaryButton>
 
       {submittedAt && (
-        <Text style={styles.timestamp}>Last submitted: {new Date(submittedAt).toLocaleString()}</Text>
+        <Text style={styles.timestamp}>
+          Last submitted: {new Date(submittedAt).toLocaleString()}
+        </Text>
       )}
     </View>
   );

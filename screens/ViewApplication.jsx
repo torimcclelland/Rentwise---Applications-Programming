@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native'
 import { getApplicationByID } from '../database_calls/application/GetApplicationByID'
 import { getUserByID } from '../database_calls/user/GetUserByID'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { Application } from '../models/Application'
 import { User } from '../models/User'
 import Profile from '../components/profile'
@@ -12,16 +12,25 @@ import { GlobalValues } from '../GlobalValues'
 import PrimaryButton from '../components/PrimaryButton'
 import CustomDivider from '../components/divider'
 import NotificationModal from '../components/NotificationModal'
+import { createConversation } from '../database_calls/conversation/CreateConversation'
+import { getConversationsByBothUsers } from '../database_calls/conversation/GetConversationsByBothUsers'
 
 const ViewApplication = () => {
 
     const route = useRoute()
+    const navigation = useNavigation();
     const {applicationID} = route.params
 
     const [application, setApplication] = useState(new Application({}))
     const [renter, setRenter] = useState(new User({}))
     const [modalVisible, setModalVisible] = useState(false)
     const landlord = GlobalValues.currentUser
+
+    // error handling stuff
+    
+    const [errModalVisible, setErrModalVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const toggleErrorModal = () => setErrModalVisible(!errModalVisible);
 
     useEffect(() => {
         const fetchData = async() => {
@@ -81,6 +90,38 @@ const ViewApplication = () => {
             toggleModal()
         }
         console.log(landlord.isPremUser)
+
+    }
+
+    const onPressMessage = async() => {
+        
+        // already have a conversation?
+        const convoExists = await getConversationsByBothUsers(renter.userID, landlord.userID);
+        if(!convoExists.success){
+            console.log("Error:" + convoExists.errorMsg);
+            setErrorMessage("Error:" + convoExists.errorMsg);
+            toggleErrorModal();
+            return;
+        }
+
+        // if no existing converstaion, make one
+        if(convoExists.errorMsg === "Empty"){
+            
+            const result = await createConversation(renter.userID, landlord.userID)
+            
+            if(!result.success){
+                console.log("Error:" + result.errorMsg);
+                setErrorMessage("Error:" + result.errorMsg);
+                toggleErrorModal();
+                return;
+            }
+            GlobalValues.conversationData = result.resultData;
+        } else {// if existing conversation, just navigate there
+            GlobalValues.conversationData = convoExists.resultData;
+        }
+
+        // if success, navigate to conversation
+        navigation.navigate('Specific Message');
 
     }
 
@@ -170,10 +211,14 @@ const ViewApplication = () => {
                     </View>
                 </View>
 
-                <View style={[application_styles.basicInfo, {marginBottom: 160}]}> {/* Added padding to the bottom so it doesn't get blocked by the message user area */}
+                <View style={[application_styles.basicInfo, {marginBottom: 160}]}>
                     <View style={{flexDirection: 'column', gap: 16}}>
-                        <Text style={application_styles.leaveReason}>Reason for Leaving</Text>
-                        <Text>{application.leaveReason}</Text>
+                        <View>
+                            <Text style={application_styles.leaveReason}>Reason for Leaving</Text>
+                        </View>
+                        <View>
+                            <Text>{application.leaveReason}</Text>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -187,8 +232,15 @@ const ViewApplication = () => {
                     title="Message"
                     iconName="message-text-outline"
                     size="large"
+                    onPress={onPressMessage}
                 />
             </View>
+
+            <NotificationModal 
+                visible={modalVisible} 
+                onClose={toggleErrorModal} 
+                message={errorMessage} 
+            />
 
         </View>
     )

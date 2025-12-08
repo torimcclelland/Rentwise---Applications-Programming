@@ -1,14 +1,38 @@
 
-export class Conversation{
+class Conversation{
 
     constructor({
         conversationID = "",
-        users = [],
-        messages = []
-    })
+        renterID = "",
+        landlordID = "",
+        messages = [],
+        renterData = {},
+        landlordData ={}
+    } = {})
     { 
         this.conversationID = conversationID;
-        this.users = users;
+        this.renterID = renterID;
+        this.landlordID = landlordID;
         this.messages = messages;
+        this.renterData = renterData;
+        this.landlordData = landlordData;
     }
 }
+
+class Message{
+    constructor({
+        messageText = "",
+        senderID = "",
+        datetime = "",
+        isNew = 0
+    } = {})
+    {
+        this.messageText = messageText;
+        this.senderID = senderID;
+        this.datetime = datetime;
+        this.isNew = isNew;
+    }
+}
+
+
+export { Conversation, Message }

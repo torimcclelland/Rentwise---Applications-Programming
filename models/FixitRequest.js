@@ -11,6 +11,7 @@ export const maintenanceCategories = [
 export class FixitRequest{
 
     constructor({
+        fixitID = "",
         userID = "",
         explanation = "",
         category = "",
@@ -19,6 +20,7 @@ export class FixitRequest{
         propertyID = ""
 
     } = {}){ 
+        this.fixitID = fixitID;
         this.userID = userID;
         this.explanation = explanation;
         this.category = category;

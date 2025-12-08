@@ -60,9 +60,9 @@ const DashboardScreen = () => {
 
           {/* Stats Overview */}
           <View style={styles.statsRow}>
-            <StatsCard label="Open Fixit Tickets" value={`${fixitRequests.length}`} />
-            <StatsCard label="Nearby Available Properties" value="3" />
-            <StatsCard label="Payments Due" value={`$${property.monthlyPrice}`} />
+            <StatsCard label="Open Fixit Tickets" value={`${fixitRequests.length}`} onPress={() => navigation.navigate('Fixit')} />
+            <StatsCard label="Nearby Available Properties" value="3" onPress={() => navigation.navigate('Browse Properties')}/>
+            <StatsCard label="Payments Due" value={`$${property.monthlyPrice}`} onPress={() => navigation.navigate('Payment')} />
           </View>
 
           <CustomDivider />

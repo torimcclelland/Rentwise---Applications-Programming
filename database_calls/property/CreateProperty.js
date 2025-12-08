@@ -25,6 +25,7 @@ export async function createProperty(newProperty) {
         || !newProperty.parking.trim()
         || !newProperty.typeOfHome.trim()
         || !newProperty.petsAllowed.trim()
+        || !newProperty.petType.trim()
         || !newProperty.furnished.trim()
         ){
         result = new ReturnValue(false, "All data fields must have a value.")

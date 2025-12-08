@@ -26,6 +26,7 @@ import PaymentSummary from './screens/PaymentSummary';
 import LoadingScreen from './screens/LoadingScreen';
 import PurchasePremium from './screens/PurchasePremium';
 import LeasedPropertyScreen from './screens/LeasedProperty';
+import { GlobalValues } from './GlobalValues';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,7 +76,7 @@ function RootStack() {
       <Stack.Screen
         name="Specific Message"
         component={SpecificMessage} 
-        //options={{headerShown: false}}
+        options={{title:"Conversation"}}
       />
       <Stack.Screen 
         name="User Profile" 

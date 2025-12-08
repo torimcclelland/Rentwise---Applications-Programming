@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,20 +11,41 @@ import userImage from '../components/profileexample.png';
 import styles from '../styles/MessagesOverviewStyle';
 import { useTheme } from '../ThemeContext';
 import { useNavigation } from '@react-navigation/native';
-
-const messages = [
-  { username: 'renter23', message: 'How are you today?', conversationID: 'conv1' },
-  { username: 'bff2025', message: 'I got a new apartment in Erie!', conversationID: 'conv2' },
-  { username: 'rentqueen', message: 'Smoking is banned in this unit.', conversationID: 'conv3' },
-  { username: 'ms.rent', message: 'Where are good places...', conversationID: 'conv4' },
-];
+import { GlobalValues } from '../GlobalValues';
+import { getConversationsByUser } from '../database_calls/conversation/GetConversationsByUser';
 
 const filters = ['All Messages', 'Newest', 'Oldest', 'Active'];
 
 const MessagesOverview = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const handlePress = () => {
+  const [conversations, setConversations] = useState([])
+  const [isLandlord, setIsLandlord] = useState(false);// just for easy access
+
+  // grab all the conversations of this user
+  useEffect(()=>{
+    setIsLandlord(GlobalValues.currentUser.isLandlord)
+    // fetch user messages
+    fetchUserMessages();
+  }, [])
+
+
+  const fetchUserMessages = async () => {
+    
+    const result = await getConversationsByUser(GlobalValues.currentUser.userID)
+
+    if(!result.success){
+      console.log("error happened here (surely there's a better way to do error handling :| )")
+      console.log(result.errorMsg)
+      return;
+    }
+
+    setConversations(result.resultList)
+  }
+
+
+  const handlePress = (conversation) => {
+    GlobalValues.conversationData = conversation
     navigation.navigate('Specific Message');
   };
 
@@ -44,17 +65,31 @@ const MessagesOverview = () => {
 
       {/* Message List */}
       <ScrollView contentContainerStyle={styles.messageList}>
-        {messages.map((msg, index) => (
+        {conversations.map((convo, index) => (
           <TouchableOpacity
             key={index}
             style={[styles.messageCard, theme.textField]}
-            onPress={() => navigation.navigate('Specific Message')}
+            onPress={() => handlePress(convo)}
           >
-            <Image source={userImage} style={styles.profileImage} />
-            <View style={styles.messageTextContainer}>
-              <Text style={[styles.username, theme.textColor]}>{msg.username}</Text>
-              <Text style={[styles.message, theme.textColor]}>{msg.message}</Text>
-            </View>
+
+            { isLandlord && 
+              <View>
+                  <Image source={convo.renterData.profilePicture} style={styles.profileImage} />
+                  <View style={styles.messageTextContainer}>
+                    <Text style={[styles.username, theme.textColor]}>{convo.renterData.firstName}</Text>
+                  </View>
+              </View>
+            }
+
+            { !isLandlord &&
+            
+              <View>
+                <Image source={convo.landlordData.profilePicture} style={styles.profileImage} />
+                <View style={styles.messageTextContainer}>
+                  <Text style={[styles.username, theme.textColor]}>{convo.landlordData.firstName}</Text>
+                </View>
+              </View>
+            }
           </TouchableOpacity>
         ))}
       </ScrollView>

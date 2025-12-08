@@ -78,6 +78,39 @@ export const PropertyInfo = () =>{
         navigation.navigate('Apply Property', {'landlordID': landlord.userID, 'propertyID': propertyID}) // navigate to the property information page
     }
 
+    
+    const onPressMessage = async() => {
+        
+        // already have a conversation?
+        const convoExists = await getConversationsByBothUsers(GlobalValues.currentUser.userID, landlord.userID);
+        if(!convoExists.success){
+            console.log("Error:" + convoExists.errorMsg);
+            setErrorMessage("Error:" + convoExists.errorMsg);
+            toggleErrorModal();
+            return;
+        }
+
+        // if no existing converstaion, make one
+        if(convoExists.errorMsg === "Empty"){
+            
+            const result = await createConversation(GlobalValues.currentUser.userID, landlord.userID)
+            
+            if(!result.success){
+                console.log("Error:" + result.errorMsg);
+                setErrorMessage("Error:" + result.errorMsg);
+                toggleErrorModal();
+                return;
+            }
+            GlobalValues.conversationData = result.resultData;
+        } else {// if existing conversation, just navigate there
+            GlobalValues.conversationData = convoExists.resultData;
+        }
+
+        // if success, navigate to conversation
+        navigation.navigate('Specific Message');
+
+    }
+
     return(
         <View style={[propertyInfo.container]}>
             
@@ -242,7 +275,11 @@ export const PropertyInfo = () =>{
                     title="Apply Now"
                     onPress={() => applyForProperty()}
                     />
-                </View>
+                    <PrimaryButton
+                title="Message Owner"
+                onPress={() => onPressMessage()}
+                />
+            </View>
                 </View>
             )}
             

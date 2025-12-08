@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
+import { View, Text, FlatList, StyleSheet, ScrollView, ScrollView } from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
 import { GlobalValues } from '../GlobalValues';
 import InfoCard from '../components/InfoCard';
@@ -10,8 +10,11 @@ import { AddPropertyToRenter } from '../database_calls/user/AddPropertyToRenter'
 import { Property } from '../models/Property';
 import { getPropertyByID } from '../database_calls/property/GetPropertyByID';
 import {updateProperty} from '../database_calls/property/UpdateProperty';
+import styles from '../styles/Notifications';
+import { useTheme } from '../ThemeContext';
 
 const Notifications = () => {
+    const theme = useTheme();
 
     const [notifList, setNotifList] = useState([])
     const [property, setProperty] = useState(new Property({}))
@@ -53,17 +56,15 @@ const Notifications = () => {
     }
    
     return (
-        <View style={notifs.container}>
-            <ScrollView>
-            <View>
+        <View style={[styles.container, theme.container]}>
+            <ScrollView contentContainerStyle={styles.messageList}>
 
                 { notifList.length > 0 ? (
-                    notifList.map(item => (
-                        <View>
+                    notifList.map((item, index) => (
                         <InfoCard
-                        key={item.notificationID?.toString()}
-                        title = {item.message.split("ID:")[0]}
-                        subtitle = {item.datetime}
+                            key={index}
+                            title = {item.message}
+                            subtitle = {item.datetime}
                         />
 
                         {item.message.includes("You have been invited to rent the property at") && (
@@ -87,14 +88,15 @@ const Notifications = () => {
                     ))
  
                 ) : (
-                    <Text> No notification</Text>
+                    <Text> No notifications</Text>
                 )}
 
-                </View>
+                </ScrollView>
 
             {/* Bottom Navigation Bar */}
-            <BottomNavBar selectedTab="notifications" />
-            </ScrollView>
+            <View style={styles.bottomNav}>
+                <BottomNavBar selectedTab="notifications" />
+            </View>
         </View>
     );
 }

@@ -4,6 +4,7 @@ import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { Conversation } from '../../models/Conversation';
 import { snapshotToConversation } from '../../models/ConversionFunctions';
+import { getUserByID } from '../user/GetUserByID';
 
 /**
  * 
@@ -21,21 +22,29 @@ export async function getConversationByID(conversationToFind) {
 
     // try catch to handle any errors
     try{
-         const conversationRef = doc(db, 'Conversations', conversationToFind)
-    
-         const snapshot = await getDoc(conversationRef);
+        const conversationRef = doc(db, 'Conversations', conversationToFind)
+
+        const snapshot = await getDoc(conversationRef);
 
         if (snapshot.data() == undefined) {
             result = new ReturnValue(false, "No snapshots found for conversation with id " + conversationToFind);
             return result;
         } 
+        // get users data
+        const renterResult = await getUserByID(snapshot.data().renterID)
+        const landlordResult = await getUserByID(snapshot.data().landlordID)
 
-        result = snapshotToConversation(snapshot);
+        if(!renterResult.success || !landlordResult.success){
+            result = new ReturnValue(false, "Error fetching user data for conversation: " + renterResult.errorMsg + landlordResult.errorMsg)
+            return result
+        }
 
+        result = snapshotToConversation(snapshot, renterResult.resultData, landlordResult.resultData);
+        
     } catch(e){
         let error = ""; 
         if (e instanceof Error) {
-            error = e.message + " (find conversation problem)" // works, `e` narrowed to Error
+            error = e.message + " (retrieve conversation problem)" // works, `e` narrowed to Error
         } else{
             error = "Had a problem with typescript error handling when finding conversation."
         }
