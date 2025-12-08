@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
 import { GlobalValues } from '../GlobalValues';
 import InfoCard from '../components/InfoCard';
 import { getNotifListByUserID } from '../database_calls/notifications/GetNotifListByUserID';
+import styles from '../styles/Notifications';
+import { useTheme } from '../ThemeContext';
 
 const Notifications = () => {
+    const theme = useTheme();
 
     const [notifList, setNotifList] = useState([])
 
@@ -26,27 +29,29 @@ const Notifications = () => {
     }
    
     return (
-        <View style={notifs.container}>
-            <View>
+        <View style={[styles.container, theme.container]}>
+            <ScrollView contentContainerStyle={styles.messageList}>
 
                 { notifList.length > 0 ? (
-                    notifList.map(item => (
+                    notifList.map((item, index) => (
                         <InfoCard
-                        key={item.notificationID?.toString()}
-                        title = {item.message}
-                        subtitle = {item.datetime}
+                            key={index}
+                            title = {item.message}
+                            subtitle = {item.datetime}
                         />
                     ))
 
                     
                 ) : (
-                    <Text> No notification</Text>
+                    <Text> No notifications</Text>
                 )}
 
-                </View>
+                </ScrollView>
 
             {/* Bottom Navigation Bar */}
-            <BottomNavBar selectedTab="notifications" />
+            <View style={styles.bottomNav}>
+                <BottomNavBar selectedTab="notifications" />
+            </View>
         </View>
     );
 }

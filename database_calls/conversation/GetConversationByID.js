@@ -4,6 +4,7 @@ import { ReturnValue } from '../../models/ReturnValue';
 import { db } from '../../firebaseConfig';
 import { Conversation } from '../../models/Conversation';
 import { snapshotToConversation } from '../../models/ConversionFunctions';
+import { getUserByID } from '../user/GetUserByID';
 
 /**
  * 
@@ -30,8 +31,8 @@ export async function getConversationByID(conversationToFind) {
             return result;
         } 
         // get users data
-        const renterResult = await getUserByID(snapshot.docs[0].data().renterID)
-        const landlordResult = await getUserByID(snapshot.docs[0].data().landlordID)
+        const renterResult = await getUserByID(snapshot.data().renterID)
+        const landlordResult = await getUserByID(snapshot.data().landlordID)
 
         if(!renterResult.success || !landlordResult.success){
             result = new ReturnValue(false, "Error fetching user data for conversation: " + renterResult.errorMsg + landlordResult.errorMsg)

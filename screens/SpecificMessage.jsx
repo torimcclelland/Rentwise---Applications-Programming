@@ -19,6 +19,7 @@ import { User } from '../models/User';
 import { getUserByID } from '../database_calls/user/GetUserByID';
 import NotificationModal from '../components/NotificationModal';
 import { addMessageToConveration } from '../database_calls/conversation/AddMessageToConversation';
+import { useNavigation } from '@react-navigation/native';
 
 
 const SpecificMessage = () => {
@@ -30,6 +31,8 @@ const SpecificMessage = () => {
   const [otherUser, setOtherUser] = useState({})
   const [conversation, setConversation] = useState({})
 
+  const navigation = useNavigation();
+
   // error handling
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,6 +41,7 @@ const SpecificMessage = () => {
 // make values for landlord and for conversation, then set them all in the useEffect below vvv
   // called when this page is navigated to
   useEffect(()=>{
+
     // grab the convesation data object from global values (first make sure data isn't null)
     if(GlobalValues.conversationData == null){
       setConversation(new Conversation())
@@ -87,7 +91,16 @@ const SpecificMessage = () => {
       setThisUser(fetchingRenter.resultData)
       setOtherUser(fetchingLandlord.resultData)
     }
+
   }
+
+  useEffect(()=>{
+    // set screen title
+    navigation.setOptions({
+      title: otherUser.firstName || 'Conversation', // Set dynamic title
+    });
+  }, [otherUser])
+
 
   // send message (add to conversation)
   const handleSend = async () => {
@@ -134,7 +147,7 @@ const SpecificMessage = () => {
               <MessageBubble
                 key={index}
                 text={msg.messageText}
-                fromUser={msg.sender !== 'landlord'}
+                fromUser={msg.senderID === GlobalValues.currentUser.userID}
                 timestamp={msg.datetime}
               />
             ))}

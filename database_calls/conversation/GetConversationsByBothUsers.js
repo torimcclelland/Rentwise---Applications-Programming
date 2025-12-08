@@ -43,7 +43,7 @@ export async function getConversationsByBothUsers(user1, user2) {
 
             // check if still empty, if so quit
             if (snapshot.docs.length == 0) {
-                result = new ReturnValue(true, "", {});
+                result = new ReturnValue(true, "Empty", {});
                 return result;
             }    
         }

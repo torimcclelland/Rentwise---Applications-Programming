@@ -12,6 +12,9 @@ import RatingStars from '../components/RatingStars'
 import PrimaryButton from '../components/PrimaryButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ImageCarousel from '../components/ImageCarousel'
+import { createConversation } from '../database_calls/conversation/CreateConversation'
+import { getConversationsByBothUsers } from '../database_calls/conversation/GetConversationsByBothUsers'
+import { GlobalValues } from '../GlobalValues'
 
 export const PropertyInfo = () =>{
 
@@ -44,6 +47,39 @@ export const PropertyInfo = () =>{
 
     const applyForProperty = async() => {
         navigation.navigate('Apply Property', {'landlordID': landlord.userID, 'propertyID': propertyID}) // navigate to the property information page
+    }
+
+    
+    const onPressMessage = async() => {
+        
+        // already have a conversation?
+        const convoExists = await getConversationsByBothUsers(GlobalValues.currentUser.userID, landlord.userID);
+        if(!convoExists.success){
+            console.log("Error:" + convoExists.errorMsg);
+            setErrorMessage("Error:" + convoExists.errorMsg);
+            toggleErrorModal();
+            return;
+        }
+
+        // if no existing converstaion, make one
+        if(convoExists.errorMsg === "Empty"){
+            
+            const result = await createConversation(GlobalValues.currentUser.userID, landlord.userID)
+            
+            if(!result.success){
+                console.log("Error:" + result.errorMsg);
+                setErrorMessage("Error:" + result.errorMsg);
+                toggleErrorModal();
+                return;
+            }
+            GlobalValues.conversationData = result.resultData;
+        } else {// if existing conversation, just navigate there
+            GlobalValues.conversationData = convoExists.resultData;
+        }
+
+        // if success, navigate to conversation
+        navigation.navigate('Specific Message');
+
     }
 
     return(
@@ -151,7 +187,7 @@ export const PropertyInfo = () =>{
                 />
                 <PrimaryButton
                 title="Message Owner"
-                onPress={() => navigation.navigate('Specific Message')}
+                onPress={() => onPressMessage()}
                 />
             </View>
 

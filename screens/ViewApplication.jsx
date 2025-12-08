@@ -105,12 +105,11 @@ const ViewApplication = () => {
         }
 
         // if no existing converstaion, make one
-        if(convoExists.resultData == {}){
+        if(convoExists.errorMsg === "Empty"){
             
             const result = await createConversation(renter.userID, landlord.userID)
             
             if(!result.success){
-                
                 console.log("Error:" + result.errorMsg);
                 setErrorMessage("Error:" + result.errorMsg);
                 toggleErrorModal();

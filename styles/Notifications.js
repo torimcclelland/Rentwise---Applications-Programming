@@ -31,41 +31,6 @@ const styles = StyleSheet.create({
     color: '#4F46E5',
     fontWeight: '500',
   },
-  messageList: {
-    paddingHorizontal: 16,
-    paddingBottom: 80,
-  },
-  messageCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 10,
-    boxShadowColor: '#000',
-    boxShadowOpacity: 0.05,
-    boxShadowRadius: 4,
-    elevation: 2,
-  },
-  profileImage: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    marginRight: 12,
-  },
-  messageTextContainer: {
-    flex: 1,
-  },
-  username: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  message: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 2,
-  },
   bottomNav: {
     position: 'absolute',
     bottom: 0,
