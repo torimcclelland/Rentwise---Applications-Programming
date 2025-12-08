@@ -4,6 +4,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { styles as globalStyles } from '../styles/UserProfileStyle';
 import {styles} from '../styles/PurchasePremiumStyle';
+import { User } from '../models/User';
 
 const PurchasePremium = () => {
   const navigation = useNavigation();

@@ -46,8 +46,6 @@ const UserProfile = () => {
           <Icon name="edit" size={24} color={theme.textColor.color} />
         </TouchableOpacity>
       </View>
-
-      {/* Scrollable content */}
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.welcomeText}>
           Hi {firstName} 👋 Welcome to your profile!
@@ -88,21 +86,28 @@ const UserProfile = () => {
               : 'Free Landlord'}
           </Text>
         </View>
+          {isLandlord && isPremUser && (
+          <View style={styles.upgradeContainer}>
+            <PrimaryButton
+              title="Manage Premium"
+              onPress={() => navigation.navigate('PurchasePremium')}
+              style={styles.upgradeButton}
+            />
+          </View>
+        )}
 
-        {/* Upgrade button for Free Landlord */}
-            {isLandlord && !isPremUser && (
-      <View style={styles.upgradeContainer}>
-        <PrimaryButton
-          title="Upgrade to Premium"
-          onPress={() => navigation.navigate('PurchasePremium')}
-          style={styles.upgradeButton}
-        />
-      </View>
-      )}
+        {isLandlord && !isPremUser && (
+          <View style={styles.upgradeContainer}>
+            <PrimaryButton
+              title="Upgrade to Premium"
+              onPress={() => navigation.navigate('PurchasePremium')}
+              style={styles.upgradeButton}
+            />
+          </View>
+        )}
 
-      </View>
 
-      {/* Sign out button now inside scrollable content */}
+      </View> 
       <PrimaryButton
         title="Sign out"
         onPress={handleSignOut}
