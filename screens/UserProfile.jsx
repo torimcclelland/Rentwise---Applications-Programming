@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity
 } from 'react-native';
@@ -53,66 +52,74 @@ const UserProfile = () => {
           Hi {firstName} 👋 Welcome to your profile!
         </Text>
 
-            <View style={[styles.card, theme.textField]}>
-        <Text style={[styles.cardTitle, theme.textColor]}>Name</Text>
-        <Text style={[styles.cardValue, theme.textColor]}>{firstName} {lastName}</Text>
-      </View>
-
-      <View style={[styles.card, theme.textField]}>
-        <Text style={[styles.cardTitle, theme.textColor]}>Email</Text>
-        <Text style={[styles.cardValue, theme.textColor]}>{email}</Text>
-      </View>
-
-      <View style={[styles.card, theme.textField]}>
-        <Text style={[styles.cardTitle, theme.textColor]}>Membership Type</Text>
-        <Text style={[styles.cardValue, theme.textColor]}>{membershipLabel}</Text>
-        <View style={[
-          styles.membershipBadge,
-          membershipLabel === 'Renter'
-            ? styles.renterBadge
-            : membershipLabel === 'Premium Landlord'
-            ? styles.premiumBadge
-            : styles.freeBadge
-        ]}>
-          <Icon
-            name={membershipLabel === 'Renter' ? 'user' : 'star'}
-            size={14}
-            color="#1F2937"
-            style={{ marginRight: 6 }}
-          />
-          <Text style={styles.badgeText}>
-            {membershipLabel === 'Renter'
-              ? 'Verified Renter'
-              : membershipLabel === 'Premium Landlord'
-              ? 'Premium Landlord'
-              : 'Free Landlord'}
+        <View style={[styles.card, theme.textField]}>
+          <Text style={[styles.cardTitle, theme.textColor]}>Name</Text>
+          <Text style={[styles.cardValue, theme.textColor]}>
+            {firstName} {lastName}
           </Text>
         </View>
 
-        {/* Upgrade button for Free Landlord */}
-            {isLandlord && !isPremUser && (
-      <View style={styles.upgradeContainer}>
+        <View style={[styles.card, theme.textField]}>
+          <Text style={[styles.cardTitle, theme.textColor]}>Email</Text>
+          <Text style={[styles.cardValue, theme.textColor]}>{email}</Text>
+        </View>
+
+        <View style={[styles.card, theme.textField]}>
+          <Text style={[styles.cardTitle, theme.textColor]}>Membership Type</Text>
+          <Text style={[styles.cardValue, theme.textColor]}>{membershipLabel}</Text>
+
+          <View
+            style={[
+              styles.membershipBadge,
+              membershipLabel === 'Renter'
+                ? styles.renterBadge
+                : membershipLabel === 'Premium Landlord'
+                ? styles.premiumBadge
+                : styles.freeBadge
+            ]}
+          >
+            <Icon
+              name={membershipLabel === 'Renter' ? 'user' : 'star'}
+              size={14}
+              color="#1F2937"
+              style={{ marginRight: 6 }}
+            />
+            <Text style={styles.badgeText}>
+              {membershipLabel === 'Renter'
+                ? 'Verified Renter'
+                : membershipLabel === 'Premium Landlord'
+                ? 'Premium Landlord'
+                : 'Free Landlord'}
+            </Text>
+          </View>
+          {isLandlord && !isPremUser && (
+            <View style={[styles.upgradeContainer, { marginTop: 12 }]}>
+              <PrimaryButton
+                title="Upgrade to Premium"
+                onPress={() => navigation.navigate('PurchasePremium')}
+                style={styles.upgradeButton}
+              />
+            </View>
+          )}
+
+          {isLandlord && isPremUser && (
+            <View style={[styles.upgradeContainer, { marginTop: 12 }]}>
+              <PrimaryButton
+                title="Manage Premium"
+                onPress={() => navigation.navigate('PurchasePremium')}
+                style={styles.upgradeButton}
+              />
+            </View>
+          )}
+        </View>
         <PrimaryButton
-          title="Upgrade to Premium"
-          onPress={() => navigation.navigate('PurchasePremium')}
-          style={styles.upgradeButton}
+          title="Sign out"
+          onPress={handleSignOut}
+          style={[login_style.loginButton, { marginTop: 20 }]}
         />
-      </View>
-      )}
-
-      </View>
-
-      {/* Sign out button now inside scrollable content */}
-      <PrimaryButton
-        title="Sign out"
-        onPress={handleSignOut}
-        style={[login_style.loginButton, { marginTop: 20 }]}
-      />
-    </ScrollView>
+      </ScrollView>
 
       <EditUserModal visible={modalVisible} onClose={toggleModal} />
-
-      {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <BottomNavBar />
       </View>
