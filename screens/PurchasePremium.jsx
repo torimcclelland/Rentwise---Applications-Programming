@@ -66,13 +66,13 @@ const PurchasePremium = () => {
       {!isPremUser ? (
         <View>
           <Text style={styles.benefit}>
-            ✅ See how many views your profile gets
+            See how many views your profile gets
           </Text>
           <Text style={styles.benefit}>
-            ✅ Get your properties promoted to more renters
+            Get your properties promoted to more renters
           </Text>
           <Text style={styles.benefit}>
-            ✅ Premium badge to stand out in searches
+            Premium badge to stand out in searches
           </Text>
 
           <PrimaryButton
