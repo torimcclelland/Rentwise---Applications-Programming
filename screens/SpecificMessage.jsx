@@ -20,6 +20,7 @@ import { getUserByID } from '../database_calls/user/GetUserByID';
 import NotificationModal from '../components/NotificationModal';
 import { addMessageToConveration } from '../database_calls/conversation/AddMessageToConversation';
 import { useNavigation } from '@react-navigation/native';
+import { snapshotToConversation } from '../models/ConversionFunctions';
 
 
 const SpecificMessage = () => {
@@ -62,7 +63,47 @@ const SpecificMessage = () => {
 
     // fetch user data of both users
     setUserData();
+    
+
+    let unsubscribe = null
+    // We can await in here
+    async function fetchData() {
+      
+      const tempDoc = doc(db, 'Conversations', GlobalValues.conversationData.conversationID);
+  
+      // this sets up our "listener" to the current user's notifications
+      unsubscribe = onSnapshot(tempDoc, (snapshot) => {
+        
+          if (snapshot.exists) {
+            
+            const convo = snapshotToConversation(snapshot)
+            
+            if(!convo.success){
+              console.error("Error fetching conversation: ", convo.errorMsg)
+              return
+            }
+
+            setConversation(convo.resultData)
+            setMessages(convo.resultData.messages)
+          }
+        }, error => {
+          console.error("Error fetching notifications: ", error);
+        }
+      );
+    }
+    fetchData();
+
+    // This is for clean up after
+    return () => {
+      unsubscribe();
+    };
+
   }, [])
+
+//*****************************************
+
+
+//*****************************************
 
   const setUserData = async () => {
     let fetchingRenter = await getUserByID(GlobalValues.conversationData.renterID)
