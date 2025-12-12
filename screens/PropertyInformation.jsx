@@ -11,11 +11,12 @@ import Profile from '../components/profile'
 import PrimaryButton from '../components/PrimaryButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ImageCarousel from '../components/ImageCarousel'
-// import MapView, {Marker, AnimatedRegion} from 'react-native-maps'
+//import MapView, {Marker, AnimatedRegion} from 'react-native-maps'
 import getAddressCoordinates from '../database_calls/api/GetAddressCoordinates'
 import { Platform, Animated } from 'react-native'
 import { GlobalValues } from '../GlobalValues'
-
+import { getConversationsByBothUsers } from '../database_calls/conversation/GetConversationsByBothUsers'
+import { createConversation } from '../database_calls/conversation/CreateConversation'
 // let MapView, Marker;
 // if (Platform.OS !== "web") {
 //   MapView = require("react-native-maps").default;

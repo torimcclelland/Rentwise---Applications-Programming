@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, FlatList, StyleSheet, ScrollView, ScrollView } from "react-native";
+import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
 import BottomNavBar from "../components/BottomNavBar";
 import { GlobalValues } from '../GlobalValues';
 import InfoCard from '../components/InfoCard';
@@ -12,9 +12,11 @@ import { getPropertyByID } from '../database_calls/property/GetPropertyByID';
 import {updateProperty} from '../database_calls/property/UpdateProperty';
 import styles from '../styles/Notifications';
 import { useTheme } from '../ThemeContext';
+import { useNavigation } from '@react-navigation/native';
 
 const Notifications = () => {
     const theme = useTheme();
+    const navigation = useNavigation();
 
     const [notifList, setNotifList] = useState([])
     const [property, setProperty] = useState(new Property({}))
@@ -47,23 +49,28 @@ const Notifications = () => {
 
         const result = await AddPropertyToRenter(propertyID);
         const property_response = await getPropertyByID(propertyID);
-        setProperty(property_response.resultData);
+        
+        const updatedProperty = {
+        ...property_response.resultData,
+        renterID: GlobalValues.currentUser.userID
+    };
 
-        property.renterID = GlobalValues.currentUser.userID;
-        const update_response = await updateProperty(property);
+        const update_response = await updateProperty(updatedProperty);
 
         console.log(update_response);
+        navigation.navigate('Renter Dashboard');
     }
    
     return (
         <View style={[styles.container, theme.container]}>
-            <ScrollView contentContainerStyle={styles.messageList}>
+            <ScrollView contentContainerStyle={styles.messageList} style={{marginBottom: 60}}>
 
                 { notifList.length > 0 ? (
                     notifList.map((item, index) => (
+                        <View key={index}>
                         <InfoCard
                             key={index}
-                            title = {item.message}
+                            title = {item.message.split("ID:")[0].trim()}
                             subtitle = {item.datetime}
                         />
 

@@ -15,6 +15,7 @@ import { uploadImage } from '../database_calls/uploadImages';
 import ImageCarousel from '../components/ImageCarousel';
 import NotificationModal from '../components/NotificationModal';
 import ValidateAddress from '../database_calls/api/ValidateAddress';
+import { useNavigation } from '@react-navigation/native';
 
 
 const AddProperty = () =>{
@@ -22,6 +23,7 @@ const AddProperty = () =>{
     const propertyID = "setLater"
     const landlordID = GlobalValues.currentUser.userID
     const renterID = "none"
+    const navigation = useNavigation()
     const [address, setAddress] = useState("")
     const [monthlyPrice, setMonthlyPrice] = useState("")
     const [city, setCity] = useState("")
@@ -77,7 +79,7 @@ const AddProperty = () =>{
             setImages(null)
 
             // close the modal
-            onClose()
+            navigation.navigate('Landlord Dashboard');
     }
 
     const toggleNotifModal = () =>{
@@ -172,11 +174,12 @@ const AddProperty = () =>{
                 return;
             }
             // close the modal after submission
-            onClose() 
 
         }catch(e){
             console.log("Error creating property:", e)
         }
+
+        closeModal();
 
     }
 

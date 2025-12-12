@@ -9,18 +9,12 @@ import { GlobalValues } from '../GlobalValues';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { addNotifToList } from '../database_calls/notifications/AddNotifToList';
 import { Notification } from '../models/Notification';
-import { createFixitRequest } from '../database_calls/fixitrequests/CreateFixitRequest';
-import { FixitRequest } from '../models/FixitRequest';
-import { useRoute } from '@react-navigation/native';
-import { GlobalValues } from '../GlobalValues';
 
 const Fixit = () => {
   const [category, setCategory] = useState('');
   const [details, setDetails] = useState('');
   const [submittedAt, setSubmittedAt] = useState(null);
   const user = GlobalValues.currentUser;
-  const route = useRoute();
-  const { landlordID } = route.params 
   const currentUser = GlobalValues.currentUser
   const renterID = currentUser.userID
   const route = useRoute()

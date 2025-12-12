@@ -23,7 +23,7 @@ const ViewApplication = () => {
 
     const [application, setApplication] = useState(new Application({}))
     const [renter, setRenter] = useState(new User({}))
-    const [modalVisible, setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false);
     const landlord = GlobalValues.currentUser
 
     // error handling stuff
@@ -237,7 +237,7 @@ const ViewApplication = () => {
             </View>
 
             <NotificationModal 
-                visible={modalVisible} 
+                visible={errModalVisible} 
                 onClose={toggleErrorModal} 
                 message={errorMessage} 
             />

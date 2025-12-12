@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import {getPropertyByID} from '../database_calls/property/GetPropertyByID';
 import { getFixitRequestsByUserID } from '../database_calls/fixitrequests/GetFixitRequestsByUserID';
 import { Property } from '../models/Property';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -54,74 +54,81 @@ const DashboardScreen = () => {
           <Text style={[styles.header, theme.textColor]}>
             Hello {GlobalValues.currentUser.firstName} 👋
           </Text>
-          <Text style={[styles.subheader, theme.textColor]}>
-            Here’s your rent summary at a glance.
-          </Text>
 
-          {/* Stats Overview */}
-          <View style={styles.statsRow}>
-            <StatsCard label="Open Fixit Tickets" value={`${fixitRequests.length}`} onPress={() => navigation.navigate('Fixit')} />
-            <StatsCard label="Nearby Available Properties" value="3" onPress={() => navigation.navigate('Browse Properties')}/>
-            <StatsCard label="Payments Due" value={`$${property.monthlyPrice}`} onPress={() => navigation.navigate('Payment')} />
-          </View>
+          {user.propertyId !== "" ? (
+            <View>
+            <Text style={[styles.subheader, theme.textColor]}>
+              Here’s your rent summary at a glance.
+            </Text>
 
-          <CustomDivider />
+            {/* Stats Overview */}
+            <View style={styles.statsRow}>
+              <StatsCard label="Open Fixit Tickets" value={`${fixitRequests.length}`} onPress={() => navigation.navigate('Fixit')} />
+              <StatsCard label="Nearby Available Properties" value="3" onPress={() => navigation.navigate('Browse Properties')}/>
+              <StatsCard label="Payments Due" value={`$${property.monthlyPrice}`} onPress={() => navigation.navigate('Payment')} />
+            </View>
 
-          {/* Lease Summary */}
-          <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Lease Summary</Text>
-          <InfoCard
-            title={`${property.address} ${property.city}, ${property.state}`}
-            subtitle={`$${property.monthlyPrice}/month • Ends Jan 31, 2026`}
-          />
-          <View style={styles.buttonRow}>
-            <PrimaryButton title="View Lease" onPress={() => navigation.navigate('Lease Info')} />
-          </View>
+            <CustomDivider />
 
-          <CustomDivider />
+            {/* Lease Summary */}
+            <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Lease Summary</Text>
+            <InfoCard
+              title={`${property.address} ${property.city}, ${property.state}`}
+              subtitle={`$${property.monthlyPrice}/month • Ends Jan 31, 2026`}
+            />
+            <View style={styles.buttonRow}>
+              <PrimaryButton title="View Lease" onPress={() => navigation.navigate('Lease Info')} />
+            </View>
 
-          {/* Recent Activity */}
-          <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Payment Summary</Text>
+            <CustomDivider />
 
-          <InfoCard
-            title="Last Payment"
-            subtitle="✅ $985 received on Sept. 30"
-          />
-          <PrimaryButton title="Make Payment" onPress={() => navigation.navigate('Payment')} />
+            {/* Recent Activity */}
+            <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Payment Summary</Text>
 
-          <CustomDivider />
+            
+            <PrimaryButton title="Make Payment" onPress={() => navigation.navigate('Payment')} />
 
-          {/* FixIt Requests */}
-          <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Fix-it Requests</Text>
+            <CustomDivider />
 
-          {fixitRequests.length > 0 && (
-            fixitRequests.map(item => (
-              <InfoCard
-              title={`${item.category}`}
-              subtitle={`🟡 Pending • Submitted on ${item.submissontime.split("T0")[0]}`}
-              />
-            ))
-          )}
-          
-          <TouchableOpacity style={styles.addRequestButton}>
-          <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit', {'landlordID': property.landlordID})} />
-          </TouchableOpacity>
+            {/* FixIt Requests */}
+            <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Fix-it Requests</Text>
 
-          <CustomDivider />
-
-          {/* Quick Access Cards */}
-          <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Quick Access</Text>
-
-          {[
-            { title: 'Payment Summary', subtitle: 'View past transactions', nav: 'Payments' },
-          ].map((card, index) => (
-            <TouchableOpacity key={index} onPress={() => console.log(`Navigate to ${card.nav}`)}>
-              <View style={[styles.card, theme.textField]}>
-                <Text style={[styles.cardTitle, theme.textColor]}>{card.title}</Text>
-                <Text style={[styles.cardSubtitle, theme.textColor]}>{card.subtitle}</Text>
-                <PrimaryButton title={`Go to ${card.nav}`} onPress={() => navigation.navigate('Payment Summary')}/>
-              </View>
+            {fixitRequests.length > 0 && (
+              fixitRequests.map(item => (
+                <InfoCard
+                title={`${item.category}`}
+                subtitle={`🟡 Pending • Submitted on ${item.submissontime.split("T0")[0]}`}
+                />
+              ))
+            )}
+            
+            <TouchableOpacity style={styles.addRequestButton}>
+            <PrimaryButton title="New Maintenance Request" onPress={() => navigation.navigate('Fixit', {'landlordID': property.landlordID})} />
             </TouchableOpacity>
-          ))}
+
+            <CustomDivider />
+
+            {/* Quick Access Cards */}
+            <Text style={[styles.sectionHeader, theme.sectionHeaderColor]}>Quick Access</Text>
+
+            {[
+              { title: 'Payment Summary', subtitle: 'View past transactions', nav: 'Payments' },
+            ].map((card, index) => (
+              <TouchableOpacity key={index} onPress={() => console.log(`Navigate to ${card.nav}`)}>
+                <View style={[styles.card, theme.textField]}>
+                  <Text style={[styles.cardTitle, theme.textColor]}>{card.title}</Text>
+                  <Text style={[styles.cardSubtitle, theme.textColor]}>{card.subtitle}</Text>
+                  <PrimaryButton title={`Go to ${card.nav}`} onPress={() => navigation.navigate('Payment Summary')}/>
+                </View>
+              </TouchableOpacity>
+            ))}
+            </View>
+          ) : (
+            <View style={{alignSelf: 'center', marginTop: 180}}>
+            <Icon name="home" size={80} color="#034974" style={{alignSelf: 'center', marginBottom: 20}}/>
+            <Text style={{fontFamily: 'inter', fontSize: 20, textAlign: 'center'}}> You have not been added to a property yet. Use our explorer page to start browsing!</Text>
+            </View>
+          )}
         </ScrollView>
 
         <BottomNavBar selectedTab="home" />

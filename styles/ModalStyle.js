@@ -25,7 +25,7 @@ export const stylesModal = StyleSheet.create({
     },
     contentView:{
       paddingHorizontal: 10,
-      backgroundColor: '#034974',
+      backgroundColor: '#E6E6E6',
       borderRadius: 8,
       elevation: 5,
       width: '80%',

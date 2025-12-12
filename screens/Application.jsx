@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {View, Text, ScrollView, StyleSheet} from 'react-native'
 import TextField from '../components/TextField'
 import PrimaryButton from '../components/PrimaryButton'
@@ -15,6 +15,8 @@ import { createApplication } from '../database_calls/application/CreateApplicati
 import { Notification } from '../models/Notification';
 import NotificationModal from '../components/NotificationModal';
 import { addNotifToList } from '../database_calls/notifications/AddNotifToList';
+import { Property } from '../models/Property';
+import { getPropertyByID } from '../database_calls/property/GetPropertyByID';
 
 export const ApplicationPage = () => {
 
@@ -25,6 +27,7 @@ export const ApplicationPage = () => {
     console.log(propertyID)
     const theme = useTheme()
     const applicationID = "setLater"
+    const [property, setProperty] = useState(new Property ({}))
 
     // personal info
     const [firstName, setFirstName] = useState(currentUser.firstName)
@@ -45,6 +48,15 @@ export const ApplicationPage = () => {
     const [rentAmount, setRentAmount] = useState(0)
 
     // proposed occupants
+
+    useEffect(() => {
+        getPropertyDetails();
+    }, []);
+
+    const getPropertyDetails = async() => {
+        const result = await getPropertyByID(propertyID);
+        setProperty(result.resultData);
+    }
 
     const submitApplication = async() => {
 
@@ -77,7 +89,7 @@ export const ApplicationPage = () => {
         toggleModal()
 
         const userID = landlordID
-        const message = "Application submitted for property by " + firstName + " " + lastName
+        const message = "Application submitted for property " + property.address + " " + property.city + " " + property.state + " by " + firstName + " " + lastName
 
         const notif = new Notification({
             datetime: new Date().toLocaleString(),
